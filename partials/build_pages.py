@@ -121,8 +121,10 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
   <meta property="og:locale" content="ko_KR" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://onesearchpro.org/assets/images/logo.png" />
-  <link rel="icon" type="image/png" href="/assets/images/logo.png" />
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg" />
+  <link rel="alternate icon" type="image/png" href="/assets/images/logo.png" />
   <link rel="apple-touch-icon" href="/assets/images/logo.png" />
+  <meta name="theme-color" content="#7c5cff" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
