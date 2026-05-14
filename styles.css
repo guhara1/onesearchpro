@@ -670,17 +670,21 @@ h1 {
   -webkit-text-fill-color: transparent;
 }
 
-/* H2 — numbered editorial style */
+/* H2 — numbered editorial style with tonal gradient */
 .article-body h2 {
   counter-increment: section;
   position: relative;
   font-size: clamp(1.65rem, 2.6vw, 2rem);
   font-weight: 800; line-height: 1.25;
   letter-spacing: -.025em;
-  color: #fff;
   margin: 4.5rem 0 1.4rem;
   padding: 2.2rem 0 0;
   border: none;
+  background: linear-gradient(135deg, #ffffff 0%, #c8bcff 60%, #8ec8ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 .article-body h2::before {
   content: counter(section, decimal-leading-zero);
