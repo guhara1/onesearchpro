@@ -965,47 +965,128 @@ PAGES = {
 
     # ========== Case Studies subpages ==========
     "/case-studies/seo/": {
-        "title": "SEO 개선 사례 | 통합 개선 작업 기록 | OneSearchPro",
-        "desc": "OneSearchPro의 SEO 개선 사례 모음. 키워드 매핑, 토픽 클러스터, 내부 링크, 스키마 적용까지 통합 작업으로 검색 노출이 회복된 B2B·교육·미디어 프로젝트를 작업 전·진단·개선·변화·주의점 5단계로 기록했습니다.",
-        "keywords": "SEO 개선 사례, SEO 성공사례, 검색 노출 회복, 키워드 매핑, 토픽 클러스터, B2B SEO 사례",
+        "title": "SEO 개선 사례 | 검색 유입·순위·구조·메타·내부링크 | OneSearchPro",
+        "desc": "검색 유입 감소, 키워드 순위 정체, 사이트 구조 문제, 내부 링크 부족, 메타 카피 미흡, 서비스 페이지 최적화까지 — SEO 개선 6대 시나리오를 작업 전 문제·진단·개선·변화·주의점 5단계로 기록한 실무 사례 모음.",
+        "keywords": "SEO 개선 사례, 검색 유입 감소, 키워드 순위 정체, 사이트 구조 SEO, 내부 링크 개선, 메타 태그 최적화, 서비스 페이지 SEO",
         "h1": "SEO 개선 사례",
         "eyebrow": "SEO IMPROVEMENT CASES",
-        "lead": "사이트 구조·콘텐츠·기술 요소를 통합 개선해 검색 노출이 회복된 실제 작업 사례입니다. 모든 사례는 \"작업 전 문제 / 진단 결과 / 개선한 항목 / 적용 후 변화 / 주의할 점\" 5단계로 정리했으며, 과장된 수치나 \"무조건 1위\" 표현은 사용하지 않습니다.",
+        "lead": "사이트가 정체·하락하는 6가지 대표 패턴별 실무 작업 기록입니다. 각 사례는 \"작업 전 문제 → 진단 결과 → 개선한 항목 → 적용 후 변화 → 주의할 점\" 5단계로 정리했으며, 과장된 수치나 \"무조건 1위\" 표현은 사용하지 않습니다.",
         "body": (
-            '<section class="section"><div class="container"><div class="grid services case-grid">' +
+            # 6대 시나리오 인덱스 (앵커 점프)
+            '<section class="section case-index"><div class="container">'
+            '<div class="section-head left"><span class="eyebrow">QUICK INDEX</span><h2>이 페이지에서 다루는 6가지 SEO 시나리오</h2><p>어느 상황에 해당하는지 먼저 골라 보고, 사례 카드로 이동하세요.</p></div>'
+            '<div class="case-index-grid">'
+            '<a href="#traffic-drop" class="case-index-item"><span class="case-index-num">01</span><div><b>검색 유입 감소</b><span>트래픽이 갑자기 줄어든 사이트의 원인 분리법</span></div></a>'
+            '<a href="#ranking-stall" class="case-index-item"><span class="case-index-num">02</span><div><b>키워드 순위 정체</b><span>10~20위에서 1페이지 진입 못 하는 키워드 진단</span></div></a>'
+            '<a href="#site-structure" class="case-index-item"><span class="case-index-num">03</span><div><b>사이트 구조 문제</b><span>정보 구조가 산만한 사이트의 카테고리 재설계</span></div></a>'
+            '<a href="#internal-linking" class="case-index-item"><span class="case-index-num">04</span><div><b>내부 링크 개선</b><span>글은 많은데 서로 연결 안 된 사이트</span></div></a>'
+            '<a href="#meta-optimization" class="case-index-item"><span class="case-index-num">05</span><div><b>메타 타이틀·디스크립션 개선</b><span>노출은 있지만 클릭이 안 되는 사이트</span></div></a>'
+            '<a href="#service-page" class="case-index-item"><span class="case-index-num">06</span><div><b>서비스 페이지 최적화</b><span>거래형 키워드에서 서비스 페이지가 안 잡히는 사이트</span></div></a>'
+            '</div></div></section>'
+
+            # Case 1 — 검색 유입 감소
+            '<section class="section" id="traffic-drop"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">01</span><span class="eyebrow">TRAFFIC DROP</span><h2>검색 유입 감소</h2><p class="lead">콘텐츠 작업은 그대로인데 검색 트래픽이 떨어졌을 때, 가장 위험한 건 \"감으로 손대기\" 입니다. 원인을 분리하는 게 먼저입니다.</p></div>'
+            '<div class="grid services case-grid">' +
             case_card(
-                badge="SAAS · B2B",
-                icon="💼",
-                h3="B2B SaaS — 핵심 키워드 진입 회복",
-                problem="자체 블로그가 있지만 핵심 상업 키워드 검색에서 거의 노출되지 않았고, 경쟁사 대비 도메인 권위가 낮은 상태였습니다.",
-                diagnosis="키워드 매핑이 검색 의도와 어긋나 있었고, 페이지 간 토픽이 분산되어 토픽 권위가 형성되지 않았습니다. 내부 링크도 사실상 없었습니다.",
-                improvements=["필러 페이지 1개 + 클러스터 8개로 토픽 구조 재설계", "타이틀·H1·메타 재작성과 검색 의도 매칭", "내부 링크 흐름 재구성과 앵커텍스트 통일"],
-                results=["타겟 키워드 중 다수가 1~2페이지로 이동", "오가닉 세션 약 2~3배 수준으로 증가", "전체 작업 기간 약 6개월"],
-                caveats="신규 페이지의 색인까지 시간이 걸리며, 동일한 결과가 모든 산업에서 보장되지는 않습니다. 검색 트렌드 변화 시 재조정이 필요합니다."
-            ) +
-            case_card(
-                badge="EDU",
-                icon="🎓",
-                h3="온라인 교육 — 카테고리 페이지 재구성",
-                problem="강의 카테고리 페이지가 빈약해서 카테고리 단위 키워드에서 경쟁사보다 뒤로 밀려 있었습니다.",
-                diagnosis="카테고리 페이지에 본문이 거의 없고 H1·H2 구조가 정렬되지 않은 상태였습니다. 또한 비교형 검색 의도(\"○○ 강의 비교\")에 맞는 콘텐츠가 없었습니다.",
-                improvements=["카테고리 페이지에 비교·선택 가이드 본문 추가", "스키마 마크업(BreadcrumbList, ItemList) 적용", "내부 링크에서 카테고리로 권위 집중"],
-                results=["카테고리 키워드 평균 노출 순위 개선", "카테고리 페이지 직접 방문 증가", "작업 기간 약 4개월"],
-                caveats="구글의 카테고리·리스트 페이지 평가는 자주 바뀌므로 분기 단위 점검이 필요합니다."
-            ) +
-            case_card(
-                badge="MEDIA",
-                icon="📰",
-                h3="산업 전문 미디어 — 기존 도메인 권위 활용",
-                problem="기존 도메인 권위는 있지만, 신규 비즈니스 영역 키워드에서 거의 노출되지 않았습니다.",
-                diagnosis="기존 콘텐츠와 신규 비즈니스 키워드 사이에 토픽 연결 고리가 없어 신규 페이지가 평가받지 못했습니다.",
-                improvements=["기존 인기 콘텐츠에서 신규 페이지로 내부 링크", "신규 영역 토픽 클러스터 신규 구축", "메타·OG·스키마 일관성 정비"],
-                results=["신규 영역 핵심 키워드 색인·노출 시작", "기존 트래픽 손실 없음", "작업 기간 약 5개월"],
-                caveats="기존 인기 콘텐츠의 트래픽이 새 페이지로 이동하는 효과는 신중하게 관찰해야 합니다."
+                badge="MEDIA · B2B",
+                icon="📉",
+                h3="트래픽이 갑자기 줄어든 사이트 — 원인 분리부터",
+                problem="3개월간 검색 트래픽이 단계적으로 감소. 콘텐츠 발행·기술 변경은 없었지만 핵심 페이지의 노출과 클릭이 함께 빠지는 패턴이었습니다.",
+                diagnosis="구글 코어 업데이트 영향과 사이트 자체 이슈가 혼재된 상태로 확인. 일부 페이지는 알고리즘 평가 변화, 일부는 색인 누락이 원인이었습니다. 서치콘솔 \"커버리지\" 리포트와 코어 업데이트 발표 시점을 매칭해 분리했습니다.",
+                improvements=["서치콘솔 시점별 데이터로 코어 영향 페이지 vs 사이트 이슈 페이지 분리", "색인 누락 페이지는 우선 진단·복구 (robots·canonical 점검)", "코어 영향 페이지는 즉시 대응 보류 (4주 관찰)", "원인이 분리된 후 우선순위 적용"],
+                results=["색인 이슈 페이지 4주 내 노출 회복", "코어 영향 페이지는 다음 업데이트 사이클에서 부분 회복 관찰", "전체 작업 기간 약 8주"],
+                caveats="코어 업데이트 영향에 패닉으로 콘텐츠를 대거 수정하면 측정 기준선이 사라집니다. 첫 2주는 데이터 수집·관찰 단계로 두는 게 가장 효과적입니다."
             ) +
             '</div></div></section>'
+
+            # Case 2 — 키워드 순위 정체
+            '<section class="section section-soft" id="ranking-stall"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">02</span><span class="eyebrow">RANKING STAGNATION</span><h2>키워드 순위 정체</h2><p class="lead">10~20위 권에 머무르며 1페이지 진입을 못 하는 키워드는 \"콘텐츠 부족\"이 아니라 \"신호 부족\"인 경우가 많습니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="SAAS · B2B",
+                icon="⏳",
+                h3="1페이지 진입을 못 하는 핵심 키워드 — 정체 원인 진단",
+                problem="자체 블로그가 있지만 핵심 상업 키워드에서 6개월 이상 10~20위에 머무르는 상태. 콘텐츠 발행은 꾸준했지만 1페이지 진입이 안 되었습니다.",
+                diagnosis="개별 페이지 품질은 충분했지만 토픽 권위가 분산되어 있었습니다. 같은 토픽을 다루는 글이 흩어져 있고 내부 링크로 연결되지 않아 검색엔진이 \"이 사이트는 ○○ 전문\"이라 판단할 신호가 부족했습니다.",
+                improvements=["필러 페이지 1개 + 클러스터 8편으로 토픽 구조 재설계", "기존 인기 글에서 신규 필러로 컨텍스트 내부 링크", "타이틀·H1·메타를 검색 의도에 맞춰 재작성"],
+                results=["타겟 키워드 중 다수가 1~2페이지로 이동", "오가닉 세션 약 2~3배 수준으로 증가", "전체 작업 기간 약 6개월"],
+                caveats="정체 원인은 키워드마다 다릅니다. 어떤 키워드는 토픽 권위 부족, 어떤 키워드는 검색 의도 미스매치가 원인이라 일괄 대응으로는 해결되지 않습니다."
+            ) +
+            '</div></div></section>'
+
+            # Case 3 — 사이트 구조 문제
+            '<section class="section" id="site-structure"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">03</span><span class="eyebrow">SITE STRUCTURE</span><h2>사이트 구조 문제</h2><p class="lead">페이지는 많은데 검색엔진이 \"이 사이트가 무엇인지\" 파악하기 어려운 경우, 카테고리·계층·내부 링크의 재설계가 필요합니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="EDU",
+                icon="🏗️",
+                h3="정보 구조가 산만한 사이트 — 카테고리·계층 재설계",
+                problem="강의 페이지가 200개 넘게 쌓였지만 카테고리 페이지가 부재. URL 계층도 일관성이 없어 같은 주제가 여러 경로에 흩어져 있었습니다. 카테고리 단위 키워드(\"○○ 강의 추천\") 검색에서 노출 자체가 없었습니다.",
+                diagnosis="URL 구조에 일관성이 없고(예: /course/abc, /lesson/xyz, /classes/123 혼재), 카테고리 허브 페이지가 부재. 사이드바·태그 외에 본문 내부 링크가 없어 \"고립 페이지(orphan)\"가 다수였습니다.",
+                improvements=["URL을 /courses/[category]/[slug]/ 형식으로 통일 + 1:1 301 리다이렉트", "카테고리 허브 페이지 신설 (소개 본문 + 강의 리스트 + 비교 가이드)", "BreadcrumbList·ItemList 스키마 적용", "본문 내부 컨텍스트 링크로 고립 페이지 연결"],
+                results=["카테고리 단위 키워드에서 노출 시작", "카테고리 페이지 자체 직접 방문 증가", "작업 기간 약 4개월"],
+                caveats="URL 변경 시 301 매핑이 부실하면 트래픽 손실이 큽니다. 변경 전 기존 URL·키워드·트래픽 매핑 시트를 반드시 만들어두세요."
+            ) +
+            '</div></div></section>'
+
+            # Case 4 — 내부 링크 개선
+            '<section class="section section-soft" id="internal-linking"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">04</span><span class="eyebrow">INTERNAL LINKING</span><h2>내부 링크 개선</h2><p class="lead">글이 많아도 서로 연결되지 않으면 검색엔진이 사이트 전체 가치를 인식하지 못합니다. 자동 \"관련 글\" 만으로는 부족합니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="MEDIA",
+                icon="🔗",
+                h3="글은 많은데 서로 연결 안 된 사이트 — 내부 링크 재구성",
+                problem="라이프스타일 미디어 사이트로 글이 100편 넘게 누적. 그런데 핵심 글에서도 다른 글로 가는 본문 내 컨텍스트 링크가 거의 없었고, 사이드바·푸터의 자동 \"인기 글\"만 있는 상태였습니다.",
+                diagnosis="사이드바·자동 추천 위젯 링크는 검색엔진이 컨텍스트 신호로 약하게 평가합니다. 본문 한가운데에서 자연스럽게 \"○○에 대해 더 알려면 [○○ 글 보기]\" 같은 텍스트 링크가 사실상 없었습니다.",
+                improvements=["트래픽 상위 20개 글에서 관련 글로 가는 본문 텍스트 링크 추가 (글당 평균 3~5개)", "앵커텍스트를 정확한 타겟 키워드로 통일", "허브-스포크 구조로 필러 글과 클러스터 글 연결", "고립 페이지(어디서도 링크되지 않는 글) 식별·연결"],
+                results=["연결된 페이지의 노출·체류 시간이 함께 회복", "사이트 전체 권위 신호 강화로 신규 글 색인 속도도 개선", "작업 기간 약 3개월"],
+                caveats="자동 생성된 \"관련 글\" 위젯에 의존하지 마세요. 컨텍스트가 어색한 위치에 강제 링크를 박는 것도 역효과입니다."
+            ) +
+            '</div></div></section>'
+
+            # Case 5 — 메타 타이틀·디스크립션 개선
+            '<section class="section" id="meta-optimization"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">05</span><span class="eyebrow">META OPTIMIZATION</span><h2>메타 타이틀·디스크립션 개선</h2><p class="lead">검색 결과에 노출은 되는데 클릭이 안 되는 사이트는 메타 카피의 문제일 가능성이 큽니다. 같은 노출로 더 많은 유입을 만드는 작업.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="ECOMMERCE",
+                icon="🏷️",
+                h3="노출은 있지만 클릭이 안 되는 사이트 — 메타 카피 재작성",
+                problem="서치콘솔 평균 게재 순위는 8~12위로 나쁘지 않은데 CTR이 평균보다 현저히 낮았습니다. 검색 결과에 우리 페이지가 보여도 사용자가 다른 결과를 클릭하는 패턴이었습니다.",
+                diagnosis="타이틀이 \"키워드 + 회사명\" 형식으로만 작성되어 있고 클릭 후크가 없었습니다. 디스크립션은 200자가 넘어 검색 결과에서 잘리거나, 페이지 본문 첫 부분이 자동으로 추출되어 광고 카피 없는 상태로 노출되고 있었습니다.",
+                improvements=["타이틀을 \"키워드 + 사용자 혜택·구체 숫자\" 형식으로 재작성 (50~60자)", "디스크립션을 120~155자로 단축하면서 CTA 1줄 명시", "특정 페이지에는 FAQ·리뷰 등 리치 결과 유도 스키마 추가", "A/B 테스트 가능한 페이지 그룹은 분기별 메타 카피 교체로 효과 측정"],
+                results=["주요 페이지의 CTR이 상승 추세로 전환", "같은 노출수에서 클릭이 의미 있게 증가", "작업 기간 약 6주"],
+                caveats="클릭 후크가 본문과 어긋나면 이탈률이 오히려 늘어납니다. 메타 개선 후 \"클릭률은 올랐는데 체류 시간이 떨어졌다\" 면 본문이 메타 약속을 지키지 못하는 신호입니다."
+            ) +
+            '</div></div></section>'
+
+            # Case 6 — 서비스 페이지 최적화
+            '<section class="section section-soft" id="service-page"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">06</span><span class="eyebrow">SERVICE PAGE OPTIMIZATION</span><h2>서비스 페이지 최적화</h2><p class="lead">블로그 글은 트래픽을 만들어도 정작 매출과 연결되는 \"서비스 페이지\"가 검색에 잡히지 않으면 SEO의 비즈니스 가치는 절반입니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="B2B · SAAS",
+                icon="💼",
+                h3="거래형 키워드에서 서비스 페이지가 안 잡히는 사이트 — 서비스 페이지 강화",
+                problem="정보형 블로그 글은 검색에 잘 나오지만 \"서비스명 + 가격\", \"서비스명 + 비교\" 같은 거래형 키워드에서는 서비스 페이지가 아예 노출되지 않았습니다. 트래픽은 많은데 문의 전환은 약한 구조였습니다.",
+                diagnosis="서비스 페이지에 본문이 거의 없고 이미지 위주로 구성되어 있었습니다. 거래형 검색 의도 키워드(\"가격\", \"비교\", \"신청\")가 본문에 등장하지 않아 매칭 실패. 또한 블로그 글에서 서비스 페이지로 가는 내부 링크가 거의 없어 권위 신호도 약했습니다.",
+                improvements=["서비스 페이지 본문 강화 (대상 고객·문제·해결·차별점·FAQ·가격 안내)", "Service / Product / Offer 스키마 적용", "관련 블로그 글에서 서비스 페이지로 본문 내부 링크 5~10개", "거래형 키워드 매핑 (블로그=정보형 / 서비스=거래형으로 의도 분리)"],
+                results=["거래형 키워드에서 서비스 페이지가 직접 노출", "블로그 트래픽이 서비스 페이지로 흐르는 비율 증가", "작업 기간 약 2~3개월"],
+                caveats="블로그 글에 서비스 페이지 링크를 과도하게 박으면 글 자체의 신뢰도가 떨어집니다. 본문 컨텍스트가 자연스러운 위치에만 1~2개 배치하는 게 안전합니다."
+            ) +
+            '</div></div></section>'
+
+            # CTA
+            '<section class="section section-cta"><div class="container cta-grid">'
+            '<div><h2>위 시나리오 중 우리 사이트는 어디에 해당할까요?</h2><p>현재 사이트 상태를 진단해 어느 패턴인지, 어떤 우선순위로 작업해야 하는지 24시간 내 분석 리포트를 보내드립니다.</p></div>'
+            '<div class="cta-actions"><a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">무료 SEO 진단 받기 →</a><a href="/services/seo/" class="btn btn-outline btn-lg btn-light">SEO 컨설팅 서비스 보기</a></div>'
+            '</div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"SEO 개선 사례","url":"https://onesearchpro.org/case-studies/seo/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"SEO 개선 사례","url":"https://onesearchpro.org/case-studies/seo/","description":"검색 유입·키워드 순위·사이트 구조·내부 링크·메타·서비스 페이지 6대 시나리오 SEO 개선 사례","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
         "active": "cases",
     },
 

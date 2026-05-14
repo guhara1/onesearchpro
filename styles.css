@@ -392,6 +392,80 @@ h1 {
 .case-card p, .case-card ul { margin-bottom: .7rem; }
 .case-grid .svc { grid-column: span 2; }
 
+/* Case Study — index navigation + section headers */
+.case-index { padding-bottom: 30px; }
+.case-index-grid {
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(3, 1fr);
+}
+.case-index-item {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: 1.1rem 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--text-soft);
+  transition: all .25s ease;
+  backdrop-filter: blur(10px);
+}
+.case-index-item:hover {
+  color: #fff;
+  background: var(--surface-hi);
+  border-color: rgba(124, 92, 255, .45);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(124, 92, 255, .18);
+}
+.case-index-num {
+  flex-shrink: 0;
+  font-size: 1.3rem; font-weight: 900; line-height: 1;
+  background: var(--grad-text); -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -.02em; min-width: 36px;
+}
+.case-index-item b { display: block; color: #fff; font-size: 1.02rem; margin-bottom: .25rem; }
+.case-index-item span { font-size: .88rem; color: var(--muted); line-height: 1.55; }
+
+.case-section-head {
+  position: relative;
+  max-width: 920px; margin: 0 auto 50px;
+  padding-left: 0;
+  text-align: left;
+}
+.case-section-head .case-num {
+  display: inline-block;
+  font-size: 4rem; font-weight: 900; line-height: 1;
+  letter-spacing: -.03em;
+  background: var(--grad-text); -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: .9;
+  margin-bottom: -.4rem;
+}
+.case-section-head .eyebrow {
+  display: inline-block; margin-left: .8rem;
+  vertical-align: middle;
+}
+.case-section-head h2 {
+  font-size: clamp(2rem, 3.6vw, 2.6rem);
+  margin: 1rem 0 .8rem;
+  letter-spacing: -.025em;
+  color: #fff; line-height: 1.18;
+}
+.case-section-head .lead {
+  color: var(--text-soft); font-size: 1.05rem; line-height: 1.72;
+  max-width: 62ch; margin: 0;
+}
+
+@media (max-width: 980px) {
+  .case-index-grid { grid-template-columns: repeat(2, 1fr); }
+  .case-section-head .case-num { font-size: 3rem; }
+}
+@media (max-width: 640px) {
+  .case-index-grid { grid-template-columns: 1fr; }
+  .case-section-head { margin-bottom: 36px; }
+  .case-section-head .case-num { font-size: 2.4rem; }
+  .case-section-head .eyebrow { display: block; margin: .6rem 0 0; }
+}
+
 /* Insights */
 .insight-card { border-style: dashed; padding-top: 2.4rem; }
 .insight-card .badge { background: var(--surface-hi); color: var(--muted); box-shadow: none; }
