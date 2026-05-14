@@ -29,7 +29,7 @@
 
 - [x] **W1 [구글 SEO]** 신규 사이트 첫 1개월 SEO 우선순위 5가지 → `/insights/google-seo/first-month-priorities/` (2025-05-14 발행)
 - [x] **W2 [기술 SEO]** 모바일 우선 색인 — 무엇이 다르고 무엇을 점검해야 하나 → `/insights/technical-seo/mobile-first-indexing/` (2025-05-14 발행, 테스트 글)
-- [ ] **W3 [콘텐츠 SEO]** 검색 의도 4가지 유형 — 키워드별로 어떻게 분류하고 페이지를 만드나
+- [x] **W3 [콘텐츠 SEO]** 검색 의도 4가지 유형 — 키워드별로 어떻게 분류하고 페이지를 만드나 → `/insights/content-seo/search-intent-4-types-keyword-classification-page-strategy/` (2026-05-14 자동 발행)
 - [ ] **W4 [지역 SEO]** 네이버 플레이스 부정 리뷰 대응 — 자주 하는 실수 5가지
 - [ ] **W5 [백링크·디지털 PR]** 게스트 포스트 — 안전한 매체 골라내는 6가지 기준
 - [ ] **W6 [SNS 마케팅]** 유튜브 영상 vs 쇼츠 — SEO 관점의 차이와 활용

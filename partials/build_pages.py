@@ -2567,6 +2567,45 @@ PAGES = {
         ),
         "active": "insights",
     },
+    "/insights/content-seo/search-intent-4-types-keyword-classification-page-strategy/": {
+        "title": "검색 의도 4가지 유형과 키워드 분류법 | OneSearchPro 콘텐츠 SEO 가이드",
+        "desc": "정보형·탐색형·거래형·상업형 검색 의도를 구분하고, 키워드별 페이지 전략을 수립하는 실전 방법. 네이버·구글 검색 결과 분석 기법과 흔한 실수 사례까지 상세히 안내합니다.",
+        "keywords": "검색 의도, 키워드 분류, 콘텐츠 SEO, 정보형 키워드, 거래형 키워드",
+        "h1": "검색 의도 4가지 유형 — 키워드별로 어떻게 분류하고 페이지를 만드나",
+        "eyebrow": "콘텐츠 SEO · ARTICLE",
+        "lead": "같은 키워드라도 사용자가 원하는 결과는 다릅니다. 검색 의도를 정확히 파악해야 페이지가 상위 노출됩니다.",
+        "body": blog_post(
+            date="2026-05-14",
+            reading_time=7,
+            intro="""<p>2024년 구글 코어 업데이트 이후 검색 의도 불일치 페이지의 순위 하락이 두드러졌습니다. 네이버 역시 C-랭크·DIA 지표로 콘텐츠와 검색어의 적합도를 평가합니다. "운동화"를 검색한 사용자가 백과사전 설명을 원하는지, 구매 페이지를 원하는지에 따라 최적 콘텐츠 형식은 완전히 달라집니다. 이 글에서는 정보형·탐색형·거래형·상업형 4가지 검색 의도를 구분하고, 키워드별로 어떤 페이지를 만들어야 하는지 구체적 기준과 실전 프로세스를 제시합니다.</p>""",
+            sections=[
+                ("1. 검색 의도(Search Intent)가 SEO에서 중요한 이유", """<p>검색 엔진은 사용자가 입력한 키워드 뒤에 숨은 <strong>진짜 목적</strong>을 파악하려 합니다. 구글의 Query Deserves Freshness(QDF)·Query Deserves Diversity(QDD) 알고리즘, 네이버의 통합검색 영역 배치 모두 검색 의도를 기반으로 작동합니다. 예를 들어 "에어컨 청소"는 정보형(방법 안내)일 수도, 거래형(청소 업체 예약)일 수도 있습니다. 의도를 잘못 판단해 블로그 글만 작성하면 "업체 찾기" 의도 사용자를 놓치고, 반대로 랜딩 페이지만 만들면 "직접 청소법" 검색자를 이탈시킵니다.</p><p>2023년 SEMrush 조사에서 상위 10위 페이지의 92%가 주요 검색 의도와 일치했습니다. 네이버 VIEW 탭과 쇼핑 탭이 분리된 것처럼, 플랫폼 자체가 의도별로 결과를 나눕니다. 의도 불일치 페이지는 아무리 기술적 SEO가 완벽해도 상위 노출이 어렵습니다.</p>"""),
+                ("2. 정보형(Informational) 검색 의도와 콘텐츠 전략", """<p>정보형 검색은 <strong>지식 습득·문제 해결 방법</strong>을 목적으로 합니다. "SEO란", "김치찌개 끓이는 법", "퇴직금 계산 방법" 같은 키워드가 대표적입니다. 네이버에서는 VIEW·지식iN·블로그가, 구글에서는 Featured Snippet·People Also Ask 영역이 주로 노출됩니다.</p><ul><li><strong>키워드 패턴:</strong> ~이란, ~방법, ~하는 법, why, how to, what is</li><li><strong>최적 콘텐츠:</strong> 가이드 블로그, 튜토리얼, FAQ, 비교 분석 글</li><li><strong>CTA 전략:</strong> 직접 판매보다는 뉴스레터 구독·관련 자료 다운로드·후속 단계 안내</li></ul><p><strong>주의점:</strong> 정보형 키워드에 상품 페이지를 연결하면 이탈률이 70% 이상 치솟습니다. 2023년 한 화장품 브랜드는 "피부 타입 구분법" 키워드로 제품 상세 페이지를 노출시켰다가 평균 체류 시간 8초, 전환율 0.3%를 기록했습니다. 이후 진단 콘텐츠+제품 추천 2단계 구조로 변경해 전환율 4.1%로 개선했습니다.</p>"""),
+                ("3. 탐색형(Navigational) 검색 의도 — 브랜드·특정 페이지 찾기", """<p>탐색형 검색은 <strong>특정 웹사이트·브랜드·페이지로 직접 이동</strong>하려는 의도입니다. "유튜브 로그인", "쿠팡 고객센터", "OneSearchPro 블로그"처럼 브랜드명이나 고유명사가 포함됩니다. 네이버 통합검색 최상단에 사이트 링크(site link)가 표시되고, 구글에서는 Knowledge Panel이 노출됩니다.</p><ul><li><strong>키워드 패턴:</strong> 브랜드명, 브랜드명+로그인/가격/후기, 특정 서비스명</li><li><strong>최적 대응:</strong> 공식 홈페이지 메타 태그 최적화, 구조화된 데이터(Organization Schema), 네이버 플레이스·브랜드 검색 등록</li><li><strong>경쟁사 대응:</strong> 타사 브랜드 키워드로 광고 집행 시 법적 리스크·품질 점수 하락 주의</li></ul><p>탐색형 의도는 이미 <strong>브랜드 인지도가 있는 상태</strong>이므로, 자사 브랜드 키워드라면 공식 페이지 상위 노출 유지가 핵심입니다. 타사 브랜드 키워드라면 콘텐츠 SEO보다는 비교 콘텐츠("A vs B")로 우회 유입을 노리는 편이 현실적입니다. 네이버 파워링크에서 경쟁사 브랜드명 입찰 시 상표권 신고로 광고 중단될 수 있으니, 브랜드명 없이 "대안", "비교" 표현 활용을 권장합니다.</p>"""),
+                ("4. 거래형(Transactional) 검색 의도 — 구매·전환 직전 단계", """<p>거래형 검색은 <strong>즉시 구매·가입·예약</strong> 행동을 목적으로 합니다. "운동화 구매", "호텔 예약", "온라인 강의 등록" 같은 키워드가 해당하며, 네이버 쇼핑·스마트스토어, 구글 Shopping 탭이 주요 노출 영역입니다.</p><ul><li><strong>키워드 패턴:</strong> 구매, 예약, 신청, 할인, buy, order, book now</li><li><strong>최적 페이지:</strong> 제품 상세(PDP), 서비스 랜딩, 프로모션 페이지, 결제 1단계</li><li><strong>전환 요소:</strong> 명확한 CTA 버튼, 신뢰 신호(리뷰·인증·배송 정보), 간편 결제 옵션</li></ul><p><strong>실패 사례:</strong> 한 SaaS 스타트업은 "프로젝트 관리 도구 구매" 키워드로 5,000자 가이드 글을 노출시켰습니다. 유입은 많았으나 전환율 1.2%에 그쳤고, 경쟁사는 3단계 요금제 비교 페이지로 8.7% 전환율을 기록했습니다. 거래형 의도에서는 <strong>결정 장벽을 낮추는 UI</strong>가 긴 설명보다 효과적입니다. 네이버 쇼핑 검색광고·구글 Performance Max 캠페인 활용도 고려해야 합니다.</p>"""),
+                ("5. 상업형(Commercial Investigation) 검색 의도 — 구매 전 비교·검토", """<p>상업형 검색은 거래 직전 <strong>제품 비교·후기 확인·대안 탐색</strong> 단계입니다. "노트북 추천", "A vs B 비교", "best CRM software 2024" 같은 키워드로, 정보형과 거래형 중간 성격을 띱니다. 네이버 VIEW 탭 상위에 "추천", "후기", "비교" 콘텐츠가 배치됩니다.</p><ul><li><strong>키워드 패턴:</strong> 추천, 비교, 후기, best, top 10, review, vs</li><li><strong>최적 콘텐츠:</strong> 비교 가이드, 제품 라운드업, 사용 후기 집계, 의사결정 체크리스트</li><li><strong>전환 연결:</strong> 콘텐츠 내 제품 링크·쿠폰 코드, 하단에 상담 신청·무료 체험 CTA 배치</li></ul><p>상업형 키워드는 전환율이 정보형보다 3~5배 높지만, 거래형보다는 낮습니다. 2024년 구글 Search Generative Experience(SGE)·네이버 하이퍼클로바X 적용 이후 AI 요약으로 비교 콘텐츠 클릭률이 감소하는 추세입니다. 따라서 <strong>독자적 테스트 데이터·사용자 설문·실제 사용 경험</strong>을 담아 AI가 요약할 수 없는 차별점을 만들어야 합니다. "2024년 기준 A 제품 3개월 사용 후 ROI 23% 개선" 같은 구체적 수치가 핵심입니다.</p>"""),
+                ("6. 키워드를 4가지 의도로 분류하는 실전 프로세스", """<p>검색 의도를 판단할 때는 <strong>키워드 자체보다 실제 검색 결과</strong>를 우선 분석해야 합니다. 같은 키워드라도 시장·시즌·사용자층에 따라 의도가 달라지기 때문입니다.</p><ol><li><strong>SERP 분석:</strong> 네이버·구글에서 키워드 직접 검색 → 상위 10개 결과 유형(블로그/쇼핑/동영상/공식 페이지) 확인</li><li><strong>탭·영역 확인:</strong> 네이버 VIEW/쇼핑/플레이스 어느 탭이 상단인지, 구글 Featured Snippet/Shopping/Local Pack 노출 여부 점검</li><li><strong>키워드 수식어:</strong> "방법", "추천", "구매" 같은 접미사로 1차 분류 후 SERP로 검증</li><li><strong>도구 활용:</strong> 네이버 검색광고 키워드 도구·구글 키워드 플래너에서 경쟁도·CPC 확인 (CPC 높으면 상업형·거래형 가능성 증가)</li><li><strong>스프레드시트 분류:</strong> 키워드 목록에 "의도" 열 추가, 정보/탐색/거래/상업 태그 부여 → 페이지 유형 매핑</li></ol><p><code>예시: "에어프라이어" → 네이버 쇼핑 탭 최상단, CPC 1,200원 → 거래형 / "에어프라이어 요리법" → VIEW 탭 우세, CPC 80원 → 정보형</code></p><p><strong>주의:</strong> 한 키워드가 여러 의도를 동시에 가질 수 있습니다(혼합 의도). "다이어트" 키워드는 정보형(방법 안내)과 상업형(보조제 추천)이 혼재하므로, 포괄 콘텐츠를 만들거나 의도별로 별도 페이지를 준비해야 합니다.</p>"""),
+                ("7. 검색 의도별 페이지 제작 체크리스트와 흔한 실수", """<p>의도를 분류한 뒤에는 각 유형에 맞는 페이지 구조·콘텐츠 요소·전환 경로를 설계해야 합니다.</p><table style='width:100%; border-collapse:collapse; margin:1em 0;'><thead><tr style='background:#f4f4f4;'><th style='border:1px solid #ddd; padding:8px;'>의도 유형</th><th style='border:1px solid #ddd; padding:8px;'>페이지 형식</th><th style='border:1px solid #ddd; padding:8px;'>핵심 요소</th><th style='border:1px solid #ddd; padding:8px;'>흔한 실수</th></tr></thead><tbody><tr><td style='border:1px solid #ddd; padding:8px;'>정보형</td><td style='border:1px solid #ddd; padding:8px;'>가이드·블로그</td><td style='border:1px solid #ddd; padding:8px;'>목차·단계별 설명·예시</td><td style='border:1px solid #ddd; padding:8px;'>과도한 제품 링크로 신뢰 하락</td></tr><tr><td style='border:1px solid #ddd; padding:8px;'>탐색형</td><td style='border:1px solid #ddd; padding:8px;'>홈·로그인</td><td style='border:1px solid #ddd; padding:8px;'>브랜드명·사이트링크</td><td style='border:1px solid #ddd; padding:8px;'>공식 페이지 메타 미최적화</td></tr><tr><td style='border:1px solid #ddd; padding:8px;'>거래형</td><td style='border:1px solid #ddd; padding:8px;'>상품·랜딩</td><td style='border:1px solid #ddd; padding:8px;'>가격·CTA·리뷰</td><td style='border:1px solid #ddd; padding:8px;'>긴 설명으로 결정 지연</td></tr><tr><td style='border:1px solid #ddd; padding:8px;'>상업형</td><td style='border:1px solid #ddd; padding:8px;'>비교·추천</td><td style='border:1px solid #ddd; padding:8px;'>표·차트·독자 데이터</td><td style='border:1px solid #ddd; padding:8px;'>제휴 링크만 나열해 편향 의심</td></tr></tbody></table><p><strong>실수 사례:</strong> 한 마케팅 에이전시는 "SEO 대행사" (탐색·상업 혼합) 키워드로 5,000자 가이드를 작성했으나, 검색자는 업체 비교·포트폴리오 확인을 원했습니다. 이탈률 78%를 기록한 후, 상단에 "주요 에이전시 7곳 비교표"와 "무료 컨설팅 신청" CTA를 배치해 전환율을 3.2%에서 9.1%로 개선했습니다.</p><p>또한 네이버 C-랭크는 체류 시간·재방문율로 콘텐츠 만족도를 평가하므로, 거래형 페이지라도 <strong>최소한의 신뢰 요소</strong>(배송 정보·환불 정책·실제 후기)는 반드시 포함해야 순위 유지가 가능합니다.</p>""")
+            ],
+            key_takeaways=[
+                "검색 의도는 정보형·탐색형·거래형·상업형 4가지로 구분하며, 네이버·구글 모두 의도 일치 페이지를 우선 노출합니다.",
+                "키워드 수식어보다 실제 SERP(검색 결과 페이지) 분석이 의도 판단의 핵심입니다. 상위 10개 결과 유형과 탭 배치를 확인하세요.",
+                "정보형 키워드에 상품 페이지를 연결하거나, 거래형 키워드에 긴 가이드를 노출하면 이탈률 급증과 전환율 하락이 발생합니다.",
+                "상업형(비교·추천) 콘텐츠는 AI 요약 시대에도 독자적 테스트 데이터·실사용 경험으로 차별화해야 클릭률을 유지할 수 있습니다."
+            ],
+            related=[
+                ("콘텐츠 SEO 인사이트 더 보기", "/insights/content-seo/", "콘텐츠 SEO"),
+                ("SEO 컨설팅 서비스", "/services/seo/", "서비스"),
+            ]
+        ),
+        "json_ld": blog_jsonld(
+            url="https://onesearchpro.org/insights/content-seo/search-intent-4-types-keyword-classification-page-strategy/",
+            title="검색 의도 4가지 유형 — 키워드별로 어떻게 분류하고 페이지를 만드나",
+            desc="정보형·탐색형·거래형·상업형 검색 의도를 구분하고, 키워드별 페이지 전략을 수립하는 실전 방법. 네이버·구글 검색 결과 분석 기법과 흔한 실수 사례까지 상세히 안내합니다.",
+            date_published="2026-05-14"
+        ),
+        "active": "insights",
+    },
     # ===== AUTO-INSERT MARKER (weekly_blog.py inserts new articles above) =====
 }
 
