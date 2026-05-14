@@ -210,6 +210,7 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
   <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg" />
   <link rel="alternate icon" type="image/png" href="/assets/images/logo.png" />
   <link rel="apple-touch-icon" href="/assets/images/logo.png" />
+  <link rel="alternate" type="application/rss+xml" title="OneSearchPro · SEO 인사이트" href="/rss.xml" />
   <meta name="theme-color" content="#7c5cff" />
   <!-- 검색엔진 소유권 인증 (등록 시 코드 입력) -->
   <meta name="google-site-verification" content="" />
