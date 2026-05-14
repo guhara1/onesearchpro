@@ -231,20 +231,19 @@ def insight_card(title, summary, label="준비 중"):
     return (
         f'<div class="svc insight-card">'
         f'<span class="badge">{label}</span>'
-        f'<div class="svc-icon">📝</div>'
         f'<h3>{title}</h3>'
         f'<p>{summary}</p>'
         f'</div>'
     )
 
 
-def insight_article_card(title, summary, url, label="NEW"):
+def insight_article_card(title, summary, url, reading_time, label="NEW"):
     return (
         f'<a href="{url}" class="svc insight-article-card">'
         f'<span class="badge">{label}</span>'
-        f'<div class="svc-icon">📝</div>'
         f'<h3>{title}</h3>'
         f'<p>{summary}</p>'
+        f'<span class="article-meta-mini">⏱ {reading_time}분 읽기</span>'
         f'<span class="svc-link">읽어보기 →</span>'
         f'</a>'
     )
@@ -762,12 +761,14 @@ PAGES = {
                     insight_article_card(
                         "구글 코어 업데이트 직후 2주, 절대 손대지 말아야 할 5가지",
                         "트래픽이 흔들릴 때 가장 위험한 건 패닉 작업입니다. 첫 2주에 손대지 말아야 할 5가지와 대신 무엇을 해야 하는지.",
-                        "/insights/google-seo/post-core-update-mistakes/"
+                        "/insights/google-seo/post-core-update-mistakes/",
+                        7
                     ),
                     insight_article_card(
                         "Helpful Content System 셀프 점검 — 한국 사이트가 자주 떨어지는 7가지 질문",
                         "HCS는 사이트 전체 평가입니다. 한국 사이트가 셀프 평가에서 자주 떨어지는 패턴과 통과 기준.",
-                        "/insights/google-seo/helpful-content-self-check/"
+                        "/insights/google-seo/helpful-content-self-check/",
+                        8
                     ),
                     insight_card("검색 의도 4가지 유형과 콘텐츠 매칭 전략", "정보형·내비게이션형·상업형·트랜잭션형 의도에 맞는 페이지 유형과 헤딩 구조 가이드."),
                     insight_card("SERP 기능별 노출 전략 — 스니펫·People Also Ask·이미지", "다양한 SERP 기능에 노출되기 위한 콘텐츠 구조와 마크업 가이드.")
@@ -780,12 +781,14 @@ PAGES = {
                     insight_article_card(
                         "서치콘솔 \"발견됨 - 현재 색인되지 않음\" 7가지 원인과 진단 순서",
                         "서치콘솔에서 가장 헷갈리는 메시지의 의미와 빈도순 진단법. 7가지 원인을 가장 흔한 것부터 점검.",
-                        "/insights/technical-seo/discovered-not-indexed/"
+                        "/insights/technical-seo/discovered-not-indexed/",
+                        9
                     ),
                     insight_article_card(
                         "워드프레스 사이트 LCP 4초 → 1.5초로 줄인 실제 작업 순서",
                         "워드프레스 LCP 90%는 4가지 패턴에서 결정됩니다. 효과 큰 순서로 정리한 작업 매뉴얼.",
-                        "/insights/technical-seo/wordpress-lcp-fix/"
+                        "/insights/technical-seo/wordpress-lcp-fix/",
+                        8
                     ),
                     insight_card("canonical 태그, 언제 어떻게 써야 하나", "파라미터·페이지네이션·다국어·복제 콘텐츠 상황별 canonical 설정 가이드."),
                     insight_card("sitemap.xml 설계 — 큰 사이트는 어떻게 분리해야 하나", "다중 sitemap, 이미지/뉴스/비디오 sitemap, sitemap 인덱스 활용 가이드.")
@@ -798,12 +801,14 @@ PAGES = {
                     insight_article_card(
                         "병원·치과 블로그 첫 100자 — 환자 검색어로 시작해야 하는 이유와 예시",
                         "첫 100자에서 검색 의도 매칭과 메타 디스크립션이 결정됩니다. 의료광고심의 충돌도 피하는 작성법.",
-                        "/insights/content-seo/medical-blog-first-100/"
+                        "/insights/content-seo/medical-blog-first-100/",
+                        7
                     ),
                     insight_article_card(
                         "쇼핑몰 제품 페이지 본문이 비어있을 때 추가하는 6단락 구조",
                         "이미지 위주 제품 페이지가 색인 안 되는 이유와, 본문 6단락으로 롱테일 노출을 늘리는 패턴.",
-                        "/insights/content-seo/product-page-content-structure/"
+                        "/insights/content-seo/product-page-content-structure/",
+                        8
                     ),
                     insight_card("토픽 클러스터로 토픽 권위(Topical Authority)를 만드는 방법", "필러 콘텐츠 1개 + 클러스터 6~12개의 구조 설계와 내부 링크 흐름 가이드."),
                     insight_card("오래된 글 리프레시 — 새 글보다 효과가 큰 이유", "트래픽 잠재력이 높은 글을 선별하는 기준과 리프레시 작업 순서, 측정 방법.")
@@ -816,12 +821,14 @@ PAGES = {
                     insight_article_card(
                         "신규 매장 네이버 플레이스 — 영수증 리뷰 적을 때 첫 3개월 운영 패턴",
                         "리뷰 없는 신규 매장이 빠지는 함정과, 정보·블로그·리뷰 우선순위로 짠 월별 운영 매뉴얼.",
-                        "/insights/local-seo/new-store-naver-place/"
+                        "/insights/local-seo/new-store-naver-place/",
+                        7
                     ),
                     insight_article_card(
                         "다지점 매장 구글 비즈니스 프로필 — 본사·지점 정보 분리 원칙과 흔한 실수",
                         "본사 정보를 모든 지점에 복붙하면 안 되는 이유. 위치·카테고리·사진·리뷰 응대 4가지 분리 원칙.",
-                        "/insights/local-seo/multi-location-gbp/"
+                        "/insights/local-seo/multi-location-gbp/",
+                        7
                     ),
                     insight_card("\"지역명 + 서비스\" 키워드용 지역 랜딩페이지 설계법", "다지점 비즈니스에서 지역 키워드를 잡기 위한 페이지 구조와 콘텐츠 작성 가이드."),
                     insight_card("NAP 일관성과 로컬 인용(citation)이 왜 중요한가", "디렉토리·SNS·자체 사이트의 상호·주소·전화 정보 통일 가이드.")
@@ -834,12 +841,14 @@ PAGES = {
                     insight_article_card(
                         "이전 대행사가 남긴 위험한 백링크 — 어디서부터 Disavow 결정해야 하나",
                         "도구 점수의 한계와 즉시·보류·유지 3단계 분류, 단계적 Disavow 제출 전략.",
-                        "/insights/backlink-pr/disavow-decision/"
+                        "/insights/backlink-pr/disavow-decision/",
+                        9
                     ),
                     insight_article_card(
                         "한국 언론사 보도자료 배포 — 백링크 따라오는 매체와 안 오는 매체 구분법",
                         "본문 링크가 살아남는 매체와 텍스트만 남는 매체의 차이, 브랜드 언급의 가치.",
-                        "/insights/backlink-pr/korean-press-release/"
+                        "/insights/backlink-pr/korean-press-release/",
+                        7
                     ),
                     insight_card("게스트 포스트와 디지털 PR의 차이", "스팸과 합법적 PR을 가르는 기준, 자연스러운 신뢰 링크 확보 전략."),
                     insight_card("브랜드 언급(unlinked mention)을 링크로 전환하는 방법", "언급 모니터링 도구 활용과 정중한 컨택 템플릿, 전환율 높이는 팁.")
@@ -852,12 +861,14 @@ PAGES = {
                     insight_article_card(
                         "유튜브 쇼츠 설명란 — 본 영상 페이지로 트래픽 유도하는 텍스트 구조",
                         "쇼츠 설명란의 첫 줄·본문·해시태그 구조와 외부 사이트 클릭률을 높이는 패턴.",
-                        "/insights/sns/youtube-shorts-description/"
+                        "/insights/sns/youtube-shorts-description/",
+                        6
                     ),
                     insight_article_card(
                         "인스타그램 프로필 링크 — 링크인바이오 vs 자체 랜딩, 어느 게 SEO에 도움될까",
                         "두 선택지의 SEO·UX·측정 관점 비교. 비즈니스 단계별 권장 방향.",
-                        "/insights/sns/instagram-link-in-bio/"
+                        "/insights/sns/instagram-link-in-bio/",
+                        6
                     ),
                     insight_card("SNS는 SEO에 직접 영향을 주는가 — 통념과 사실", "소셜 신호와 검색 순위의 실제 관계, 간접적으로 작용하는 경로 정리."),
                     insight_card("인스타그램 검색 탭과 구글 인덱싱 — 활용 포인트", "프로필·릴스·해시태그를 어떻게 검색 자산으로 만들 수 있는지에 대한 실무 가이드.")
@@ -870,12 +881,14 @@ PAGES = {
                     insight_article_card(
                         "사이트 리뉴얼 후 트래픽 절반 — 301 리다이렉트 시 자주 빠뜨리는 12가지",
                         "리뉴얼 후 트래픽 손실의 90%는 301 매핑 누락에서. 자주 빠뜨리는 12가지와 모니터링 매뉴얼.",
-                        "/insights/visibility/301-migration-mistakes/"
+                        "/insights/visibility/301-migration-mistakes/",
+                        8
                     ),
                     insight_article_card(
                         "서치콘솔 \"크롤링됨 - 현재 색인되지 않음\" — 다른 상태와의 차이와 대응법",
                         "구글이 가져갔는데 색인 안 시키는 상태. 5가지 원인과 단계적 개선 방법.",
-                        "/insights/visibility/crawled-not-indexed/"
+                        "/insights/visibility/crawled-not-indexed/",
+                        8
                     ),
                     insight_card("트래픽이 갑자기 떨어졌을 때 4주 진단 매뉴얼", "코어 업데이트·알고리즘 변경·사이트 문제·계절성을 구분하는 진단 순서."),
                     insight_card("\"수동 조치(manual action)\" 메시지를 받았을 때 대응 가이드", "서치콘솔에서 메시지를 받은 경우 단계별 점검 항목과 재심사 요청 절차.")
