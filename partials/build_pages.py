@@ -174,6 +174,21 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
     # sameAs: 구글 Knowledge Panel·E-E-A-T Authoritativeness 신호
     site_wide_jsonld = '''<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"OneSearchPro","alternateName":"원서치프로","url":"https://onesearchpro.org/","inLanguage":"ko-KR","publisher":{"@type":"Organization","name":"OneSearchPro","legalName":"YH기획"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"YH기획 (OneSearchPro)","alternateName":"OneSearchPro","url":"https://onesearchpro.org/","logo":"https://onesearchpro.org/assets/images/logo.png","image":"https://onesearchpro.org/assets/images/logo.png","telephone":"","email":"contact@onesearchpro.com","priceRange":"₩₩","address":{"@type":"PostalAddress","streetAddress":"부평대로 283 부평우림라이온스밸리","addressLocality":"부평구","addressRegion":"인천광역시","postalCode":"21389","addressCountry":"KR"},"areaServed":"KR","taxID":"503-30-66944","sameAs":["https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/","https://medium.com/@88smartbro88","https://x.com/gugeulmake84173","https://t.me/googleseolab"]}</script>'''
 
+    # 페이지 본문 내에 자체 CTA가 있는 페이지는 글로벌 CTA를 생략 (중복 방지)
+    has_own_cta = path in {
+        "/case-studies/seo/",
+        "/case-studies/local-seo/",
+        "/case-studies/content/",
+        "/case-studies/web-design/",
+        "/case-studies/visibility/",
+    }
+    global_cta_html = "" if has_own_cta else '''<section class="section section-cta">
+      <div class="container cta-grid">
+        <div><h2>무료 진단 후 정확한 견적을 받아보세요</h2><p>24시간 내 분석 리포트와 맞춤 제안서를 보내드립니다.</p></div>
+        <div class="cta-actions"><a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">무료 진단 신청 →</a><a href="/case-studies/" class="btn btn-outline btn-lg btn-light">성공사례 보기</a></div>
+      </div>
+    </section>'''
+
     return f'''<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -215,12 +230,7 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
   <main>
     {hero_html}
     {body}
-    <section class="section section-cta">
-      <div class="container cta-grid">
-        <div><h2>무료 진단 후 정확한 견적을 받아보세요</h2><p>24시간 내 분석 리포트와 맞춤 제안서를 보내드립니다.</p></div>
-        <div class="cta-actions"><a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">무료 진단 신청 →</a><a href="/case-studies/" class="btn btn-outline btn-lg btn-light">성공사례 보기</a></div>
-      </div>
-    </section>
+    {global_cta_html}
   </main>
   {FOOTER}
   <script src="/script.js"></script>
