@@ -8,7 +8,7 @@ SITE = "https://onesearchpro.pages.dev"
 
 HEADER = '''<header class="site-header">
     <div class="container nav-wrap">
-      <a href="/" class="brand"><span class="brand-mark">1</span><span class="brand-name">OneSearch<strong>Pro</strong></span></a>
+      <a href="/" class="brand" aria-label="OneSearchPro 홈"><img src="/assets/images/logo.png" alt="OneSearchPro - 검색의 기준을 바꾸다" class="brand-logo" width="180" height="60" /></a>
       <nav class="nav" id="nav">
         <div class="has-dropdown">
           <a href="/services/seo/" class="nav-trigger{ACTIVE_SVC}">서비스 <span class="caret">▾</span></a>
@@ -116,6 +116,13 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
   <meta property="og:title" content="{title}" />
   <meta property="og:description" content="{desc}" />
   <meta property="og:url" content="{canonical}" />
+  <meta property="og:image" content="https://onesearchpro.pages.dev/assets/images/logo.png" />
+  <meta property="og:site_name" content="OneSearchPro" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://onesearchpro.pages.dev/assets/images/logo.png" />
+  <link rel="icon" type="image/png" href="/assets/images/logo.png" />
+  <link rel="apple-touch-icon" href="/assets/images/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />

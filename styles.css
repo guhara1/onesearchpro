@@ -98,6 +98,14 @@ ul { list-style: none; padding: 0; margin: 0; }
 }
 .nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 74px; gap: 1rem; }
 .brand { display: inline-flex; align-items: center; gap: .6rem; font-weight: 800; font-size: 1.18rem; color: var(--text); }
+.brand-logo {
+  height: 44px; width: auto; display: block;
+  filter: brightness(0) invert(1) drop-shadow(0 0 12px rgba(124, 92, 255, .35));
+  transition: filter .25s ease;
+}
+.brand:hover .brand-logo {
+  filter: brightness(0) invert(1) drop-shadow(0 0 16px rgba(124, 92, 255, .6)) drop-shadow(0 0 24px rgba(34, 211, 238, .35));
+}
 .brand-mark {
   width: 34px; height: 34px; border-radius: 10px;
   display: grid; place-items: center; color: #fff; font-weight: 900;
@@ -105,6 +113,7 @@ ul { list-style: none; padding: 0; margin: 0; }
   box-shadow: 0 8px 18px rgba(124, 92, 255, .45);
 }
 .brand-name strong { background: var(--grad-text); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.site-footer .brand-logo { filter: brightness(0) invert(.95); }
 .nav { display: flex; align-items: center; gap: 1.2rem; }
 .nav > a, .nav .nav-trigger { font-weight: 500; color: var(--text-soft); font-size: .95rem; transition: color .15s; }
 .nav > a:hover, .nav .nav-trigger:hover { color: #fff; }
