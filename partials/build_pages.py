@@ -68,7 +68,7 @@ FOOTER = '''<footer class="site-footer">
       <div><h5>SEO 서비스</h5><ul><li><a href="/services/seo/">SEO 컨설팅</a></li><li><a href="/services/technical-seo/">기술 SEO 진단</a></li><li><a href="/services/content-seo/">콘텐츠 SEO</a></li><li><a href="/services/local-seo/">지역 SEO</a></li><li><a href="/services/digital-pr/">디지털 PR · 백링크 진단</a></li><li><a href="/services/social-media/">SNS 마케팅</a></li><li><a href="/services/web-design/">SEO 웹사이트 제작</a></li></ul></div>
       <div><h5>회사</h5><ul><li><a href="/case-studies/">성공사례</a></li><li><a href="/insights/">SEO 인사이트</a></li><li><a href="/about/">회사 소개</a></li><li><a href="/contact/">내 사이트 진단받기</a></li></ul></div>
       <div><h5>연락처</h5><ul><li>contact@onesearchpro.com</li><li>인천 부평구</li></ul></div>
-      <div><h5>약관·정책</h5><ul><li><a href="/privacy/">개인정보처리방침</a></li><li><a href="/terms/">이용약관</a></li></ul></div>
+      <div><h5>약관·정책</h5><ul><li><a href="/privacy/">개인정보처리방침</a></li><li><a href="/terms/">이용약관</a></li><li><a href="/sitemap-html/">사이트맵</a></li><li><a href="/rss.xml">RSS 피드</a></li></ul></div>
     </div>
     <div class="container biz-info">
       <span>상호 <b>YH기획</b></span>
@@ -160,6 +160,9 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
     elif path == "/terms/":
         breadcrumb_trail = [("홈", "/"), ("이용약관", path)]
         breadcrumb_html = '<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <span>이용약관</span></div></nav>'
+    elif path == "/sitemap-html/":
+        breadcrumb_trail = [("홈", "/"), ("사이트맵", path)]
+        breadcrumb_html = '<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <span>사이트맵</span></div></nav>'
 
     # BreadcrumbList JSON-LD 자동 생성
     breadcrumb_jsonld = ""
@@ -3436,6 +3439,154 @@ PAGES = {
         "active": "insights",
     },
     # ===== AUTO-INSERT MARKER (weekly_blog.py inserts new articles above) =====
+
+    "/sitemap-html/": {
+        "title": "사이트맵 | 전체 페이지 목록 | OneSearchPro",
+        "desc": "OneSearchPro 사이트의 전체 페이지 목록입니다. 서비스·성공사례·SEO 인사이트·회사소개 등 모든 페이지로 한 번에 이동할 수 있습니다.",
+        "keywords": "사이트맵, OneSearchPro 사이트맵, 전체 페이지 목록",
+        "h1": "사이트맵",
+        "eyebrow": "SITEMAP",
+        "lead": "OneSearchPro 사이트의 전체 페이지를 한 페이지에 모았습니다. 검색엔진용 XML 사이트맵은 /sitemap.xml, RSS 피드는 /rss.xml 에 있습니다.",
+        "body": (
+            '<section class="section"><div class="container">'
+            '<div class="sitemap-grid">'
+
+            '<div class="sitemap-col">'
+            '<h2>메인</h2>'
+            '<ul><li><a href="/">홈</a></li></ul>'
+            '</div>'
+
+            '<div class="sitemap-col">'
+            '<h2>SEO 서비스</h2>'
+            '<ul>'
+            '<li><a href="/services/seo/">SEO 컨설팅</a></li>'
+            '<li><a href="/services/technical-seo/">기술 SEO 진단</a></li>'
+            '<li><a href="/services/content-seo/">콘텐츠 SEO</a></li>'
+            '<li><a href="/services/local-seo/">지역 SEO</a></li>'
+            '<li><a href="/services/digital-pr/">디지털 PR · 백링크 진단</a></li>'
+            '<li><a href="/services/social-media/">SNS 마케팅</a></li>'
+            '<li><a href="/services/web-design/">SEO 웹사이트 제작</a></li>'
+            '</ul>'
+            '</div>'
+
+            '<div class="sitemap-col">'
+            '<h2>성공사례</h2>'
+            '<ul>'
+            '<li><a href="/case-studies/">성공사례 허브</a></li>'
+            '<li><a href="/case-studies/seo/">SEO 개선 사례</a></li>'
+            '<li><a href="/case-studies/local-seo/">지역 SEO 사례</a></li>'
+            '<li><a href="/case-studies/content/">콘텐츠 개선 사례</a></li>'
+            '<li><a href="/case-studies/web-design/">웹사이트 제작 사례</a></li>'
+            '<li><a href="/case-studies/visibility/">검색 노출 문제 해결 사례</a></li>'
+            '</ul>'
+            '</div>'
+
+            '<div class="sitemap-col">'
+            '<h2>SEO 인사이트 — 카테고리</h2>'
+            '<ul>'
+            '<li><a href="/insights/">전체 인사이트</a></li>'
+            '<li><a href="/insights/google-seo/">구글 SEO</a></li>'
+            '<li><a href="/insights/technical-seo/">기술 SEO</a></li>'
+            '<li><a href="/insights/content-seo/">콘텐츠 SEO</a></li>'
+            '<li><a href="/insights/local-seo/">지역 SEO</a></li>'
+            '<li><a href="/insights/backlink-pr/">백링크 · 디지털 PR</a></li>'
+            '<li><a href="/insights/sns/">SNS 마케팅</a></li>'
+            '<li><a href="/insights/visibility/">검색 노출 문제 해결</a></li>'
+            '</ul>'
+            '</div>'
+
+            '<div class="sitemap-col">'
+            '<h2>인사이트 글 — 구글 SEO</h2>'
+            '<ul>'
+            '<li><a href="/insights/google-seo/post-core-update-mistakes/">코어 업데이트 직후 SEO 주의사항 5가지</a></li>'
+            '<li><a href="/insights/google-seo/helpful-content-self-check/">Helpful Content System 셀프 점검 7가지</a></li>'
+            '<li><a href="/insights/google-seo/first-month-priorities/">신규 사이트 첫 1개월 SEO 우선순위 5가지</a></li>'
+            '</ul>'
+            '</div>'
+
+            '<div class="sitemap-col">'
+            '<h2>인사이트 글 — 기술 SEO</h2>'
+            '<ul>'
+            '<li><a href="/insights/technical-seo/discovered-not-indexed/">"발견됨 - 색인되지 않음" 원인 7가지</a></li>'
+            '<li><a href="/insights/technical-seo/wordpress-lcp-fix/">워드프레스 LCP 개선 작업 순서</a></li>'
+            '<li><a href="/insights/technical-seo/mobile-first-indexing/">모바일 우선 색인 점검 가이드</a></li>'
+            '</ul>'
+            '</div>'
+
+            '<div class="sitemap-col">'
+            '<h2>인사이트 글 — 콘텐츠 SEO</h2>'
+            '<ul>'
+            '<li><a href="/insights/content-seo/medical-blog-first-100/">병원·치과 블로그 첫 100자 작성법</a></li>'
+            '<li><a href="/insights/content-seo/product-page-content-structure/">쇼핑몰 제품 페이지 본문 6단락 구조</a></li>'
+            '<li><a href="/insights/content-seo/search-intent-4-types-keyword-classification-page-strategy/">검색 의도 4가지 유형과 키워드 분류</a></li>'
+            '</ul>'
+            '</div>'
+
+            '<div class="sitemap-col">'
+            '<h2>인사이트 글 — 지역 SEO</h2>'
+            '<ul>'
+            '<li><a href="/insights/local-seo/new-store-naver-place/">신규 매장 네이버 플레이스 3개월 운영</a></li>'
+            '<li><a href="/insights/local-seo/multi-location-gbp/">다지점 매장 GBP 본사·지점 분리 원칙</a></li>'
+            '</ul>'
+            '</div>'
+
+            '<div class="sitemap-col">'
+            '<h2>인사이트 글 — 백링크 · 디지털 PR</h2>'
+            '<ul>'
+            '<li><a href="/insights/backlink-pr/disavow-decision/">위험한 백링크 Disavow 결정 기준</a></li>'
+            '<li><a href="/insights/backlink-pr/korean-press-release/">한국 언론사 보도자료 백링크 구분법</a></li>'
+            '</ul>'
+            '</div>'
+
+            '<div class="sitemap-col">'
+            '<h2>인사이트 글 — SNS 마케팅</h2>'
+            '<ul>'
+            '<li><a href="/insights/sns/youtube-shorts-description/">유튜브 쇼츠 설명란 트래픽 유도법</a></li>'
+            '<li><a href="/insights/sns/instagram-link-in-bio/">인스타그램 프로필 링크 SEO 비교</a></li>'
+            '</ul>'
+            '</div>'
+
+            '<div class="sitemap-col">'
+            '<h2>인사이트 글 — 검색 노출 문제 해결</h2>'
+            '<ul>'
+            '<li><a href="/insights/visibility/301-migration-mistakes/">사이트 리뉴얼 301 매핑 실수 12가지</a></li>'
+            '<li><a href="/insights/visibility/crawled-not-indexed/">"크롤링됨 - 색인되지 않음" 대응법</a></li>'
+            '</ul>'
+            '</div>'
+
+            '<div class="sitemap-col">'
+            '<h2>회사소개</h2>'
+            '<ul>'
+            '<li><a href="/about/">회사 소개</a></li>'
+            '<li><a href="/about/principles/">운영 원칙</a></li>'
+            '<li><a href="/about/process/">작업 프로세스</a></li>'
+            '<li><a href="/about/faq/">자주 묻는 질문</a></li>'
+            '</ul>'
+            '</div>'
+
+            '<div class="sitemap-col">'
+            '<h2>기타</h2>'
+            '<ul>'
+            '<li><a href="/contact/">내 사이트 진단받기</a></li>'
+            '<li><a href="/privacy/">개인정보처리방침</a></li>'
+            '<li><a href="/terms/">이용약관</a></li>'
+            '</ul>'
+            '</div>'
+
+            '<div class="sitemap-col">'
+            '<h2>검색엔진용 피드</h2>'
+            '<ul>'
+            '<li><a href="/sitemap.xml">XML 사이트맵 (검색엔진용)</a></li>'
+            '<li><a href="/rss.xml">RSS 피드 (인사이트 구독)</a></li>'
+            '<li><a href="/robots.txt">robots.txt</a></li>'
+            '</ul>'
+            '</div>'
+
+            '</div></div></section>'
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"사이트맵","url":"https://onesearchpro.org/sitemap-html/","inLanguage":"ko-KR"}</script>',
+        "active": "",
+    },
 
     "/privacy/": {
         "title": "개인정보처리방침 | OneSearchPro",
