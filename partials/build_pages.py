@@ -1520,47 +1520,145 @@ PAGES = {
     },
 
     "/case-studies/visibility/": {
-        "title": "검색 노출 해결 사례 | 색인·페널티 | OneSearchPro",
-        "desc": "OneSearchPro의 검색 노출 문제 해결 사례. 색인 누락, 페널티, 중복 URL, robots 설정 오류 등 \"검색 노출 자체가 막혀 있던\" 사이트를 정상화한 작업 기록입니다.",
-        "keywords": "검색 노출 사례, 색인 문제, 중복 URL, robots 설정, 페널티 회복, 색인 누락",
+        "title": "검색 노출 문제 해결 사례 | 색인·서치콘솔·샌드박스·중복·이전 | OneSearchPro",
+        "desc": "구글 색인 안 됨, 서치콘솔 오류, 검색 결과 미노출, 사이트맵 무반응, 신규 도메인 샌드박스, 중복 페이지, 도메인 이전 트래픽 하락 — '왜 구글에 안 뜨지?' 의 7가지 시나리오 실제 해결 기록.",
+        "keywords": "검색 노출 사례, 구글 색인 안됨, 서치콘솔 오류, 사이트맵 색인, 샌드박스, 중복 페이지, 도메인 이전 트래픽 하락",
         "h1": "검색 노출 문제 해결 사례",
         "eyebrow": "VISIBILITY FIX CASES",
-        "lead": "색인·페널티·중복 콘텐츠 등 검색 노출 자체가 막혀 있던 사이트를 진단하고 정상화한 실제 작업 사례입니다. 이런 문제는 콘텐츠가 좋아도 검색에 잡히지 않으므로 가장 먼저 해결해야 합니다.",
+        "lead": "\"왜 구글에 안 뜨지?\" — 콘텐츠는 만들고, 사이트도 잘 운영하는데 검색에 안 잡힐 때 가장 답답합니다. 이 페이지는 그 정확한 상황 7가지를 다룹니다. 각 시나리오는 \"작업 전 문제 → 진단 결과 → 개선한 항목 → 적용 후 변화 → 주의할 점\" 5단계로 정리했습니다.",
         "body": (
-            '<section class="section"><div class="container"><div class="grid services case-grid">' +
+            # 7대 시나리오 인덱스
+            '<section class="section case-index"><div class="container">'
+            '<div class="section-head left"><span class="eyebrow">QUICK INDEX</span><h2>이 페이지에서 다루는 7가지 검색 노출 시나리오</h2><p>지금 사이트가 겪고 있는 상황을 골라서 바로 해당 사례로 이동하세요.</p></div>'
+            '<div class="case-index-grid">'
+            '<a href="#not-indexed" class="case-index-item"><span class="case-index-num">01</span><div><b>구글 색인 안 됨</b><span>"site:도메인" 검색해도 결과가 없는 사이트</span></div></a>'
+            '<a href="#search-console-error" class="case-index-item"><span class="case-index-num">02</span><div><b>서치콘솔 오류</b><span>빨간 오류·경고가 다수 떠 있는데 어디부터 손댈지</span></div></a>'
+            '<a href="#no-search-visibility" class="case-index-item"><span class="case-index-num">03</span><div><b>검색 결과 미노출</b><span>색인은 됐는데 어떤 키워드로도 안 나오는 사이트</span></div></a>'
+            '<a href="#sitemap-no-response" class="case-index-item"><span class="case-index-num">04</span><div><b>사이트맵 제출 후 반응 없음</b><span>sitemap.xml 냈는데 색인이 진행 안 되는 사이트</span></div></a>'
+            '<a href="#sandbox" class="case-index-item"><span class="case-index-num">05</span><div><b>신규 사이트 샌드박스 의심</b><span>신규 도메인이 3~6개월간 거의 무반응인 경우</span></div></a>'
+            '<a href="#duplicate-pages" class="case-index-item"><span class="case-index-num">06</span><div><b>중복 페이지 문제</b><span>같은 내용이 여러 URL로 색인된 사이트의 정리</span></div></a>'
+            '<a href="#domain-migration" class="case-index-item"><span class="case-index-num">07</span><div><b>도메인 이전 후 트래픽 하락</b><span>리뉴얼·도메인 변경 후 트래픽이 절반으로</span></div></a>'
+            '</div></div></section>'
+
+            # Case 1 — 구글 색인 안 됨
+            '<section class="section" id="not-indexed"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">01</span><span class="eyebrow">NOT INDEXED</span><h2>구글 색인 안 됨</h2><p class="lead">\"site:도메인.com\" 검색해도 결과가 없거나 메인페이지만 색인되는 경우. 가장 기본 단계인 색인부터 막혀있는 상태입니다.</p></div>'
+            '<div class="grid services case-grid">' +
             case_card(
                 badge="INDEXING",
-                icon="🔍",
-                h3="신규 도메인 — 색인 자체가 안 되던 사이트",
-                problem="런칭 후 몇 달이 지나도 구글 색인에 거의 잡히지 않았습니다.",
-                diagnosis="robots.txt에서 일부 디렉토리가 차단되어 있었고, canonical과 메타 robots noindex가 잘못 설정된 페이지가 다수였습니다.",
-                improvements=["robots.txt 재작성과 차단 규칙 해제", "canonical·noindex 설정 점검과 수정", "sitemap 재생성과 서치콘솔 색인 요청"],
-                results=["주요 페이지 대부분 색인 정상화", "키워드 노출 시작", "작업 기간 약 4주"],
-                caveats="색인 정상화 자체와 상위 노출은 별개입니다. 색인 이후에도 콘텐츠·외부 신호 작업이 필요합니다."
+                icon="🚫",
+                h3="사이트가 구글에 아예 안 나오는 사이트 — 색인 단계별 진단",
+                problem="\"site:도메인\" 검색해도 결과가 거의 없거나 메인페이지만 색인된 상태. 구글에 회사명·서비스명을 쳐도 검색 결과에 사이트가 나오지 않았습니다.",
+                diagnosis="색인 실패는 보통 다음 중 하나로 좁혀집니다 — robots.txt 차단 규칙, 메타 robots에 잘못 박힌 noindex, canonical이 다른 URL을 가리키는 오설정, 호스팅·CDN의 봇 차단, 서버 응답 코드 오류(5xx, 잘못된 4xx).",
+                improvements=["robots.txt 점검 — 불필요한 Disallow 제거, 핵심 경로 차단 해제", "모든 페이지의 메타 robots 확인 — noindex가 잘못 박힌 페이지 식별", "canonical이 자기 자신을 정확히 가리키는지 점검", "서치콘솔에 sitemap 제출 + URL 검사 도구로 색인 요청", "서버 응답 코드 점검 (정상 페이지는 200, 의도된 차단은 명확히)"],
+                results=["주요 페이지 대부분 색인 정상화", "회사명·서비스명 검색에서 사이트 노출 회복", "작업 기간 약 4주"],
+                caveats="색인됐다고 검색 상위 노출까지 보장되는 건 아닙니다. 색인은 \"검색에 잡힐 자격\"을 얻는 단계이고, 실제 노출은 콘텐츠·외부 신호 작업이 추가로 필요합니다."
             ) +
+            '</div></div></section>'
+
+            # Case 2 — 서치콘솔 오류
+            '<section class="section section-soft" id="search-console-error"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">02</span><span class="eyebrow">SEARCH CONSOLE ERROR</span><h2>서치콘솔 오류</h2><p class="lead">빨간 오류·경고가 화면 가득 떠 있는데 무엇부터 손대야 할지 모르겠는 경우. 모든 오류를 한 번에 잡으려 하면 시간만 낭비됩니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="DIAGNOSIS",
+                icon="⚠️",
+                h3="서치콘솔에 빨간 오류·경고가 계속 뜨는 사이트 — 분류 후 우선순위",
+                problem="서치콘솔 \"페이지 색인 생성\" 리포트에 빨간 오류와 노란 경고가 수십~수백 개. \"리디렉션 오류\", \"발견됨 - 색인되지 않음\", \"noindex 태그에 의해 제외됨\", \"4xx (요청을 처리할 수 없음)\" 등 다양한 메시지가 섞여있었습니다.",
+                diagnosis="서치콘솔 오류는 종류별로 영향이 다릅니다. 일부는 의도된 동작(예: 관리자 페이지의 noindex, 검색용 차단)이고 일부는 진짜 문제(404, 5xx, 색인 실패). 모든 오류를 0으로 만들 필요는 없습니다.",
+                improvements=["오류를 3분류 — ① 진짜 문제 (5xx 서버 오류, 의도하지 않은 4xx, 색인 실패), ② 의도된 동작 (관리자 noindex, 카테고리 필터 차단), ③ 무시 가능 (오래된 외부 링크의 404 등)", "우선순위 1: 5xx 서버 오류 (즉시), 핵심 페이지의 4xx (1주 내), 핵심 페이지 색인 누락 (2주 내)", "우선순위 2: 중복 콘텐츠, canonical 미일치, 모바일 사용성", "우선순위 3: 비핵심 페이지의 \"발견됨/색인 안 됨\""],
+                results=["오류 페이지 수 정상 수준으로 회복", "핵심 페이지 색인 비율 회복", "작업 기간 약 6주"],
+                caveats="\"오류 0\"이 목표가 아닙니다. 의도된 동작은 그대로 두고, 진짜 문제만 우선순위로 해결하는 게 효율적입니다."
+            ) +
+            '</div></div></section>'
+
+            # Case 3 — 검색 결과 미노출
+            '<section class="section" id="no-search-visibility"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">03</span><span class="eyebrow">NO SEARCH VISIBILITY</span><h2>검색 결과 미노출</h2><p class="lead">색인은 분명히 됐는데 어떤 키워드로 검색해도 우리 사이트가 결과에 보이지 않는 경우. 색인과 노출은 다른 단계의 신호입니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="VISIBILITY",
+                icon="🔍",
+                h3="색인은 됐는데 검색 결과에 안 보이는 사이트 — 노출 단서 진단",
+                problem="서치콘솔에서는 페이지가 \"색인됨\" 상태로 표시되는데, 정작 어떤 키워드로 구글에 검색해도 우리 사이트가 결과에 나오지 않았습니다. 단순 색인과 실제 노출은 다른 문제입니다.",
+                diagnosis="색인 ≠ 노출. 색인은 \"검색 후보 풀에 들어간 것\"이고, 노출은 \"실제 검색 결과 페이지에 표시되는 것\"입니다. 페이지가 색인됐어도 검색엔진이 \"이 페이지를 어떤 키워드에 노출할까\" 판단할 신호가 부족하거나, 품질·신뢰 임계 이하면 노출에서 제외됩니다.",
+                improvements=["서치콘솔 \"성능\" 리포트에서 페이지가 어떤 쿼리에라도 노출됐는지 확인 (노출 0이면 신호 부재)", "노출 0인 페이지는 본문·메타·내부 링크·H 태그·구조화 데이터 신호 보강", "매우 경쟁 심한 키워드는 자연스럽게 노출 형성에 3~6개월 소요됨을 인지", "E-E-A-T 신호 점검 (저자·갱신성·출처·실적)", "롱테일 키워드부터 진입 시도 (경쟁 낮은 키워드로 신호 누적)"],
+                results=["페이지가 어떤 키워드에서든 노출 시작 → 점진 확장", "롱테일 키워드 우선 진입 후 메인 키워드로 확장", "작업 기간 약 3~5개월"],
+                caveats="신규 도메인은 색인됐어도 노출까지 4~8주 걸리는 게 흔합니다. 노출 0이라고 즉시 \"문제\"는 아닙니다."
+            ) +
+            '</div></div></section>'
+
+            # Case 4 — 사이트맵 제출 후 반응 없음
+            '<section class="section section-soft" id="sitemap-no-response"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">04</span><span class="eyebrow">SITEMAP NOT PICKED UP</span><h2>사이트맵 제출 후 반응 없음</h2><p class="lead">서치콘솔에 sitemap.xml을 제출했는데 색인 페이지 수가 늘지 않고 \"제출됨 - 색인되지 않음\" 으로 정체된 경우.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="SITEMAP",
+                icon="🗺️",
+                h3="sitemap.xml 제출 후 반응 없는 사이트 — sitemap·크롤링 진단",
+                problem="서치콘솔에 sitemap.xml을 제출하고 2~3주가 지났는데 색인 페이지 수가 증가하지 않음. \"제출됨 - 색인되지 않음\" 상태로 정체되어 있었습니다.",
+                diagnosis="sitemap이 제대로 처리되지 않는 원인은 보통 4가지 — ① sitemap XML 형식 오류(인코딩·XML 구문), ② sitemap 내 URL이 robots.txt에 차단됨, ③ 사이트 권위가 낮아 크롤링 예산이 작음, ④ sitemap 내 URL 다수가 중복·자동 생성 노이즈.",
+                improvements=["sitemap XML 형식 검증 (XML Sitemap Validator 같은 도구로)", "sitemap 내 URL이 robots.txt에 차단되지 않는지 모든 URL 점검", "자동 생성 sitemap을 \"수동 큐레이션\"으로 전환 — 노이즈 URL 제거, 정말 색인 시키고 싶은 URL만 포함", "큰 사이트는 sitemap을 카테고리별로 분리 + sitemap 인덱스 사용", "서치콘솔 URL 검사 → 핵심 페이지 색인 요청으로 수동 트리거"],
+                results=["sitemap 처리 속도 개선", "색인된 URL 수 점진 증가", "작업 기간 약 4~6주"],
+                caveats="sitemap이 모든 페이지의 색인을 보장하지 않습니다. sitemap은 \"이 URL들을 우선 봐달라\"는 요청 신호일 뿐, 색인 결정은 구글이 합니다."
+            ) +
+            '</div></div></section>'
+
+            # Case 5 — 신규 사이트 샌드박스
+            '<section class="section" id="sandbox"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">05</span><span class="eyebrow">NEW DOMAIN SANDBOX</span><h2>신규 사이트 샌드박스 의심</h2><p class="lead">신규 도메인 사이트가 런칭 후 3~6개월이 지나도 검색 트래픽이 매우 적은 경우. 흔히 \"구글 샌드박스\" 로 의심하지만 실체는 \"도메인 신뢰 누적 시간\" 입니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="NEW DOMAIN",
+                icon="🏝️",
+                h3="신규 도메인이 몇 개월간 거의 무반응인 사이트 — 권위 누적 가속",
+                problem="신규 도메인으로 사이트를 런칭한 후 3~6개월이 지나도 검색 트래픽이 매우 적었습니다. 색인은 되지만 어떤 키워드로도 거의 잡히지 않아 \"구글 샌드박스\" 현상으로 의심되는 패턴이었습니다.",
+                diagnosis="구글이 공식적으로 \"샌드박스\"를 인정하진 않지만, 신규 도메인의 신뢰 형성에 시간이 걸리는 건 명확합니다. 도메인 권위·외부 신호·콘텐츠 누적이 임계점에 도달해야 검색이 활성화됩니다. 단기간 백링크 대량 발주 같은 무리한 신호는 오히려 의심 신호로 작용합니다.",
+                improvements=["첫 6개월은 콘텐츠 발행·내부 구조에 집중 (외부 신호 무리하게 추구 X)", "주 1~2편 정기 콘텐츠로 \"활성 사이트\" 신호 누적", "안전한 외부 신호 확보 (보도자료·디지털 PR 기반의 자연 언급)", "코어 키워드보다 롱테일 키워드 우선 진입 (경쟁 낮은 키워드부터)", "인내 — 도메인 권위 누적은 절대 시간 필요"],
+                results=["6~9개월차부터 키워드 노출 점진 회복", "롱테일 키워드부터 진입 시작", "안정 노출까지 9~12개월"],
+                caveats="신규 도메인에 단기간 백링크 대량 발주는 의심 신호로 작용합니다. 자연 누적이 정답이며, 무리한 가속은 오히려 회복 시간을 늘립니다."
+            ) +
+            '</div></div></section>'
+
+            # Case 6 — 중복 페이지 문제
+            '<section class="section section-soft" id="duplicate-pages"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">06</span><span class="eyebrow">DUPLICATE CONTENT</span><h2>중복 페이지 문제</h2><p class="lead">같은 내용이 여러 URL로 색인된 사이트는 어느 페이지도 1위가 되지 못합니다. 옵션·필터·정렬·페이지네이션이 중복 URL의 주범입니다.</p></div>'
+            '<div class="grid services case-grid">' +
             case_card(
                 badge="DUPLICATE",
                 icon="🧩",
-                h3="대형 쇼핑몰 — 중복 URL 문제 정리",
-                problem="제품 페이지가 옵션·필터·정렬에 따라 수만 개의 중복 URL로 색인되어 크롤링 예산이 낭비되고 있었습니다.",
-                diagnosis="canonical 미설정·중복 메타·중복 콘텐츠가 누적되어 핵심 페이지가 평가받지 못하는 상태였습니다.",
-                improvements=["옵션·필터 파라미터에 대한 canonical 설정", "파라미터별 noindex·meta robots 규칙 정비", "sitemap에서 핵심 페이지만 포함"],
-                results=["크롤링 통계상 핵심 페이지 방문 증가", "중복 색인 페이지 점진적 감소", "작업 기간 약 3개월"],
-                caveats="대규모 색인 정리는 단기 트래픽 변동이 발생할 수 있으며, 분기 단위 추적이 필요합니다."
-            ) +
-            case_card(
-                badge="MANUAL ACTION",
-                icon="⚠️",
-                h3="중소 비즈니스 — 수동 조치(Manual Action) 회복",
-                problem="과거 대량 백링크 작업의 영향으로 서치콘솔에서 수동 조치 메시지를 받은 상태였습니다.",
-                diagnosis="위험한 외부 백링크가 다수 식별되었고, 일부 자체 콘텐츠에서도 가이드라인 위반 패턴이 확인되었습니다.",
-                improvements=["위험 백링크 식별과 Disavow 파일 제출", "내부 가이드라인 위반 콘텐츠 정비", "서치콘솔 재심사 요청과 결과 모니터링"],
-                results=["수동 조치 해제", "기본 검색 노출 복귀", "회복 기간 약 3~4개월"],
-                caveats="수동 조치 회복은 자동으로 보장되지 않습니다. 재심사 통과까지 여러 번 시도가 필요할 수 있으며, 회복 후에도 신뢰 회복은 별개입니다."
+                h3="같은 내용이 여러 URL로 색인된 사이트 — canonical·통합 정리",
+                problem="제품·콘텐츠 페이지가 옵션·필터·정렬·페이지네이션에 따라 수많은 중복 URL로 색인. 본문은 거의 같은데 URL만 다른 페이지가 수천 개. 서치콘솔에 \"중복, 사용자가 선택한 표준 URL 없음\" 메시지가 다수 발생한 상태였습니다.",
+                diagnosis="중복 콘텐츠는 구글이 \"어느 페이지가 메인인지\" 판단하지 못해 노출 우선순위가 하락합니다. 또한 크롤링 예산을 낭비해서 정말 색인되어야 할 핵심 페이지의 색인까지 지연됩니다.",
+                improvements=["중복 페이지 식별 (서치콘솔 + site: 검색 + 본문 첫 50자 따옴표 검색)", "옵션·필터·정렬 URL은 메인 페이지를 canonical로 지정", "페이지네이션은 rel=next/prev 대신 canonical 메인 + noindex 조합", "본문 90% 이상 같은 페이지는 통합 후 301", "sitemap에서 중복 URL 모두 제거, 핵심 URL만 포함"],
+                results=["크롤링 통계상 핵심 페이지 방문 증가", "중복 색인 페이지 점진 감소", "핵심 페이지 노출 회복", "작업 기간 약 3개월"],
+                caveats="대규모 중복 정리는 단기 트래픽 변동이 발생할 수 있습니다. 작업 전 영향 분석과 분기 단위 추적이 필요합니다."
             ) +
             '</div></div></section>'
+
+            # Case 7 — 도메인 이전 트래픽 하락
+            '<section class="section" id="domain-migration"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">07</span><span class="eyebrow">DOMAIN MIGRATION</span><h2>기존 도메인 이전 후 트래픽 하락</h2><p class="lead">도메인을 바꿨거나 URL 구조를 리뉴얼한 후 트래픽이 절반 이상 빠진 경우. 90% 케이스는 301 매핑 누락이 원인입니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="MIGRATION",
+                icon="📦",
+                h3="도메인·URL 변경 후 트래픽이 절반으로 — 마이그레이션 복구",
+                problem="기존 사이트의 도메인을 변경하거나 URL 구조를 리뉴얼한 후 검색 트래픽이 50% 이상 감소. 회복 기미 없이 몇 주가 지난 상태로 상담이 시작되었습니다.",
+                diagnosis="마이그레이션 후 트래픽 손실의 90%는 301 리다이렉트 매핑 누락에서 발생합니다. 옛 URL이 새 URL로 정확히 연결되지 않으면 외부 백링크·기존 색인 신호가 모두 끊깁니다. 또한 도메인 변경 시 서치콘솔의 \"주소 변경 도구\"를 사용하지 않은 경우도 흔합니다.",
+                improvements=["기존 URL ↔ 새 URL 1:1 매핑 시트 작성, 누락 점검", "모든 옛 URL에 301 리다이렉트 적용 (http/https/www/non-www/대소문자/슬래시 변형 포함)", "서치콘솔 \"주소 변경 도구\"로 도메인 이전 명시 (도메인 자체가 바뀐 경우)", "새 도메인의 sitemap 제출 + 핵심 URL 색인 재요청", "외부 백링크가 가리키는 옛 URL이 살아있는지(301 작동) 점검", "외부 백링크 일부는 새 URL로 업데이트 요청"],
+                results=["트래픽 점진 회복 (보통 4~12주)", "핵심 키워드 순위 대부분 유지", "작업 기간 약 6~10주"],
+                caveats="마이그레이션 트래픽 손실은 즉시 회복되지 않습니다. 사전 계획이 핵심이고 사후 복구는 시간이 오래 걸립니다. 도메인 이전을 계획 중이라면 출시 전 SEO 컨설팅이 비용 대비 가장 효율적입니다."
+            ) +
+            '</div></div></section>'
+
+            # CTA (전환 강조)
+            '<section class="section section-cta"><div class="container cta-grid">'
+            '<div><h2>지금 \"왜 안 뜨지?\" 라고 느끼신다면</h2><p>위 7가지 시나리오 중 하나에 거의 확실히 해당합니다. 어떤 상황인지, 어디서부터 손대야 하는지 24시간 내 분석 리포트를 텔레그램으로 회신드립니다. 진단 자체는 무료이고 계약 의무는 없습니다.</p></div>'
+            '<div class="cta-actions"><a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">지금 무료 진단 받기 →</a><a href="/services/technical-seo/" class="btn btn-outline btn-lg btn-light">기술 SEO 진단 서비스</a></div>'
+            '</div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"검색 노출 문제 해결 사례","url":"https://onesearchpro.org/case-studies/visibility/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"검색 노출 문제 해결 사례","url":"https://onesearchpro.org/case-studies/visibility/","description":"구글 색인·서치콘솔·사이트맵·샌드박스·중복·도메인 이전 7대 시나리오 검색 노출 문제 해결 작업 기록","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
         "active": "cases",
     },
 
