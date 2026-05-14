@@ -26,33 +26,33 @@ HEADER = '''<header class="site-header">
           <a href="/case-studies/" class="nav-trigger{ACTIVE_CASES}">성공사례 <span class="caret">▾</span></a>
           <div class="dropdown">
             <a href="/case-studies/" class="dd-main"><b>📁 전체 성공사례</b><span>업종별 작업 기록</span></a>
-            <a href="/case-studies/#seo">SEO 개선 사례</a>
-            <a href="/case-studies/#local-seo">지역 SEO 사례</a>
-            <a href="/case-studies/#content">콘텐츠 개선 사례</a>
-            <a href="/case-studies/#web-design">웹사이트 제작 사례</a>
-            <a href="/case-studies/#visibility">검색 노출 문제 해결 사례</a>
+            <a href="/case-studies/seo/">SEO 개선 사례</a>
+            <a href="/case-studies/local-seo/">지역 SEO 사례</a>
+            <a href="/case-studies/content/">콘텐츠 개선 사례</a>
+            <a href="/case-studies/web-design/">웹사이트 제작 사례</a>
+            <a href="/case-studies/visibility/">검색 노출 문제 해결 사례</a>
           </div>
         </div>
         <div class="has-dropdown">
           <a href="/insights/" class="nav-trigger{ACTIVE_INSIGHTS}">SEO 인사이트 <span class="caret">▾</span></a>
           <div class="dropdown">
             <a href="/insights/" class="dd-main"><b>📰 전체 글</b><span>SEO 전문 콘텐츠</span></a>
-            <a href="/insights/#google-seo">구글 SEO</a>
-            <a href="/insights/#technical-seo">기술 SEO</a>
-            <a href="/insights/#content-seo">콘텐츠 SEO</a>
-            <a href="/insights/#local-seo">지역 SEO</a>
-            <a href="/insights/#backlink-pr">백링크 · 디지털 PR</a>
-            <a href="/insights/#sns">SNS 마케팅</a>
-            <a href="/insights/#visibility">검색 노출 문제 해결</a>
+            <a href="/insights/google-seo/">구글 SEO</a>
+            <a href="/insights/technical-seo/">기술 SEO</a>
+            <a href="/insights/content-seo/">콘텐츠 SEO</a>
+            <a href="/insights/local-seo/">지역 SEO</a>
+            <a href="/insights/backlink-pr/">백링크 · 디지털 PR</a>
+            <a href="/insights/sns/">SNS 마케팅</a>
+            <a href="/insights/visibility/">검색 노출 문제 해결</a>
           </div>
         </div>
         <div class="has-dropdown">
           <a href="/about/" class="nav-trigger{ACTIVE_ABOUT}">회사소개 <span class="caret">▾</span></a>
           <div class="dropdown">
             <a href="/about/" class="dd-main"><b>🏢 원서치프로 소개</b><span>About OneSearchPro</span></a>
-            <a href="/about/#principles">작업 원칙</a>
-            <a href="/about/#process">진행 프로세스</a>
-            <a href="/about/#faq">자주 묻는 질문</a>
+            <a href="/about/principles/">작업 원칙</a>
+            <a href="/about/process/">진행 프로세스</a>
+            <a href="/about/faq/">자주 묻는 질문</a>
             <a href="/contact/">문의하기</a>
           </div>
         </div>
@@ -87,15 +87,21 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
     breadcrumb_html = ""
     if path.startswith("/services/"):
         slug_title = h1
-        breadcrumb_html = f'''<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <a href="/services/seo/">SEO 서비스</a> <span>›</span> <span>{slug_title}</span></div></nav>'''
+        breadcrumb_html = f'''<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <a href="/services/seo/">서비스</a> <span>›</span> <span>{slug_title}</span></div></nav>'''
     elif path == "/about/":
-        breadcrumb_html = '<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <span>회사 소개</span></div></nav>'
+        breadcrumb_html = '<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <span>회사소개</span></div></nav>'
+    elif path.startswith("/about/") and path != "/about/":
+        breadcrumb_html = f'<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <a href="/about/">회사소개</a> <span>›</span> <span>{h1}</span></div></nav>'
     elif path == "/contact/":
         breadcrumb_html = '<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <span>내 사이트 진단받기</span></div></nav>'
     elif path == "/case-studies/":
         breadcrumb_html = '<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <span>성공사례</span></div></nav>'
+    elif path.startswith("/case-studies/") and path != "/case-studies/":
+        breadcrumb_html = f'<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <a href="/case-studies/">성공사례</a> <span>›</span> <span>{h1}</span></div></nav>'
     elif path == "/insights/":
         breadcrumb_html = '<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <span>SEO 인사이트</span></div></nav>'
+    elif path.startswith("/insights/") and path != "/insights/":
+        breadcrumb_html = f'<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <a href="/insights/">SEO 인사이트</a> <span>›</span> <span>{h1}</span></div></nav>'
 
     return f'''<!DOCTYPE html>
 <html lang="ko">
@@ -695,6 +701,437 @@ PAGES = {
         ),
         "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"SEO 인사이트","url":"https://onesearchpro.pages.dev/insights/","description":"구글·네이버 SEO·디지털 마케팅 전문 콘텐츠 허브"}</script>',
         "active": "insights",
+    },
+
+    # ========== Case Studies subpages ==========
+    "/case-studies/seo/": {
+        "title": "SEO 개선 성공사례 | 사이트 구조·콘텐츠·기술 통합 개선 - OneSearchPro",
+        "desc": "OneSearchPro의 SEO 개선 사례 모음. 키워드 매핑, 토픽 클러스터, 내부 링크, 스키마 적용까지 통합 작업으로 검색 노출이 회복된 B2B·교육·미디어 프로젝트를 작업 전·진단·개선·변화·주의점 5단계로 기록했습니다.",
+        "keywords": "SEO 개선 사례, SEO 성공사례, 검색 노출 회복, 키워드 매핑, 토픽 클러스터, B2B SEO 사례",
+        "h1": "SEO 개선 사례",
+        "eyebrow": "SEO IMPROVEMENT CASES",
+        "lead": "사이트 구조·콘텐츠·기술 요소를 통합 개선해 검색 노출이 회복된 실제 작업 사례입니다. 모든 사례는 \"작업 전 문제 / 진단 결과 / 개선한 항목 / 적용 후 변화 / 주의할 점\" 5단계로 정리했으며, 과장된 수치나 \"무조건 1위\" 표현은 사용하지 않습니다.",
+        "body": (
+            '<section class="section"><div class="container"><div class="grid services case-grid">' +
+            case_card(
+                badge="SAAS · B2B",
+                icon="💼",
+                h3="B2B SaaS — 핵심 키워드 진입 회복",
+                problem="자체 블로그가 있지만 핵심 상업 키워드 검색에서 거의 노출되지 않았고, 경쟁사 대비 도메인 권위가 낮은 상태였습니다.",
+                diagnosis="키워드 매핑이 검색 의도와 어긋나 있었고, 페이지 간 토픽이 분산되어 토픽 권위가 형성되지 않았습니다. 내부 링크도 사실상 없었습니다.",
+                improvements=["필러 페이지 1개 + 클러스터 8개로 토픽 구조 재설계", "타이틀·H1·메타 재작성과 검색 의도 매칭", "내부 링크 흐름 재구성과 앵커텍스트 통일"],
+                results=["타겟 키워드 중 다수가 1~2페이지로 이동", "오가닉 세션 약 2~3배 수준으로 증가", "전체 작업 기간 약 6개월"],
+                caveats="신규 페이지의 색인까지 시간이 걸리며, 동일한 결과가 모든 산업에서 보장되지는 않습니다. 검색 트렌드 변화 시 재조정이 필요합니다."
+            ) +
+            case_card(
+                badge="EDU",
+                icon="🎓",
+                h3="온라인 교육 — 카테고리 페이지 재구성",
+                problem="강의 카테고리 페이지가 빈약해서 카테고리 단위 키워드에서 경쟁사보다 뒤로 밀려 있었습니다.",
+                diagnosis="카테고리 페이지에 본문이 거의 없고 H1·H2 구조가 정렬되지 않은 상태였습니다. 또한 비교형 검색 의도(\"○○ 강의 비교\")에 맞는 콘텐츠가 없었습니다.",
+                improvements=["카테고리 페이지에 비교·선택 가이드 본문 추가", "스키마 마크업(BreadcrumbList, ItemList) 적용", "내부 링크에서 카테고리로 권위 집중"],
+                results=["카테고리 키워드 평균 노출 순위 개선", "카테고리 페이지 직접 방문 증가", "작업 기간 약 4개월"],
+                caveats="구글의 카테고리·리스트 페이지 평가는 자주 바뀌므로 분기 단위 점검이 필요합니다."
+            ) +
+            case_card(
+                badge="MEDIA",
+                icon="📰",
+                h3="산업 전문 미디어 — 기존 도메인 권위 활용",
+                problem="기존 도메인 권위는 있지만, 신규 비즈니스 영역 키워드에서 거의 노출되지 않았습니다.",
+                diagnosis="기존 콘텐츠와 신규 비즈니스 키워드 사이에 토픽 연결 고리가 없어 신규 페이지가 평가받지 못했습니다.",
+                improvements=["기존 인기 콘텐츠에서 신규 페이지로 내부 링크", "신규 영역 토픽 클러스터 신규 구축", "메타·OG·스키마 일관성 정비"],
+                results=["신규 영역 핵심 키워드 색인·노출 시작", "기존 트래픽 손실 없음", "작업 기간 약 5개월"],
+                caveats="기존 인기 콘텐츠의 트래픽이 새 페이지로 이동하는 효과는 신중하게 관찰해야 합니다."
+            ) +
+            '</div></div></section>'
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"SEO 개선 사례","url":"https://onesearchpro.pages.dev/case-studies/seo/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
+        "active": "cases",
+    },
+
+    "/case-studies/local-seo/": {
+        "title": "지역 SEO 성공사례 | 네이버 플레이스·구글 비즈니스 프로필 - OneSearchPro",
+        "desc": "OneSearchPro의 지역 SEO 사례. \"지역명 + 서비스\" 키워드 노출 개선, 구글 비즈니스 프로필·네이버 플레이스 정비, 다지점 매장 지역 랜딩 분리 등 지역 기반 검색 유입을 회복시킨 작업 기록입니다.",
+        "keywords": "지역 SEO 사례, 네이버 플레이스 사례, 구글 비즈니스 프로필, 지역 키워드 노출, 마사지 사이트 SEO, 다지점 SEO",
+        "h1": "지역 SEO 사례",
+        "eyebrow": "LOCAL SEO CASES",
+        "lead": "지역명 + 서비스 키워드, 구글맵·네이버 지도 노출, 지역 랜딩페이지 설계 등 지역 기반 검색 유입을 정상화한 실제 작업 사례입니다.",
+        "body": (
+            '<section class="section"><div class="container"><div class="grid services case-grid">' +
+            case_card(
+                badge="MASSAGE",
+                icon="💆",
+                h3="지역 마사지 전문점 — 6개월간 단계적 개선",
+                problem="네이버 플레이스에 등록은 되어 있었으나, \"지역명 + 마사지\" 검색에서 거의 노출되지 않았고 구글 비즈니스 프로필도 비어 있는 상태였습니다.",
+                diagnosis="NAP(상호·주소·전화) 정보가 채널마다 달랐고, 카테고리 설정·서비스 항목·사진이 부족했습니다. 자체 사이트의 지역 키워드 사용도 거의 없었습니다.",
+                improvements=["NAP 정보 통일과 GBP·플레이스 카테고리 재설정", "지역 랜딩페이지 신설(지역명 + 서비스 페이지 구조)", "지역 디렉토리 인용(citation) 등록과 일관성 확보", "리뷰 응대 매뉴얼과 사진·게시물 주간 운영"],
+                results=["일부 핵심 지역 키워드에서 구글 1페이지 진입", "네이버 플레이스 노출과 예약 문의 증가", "작업 기간 약 6개월"],
+                caveats="지역 검색은 경쟁 매장의 활동성에 따라 순위가 자주 바뀝니다. 작업 종료 후에도 리뷰·게시물 운영이 멈추면 다시 밀려날 수 있습니다."
+            ) +
+            case_card(
+                badge="DENTAL",
+                icon="🦷",
+                h3="다지점 치과 — 지점별 지역 랜딩 정비",
+                problem="여러 지점이 있지만 사이트는 본점 정보만 있고, 지점별 검색에서 노출이 되지 않았습니다.",
+                diagnosis="모든 지점이 같은 페이지를 공유해 지역 시그널이 분산되어 있었고, 각 지점의 GBP가 미정비 상태였습니다.",
+                improvements=["지점별 랜딩페이지 분리(지역명·진료 항목 별)", "지점별 GBP 분리 운영과 카테고리·서비스 정비", "지역 리뷰 응대 SLA 수립"],
+                results=["일부 지점에서 \"지역명 + 진료과목\" 검색 노출 회복", "지점 단위 신규 방문 문의 증가", "작업 기간 약 5개월"],
+                caveats="치과·의료 분야는 광고 관련 법규와 의료광고심의 대상 표현을 반드시 사전 검토해야 합니다."
+            ) +
+            case_card(
+                badge="F&B",
+                icon="🍱",
+                h3="외식 프랜차이즈 — 매장 단위 검색 노출",
+                problem="브랜드 검색은 잘 되지만 \"지역 + 음식 종류\" 검색에서는 경쟁 개인 식당에 밀렸습니다.",
+                diagnosis="브랜드 페이지에는 지역 키워드가 없었고, 매장 단위 페이지는 PDF·이미지 위주여서 검색엔진이 텍스트를 읽지 못했습니다.",
+                improvements=["매장별 텍스트 기반 랜딩페이지 구축", "메뉴·운영시간·예약 정보 스키마 적용", "지역 리뷰 응답 가이드라인 운영"],
+                results=["일부 매장 검색에서 노출 회복", "지도 결과 노출 빈도 증가", "작업 기간 약 6개월"],
+                caveats="프랜차이즈는 본사·가맹점 간 NAP 일관성과 콘텐츠 중복 관리가 지속적으로 필요합니다."
+            ) +
+            '</div></div></section>'
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"지역 SEO 사례","url":"https://onesearchpro.pages.dev/case-studies/local-seo/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
+        "active": "cases",
+    },
+
+    "/case-studies/content/": {
+        "title": "콘텐츠 SEO 개선 사례 | 키워드·구조·E-E-A-T 적용 기록 - OneSearchPro",
+        "desc": "OneSearchPro의 콘텐츠 SEO 개선 사례. 오래된 글 리프레시, 제품 페이지 재작성, 검색 의도 매칭, E-E-A-T 신호 강화로 콘텐츠 자산이 다시 작동하기 시작한 실제 작업 기록입니다.",
+        "keywords": "콘텐츠 SEO 사례, 콘텐츠 리프레시, 제품 페이지 SEO, E-E-A-T 사례, 검색 의도 매칭",
+        "h1": "콘텐츠 개선 사례",
+        "eyebrow": "CONTENT IMPROVEMENT CASES",
+        "lead": "키워드 설계·H태그·검색 의도·E-E-A-T 신호를 보완해 잠자던 콘텐츠 자산이 다시 트래픽을 만들기 시작한 실제 작업 사례입니다.",
+        "body": (
+            '<section class="section"><div class="container"><div class="grid services case-grid">' +
+            case_card(
+                badge="MEDIA",
+                icon="📰",
+                h3="라이프스타일 미디어 — 오래된 글 리프레시",
+                problem="과거 글이 많지만 대부분 색인은 되어 있어도 트래픽이 거의 없었습니다.",
+                diagnosis="검색 의도가 변한 키워드를 따라가지 못했고, 본문 길이·이미지·내부 링크가 빈약했습니다. 일부 글은 중복 토픽으로 카니발리제이션 상태였습니다.",
+                improvements=["트래픽 잠재력이 높은 글 50개 선별 후 리프레시", "중복 토픽 통합과 301 리다이렉트 정리", "본문 구조(H2·H3) 재정렬과 내부 링크 재배치"],
+                results=["리프레시 대상 글의 평균 순위 상승", "오가닉 유입 회복 추세 확인", "작업 기간 약 4개월"],
+                caveats="콘텐츠 리프레시 효과는 곧바로 나타나지 않습니다. 색인 재크롤·재평가에 수 주 이상 걸릴 수 있습니다."
+            ) +
+            case_card(
+                badge="ECOMMERCE",
+                icon="🛍️",
+                h3="D2C 커머스 — 제품 페이지 SEO 재작성",
+                problem="제품 페이지가 이미지 중심으로만 만들어져 검색엔진이 제품을 이해하지 못했습니다.",
+                diagnosis="제품명·H1·메타·본문이 동일 문구의 반복이었고, 리뷰·FAQ·사양 정보가 구조화되어 있지 않았습니다.",
+                improvements=["제품별 본문(특징·재질·사용법·FAQ) 추가", "Product·FAQ·Review 스키마 적용", "이미지 alt·파일명·이미지맵 sitemap 정비"],
+                results=["롱테일 제품 키워드 노출 증가", "검색 결과의 리치 스니펫(별점·가격) 노출 시작", "작업 기간 약 3개월"],
+                caveats="제품 정보가 자주 바뀌면 sitemap·구조화 데이터를 함께 갱신해야 합니다."
+            ) +
+            case_card(
+                badge="B2B",
+                icon="📚",
+                h3="전문 컨설팅 — 저자 신뢰도(E-E-A-T) 신호 강화",
+                problem="전문성 있는 콘텐츠를 만들고 있지만 검색 노출이 약했습니다.",
+                diagnosis="저자 정보가 없고, 사례·인용·출처가 본문에 잘 드러나지 않아 \"누가 쓴 글인지\"에 대한 신호가 부족했습니다.",
+                improvements=["저자 페이지·약력 신설과 Author 스키마 적용", "본문 내 실제 사례·출처·인용 보강", "외부 매체 기고로 저자 권위 신호 누적"],
+                results=["전문 키워드에서 노출·체류시간 개선", "기고 매체에서 자연 유입 증가", "작업 기간 약 6개월"],
+                caveats="E-E-A-T 신호는 빠르게 만들 수 없습니다. 6개월 이상의 누적 작업과 진정성 있는 활동이 필요합니다."
+            ) +
+            '</div></div></section>'
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"콘텐츠 개선 사례","url":"https://onesearchpro.pages.dev/case-studies/content/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
+        "active": "cases",
+    },
+
+    "/case-studies/web-design/": {
+        "title": "SEO 웹사이트 제작 사례 | 검색엔진 친화 구조 제작 기록 - OneSearchPro",
+        "desc": "OneSearchPro의 SEO 웹사이트 제작 사례. 신규 사이트 SEO 기초 공사, 리뉴얼 시 URL 마이그레이션, Core Web Vitals 최적화 등 처음부터 검색 친화로 만든 제작 기록입니다.",
+        "keywords": "SEO 웹사이트 제작 사례, 사이트 리뉴얼, URL 마이그레이션, Core Web Vitals 사례, 신규 사이트 SEO",
+        "h1": "웹사이트 제작 사례",
+        "eyebrow": "WEB DESIGN CASES",
+        "lead": "처음부터 검색엔진이 이해하기 쉬운 구조로 만든 사이트 제작·리뉴얼 사례입니다. 런칭 후 빠른 색인, 트래픽 손실 없는 마이그레이션이 핵심 목표였습니다.",
+        "body": (
+            '<section class="section"><div class="container"><div class="grid services case-grid">' +
+            case_card(
+                badge="STARTUP",
+                icon="🚀",
+                h3="스타트업 신규 웹사이트 — SEO 기초 공사 포함 제작",
+                problem="기존 사이트가 외주로 만들어진 디자인 중심 페이지여서 메타·sitemap·스키마가 없는 상태였습니다.",
+                diagnosis="페이지 구조·URL·내부 링크가 검색엔진 친화적이지 않았고, Core Web Vitals 점수가 낮았습니다.",
+                improvements=["정보 구조 재설계(서비스·사례·인사이트 허브 구분)", "Core Web Vitals 90+ 기준으로 코드 최적화", "메타·OG·sitemap·robots·구조화 데이터 셋업", "GA4·서치콘솔·픽셀 연동까지 납품"],
+                results=["런칭 직후부터 색인 정상화", "초기 키워드 노출이 일반 신규 사이트보다 빠르게 형성됨", "제작·셋업 기간 약 6주"],
+                caveats="신규 사이트는 도메인 권위가 낮아 경쟁 키워드 진입까지 추가 시간이 필요합니다. 제작 후 콘텐츠·외부 신호 작업이 이어져야 합니다."
+            ) +
+            case_card(
+                badge="B2B",
+                icon="🏗️",
+                h3="B2B 기업 사이트 — 리뉴얼과 URL 마이그레이션",
+                problem="기존 사이트의 URL 구조 변경이 필요했지만 트래픽 손실이 우려되는 상황이었습니다.",
+                diagnosis="기존 페이지 다수가 핵심 키워드에서 노출되고 있어, 잘못된 리다이렉트 시 트래픽 손실 가능성이 컸습니다.",
+                improvements=["기존 URL·키워드·트래픽 매핑 시트 작성", "1:1 301 리다이렉트 매핑과 사전 검증", "출시 직후 서치콘솔로 색인 재요청과 모니터링"],
+                results=["리뉴얼 이후 핵심 키워드 순위 대부분 유지", "오가닉 트래픽 손실 최소화", "프로젝트 기간 약 2개월"],
+                caveats="대규모 마이그레이션은 사전 계획이 부족하면 회복까지 수개월 걸릴 수 있습니다."
+            ) +
+            '</div></div></section>'
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"웹사이트 제작 사례","url":"https://onesearchpro.pages.dev/case-studies/web-design/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
+        "active": "cases",
+    },
+
+    "/case-studies/visibility/": {
+        "title": "검색 노출 문제 해결 사례 | 색인·페널티·중복 URL - OneSearchPro",
+        "desc": "OneSearchPro의 검색 노출 문제 해결 사례. 색인 누락, 페널티, 중복 URL, robots 설정 오류 등 \"검색 노출 자체가 막혀 있던\" 사이트를 정상화한 작업 기록입니다.",
+        "keywords": "검색 노출 사례, 색인 문제, 중복 URL, robots 설정, 페널티 회복, 색인 누락",
+        "h1": "검색 노출 문제 해결 사례",
+        "eyebrow": "VISIBILITY FIX CASES",
+        "lead": "색인·페널티·중복 콘텐츠 등 검색 노출 자체가 막혀 있던 사이트를 진단하고 정상화한 실제 작업 사례입니다. 이런 문제는 콘텐츠가 좋아도 검색에 잡히지 않으므로 가장 먼저 해결해야 합니다.",
+        "body": (
+            '<section class="section"><div class="container"><div class="grid services case-grid">' +
+            case_card(
+                badge="INDEXING",
+                icon="🔍",
+                h3="신규 도메인 — 색인 자체가 안 되던 사이트",
+                problem="런칭 후 몇 달이 지나도 구글 색인에 거의 잡히지 않았습니다.",
+                diagnosis="robots.txt에서 일부 디렉토리가 차단되어 있었고, canonical과 메타 robots noindex가 잘못 설정된 페이지가 다수였습니다.",
+                improvements=["robots.txt 재작성과 차단 규칙 해제", "canonical·noindex 설정 점검과 수정", "sitemap 재생성과 서치콘솔 색인 요청"],
+                results=["주요 페이지 대부분 색인 정상화", "키워드 노출 시작", "작업 기간 약 4주"],
+                caveats="색인 정상화 자체와 상위 노출은 별개입니다. 색인 이후에도 콘텐츠·외부 신호 작업이 필요합니다."
+            ) +
+            case_card(
+                badge="DUPLICATE",
+                icon="🧩",
+                h3="대형 쇼핑몰 — 중복 URL 문제 정리",
+                problem="제품 페이지가 옵션·필터·정렬에 따라 수만 개의 중복 URL로 색인되어 크롤링 예산이 낭비되고 있었습니다.",
+                diagnosis="canonical 미설정·중복 메타·중복 콘텐츠가 누적되어 핵심 페이지가 평가받지 못하는 상태였습니다.",
+                improvements=["옵션·필터 파라미터에 대한 canonical 설정", "파라미터별 noindex·meta robots 규칙 정비", "sitemap에서 핵심 페이지만 포함"],
+                results=["크롤링 통계상 핵심 페이지 방문 증가", "중복 색인 페이지 점진적 감소", "작업 기간 약 3개월"],
+                caveats="대규모 색인 정리는 단기 트래픽 변동이 발생할 수 있으며, 분기 단위 추적이 필요합니다."
+            ) +
+            case_card(
+                badge="MANUAL ACTION",
+                icon="⚠️",
+                h3="중소 비즈니스 — 수동 조치(Manual Action) 회복",
+                problem="과거 대량 백링크 작업의 영향으로 서치콘솔에서 수동 조치 메시지를 받은 상태였습니다.",
+                diagnosis="위험한 외부 백링크가 다수 식별되었고, 일부 자체 콘텐츠에서도 가이드라인 위반 패턴이 확인되었습니다.",
+                improvements=["위험 백링크 식별과 Disavow 파일 제출", "내부 가이드라인 위반 콘텐츠 정비", "서치콘솔 재심사 요청과 결과 모니터링"],
+                results=["수동 조치 해제", "기본 검색 노출 복귀", "회복 기간 약 3~4개월"],
+                caveats="수동 조치 회복은 자동으로 보장되지 않습니다. 재심사 통과까지 여러 번 시도가 필요할 수 있으며, 회복 후에도 신뢰 회복은 별개입니다."
+            ) +
+            '</div></div></section>'
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"검색 노출 문제 해결 사례","url":"https://onesearchpro.pages.dev/case-studies/visibility/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
+        "active": "cases",
+    },
+
+    # ========== Insights subpages ==========
+    "/insights/google-seo/": {
+        "title": "구글 SEO 가이드 | E-E-A-T·알고리즘·검색 의도 - OneSearchPro 인사이트",
+        "desc": "구글 SEO 실무 가이드 모음. 신규 사이트 시작 체크리스트, E-E-A-T 적용 방법, 코어 업데이트 대응, 검색 의도 분류 등 구글 검색 결과 페이지의 작동 원리를 다룹니다.",
+        "keywords": "구글 SEO 가이드, E-E-A-T, 코어 업데이트, 검색 의도, 구글 알고리즘, 구글 SEO 입문",
+        "h1": "구글 SEO",
+        "eyebrow": "GOOGLE SEO GUIDES",
+        "lead": "구글 검색 결과 페이지의 작동 원리, 알고리즘 업데이트, E-E-A-T 가이드라인을 다루는 실무 가이드 모음입니다. 단발성 트렌드보다 오랫동안 유효한 SEO 원칙에 가중치를 두고 작성합니다.",
+        "body": (
+            '<section class="section"><div class="container"><div class="grid services">' +
+            insight_card("구글 SEO 처음 시작할 때 가장 먼저 봐야 할 5가지", "신규 사이트 운영자가 첫 달에 점검해야 할 색인·서치콘솔·메타·내부 링크·핵심 키워드 점검 항목을 정리한 입문 가이드.") +
+            insight_card("E-E-A-T란 무엇이고 왜 점점 중요해지는가", "Experience·Expertise·Authoritativeness·Trustworthiness 4가지 신호를 사이트 안에 자연스럽게 녹이는 구체적인 방법.") +
+            insight_card("구글 코어 업데이트가 발표됐을 때의 대응 체크리스트", "트래픽 변동이 발생했을 때 \"패닉 작업\" 대신 사용해야 하는 진단 순서와 4주간의 관찰 가이드.") +
+            insight_card("검색 의도 4가지 유형과 콘텐츠 매칭 전략", "정보형·내비게이션형·상업형·트랜잭션형 의도에 맞는 페이지 유형과 헤딩 구조 가이드.") +
+            insight_card("Helpful Content System — 구글이 평가하는 \"도움이 되는 콘텐츠\"", "구글이 공개한 셀프 평가 질문들을 실제 콘텐츠 점검에 적용하는 방법.") +
+            insight_card("SERP 기능별 노출 전략 — 스니펫·People Also Ask·이미지", "다양한 SERP 기능에 노출되기 위한 콘텐츠 구조와 마크업 가이드.") +
+            '</div></div></section>'
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"구글 SEO","url":"https://onesearchpro.pages.dev/insights/google-seo/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
+        "active": "insights",
+    },
+
+    "/insights/technical-seo/": {
+        "title": "기술 SEO 가이드 | 색인·sitemap·Core Web Vitals - OneSearchPro 인사이트",
+        "desc": "기술 SEO 실무 가이드. 색인 누락 진단, robots·sitemap·canonical 설정, Core Web Vitals 90+ 만들기, JavaScript SEO 등 테크니컬 영역의 가이드 모음.",
+        "keywords": "기술 SEO 가이드, 테크니컬 SEO, Core Web Vitals, 색인 누락, sitemap, canonical, JavaScript SEO",
+        "h1": "기술 SEO",
+        "eyebrow": "TECHNICAL SEO GUIDES",
+        "lead": "색인·속도·구조화 데이터·중복 URL 등 기술 요소에 대한 실무 가이드 모음입니다. 콘텐츠가 충분한데 노출이 안 되는 경우 대부분 이 영역에서 답을 찾을 수 있습니다.",
+        "body": (
+            '<section class="section"><div class="container"><div class="grid services">' +
+            insight_card("페이지가 색인되지 않을 때 확인할 8가지 항목", "robots.txt, noindex, canonical, 크롤링 예산, JavaScript 렌더링 등 색인 실패 원인 진단 순서.") +
+            insight_card("Core Web Vitals 점수를 90점 이상으로 끌어올리는 실무 체크리스트", "LCP·INP·CLS 개선을 위한 이미지·CSS·JS·서버 측 작업 가이드.") +
+            insight_card("canonical 태그, 언제 어떻게 써야 하나", "파라미터·페이지네이션·다국어·복제 콘텐츠 상황별 canonical 설정 가이드.") +
+            insight_card("sitemap.xml 설계 — 큰 사이트는 어떻게 분리해야 하나", "다중 sitemap, 이미지/뉴스/비디오 sitemap, sitemap 인덱스 활용 가이드.") +
+            insight_card("JavaScript SEO — SPA·CSR 사이트의 색인 문제", "React/Vue/Next 사이트에서 색인이 어려운 이유와 SSR·prerender 대안.") +
+            insight_card("구조화 데이터(JSON-LD) — 어떤 스키마를 적용해야 할까", "Organization, FAQ, Article, Product 등 비즈니스 유형별 적합한 스키마 가이드.") +
+            '</div></div></section>'
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"기술 SEO","url":"https://onesearchpro.pages.dev/insights/technical-seo/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
+        "active": "insights",
+    },
+
+    "/insights/content-seo/": {
+        "title": "콘텐츠 SEO 가이드 | 키워드·H태그·토픽 권위 - OneSearchPro 인사이트",
+        "desc": "콘텐츠 SEO 실무 가이드. 키워드 의도 분류, H태그 구조, 토픽 클러스터 설계, 콘텐츠 리프레시 전략 등 검색 자산이 되는 콘텐츠를 만드는 방법.",
+        "keywords": "콘텐츠 SEO 가이드, 키워드 리서치, 토픽 클러스터, H태그 구조, 콘텐츠 리프레시, 검색 의도",
+        "h1": "콘텐츠 SEO",
+        "eyebrow": "CONTENT SEO GUIDES",
+        "lead": "키워드 설계·H태그·검색 의도·콘텐츠 클러스터링·리프레시 전략을 다루는 콘텐츠 SEO 실무 가이드 모음입니다.",
+        "body": (
+            '<section class="section"><div class="container"><div class="grid services">' +
+            insight_card("키워드 리서치 — 검색량이 아니라 의도로 분류하는 방법", "검색량 중심 키워드 시트의 한계와 의도 중심 키워드 매핑으로 바꾸는 단계별 가이드.") +
+            insight_card("H1·H2·H3 헤딩 구조, SEO에 실제로 얼마나 영향을 주는가", "헤딩 태그의 역할과 자주 하는 실수, 검색 결과 스니펫에 미치는 영향 정리.") +
+            insight_card("토픽 클러스터로 토픽 권위(Topical Authority)를 만드는 방법", "필러 콘텐츠 1개 + 클러스터 6~12개의 구조 설계와 내부 링크 흐름 가이드.") +
+            insight_card("오래된 글 리프레시 — 새 글보다 효과가 큰 이유", "트래픽 잠재력이 높은 글을 선별하는 기준과 리프레시 작업 순서, 측정 방법.") +
+            insight_card("AI 콘텐츠 시대의 SEO — 자동 생성 글은 어디까지 허용되나", "구글의 AI 콘텐츠 정책과 실무에서 안전하게 활용하는 방법.") +
+            insight_card("롱폼 vs 숏폼 — 어떤 길이의 글이 SEO에 유리한가", "키워드 유형별 적합 본문 길이와 글 쪼개기·합치기 의사결정 기준.") +
+            '</div></div></section>'
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"콘텐츠 SEO","url":"https://onesearchpro.pages.dev/insights/content-seo/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
+        "active": "insights",
+    },
+
+    "/insights/local-seo/": {
+        "title": "지역 SEO 가이드 | GBP·네이버 플레이스·NAP - OneSearchPro 인사이트",
+        "desc": "지역 SEO 실무 가이드. 구글 비즈니스 프로필 최적화, 네이버 플레이스 운영, 지역 랜딩페이지 설계, NAP 일관성 등 지역 기반 검색 유입 가이드 모음.",
+        "keywords": "지역 SEO 가이드, 구글 비즈니스 프로필, 네이버 플레이스, 지역 랜딩페이지, NAP 일관성, 로컬 SEO",
+        "h1": "지역 SEO",
+        "eyebrow": "LOCAL SEO GUIDES",
+        "lead": "구글 비즈니스 프로필·네이버 플레이스·지역 랜딩페이지·NAP 일관성을 다루는 지역 SEO 실무 가이드입니다.",
+        "body": (
+            '<section class="section"><div class="container"><div class="grid services">' +
+            insight_card("구글 비즈니스 프로필(GBP) 최적화 체크리스트", "카테고리·서비스·사진·리뷰·게시물 관리에서 자주 빠뜨리는 항목.") +
+            insight_card("네이버 플레이스 상위 노출에 영향을 주는 신호들", "스마트플레이스 정보·블로그 연동·영수증 리뷰·톡톡 응대의 우선순위 정리.") +
+            insight_card("\"지역명 + 서비스\" 키워드용 지역 랜딩페이지 설계법", "다지점 비즈니스에서 지역 키워드를 잡기 위한 페이지 구조와 콘텐츠 작성 가이드.") +
+            insight_card("NAP 일관성과 로컬 인용(citation)이 왜 중요한가", "디렉토리·SNS·자체 사이트의 상호·주소·전화 정보 통일 가이드.") +
+            insight_card("리뷰 관리 — 부정 리뷰 대응 매뉴얼", "감정적 대응 없이 검색 신호로 작용할 수 있는 리뷰 응답 템플릿과 절차.") +
+            insight_card("지역 SEO와 일반 SEO의 우선순위 차이", "오프라인 매장과 온라인 비즈니스의 SEO 작업 순서 차이 가이드.") +
+            '</div></div></section>'
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"지역 SEO","url":"https://onesearchpro.pages.dev/insights/local-seo/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
+        "active": "insights",
+    },
+
+    "/insights/backlink-pr/": {
+        "title": "백링크·디지털 PR 가이드 | 링크 리스크·평판 관리 - OneSearchPro 인사이트",
+        "desc": "안전한 외부 신호 확보 가이드. 백링크 리스크 진단, Disavow 활용, 디지털 PR과 게스트 포스트의 차이, 브랜드 언급 링크 전환 등 외부 신뢰 신호 가이드.",
+        "keywords": "백링크 가이드, 디지털 PR, Disavow, 백링크 리스크, 브랜드 언급, 외부 신뢰 신호",
+        "h1": "백링크 · 디지털 PR",
+        "eyebrow": "BACKLINK & DIGITAL PR GUIDES",
+        "lead": "안전한 외부 신호 확보, 백링크 리스크 진단, 디지털 PR 전략을 다루는 가이드입니다. 양이 아닌 신뢰가 핵심인 접근법을 다룹니다.",
+        "body": (
+            '<section class="section"><div class="container"><div class="grid services">' +
+            insight_card("위험한 백링크를 식별하는 7가지 지표", "Toxic Score·앵커 분포·발신 사이트 품질·언어·지역 시그널 등 점검 항목.") +
+            insight_card("Google Disavow 도구 — 언제 써야 하고 언제 쓰지 말아야 하나", "Disavow의 실제 효과와 잘못된 사용으로 인한 위험, 단계적 의사결정 가이드.") +
+            insight_card("게스트 포스트와 디지털 PR의 차이", "스팸과 합법적 PR을 가르는 기준, 자연스러운 신뢰 링크 확보 전략.") +
+            insight_card("브랜드 언급(unlinked mention)을 링크로 전환하는 방법", "언급 모니터링 도구 활용과 정중한 컨택 템플릿, 전환율 높이는 팁.") +
+            insight_card("디지털 PR 캠페인 — 데이터 리서치·전문가 인터뷰 활용", "자연스럽게 언론 인용이 따라오는 콘텐츠 기획 패턴.") +
+            insight_card("백링크 프로파일 점검 주기와 모니터링 도구 비교", "Ahrefs·SEMrush·Majestic 등 도구별 강점과 분기 점검 루틴.") +
+            '</div></div></section>'
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"백링크 · 디지털 PR","url":"https://onesearchpro.pages.dev/insights/backlink-pr/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
+        "active": "insights",
+    },
+
+    "/insights/sns/": {
+        "title": "SNS 마케팅 가이드 | 인스타·유튜브·틱톡 SEO 보조 - OneSearchPro 인사이트",
+        "desc": "SNS 마케팅과 SEO의 관계를 다루는 가이드. 소셜 신호가 SEO에 미치는 영향, 유튜브 SEO, 인스타그램 검색 활용 등 외부 유입과 브랜드 신뢰 보조 전략.",
+        "keywords": "SNS 마케팅 가이드, 유튜브 SEO, 인스타그램 SEO, 소셜 신호, 외부 유입, SNS와 SEO",
+        "h1": "SNS 마케팅",
+        "eyebrow": "SOCIAL MEDIA GUIDES",
+        "lead": "인스타그램·유튜브·틱톡·네이버 채널이 SEO에 어떻게 작용하는지, 외부 유입과 브랜드 신뢰를 보조하는 방법을 다루는 가이드입니다.",
+        "body": (
+            '<section class="section"><div class="container"><div class="grid services">' +
+            insight_card("SNS는 SEO에 직접 영향을 주는가 — 통념과 사실", "소셜 신호와 검색 순위의 실제 관계, 간접적으로 작용하는 경로 정리.") +
+            insight_card("유튜브 SEO 기본 — 제목·설명·태그·썸네일의 우선순위", "유튜브 알고리즘이 평가하는 요소와 콘텐츠 갱신 주기 가이드.") +
+            insight_card("인스타그램 검색 탭과 구글 인덱싱 — 활용 포인트", "프로필·릴스·해시태그를 어떻게 검색 자산으로 만들 수 있는지에 대한 실무 가이드.") +
+            insight_card("틱톡·쇼츠 — 짧은 영상이 SEO를 어떻게 보조하나", "숏폼 콘텐츠와 웹사이트 유입을 연결하는 운영 가이드.") +
+            insight_card("네이버 블로그·카페·인플루언서 마케팅 — SEO 보조 전략", "네이버 생태계에서 검색 신호로 연결되는 운영 패턴 정리.") +
+            '</div></div></section>'
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"SNS 마케팅","url":"https://onesearchpro.pages.dev/insights/sns/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
+        "active": "insights",
+    },
+
+    "/insights/visibility/": {
+        "title": "검색 노출 문제 해결 가이드 | 색인 누락·트래픽 급락 진단 - OneSearchPro 인사이트",
+        "desc": "검색 노출 문제 진단 가이드. 색인 누락 진단, 트래픽 급락 4주 매뉴얼, 수동 조치 회복, 중복 콘텐츠 정리 등 \"검색 노출이 안 될 때\" 점검할 항목 모음.",
+        "keywords": "검색 노출 진단, 색인 누락, 트래픽 급락, 수동 조치, 중복 콘텐츠, 페널티 회복",
+        "h1": "검색 노출 문제 해결",
+        "eyebrow": "VISIBILITY TROUBLESHOOTING",
+        "lead": "색인·페널티·중복·트래픽 급락 등 \"검색 노출이 안 될 때\" 단계적으로 진단하는 가이드 모음입니다.",
+        "body": (
+            '<section class="section"><div class="container"><div class="grid services">' +
+            insight_card("트래픽이 갑자기 떨어졌을 때 4주 진단 매뉴얼", "코어 업데이트·알고리즘 변경·사이트 문제·계절성을 구분하는 진단 순서.") +
+            insight_card("색인 누락 원인 7가지와 단계별 진단 방법", "Crawl·Render·Index 3단계에서 일어날 수 있는 실패 패턴 분류.") +
+            insight_card("\"수동 조치(manual action)\" 메시지를 받았을 때 대응 가이드", "서치콘솔에서 메시지를 받은 경우 단계별 점검 항목과 재심사 요청 절차.") +
+            insight_card("중복 콘텐츠 문제 — canonical, 301, noindex 중 어떤 걸 써야 하나", "상황별 의사결정 트리와 실제 사례 기반 가이드.") +
+            insight_card("서치콘솔 \"발견됨 - 현재 색인되지 않음\" 해석법", "구글이 발견은 했지만 색인 안 한 이유를 분류하는 방법.") +
+            insight_card("크롤링 예산이 부족한 사이트 — 우선순위 정리법", "큰 사이트에서 핵심 페이지로 크롤러를 집중시키는 구조 설계 가이드.") +
+            '</div></div></section>'
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"검색 노출 문제 해결","url":"https://onesearchpro.pages.dev/insights/visibility/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
+        "active": "insights",
+    },
+
+    # ========== About subpages ==========
+    "/about/principles/": {
+        "title": "작업 원칙 | OneSearchPro의 화이트햇 SEO 원칙 6가지",
+        "desc": "OneSearchPro가 모든 프로젝트에서 지키는 6가지 작업 원칙. 화이트햇·투명한 공유·데이터 기반·업종 특화·과장 없는 커뮤니케이션·검색 자산 누적을 통한 신뢰 기반 SEO 작업 방식.",
+        "keywords": "OneSearchPro 작업 원칙, 화이트햇 SEO, 투명한 SEO, 데이터 기반 마케팅, SEO 윤리",
+        "h1": "작업 원칙",
+        "eyebrow": "OUR PRINCIPLES",
+        "lead": "에이전시의 가치는 결국 \"신뢰\"에서 나온다고 믿습니다. OneSearchPro가 모든 프로젝트에서 양보하지 않는 6가지 작업 원칙입니다.",
+        "body": (
+            section("PRINCIPLES", "OneSearchPro 6대 원칙",
+                "단기 트릭이 아닌 정공법으로 일하는 이유.",
+                [
+                    {"icon":"✅","h":"화이트햇 원칙","p":"구글 웹마스터 가이드라인을 우선합니다. 단기 트릭, 자동화 도구, 대량 발주 방식은 사용하지 않습니다.","li":["수동 검수 100%","리스크 사전 고지"]},
+                    {"icon":"🤝","h":"투명한 공유","p":"모든 백링크 URL, 작업 내역, 키워드 순위 변화, 비용 구조를 고객과 공유합니다.","li":["월간 리포트 발송","대시보드 접근권 제공"]},
+                    {"icon":"📊","h":"데이터 기반 의사결정","p":"가설 → 실험 → 측정 → 개선 사이클을 반복합니다. 추정이 아닌 숫자로 보고합니다.","li":["서치콘솔·GA4 연동","A/B 테스트 운영"]},
+                    {"icon":"🎯","h":"업종 특화 전략","p":"리테일·F&B·뷰티·핀테크·교육·여행 등 산업별 검색 의도와 경쟁 구도를 분리해 접근합니다.","li":["업종별 케이스북","경쟁사 갭 분석"]},
+                    {"icon":"🧭","h":"과장 없는 커뮤니케이션","p":"\"무조건 1위\", \"보장\" 같은 표현은 쓰지 않습니다. 예상 타임라인과 리스크를 사전에 명시합니다.","li":["진단 후 견적 제시","현실적 타임라인"]},
+                    {"icon":"♻️","h":"검색 자산 누적","p":"광고를 끄면 사라지는 트래픽이 아니라, 작업을 멈춰도 남는 콘텐츠·링크·평판을 누적시킵니다.","li":["콘텐츠 IP 고객 귀속","링크 자산 분기 점검"]},
+                ])
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"OneSearchPro 작업 원칙","url":"https://onesearchpro.pages.dev/about/principles/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
+        "active": "about",
+    },
+
+    "/about/process/": {
+        "title": "진행 프로세스 | OneSearchPro 6단계 SEO 작업 방식",
+        "desc": "OneSearchPro의 6단계 SEO 작업 프로세스. 사이트 진단 → 키워드 분석 → 콘텐츠 설계 → 기술 SEO 개선 → 외부 신뢰 강화 → 측정과 지속 개선까지 동일한 사이클로 운영합니다.",
+        "keywords": "SEO 작업 프로세스, OneSearchPro 진행 방식, SEO 단계, SEO 진단, SEO 컨설팅 프로세스",
+        "h1": "진행 프로세스",
+        "eyebrow": "OUR PROCESS",
+        "lead": "모든 프로젝트는 동일한 진단·실행·측정 사이클로 진행됩니다. 단계마다 명확한 산출물이 있어 작업이 객관적으로 추적됩니다.",
+        "body": (
+            steps_section("PROCESS", "6단계 SEO 작업 프로세스", [
+                ("사이트 진단", "100+ 항목 기술 감사, 현재 키워드 순위, 백링크 프로파일, 경쟁사 갭 분석. 무료 1차 진단 리포트 제공."),
+                ("키워드·경쟁 분석", "상업 의도 높은 타겟 키워드 선정, 경쟁사 콘텐츠·링크 패턴 분해, 12개월 키워드 로드맵 수립."),
+                ("콘텐츠·구조 설계", "토픽 클러스터 설계, 내부 링크와 헤딩 구조, 스키마 마크업을 검색 의도에 맞춰 재배치."),
+                ("기술 SEO 개선", "Core Web Vitals, 색인, sitemap, robots, 중복 URL, canonical 등 코드 레벨 개선 실행."),
+                ("외부 신뢰 강화", "디지털 PR, 화이트햇 백링크, 브랜드 언급(citation) 누적으로 도메인·토픽 권위 확보."),
+                ("측정·지속 개선", "월간 순위·트래픽·전환 리포트, 분기 전략 리뷰, 6개월 단위 콘텐츠 리프레시."),
+            ])
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"OneSearchPro 진행 프로세스","url":"https://onesearchpro.pages.dev/about/process/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
+        "active": "about",
+    },
+
+    "/about/faq/": {
+        "title": "자주 묻는 질문 | OneSearchPro SEO 컨설팅 FAQ",
+        "desc": "OneSearchPro SEO 컨설팅에 대해 자주 받는 질문 정리. 효과 시점, 보장 가능 여부, 비용 구조, 계약 기간, 기존 백링크 위험, 네이버 SEO 등 실무 질문에 정직하게 답합니다.",
+        "keywords": "SEO 컨설팅 FAQ, OneSearchPro 자주 묻는 질문, SEO 효과 기간, SEO 비용, 네이버 SEO, SEO 계약",
+        "h1": "자주 묻는 질문",
+        "eyebrow": "FREQUENTLY ASKED QUESTIONS",
+        "lead": "SEO 컨설팅을 검토하시는 분들이 자주 묻는 질문을 정리했습니다. 보장 표현 대신 현실적인 답변을 드립니다.",
+        "body": (
+            '<section class="section"><div class="container faq-wrap"><div class="section-head left"><span class="eyebrow">FAQ</span><h2>SEO 컨설팅에 대해 자주 묻는 질문</h2></div><div class="faq">'
+            '<details open><summary>SEO 효과는 언제부터 나타나나요?</summary><p>키워드 난이도와 사이트 상태에 따라 다르지만, 일반적으로 온페이지 개선은 4~8주, 외부 신호 누적 효과는 8~16주, 안정적인 상위 노출은 3~6개월 이후입니다. 무료 진단 단계에서 예상 타임라인을 함께 제시합니다.</p></details>'
+            '<details><summary>"무조건 구글 1위 보장"이 가능한가요?</summary><p>가능하지 않습니다. 검색 결과는 구글 알고리즘이 결정하며, 어떤 에이전시도 순위를 보장할 수 없습니다. OneSearchPro는 보장 대신 진단 결과와 예상 시나리오, 작업 범위를 사전에 명시합니다.</p></details>'
+            '<details><summary>월 비용은 얼마부터 시작하나요?</summary><p>서비스 종류와 사이트 규모에 따라 다릅니다. SEO 컨설팅은 월 단위 리테이너, 기술 SEO 진단은 일회성 진단도 가능합니다. 정확한 견적은 무료 진단 후 사이트 상태에 맞춰 맞춤 제안드립니다.</p></details>'
+            '<details><summary>계약 기간은 어떻게 되나요?</summary><p>기본 3개월 단위 계약을 권장하지만, 1~2개월 시범 운영도 가능합니다. SEO는 누적 효과가 핵심이므로 6개월 이상 진행 시 가장 좋은 ROI가 나옵니다.</p></details>'
+            '<details><summary>이전 대행사가 사용한 백링크가 위험할 수 있나요?</summary><p>가능합니다. 디지털 PR·백링크 진단 서비스로 기존 백링크를 전수 점검해 스팸·페널티 위험 링크를 식별하고, 필요 시 disavow 작업까지 진행합니다.</p></details>'
+            '<details><summary>네이버 SEO도 함께 해주시나요?</summary><p>네. 구글과 네이버는 알고리즘이 다르므로 분리된 전략이 필요합니다. 통합 SEO 컨설팅에는 두 검색엔진 동시 대응이 포함됩니다.</p></details>'
+            '<details><summary>이미 사이트가 운영 중인데 처음부터 새로 만들어야 하나요?</summary><p>대부분 그럴 필요는 없습니다. 기존 사이트의 SEO 자산(도메인 권위, 색인된 페이지)을 유지하면서 단계적으로 개선하는 것이 일반적이며, 구조적 문제가 심각할 때만 리뉴얼을 권장합니다.</p></details>'
+            '<details><summary>광고는 같이 운영해야 하나요?</summary><p>필수는 아니지만 초기에 데이터를 빠르게 수집하기 위해 일부 광고와 병행하는 것을 권장하기도 합니다. SEO 자산이 누적된 후에는 광고 의존도를 줄일 수 있습니다.</p></details>'
+            '</div></div></section>'
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"SEO 효과는 언제부터 나타나나요?","acceptedAnswer":{"@type":"Answer","text":"키워드 난이도와 사이트 상태에 따라 다르지만, 일반적으로 온페이지 개선은 4~8주, 외부 신호 누적 효과는 8~16주, 안정적인 상위 노출은 3~6개월 이후입니다."}},{"@type":"Question","name":"무조건 구글 1위 보장이 가능한가요?","acceptedAnswer":{"@type":"Answer","text":"가능하지 않습니다. 검색 결과는 구글 알고리즘이 결정하며, 어떤 에이전시도 순위를 보장할 수 없습니다."}},{"@type":"Question","name":"월 비용은 얼마부터 시작하나요?","acceptedAnswer":{"@type":"Answer","text":"서비스 종류와 사이트 규모에 따라 다릅니다. 정확한 견적은 무료 진단 후 맞춤 제안드립니다."}},{"@type":"Question","name":"계약 기간은 어떻게 되나요?","acceptedAnswer":{"@type":"Answer","text":"기본 3개월 단위 계약을 권장하지만 1~2개월 시범 운영도 가능합니다."}},{"@type":"Question","name":"네이버 SEO도 함께 해주시나요?","acceptedAnswer":{"@type":"Answer","text":"네. 통합 SEO 컨설팅에는 구글과 네이버 동시 대응이 포함됩니다."}}]}</script>',
+        "active": "about",
     },
 }
 

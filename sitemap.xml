@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://onesearchpro.pages.dev/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+
   <url><loc>https://onesearchpro.pages.dev/services/seo/</loc><changefreq>monthly</changefreq><priority>0.95</priority></url>
   <url><loc>https://onesearchpro.pages.dev/services/technical-seo/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://onesearchpro.pages.dev/services/content-seo/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
@@ -8,8 +9,27 @@
   <url><loc>https://onesearchpro.pages.dev/services/digital-pr/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://onesearchpro.pages.dev/services/social-media/</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://onesearchpro.pages.dev/services/web-design/</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+
   <url><loc>https://onesearchpro.pages.dev/case-studies/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://onesearchpro.pages.dev/case-studies/seo/</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://onesearchpro.pages.dev/case-studies/local-seo/</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://onesearchpro.pages.dev/case-studies/content/</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://onesearchpro.pages.dev/case-studies/web-design/</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://onesearchpro.pages.dev/case-studies/visibility/</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+
   <url><loc>https://onesearchpro.pages.dev/insights/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://onesearchpro.pages.dev/insights/google-seo/</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://onesearchpro.pages.dev/insights/technical-seo/</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://onesearchpro.pages.dev/insights/content-seo/</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://onesearchpro.pages.dev/insights/local-seo/</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://onesearchpro.pages.dev/insights/backlink-pr/</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://onesearchpro.pages.dev/insights/sns/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://onesearchpro.pages.dev/insights/visibility/</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+
   <url><loc>https://onesearchpro.pages.dev/about/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onesearchpro.pages.dev/about/principles/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onesearchpro.pages.dev/about/process/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onesearchpro.pages.dev/about/faq/</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+
   <url><loc>https://onesearchpro.pages.dev/contact/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
