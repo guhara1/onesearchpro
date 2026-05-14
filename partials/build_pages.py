@@ -67,7 +67,7 @@ FOOTER = '''<footer class="site-footer">
       <div><a href="/" class="brand"><span class="brand-mark">1</span><span class="brand-name">OneSearch<strong>Pro</strong></span></a><p class="muted">검색에서 시작되는 비즈니스 성장.<br/>SEO · 디지털 마케팅 전문 에이전시.</p></div>
       <div><h5>SEO 서비스</h5><ul><li><a href="/services/seo/">SEO 컨설팅</a></li><li><a href="/services/technical-seo/">기술 SEO 진단</a></li><li><a href="/services/content-seo/">콘텐츠 SEO</a></li><li><a href="/services/local-seo/">지역 SEO</a></li><li><a href="/services/digital-pr/">디지털 PR · 백링크 진단</a></li><li><a href="/services/social-media/">SNS 마케팅</a></li><li><a href="/services/web-design/">SEO 웹사이트 제작</a></li></ul></div>
       <div><h5>회사</h5><ul><li><a href="/case-studies/">성공사례</a></li><li><a href="/insights/">SEO 인사이트</a></li><li><a href="/about/">회사 소개</a></li><li><a href="/contact/">내 사이트 진단받기</a></li></ul></div>
-      <div><h5>연락처</h5><ul><li>contact@onesearchpro.com</li><li>인천 부평구</li><li>KakaoTalk: @onesearchpro</li></ul></div>
+      <div><h5>연락처</h5><ul><li>contact@onesearchpro.com</li><li>인천 부평구</li></ul></div>
       <div><h5>약관·정책</h5><ul><li><a href="/privacy/">개인정보처리방침</a></li><li><a href="/terms/">이용약관</a></li></ul></div>
     </div>
     <div class="container biz-info">
@@ -559,7 +559,7 @@ PAGES = {
                 ("측정·지속 개선", "월간 순위·트래픽·전환 리포트, 분기 전략 리뷰, 6개월 단위 콘텐츠 리프레시."),
             ]) +
 
-            '<section class="section"><div class="container"><div class="section-head left"><span class="eyebrow">COMPANY INFO</span><h2>사업자 정보</h2><p>OneSearchPro는 YH기획이 운영하는 SEO·디지털 마케팅 브랜드입니다.</p></div><div class="company-info"><dl><dt>상호</dt><dd>YH기획</dd><dt>브랜드</dt><dd>OneSearchPro (원서치프로)</dd><dt>사업자등록번호</dt><dd>503-30-66944</dd><dt>주소</dt><dd>인천광역시 부평구 부평대로 283 부평우림라이온스밸리</dd><dt>이메일</dt><dd><a href="mailto:contact@onesearchpro.com">contact@onesearchpro.com</a></dd><dt>문의 채널</dt><dd>텔레그램 <a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer">@googleseolab</a> · 카카오톡 채널 @onesearchpro</dd></dl></div></div></section>' +
+            '<section class="section"><div class="container"><div class="section-head left"><span class="eyebrow">COMPANY INFO</span><h2>사업자 정보</h2><p>OneSearchPro는 YH기획이 운영하는 SEO·디지털 마케팅 브랜드입니다.</p></div><div class="company-info"><dl><dt>상호</dt><dd>YH기획</dd><dt>브랜드</dt><dd>OneSearchPro (원서치프로)</dd><dt>사업자등록번호</dt><dd>503-30-66944</dd><dt>주소</dt><dd>인천광역시 부평구 부평대로 283 부평우림라이온스밸리</dd><dt>이메일</dt><dd><a href="mailto:contact@onesearchpro.com">contact@onesearchpro.com</a></dd><dt>문의 채널</dt><dd>텔레그램 <a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer">@googleseolab</a></dd></dl></div></div></section>' +
 
             '<section class="section" id="faq-anchor"><a id="faq"></a><div class="container faq-wrap"><div class="section-head left"><span class="eyebrow">FAQ</span><h2>자주 묻는 질문</h2></div><div class="faq">'
             '<details open><summary>SEO 효과는 언제부터 나타나나요?</summary><p>키워드 난이도와 사이트 상태에 따라 다르지만, 일반적으로 온페이지 개선은 4~8주, 외부 신호 누적 효과는 8~16주, 안정적인 상위 노출은 3~6개월 이후입니다. 무료 진단 단계에서 예상 타임라인을 함께 제시합니다.</p></details>'
