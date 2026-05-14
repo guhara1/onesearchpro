@@ -239,6 +239,101 @@ def insights_section(anchor, eyebrow, h2, intro, cards):
     )
 
 
+def blog_post(*, date, reading_time, author="OneSearchPro SEO팀", intro, sections, key_takeaways=None, related=None):
+    """블로그 글 본문 HTML을 생성합니다.
+    sections: list of (h2, html_content) tuples
+    key_takeaways: 글 끝부분에 들어가는 요약 리스트 (optional)
+    related: list of (title, url, badge) tuples - 내부 링크용
+    """
+    meta = (
+        f'<div class="article-meta">'
+        f'<span>📅 {date}</span>'
+        f'<span>⏱ 읽는 시간 약 {reading_time}분</span>'
+        f'<span>✍ {author}</span>'
+        f'</div>'
+    )
+
+    section_html = ""
+    for h2_title, content in sections:
+        section_html += f'<h2>{h2_title}</h2>\n{content}\n'
+
+    takeaways_html = ""
+    if key_takeaways:
+        items = "".join(f"<li>{x}</li>" for x in key_takeaways)
+        takeaways_html = (
+            f'<aside class="article-takeaway">'
+            f'<h3>🎯 핵심 정리</h3>'
+            f'<ul>{items}</ul>'
+            f'</aside>'
+        )
+
+    related_html = ""
+    if related:
+        cards = ""
+        for title, url, badge in related:
+            cards += (
+                f'<a href="{url}" class="svc related-card">'
+                f'<span class="badge">{badge}</span>'
+                f'<h3>{title}</h3>'
+                f'<span class="svc-link">자세히 보기 →</span>'
+                f'</a>'
+            )
+        related_html = (
+            f'<section class="section section-soft">'
+            f'<div class="container">'
+            f'<div class="section-head left">'
+            f'<span class="eyebrow">RELATED · 내부 링크</span>'
+            f'<h2>이 글과 함께 보면 좋은 글·서비스</h2>'
+            f'<p>같은 주제 또는 연관 영역의 글과 서비스 페이지입니다. 깊이 있게 이해하시려면 함께 읽어보세요.</p>'
+            f'</div>'
+            f'<div class="grid services">{cards}</div>'
+            f'</div></section>'
+        )
+
+    cta_html = (
+        f'<section class="section">'
+        f'<div class="container">'
+        f'<div class="article-cta">'
+        f'<h3>내 사이트의 SEO 상태가 궁금하다면</h3>'
+        f'<p>위 가이드의 항목들을 실제 우리 사이트에 적용하면 어떤 결과가 나올지 궁금하시면, 무료 SEO 진단을 받아보세요. 텔레그램으로 사이트 URL을 보내주시면 24시간 내 분석 리포트를 회신드립니다.</p>'
+        f'<a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">무료 SEO 진단 받기 →</a>'
+        f'</div>'
+        f'</div></section>'
+    )
+
+    return (
+        f'<section class="section article-section">'
+        f'<article class="article-body container">'
+        f'{meta}'
+        f'<p class="article-intro">{intro}</p>'
+        f'{section_html}'
+        f'{takeaways_html}'
+        f'</article>'
+        f'</section>'
+        f'{cta_html}'
+        f'{related_html}'
+    )
+
+
+def blog_jsonld(*, url, title, desc, date_published, date_modified=None):
+    date_modified = date_modified or date_published
+    return (
+        f'<script type="application/ld+json">'
+        f'{{"@context":"https://schema.org","@type":"BlogPosting",'
+        f'"headline":"{title}",'
+        f'"description":"{desc}",'
+        f'"url":"{url}",'
+        f'"datePublished":"{date_published}",'
+        f'"dateModified":"{date_modified}",'
+        f'"author":{{"@type":"Organization","name":"OneSearchPro","url":"https://onesearchpro.org/"}},'
+        f'"publisher":{{"@type":"Organization","name":"OneSearchPro","logo":{{"@type":"ImageObject","url":"https://onesearchpro.org/assets/images/logo.png"}}}},'
+        f'"image":"https://onesearchpro.org/assets/images/logo.png",'
+        f'"mainEntityOfPage":{{"@type":"WebPage","@id":"{url}"}},'
+        f'"inLanguage":"ko-KR"}}'
+        f'</script>'
+    )
+
+
 PAGES = {
     "/services/seo/": {
         "title": "SEO 컨설팅 | 검색 노출 원인 진단·통합 개선 - OneSearchPro",
