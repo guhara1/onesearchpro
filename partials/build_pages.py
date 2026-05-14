@@ -69,7 +69,14 @@ FOOTER = '''<footer class="site-footer">
       <div><h5>회사</h5><ul><li><a href="/case-studies/">성공사례</a></li><li><a href="/insights/">SEO 인사이트</a></li><li><a href="/about/">회사 소개</a></li><li><a href="/contact/">내 사이트 진단받기</a></li></ul></div>
       <div><h5>연락처</h5><ul><li>contact@onesearchpro.com</li><li>Seoul, Korea</li><li>KakaoTalk: @onesearchpro</li></ul></div>
     </div>
-    <div class="container foot-bottom"><span>© <span id="year"></span> OneSearchPro. All rights reserved.</span><span>Made with ☕ in Seoul</span></div>
+    <div class="container biz-info">
+      <span>상호 <b>YH기획</b></span>
+      <span class="biz-sep">·</span>
+      <span>사업자등록번호 503-30-66944</span>
+      <span class="biz-sep">·</span>
+      <span>주소 인천광역시 부평구 부평대로 283 부평우림라이온스밸리</span>
+    </div>
+    <div class="container foot-bottom"><span>© <span id="year"></span> YH기획 (OneSearchPro). All rights reserved.</span><span>Made with ☕ in Seoul</span></div>
   </footer>'''
 
 
@@ -509,6 +516,8 @@ PAGES = {
                 ("측정·지속 개선", "월간 순위·트래픽·전환 리포트, 분기 전략 리뷰, 6개월 단위 콘텐츠 리프레시."),
             ]) +
 
+            '<section class="section"><div class="container"><div class="section-head left"><span class="eyebrow">COMPANY INFO</span><h2>사업자 정보</h2><p>OneSearchPro는 YH기획이 운영하는 SEO·디지털 마케팅 브랜드입니다.</p></div><div class="company-info"><dl><dt>상호</dt><dd>YH기획</dd><dt>브랜드</dt><dd>OneSearchPro (원서치프로)</dd><dt>사업자등록번호</dt><dd>503-30-66944</dd><dt>주소</dt><dd>인천광역시 부평구 부평대로 283 부평우림라이온스밸리</dd><dt>이메일</dt><dd><a href="mailto:contact@onesearchpro.com">contact@onesearchpro.com</a></dd><dt>문의 채널</dt><dd>텔레그램 <a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer">@googleseolab</a> · 카카오톡 채널 @onesearchpro</dd></dl></div></div></section>' +
+
             '<section class="section" id="faq-anchor"><a id="faq"></a><div class="container faq-wrap"><div class="section-head left"><span class="eyebrow">FAQ</span><h2>자주 묻는 질문</h2></div><div class="faq">'
             '<details open><summary>SEO 효과는 언제부터 나타나나요?</summary><p>키워드 난이도와 사이트 상태에 따라 다르지만, 일반적으로 온페이지 개선은 4~8주, 외부 신호 누적 효과는 8~16주, 안정적인 상위 노출은 3~6개월 이후입니다. 무료 진단 단계에서 예상 타임라인을 함께 제시합니다.</p></details>'
             '<details><summary>"무조건 구글 1위 보장"이 가능한가요?</summary><p>가능하지 않습니다. 검색 결과는 구글 알고리즘이 결정하며, 어떤 에이전시도 순위를 보장할 수 없습니다. OneSearchPro는 보장 대신 진단 결과와 예상 시나리오, 작업 범위를 사전에 명시합니다.</p></details>'
@@ -518,7 +527,7 @@ PAGES = {
             '<details><summary>네이버 SEO도 함께 해주시나요?</summary><p>네. 구글과 네이버는 알고리즘이 다르므로 분리된 전략이 필요합니다. 통합 SEO 컨설팅에는 두 검색엔진 동시 대응이 포함됩니다.</p></details>'
             '</div></div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"­원서치프로 소개","url":"https://onesearchpro.org/about/","mainEntity":{"@type":"Organization","name":"OneSearchPro","alternateName":"원서치프로","url":"https://onesearchpro.org/","description":"SEO·디지털 마케팅 전문 에이전시"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"원서치프로 소개","url":"https://onesearchpro.org/about/","mainEntity":{"@type":"Organization","name":"OneSearchPro","alternateName":["원서치프로","YH기획"],"legalName":"YH기획","url":"https://onesearchpro.org/","logo":"https://onesearchpro.org/assets/images/logo.png","description":"SEO·디지털 마케팅 전문 에이전시","taxID":"503-30-66944","address":{"@type":"PostalAddress","streetAddress":"부평대로 283 부평우림라이온스밸리","addressLocality":"부평구","addressRegion":"인천광역시","addressCountry":"KR"},"email":"contact@onesearchpro.com"}}</script>',
         "active": "about",
     },
 

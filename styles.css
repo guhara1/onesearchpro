@@ -570,6 +570,61 @@ h1 {
 .muted { color: var(--muted); margin-top: 1rem; font-size: .92rem; line-height: 1.7; }
 .foot-bottom { display: flex; justify-content: space-between; padding-top: 26px; font-size: .85rem; color: var(--muted); }
 
+/* Business info strip (legal/registration) */
+.biz-info {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .6rem;
+  padding: 18px 0 4px;
+  font-size: .82rem;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+}
+.biz-info b { color: var(--text-soft); font-weight: 600; }
+.biz-info .biz-sep { color: var(--line-hi); }
+
+/* Company info dl on About page */
+.company-info {
+  background: var(--surface);
+  border: 1px solid var(--line-hi);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem 2rem;
+  backdrop-filter: blur(10px);
+  max-width: 760px;
+  margin: 0 auto;
+}
+.company-info dl {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1rem 1.8rem;
+  margin: 0;
+}
+.company-info dt {
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding-top: .1rem;
+}
+.company-info dd {
+  margin: 0;
+  color: var(--text);
+  font-weight: 500;
+  line-height: 1.65;
+}
+.company-info dd a {
+  color: var(--brand-2);
+  border-bottom: 1px dashed rgba(34, 211, 238, .35);
+}
+.company-info dd a:hover { border-bottom-style: solid; }
+@media (max-width: 640px) {
+  .company-info { padding: 1.4rem 1.2rem; }
+  .company-info dl { grid-template-columns: 1fr; gap: .35rem 0; }
+  .company-info dt { padding-top: .6rem; }
+  .company-info dt:first-child { padding-top: 0; }
+  .biz-info { font-size: .76rem; gap: .4rem; }
+  .biz-info .biz-sep { display: none; }
+}
+
 /* =========================================
    Editorial Blog Article — Premium Reading
    ========================================= */
