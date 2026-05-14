@@ -1360,37 +1360,162 @@ PAGES = {
     },
 
     "/case-studies/web-design/": {
-        "title": "SEO 웹사이트 제작 사례 | OneSearchPro",
-        "desc": "OneSearchPro의 SEO 웹사이트 제작 사례. 신규 사이트 SEO 기초 공사, 리뉴얼 시 URL 마이그레이션, Core Web Vitals 최적화 등 처음부터 검색 친화로 만든 제작 기록입니다.",
-        "keywords": "SEO 웹사이트 제작 사례, 사이트 리뉴얼, URL 마이그레이션, Core Web Vitals 사례, 신규 사이트 SEO",
+        "title": "SEO 웹사이트 제작 사례 | 메뉴·URL·속도·전환 8대 시나리오 | OneSearchPro",
+        "desc": "메뉴 구조, URL 구조, 모바일 반응형, 페이지 속도, 서비스 페이지 구성, 메타 정보, 내부 링크, 문의 전환 구조까지 — 디자인 포트폴리오가 아닌 SEO 구조로 제작한 사이트 8대 시나리오 작업 기록.",
+        "keywords": "SEO 웹사이트 제작 사례, 메뉴 구조, URL 구조, 모바일 반응형, Core Web Vitals, 서비스 페이지, 내부 링크, 문의 전환",
         "h1": "웹사이트 제작 사례",
         "eyebrow": "WEB DESIGN CASES",
-        "lead": "처음부터 검색엔진이 이해하기 쉬운 구조로 만든 사이트 제작·리뉴얼 사례입니다. 런칭 후 빠른 색인, 트래픽 손실 없는 마이그레이션이 핵심 목표였습니다.",
+        "lead": "OneSearchPro의 웹사이트 제작은 단순 디자인 포트폴리오가 아닙니다. 처음부터 검색엔진이 이해할 수 있는 구조·URL·속도·전환 동선을 \"SEO 자산\"으로 설계합니다. 다음은 사이트 제작·리뉴얼 시 자주 다루는 8가지 시나리오의 실제 작업 기록입니다.",
         "body": (
-            '<section class="section"><div class="container"><div class="grid services case-grid">' +
-            case_card(
-                badge="STARTUP",
-                icon="🚀",
-                h3="스타트업 신규 웹사이트 — SEO 기초 공사 포함 제작",
-                problem="기존 사이트가 외주로 만들어진 디자인 중심 페이지여서 메타·sitemap·스키마가 없는 상태였습니다.",
-                diagnosis="페이지 구조·URL·내부 링크가 검색엔진 친화적이지 않았고, Core Web Vitals 점수가 낮았습니다.",
-                improvements=["정보 구조 재설계(서비스·사례·인사이트 허브 구분)", "Core Web Vitals 90+ 기준으로 코드 최적화", "메타·OG·sitemap·robots·구조화 데이터 셋업", "GA4·서치콘솔·픽셀 연동까지 납품"],
-                results=["런칭 직후부터 색인 정상화", "초기 키워드 노출이 일반 신규 사이트보다 빠르게 형성됨", "제작·셋업 기간 약 6주"],
-                caveats="신규 사이트는 도메인 권위가 낮아 경쟁 키워드 진입까지 추가 시간이 필요합니다. 제작 후 콘텐츠·외부 신호 작업이 이어져야 합니다."
-            ) +
+            # 8대 시나리오 인덱스
+            '<section class="section case-index"><div class="container">'
+            '<div class="section-head left"><span class="eyebrow">QUICK INDEX</span><h2>이 페이지에서 다루는 8가지 SEO 웹사이트 제작 시나리오</h2><p>제작·리뉴얼 시 SEO 관점에서 반드시 점검하는 8가지 영역입니다. 해당 항목으로 바로 이동하세요.</p></div>'
+            '<div class="case-index-grid">'
+            '<a href="#nav-architecture" class="case-index-item"><span class="case-index-num">01</span><div><b>메뉴 구조</b><span>핵심 페이지에 3클릭 안에 도달 못 하는 사이트</span></div></a>'
+            '<a href="#url-architecture" class="case-index-item"><span class="case-index-num">02</span><div><b>URL 구조</b><span>/index.php?id=123 같은 비의미적 URL 정리</span></div></a>'
+            '<a href="#mobile-responsive" class="case-index-item"><span class="case-index-num">03</span><div><b>모바일 반응형</b><span>모바일에서 본문·링크가 빠진 사이트의 콘텐츠 패리티</span></div></a>'
+            '<a href="#page-speed" class="case-index-item"><span class="case-index-num">04</span><div><b>페이지 속도</b><span>Core Web Vitals 모바일 50점대 사이트 90+ 만들기</span></div></a>'
+            '<a href="#service-page-design" class="case-index-item"><span class="case-index-num">05</span><div><b>서비스 페이지 구성</b><span>이미지 위주 빈약한 서비스 페이지 6단락 재설계</span></div></a>'
+            '<a href="#meta-info" class="case-index-item"><span class="case-index-num">06</span><div><b>메타 정보</b><span>자동 추출 메타로 CTR 손실 → 페이지별 수동 작성</span></div></a>'
+            '<a href="#design-internal-link" class="case-index-item"><span class="case-index-num">07</span><div><b>내부 링크</b><span>고립 페이지가 많은 사이트의 권위 흐름 설계</span></div></a>'
+            '<a href="#conversion-structure" class="case-index-item"><span class="case-index-num">08</span><div><b>문의 전환 구조</b><span>트래픽은 오는데 문의가 없는 사이트의 CTA 동선</span></div></a>'
+            '</div></div></section>'
+
+            # Case 1 — 메뉴 구조
+            '<section class="section" id="nav-architecture"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">01</span><span class="eyebrow">NAVIGATION ARCHITECTURE</span><h2>메뉴 구조</h2><p class="lead">사용자가 핵심 페이지에 3클릭 안에 도달하지 못하면 검색엔진 크롤러도 동일합니다. 메뉴는 첫 번째 SEO 구조입니다.</p></div>'
+            '<div class="grid services case-grid">' +
             case_card(
                 badge="B2B",
-                icon="🏗️",
-                h3="B2B 기업 사이트 — 리뉴얼과 URL 마이그레이션",
-                problem="기존 사이트의 URL 구조 변경이 필요했지만 트래픽 손실이 우려되는 상황이었습니다.",
-                diagnosis="기존 페이지 다수가 핵심 키워드에서 노출되고 있어, 잘못된 리다이렉트 시 트래픽 손실 가능성이 컸습니다.",
-                improvements=["기존 URL·키워드·트래픽 매핑 시트 작성", "1:1 301 리다이렉트 매핑과 사전 검증", "출시 직후 서치콘솔로 색인 재요청과 모니터링"],
-                results=["리뉴얼 이후 핵심 키워드 순위 대부분 유지", "오가닉 트래픽 손실 최소화", "프로젝트 기간 약 2개월"],
-                caveats="대규모 마이그레이션은 사전 계획이 부족하면 회복까지 수개월 걸릴 수 있습니다."
+                icon="🧭",
+                h3="메뉴가 깊거나 평평한 사이트 — SEO 친화 정보 구조 설계",
+                problem="기존 사이트의 메뉴가 4단 깊이까지 들어가야 핵심 서비스 페이지에 도달하는 구조였습니다. 또 다른 케이스에서는 메뉴에 30개 링크가 평평하게 늘어서서 정보 계층이 안 보이는 패턴이 있었습니다.",
+                diagnosis="크롤러는 사용자와 비슷하게 사이트를 탐색합니다. 메뉴 깊이가 4단 이상이면 깊은 페이지는 색인 우선순위가 떨어집니다. 반대로 평평한 메뉴는 카테고리 그룹 신호가 약합니다.",
+                improvements=["1차 메뉴 5~7개 + 드롭다운 2단으로 제한", "사용자 결정 흐름 기반 메뉴 재배치 (서비스→사례→인사이트→회사→문의)", "메뉴 항목명에 정확한 키워드 포함 (\"서비스\" 단독보다 \"SEO 컨설팅\" 등 구체)", "모바일 햄버거 메뉴에서도 동일 계층 유지"],
+                results=["크롤링 효율 회복으로 깊은 페이지 색인 속도 개선", "사용자 동선 단축으로 페이지뷰 증가", "메뉴 재설계 작업 기간 약 3~4주"],
+                caveats="메뉴 변경은 기존 사용자 동선에 영향을 줍니다. 변경 전 사용자 행동 데이터를 보고, 변경 후 이탈률 모니터링이 필요합니다."
             ) +
             '</div></div></section>'
+
+            # Case 2 — URL 구조
+            '<section class="section section-soft" id="url-architecture"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">02</span><span class="eyebrow">URL ARCHITECTURE</span><h2>URL 구조</h2><p class="lead">URL은 검색엔진과 사용자 모두에게 \"이 페이지가 무엇인지\"의 첫 신호입니다. /index.php?id=123 같은 패턴은 즉시 손해입니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="LEGACY CMS",
+                icon="🔗",
+                h3="비의미적 URL 패턴 사이트 — 의미적 URL 재설계와 마이그레이션",
+                problem="기존 사이트가 PHP 기반으로 /page.php?cat=4&id=128 같은 파라미터 URL 사용. 카테고리·계층 정보가 URL에 전혀 반영되지 않았고, 같은 페이지가 여러 파라미터 조합으로 접근 가능해 중복 URL이 다수 발생했습니다.",
+                diagnosis="의미 없는 URL은 검색엔진과 사용자 모두에게 신호가 약합니다. 또한 파라미터 URL은 트래킹·캠페인 변수에 따라 무한히 늘어나 크롤링 예산을 낭비합니다.",
+                improvements=["URL 패턴을 /[category]/[subcategory]/[slug]/ 형식으로 통일", "영문 슬러그 사용 (한글 URL은 인코딩 문제 발생 가능)", "카테고리·서비스 계층을 URL에 반영", "파라미터 URL은 canonical 또는 noindex로 정리", "기존 URL과 새 URL 1:1 301 매핑 시트 작성"],
+                results=["URL 자체가 키워드 신호로 작동", "중복 URL 정리로 크롤링 예산 회복", "색인된 핵심 페이지의 검색 노출 회복"],
+                caveats="URL 변경 시 반드시 모든 기존 URL의 1:1 301 매핑 필수. 누락되면 트래픽 손실이 수개월 이어집니다."
+            ) +
+            '</div></div></section>'
+
+            # Case 3 — 모바일 반응형
+            '<section class="section" id="mobile-responsive"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">03</span><span class="eyebrow">MOBILE FIRST</span><h2>모바일 반응형</h2><p class="lead">구글은 모바일 우선 색인입니다. 모바일에서 안 보이는 콘텐츠는 사실상 색인되지 않습니다. \"반응형\"이라도 콘텐츠 패리티는 별도 점검이 필요합니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="ECOMMERCE",
+                icon="📱",
+                h3="모바일 콘텐츠가 빠진 사이트 — 모바일 우선 색인 대응 제작",
+                problem="PC 기준으로 잘 만들어진 사이트지만 모바일에서는 사이드바·일부 본문·내부 링크가 <code>display:none</code> 처리되어 보이지 않는 상태. 모바일 viewport 메타 누락 페이지도 있었고, 터치 타겟 크기·가독성 기준도 미준수했습니다.",
+                diagnosis="모바일 우선 색인은 \"모바일에서 보이는 게 색인 기준\"이 됩니다. 데스크탑에만 있는 본문·이미지·내부 링크는 사실상 색인되지 않는 셈입니다. 콘텐츠 패리티(데스크탑/모바일 일치) 실패 케이스였습니다.",
+                improvements=["모바일에서 <code>display:none</code> 처리된 본문·링크 점검 후 복원", "<code>viewport</code> 메타 적용, 본문 폰트 16px 이상, 탭 영역 48×48px+", "모바일 친화성 테스트 통과", "구조화 데이터·내부 링크가 모바일에서도 동일하게 출력되는지 점검", "모바일 LCP·INP·CLS 별도 측정·최적화"],
+                results=["모바일 키워드 노출 회복", "모바일 트래픽이 데스크탑 수준으로 회복", "작업 기간 약 4주"],
+                caveats="별도 모바일 도메인(m.example.com)은 관리 부담만 큽니다. 반응형 단일 사이트가 정답입니다."
+            ) +
+            '</div></div></section>'
+
+            # Case 4 — 페이지 속도
+            '<section class="section section-soft" id="page-speed"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">04</span><span class="eyebrow">PAGE SPEED</span><h2>페이지 속도</h2><p class="lead">PageSpeed 점수보다 중요한 건 사용자 환경에서 측정된 Field Data입니다. 구글이 랭킹에 쓰는 건 실제 사용자 데이터입니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="WORDPRESS",
+                icon="⚡",
+                h3="Core Web Vitals 모바일 50점대 사이트 — 90+ 만들기 작업",
+                problem="PageSpeed Insights 모바일 점수가 30~50점대로 정체. LCP 4초 이상, CLS 0.25 초과, INP 200ms 이상으로 Core Web Vitals 기준치 초과. 모바일 검색 노출에 부정적 영향이 있는 상태였습니다.",
+                diagnosis="Hero 이미지가 압축 안 된 4MB PNG, 폰트가 차단 렌더링, 무거운 플러그인·CSS/JS, 호스팅 TTFB 1초 초과 등이 복합 원인이었습니다.",
+                improvements=["Hero 이미지 WebP 변환 + 모바일용 별도 srcset, fetchpriority high", "한글 폰트 swap·preload·subset 적용", "사용 안 하는 CSS/JS 제거 또는 lazy loading", "캐싱 플러그인 + Cloudflare CDN 도입으로 TTFB 단축", "Core Web Vitals Field Data를 서치콘솔에서 지속 추적"],
+                results=["모바일 PageSpeed 점수 90+ 진입", "LCP 1.5~2초대로 단축", "Field Data 기준 \"Good\" 비율 증가"],
+                caveats="PageSpeed Lab 점수와 Field Data가 다를 수 있습니다. 구글은 Field Data를 랭킹 신호로 사용하므로 실측 기반 모니터링이 필수입니다."
+            ) +
+            '</div></div></section>'
+
+            # Case 5 — 서비스 페이지 구성
+            '<section class="section" id="service-page-design"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">05</span><span class="eyebrow">SERVICE PAGE</span><h2>서비스 페이지 구성</h2><p class="lead">서비스 페이지는 검색 의도(거래형) 매칭 + 전환 동선이 핵심입니다. 본문이 없으면 둘 다 실패합니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="B2B · SAAS",
+                icon="💼",
+                h3="이미지 위주 빈약한 서비스 페이지 — 전환 + SEO 통합 6단락 재구성",
+                problem="서비스 페이지가 이미지 위주로 구성되고 본문이 거의 없었습니다. 사용자가 어떤 서비스인지, 가격·차별점·결과를 알기 어려웠고, 검색에서도 거래형 키워드(\"서비스명 + 가격\", \"비교\")에서 노출되지 않았습니다.",
+                diagnosis="서비스 페이지는 \"정보 + 전환\" 두 역할을 동시에 해야 하는데, 본문 부재로 검색엔진 신호(SEO)와 사용자 결정(전환) 둘 다 잡지 못하는 상태였습니다.",
+                improvements=["서비스별 6단락 구조: ① 대상 고객, ② 해결할 문제, ③ 해결 방식, ④ 차별점·증거, ⑤ 프로세스, ⑥ FAQ", "Service / Offer 스키마 적용", "기간·결과물·범위 명시 (\"보장\" 표현 없이 \"기준\"·\"목표\"·\"평균\" 표현 사용)", "관련 사례·블로그 글로 본문 내 컨텍스트 링크", "페이지 하단 명확한 CTA + 신뢰 신호 (실적·후기·법적 정보)"],
+                results=["거래형 키워드에서 서비스 페이지가 직접 노출", "문의 전환율 회복 추세", "재구성 기간 약 6주"],
+                caveats="가격 비공개 정책이면 가격 대신 \"프로젝트 단위 견적\"으로 안내하되, 범위·기간은 반드시 명시해야 신뢰가 형성됩니다."
+            ) +
+            '</div></div></section>'
+
+            # Case 6 — 메타 정보
+            '<section class="section section-soft" id="meta-info"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">06</span><span class="eyebrow">META INFO</span><h2>메타 정보</h2><p class="lead">메타는 SERP의 입구입니다. 자동 추출에 맡기면 사용자가 클릭할 후크가 없습니다. 페이지별 수동 작성이 필수입니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="MULTI-PAGE",
+                icon="🏷️",
+                h3="자동 생성된 메타가 클릭률을 낮추는 사이트 — 페이지별 수동 작성",
+                problem="title이 모든 페이지에 \"회사명 - 페이지명\" 패턴으로 자동 생성. description은 입력 안 된 상태라 본문 첫 문장이 자동 추출되어 \"안녕하세요, ○○ 회사입니다\" 같은 의미 없는 텍스트가 검색 결과에 노출되었습니다.",
+                diagnosis="메타는 SERP에서 사용자가 우리 페이지를 클릭할지 결정하는 핵심 후크입니다. 자동 추출은 통제 불가능하고, 클릭 후크가 없어 같은 노출수에서도 클릭이 빠집니다.",
+                improvements=["페이지별 title 50~60자 (1차 키워드 + 클릭 후크 + 브랜드)", "description 120~155자 (가치·차별점·CTA 한 줄)", "OG title·description 별도 작성 (SNS 공유 카피와 SERP 카피 분리)", "구조화 데이터로 리치 결과 유도 (FAQPage, Review, Product 등 페이지 유형별)"],
+                results=["평균 CTR 회복", "같은 노출수에서 클릭 증가", "메타 작성·검수 작업 기간 약 3~4주 (페이지 수에 비례)"],
+                caveats="자동 생성 도구 활용 시에도 페이지마다 검수 필수. 동일 패턴이면 구글이 자동 추출로 대체하기도 합니다."
+            ) +
+            '</div></div></section>'
+
+            # Case 7 — 내부 링크
+            '<section class="section" id="design-internal-link"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">07</span><span class="eyebrow">INTERNAL LINKING</span><h2>내부 링크</h2><p class="lead">페이지가 많아도 본문에서 서로 연결되지 않으면 검색엔진이 사이트 전체 가치를 인식하지 못합니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="LARGE SITE",
+                icon="🕸️",
+                h3="고립 페이지가 많은 사이트 — 권위 흐름 설계",
+                problem="페이지가 100개 넘게 있지만 본문 안에서 다른 페이지로 가는 컨텍스트 링크가 거의 없었습니다. 사이드바·자동 \"관련 글\" 위젯에만 의존했고, 일부 페이지는 사이트맵·메뉴 외에는 어디서도 링크되지 않는 고립 페이지(orphan) 상태였습니다.",
+                diagnosis="고립 페이지는 검색엔진이 \"중요하지 않은 페이지\"로 판단해 색인 우선순위가 매우 낮습니다. 또한 본문 컨텍스트 링크 부재로 사이트 전체 권위 신호가 흐르지 않았습니다.",
+                improvements=["본문 내 컨텍스트 링크 평균 3~5개씩 추가 (관련 글·서비스·사례)", "카테고리 허브 → 개별 글 → 서비스 페이지 흐름 설계", "고립 페이지 식별 후 본문 내 자연스러운 위치에 연결", "앵커텍스트는 정확한 타겟 키워드로 통일 (\"여기 클릭\" 금지)", "필러 글과 클러스터 글을 명확히 구분해 권위 집중"],
+                results=["사이트 전체 권위 흐름 형성", "신규 페이지의 색인 속도 개선", "평균 페이지뷰 증가"],
+                caveats="자동 \"관련 글\" 위젯에 의존하지 마세요. 본문 컨텍스트가 자연스러운 위치에 수동 배치가 검색엔진 신호로 더 강합니다."
+            ) +
+            '</div></div></section>'
+
+            # Case 8 — 문의 전환 구조
+            '<section class="section section-soft" id="conversion-structure"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">08</span><span class="eyebrow">CONVERSION STRUCTURE</span><h2>문의 전환 구조</h2><p class="lead">SEO로 트래픽이 회복돼도 문의·전환으로 이어지지 않으면 비즈니스 가치는 절반입니다. 사이트 제작 단계에서 전환 동선이 함께 설계되어야 합니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="LEAD GEN",
+                icon="💬",
+                h3="트래픽은 오는데 문의가 없는 사이트 — CTA 동선 재설계",
+                problem="SEO 작업 후 검색 유입은 회복됐는데 문의·신청 수가 거의 변하지 않는 상태. 페이지에 도착해도 다음 행동(CTA)이 명확하지 않거나, 폼이 복잡해서 결정 마비가 발생하는 패턴이었습니다.",
+                diagnosis="페이지마다 \"다음 행동\"이 명확하지 않거나 푸터에만 있는 케이스. 폼 항목이 너무 많아서 입력 부담이 크고, 신뢰 신호(실적·후기·법적 정보)가 부족해 마지막 결정이 막히는 구조였습니다.",
+                improvements=["모든 핵심 페이지에 명확한 CTA 배치 (상단·중간·하단 3구간)", "폼 항목 최소화 (이름·이메일·문의 내용 3개로 시작)", "복수 채널 제공 (폼 외에 텔레그램·이메일 등)", "신뢰 신호 강화 (실적·후기·인증·법적 정보·사업자등록번호)", "마이크로 컨버전 추가 (무료 진단·체크리스트 다운로드 등 진입 장벽 낮은 행동)"],
+                results=["같은 트래픽에서 문의 수 회복 추세", "재구성 작업 기간 약 3~4주"],
+                caveats="CTA가 너무 공격적이거나 팝업이 과하면 이탈률이 증가합니다. 신뢰 신호와 CTA의 균형이 핵심입니다."
+            ) +
+            '</div></div></section>'
+
+            # CTA
+            '<section class="section section-cta"><div class="container cta-grid">'
+            '<div><h2>지금 사이트는 어느 시나리오에 해당할까요?</h2><p>현재 사이트의 메뉴·URL·속도·전환 구조를 8가지 기준으로 진단해 우선순위를 알려드립니다. 신규 제작·리뉴얼 견적도 함께 회신드립니다.</p></div>'
+            '<div class="cta-actions"><a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">무료 사이트 진단 받기 →</a><a href="/services/web-design/" class="btn btn-outline btn-lg btn-light">SEO 웹사이트 제작 서비스</a></div>'
+            '</div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"웹사이트 제작 사례","url":"https://onesearchpro.org/case-studies/web-design/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"SEO 웹사이트 제작 사례","url":"https://onesearchpro.org/case-studies/web-design/","description":"메뉴·URL·속도·메타·내부 링크·전환까지 SEO 구조로 만든 사이트 8대 시나리오 작업 기록","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
         "active": "cases",
     },
 
