@@ -142,7 +142,7 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
           <h1>{h1}</h1>
           <p class="lead">{lead}</p>
           <div class="cta-row">
-            <a href="/contact/" class="btn btn-primary">내 사이트 진단받기</a>
+            <a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary">내 사이트 진단받기</a>
             <a href="/case-studies/" class="btn btn-outline">성공사례 보기 →</a>
           </div>
         </div>
@@ -158,7 +158,7 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
     <section class="section section-cta">
       <div class="container cta-grid">
         <div><h2>무료 진단 후 정확한 견적을 받아보세요</h2><p>24시간 내 분석 리포트와 맞춤 제안서를 보내드립니다.</p></div>
-        <div class="cta-actions"><a href="/contact/" class="btn btn-primary btn-lg">무료 진단 신청 →</a><a href="/case-studies/" class="btn btn-outline btn-lg btn-light">성공사례 보기</a></div>
+        <div class="cta-actions"><a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">무료 진단 신청 →</a><a href="/case-studies/" class="btn btn-outline btn-lg btn-light">성공사례 보기</a></div>
       </div>
     </section>
   </main>
