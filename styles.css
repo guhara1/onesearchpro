@@ -96,11 +96,11 @@ ul { list-style: none; padding: 0; margin: 0; }
   backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid var(--line);
 }
-.nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 74px; gap: 1rem; }
+.nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 170px; gap: 1rem; }
 .brand { display: inline-flex; align-items: center; gap: .6rem; font-weight: 800; font-size: 1.18rem; color: var(--text); }
 .brand-logo {
-  height: 44px; width: auto; display: block;
-  filter: brightness(0) invert(1) drop-shadow(0 0 12px rgba(124, 92, 255, .35));
+  height: 140px; width: auto; display: block;
+  filter: brightness(0) invert(1) drop-shadow(0 0 18px rgba(124, 92, 255, .35));
   transition: filter .25s ease;
 }
 .brand:hover .brand-logo {
@@ -576,7 +576,9 @@ h1 {
   .section { padding: 80px 0; }
 }
 @media (max-width: 640px) {
-  .nav { display: none; position: absolute; top: 74px; left: 0; right: 0;
+  .nav-wrap { height: 96px; }
+  .brand-logo { height: 64px; }
+  .nav { display: none; position: absolute; top: 96px; left: 0; right: 0;
     flex-direction: column; align-items: stretch; gap: 0; padding: 12px 5%;
     background: rgba(7, 7, 26, .98); border-bottom: 1px solid var(--line); backdrop-filter: blur(20px); }
   .nav.open { display: flex; }
