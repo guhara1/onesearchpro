@@ -474,9 +474,10 @@ h1 {
 .price-tag { margin: 0; }
 .price-tag b { font-size: 2.2rem; font-weight: 800; color: #fff; }
 .price-tag span { color: var(--muted); margin-left: 4px; }
-.price ul { display: grid; gap: .6rem; }
+.price ul { display: grid; gap: .6rem; margin-bottom: .4rem; }
 .price ul li { padding-left: 1.4rem; position: relative; color: var(--text-soft); font-size: .94rem; }
 .price ul li::before { content: '✓'; position: absolute; left: 0; color: var(--brand-2); font-weight: 800; }
+.price .btn { margin-top: auto; }
 
 /* ---------- FAQ ---------- */
 .faq-wrap { display: grid; grid-template-columns: 360px 1fr; gap: 60px; align-items: start; }
