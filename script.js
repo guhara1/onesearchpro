@@ -47,6 +47,23 @@
     });
   }
 
+  // Reading progress bar (articles only)
+  const progressBar = document.getElementById('readingProgress');
+  const articleBody = document.querySelector('.article-body');
+  if (progressBar && articleBody) {
+    const update = () => {
+      const rect = articleBody.getBoundingClientRect();
+      const winH = window.innerHeight;
+      const total = articleBody.offsetHeight - winH;
+      const scrolled = Math.max(0, -rect.top);
+      const pct = total > 0 ? Math.min(100, (scrolled / total) * 100) : 0;
+      progressBar.style.width = pct + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  }
+
   // Reveal-on-scroll
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {

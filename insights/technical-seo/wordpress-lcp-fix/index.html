@@ -26,7 +26,8 @@
   <link rel="stylesheet" href="/styles.css" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"워드프레스 사이트 LCP 4초 → 1.5초로 줄인 실제 작업 순서","description":"워드프레스 LCP 개선의 4가지 핵심 작업과 빈도순 매뉴얼.","url":"https://onesearchpro.org/insights/technical-seo/wordpress-lcp-fix/","datePublished":"2025-05-14","dateModified":"2025-05-14","author":{"@type":"Organization","name":"OneSearchPro","url":"https://onesearchpro.org/"},"publisher":{"@type":"Organization","name":"OneSearchPro","logo":{"@type":"ImageObject","url":"https://onesearchpro.org/assets/images/logo.png"}},"image":"https://onesearchpro.org/assets/images/logo.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://onesearchpro.org/insights/technical-seo/wordpress-lcp-fix/"},"inLanguage":"ko-KR"}</script>
 </head>
-<body>
+<body class=" is-article">
+  <div class="reading-progress" id="readingProgress"></div>
   <header class="site-header">
     <div class="container nav-wrap">
       <a href="/" class="brand" aria-label="OneSearchPro 홈"><img src="/assets/images/logo.png" alt="OneSearchPro - 검색의 기준을 바꾸다" class="brand-logo" width="180" height="60" /></a>
@@ -84,25 +85,7 @@
   </header>
   <nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <a href="/insights/">SEO 인사이트</a> <span>›</span> <span>워드프레스 사이트 LCP 4초 → 1.5초로 줄인 실제 작업 순서</span></div></nav>
   <main>
-    <section class="page-hero">
-      <div class="container page-hero-grid">
-        <div>
-          <span class="eyebrow">TECHNICAL SEO · ARTICLE</span>
-          <h1>워드프레스 사이트 LCP 4초 → 1.5초로 줄인 실제 작업 순서</h1>
-          <p class="lead">워드프레스 LCP가 느린 이유는 거의 정해져 있습니다. 4가지 핵심 원인을 효과 큰 순서로 정리하고, 실제 작업 단계와 측정 방법까지 정리합니다.</p>
-          <div class="cta-row">
-            <a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary">내 사이트 진단받기</a>
-            <a href="/case-studies/" class="btn btn-outline">성공사례 보기 →</a>
-          </div>
-        </div>
-        <div class="page-hero-stats">
-          <div><b>1,200+</b><span>구축 백링크</span></div>
-          <div><b>180+</b><span>프로젝트</span></div>
-          <div><b>97%</b><span>고객 재계약</span></div>
-          <div><b>DR 50+</b><span>평균 도메인</span></div>
-        </div>
-      </div>
-    </section>
+    <section class="article-hero"><div class="container article-hero-inner"><span class="eyebrow">TECHNICAL SEO · ARTICLE</span><h1>워드프레스 사이트 LCP 4초 → 1.5초로 줄인 실제 작업 순서</h1><p class="lead">워드프레스 LCP가 느린 이유는 거의 정해져 있습니다. 4가지 핵심 원인을 효과 큰 순서로 정리하고, 실제 작업 단계와 측정 방법까지 정리합니다.</p></div></section>
     <section class="section article-section"><article class="article-body container"><div class="article-meta"><span>📅 2025-05-14</span><span>⏱ 읽는 시간 약 8분</span><span>✍ OneSearchPro SEO팀</span></div><p class="article-intro">"Core Web Vitals 90점+"라는 목표는 추상적이라 막막합니다. 워드프레스 사이트에서 가장 자주 느려지는 원인은 LCP(Largest Contentful Paint)이고, LCP의 90%는 4가지 패턴에서 나옵니다. 이 4가지를 효과 순서대로 정리합니다.</p><h2>워드프레스 LCP가 느려지는 4가지 빈도순 원인</h2>
 <ol><li><b>Hero 이미지 비최적화</b> — 가장 큰 효과. 메인 비주얼이 압축 안 된 4MB PNG인 경우.</li><li><b>웹폰트 차단 렌더링</b> — Google Fonts 또는 무거운 한글 폰트가 본문 페인트를 지연.</li><li><b>플러그인·테마의 무거운 CSS/JS</b> — Elementor 같은 빌더가 본문에 200KB CSS 주입.</li><li><b>호스팅·캐싱 부재</b> — TTFB가 1초 넘는 호스팅, 캐싱 플러그인 미설정.</li></ol><p>실무에서 본 평균 분포는 위 순서가 그대로 영향력 순서입니다. 1번을 잡으면 보통 1~1.5초 단축, 2~4번은 각 0.3~0.7초 정도 단축합니다.</p>
 <h2>작업 1 — Hero 이미지 처리 (가장 큰 효과)</h2>

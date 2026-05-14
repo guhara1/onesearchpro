@@ -84,6 +84,33 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
         .replace("{ACTIVE_CASES}", active_cases)
         .replace("{ACTIVE_INSIGHTS}", active_insights)
         .replace("{ACTIVE_ABOUT}", active_about))
+
+    is_article = path.startswith("/insights/") and path.strip("/").count("/") >= 2
+    body_class = " is-article" if is_article else ""
+
+    if is_article:
+        hero_html = f'<section class="article-hero"><div class="container article-hero-inner"><span class="eyebrow">{eyebrow}</span><h1>{h1}</h1><p class="lead">{lead}</p></div></section>'
+    else:
+        hero_html = f'''<section class="page-hero">
+      <div class="container page-hero-grid">
+        <div>
+          <span class="eyebrow">{eyebrow}</span>
+          <h1>{h1}</h1>
+          <p class="lead">{lead}</p>
+          <div class="cta-row">
+            <a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary">내 사이트 진단받기</a>
+            <a href="/case-studies/" class="btn btn-outline">성공사례 보기 →</a>
+          </div>
+        </div>
+        <div class="page-hero-stats">
+          <div><b>1,200+</b><span>구축 백링크</span></div>
+          <div><b>180+</b><span>프로젝트</span></div>
+          <div><b>97%</b><span>고객 재계약</span></div>
+          <div><b>DR 50+</b><span>평균 도메인</span></div>
+        </div>
+      </div>
+    </section>'''
+
     breadcrumb_html = ""
     if path.startswith("/services/"):
         slug_title = h1
@@ -131,29 +158,12 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
   <link rel="stylesheet" href="/styles.css" />
   {json_ld}
 </head>
-<body>
+<body class="{body_class}">
+  <div class="reading-progress" id="readingProgress"></div>
   {header}
   {breadcrumb_html}
   <main>
-    <section class="page-hero">
-      <div class="container page-hero-grid">
-        <div>
-          <span class="eyebrow">{eyebrow}</span>
-          <h1>{h1}</h1>
-          <p class="lead">{lead}</p>
-          <div class="cta-row">
-            <a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary">내 사이트 진단받기</a>
-            <a href="/case-studies/" class="btn btn-outline">성공사례 보기 →</a>
-          </div>
-        </div>
-        <div class="page-hero-stats">
-          <div><b>1,200+</b><span>구축 백링크</span></div>
-          <div><b>180+</b><span>프로젝트</span></div>
-          <div><b>97%</b><span>고객 재계약</span></div>
-          <div><b>DR 50+</b><span>평균 도메인</span></div>
-        </div>
-      </div>
-    </section>
+    {hero_html}
     {body}
     <section class="section section-cta">
       <div class="container cta-grid">
