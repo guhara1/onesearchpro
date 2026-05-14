@@ -1217,47 +1217,145 @@ PAGES = {
     },
 
     "/case-studies/content/": {
-        "title": "콘텐츠 SEO 사례 | E-E-A-T 적용 기록 | OneSearchPro",
-        "desc": "OneSearchPro의 콘텐츠 SEO 개선 사례. 오래된 글 리프레시, 제품 페이지 재작성, 검색 의도 매칭, E-E-A-T 신호 강화로 콘텐츠 자산이 다시 작동하기 시작한 실제 작업 기록입니다.",
-        "keywords": "콘텐츠 SEO 사례, 콘텐츠 리프레시, 제품 페이지 SEO, E-E-A-T 사례, 검색 의도 매칭",
+        "title": "콘텐츠 개선 사례 | 검색 의도·H태그·E-E-A-T·내부링크 | OneSearchPro",
+        "desc": "검색 의도 불일치, H태그 구조, 키워드 과잉, 얇은 콘텐츠, FAQ 추가, E-E-A-T 신호, 내부 링크까지 — 콘텐츠 개선 7대 시나리오 실무 작업 기록.",
+        "keywords": "콘텐츠 SEO 사례, 검색 의도 불일치, H태그 구조, 키워드 스터핑, 얇은 콘텐츠, FAQ 스키마, E-E-A-T",
         "h1": "콘텐츠 개선 사례",
         "eyebrow": "CONTENT IMPROVEMENT CASES",
-        "lead": "키워드 설계·H태그·검색 의도·E-E-A-T 신호를 보완해 잠자던 콘텐츠 자산이 다시 트래픽을 만들기 시작한 실제 작업 사례입니다.",
+        "lead": "Google은 도움이 되는 콘텐츠가 독창적인 정보, 충분한 설명, 뻔하지 않은 분석을 제공하는지 스스로 평가하라고 안내합니다. 따라서 콘텐츠 SEO 사례에서는 \"몇 글자 작성\"보다 무엇을 보강했고 왜 좋아졌는지를 보여주는 게 중요합니다.",
         "body": (
-            '<section class="section"><div class="container"><div class="grid services case-grid">' +
+            # 7대 시나리오 인덱스
+            '<section class="section case-index"><div class="container">'
+            '<div class="section-head left"><span class="eyebrow">QUICK INDEX</span><h2>이 페이지에서 다루는 7가지 콘텐츠 개선 시나리오</h2><p>어느 상황에 해당하는지 먼저 골라 보고, 사례 카드로 이동하세요.</p></div>'
+            '<div class="case-index-grid">'
+            '<a href="#search-intent" class="case-index-item"><span class="case-index-num">01</span><div><b>검색 의도 불일치</b><span>잘 쓴 페이지인데 노출되지 않는 사이트의 SERP 분석</span></div></a>'
+            '<a href="#heading-structure" class="case-index-item"><span class="case-index-num">02</span><div><b>H태그 구조 개선</b><span>H1·H2·H3 계층이 무너진 사이트의 헤딩 재구성</span></div></a>'
+            '<a href="#keyword-stuffing" class="case-index-item"><span class="case-index-num">03</span><div><b>키워드 과잉 반복 수정</b><span>본문에 타겟 키워드가 30번 박힌 페이지 자연화</span></div></a>'
+            '<a href="#thin-content" class="case-index-item"><span class="case-index-num">04</span><div><b>얇은 콘텐츠 보강</b><span>본문 300자 미만 페이지의 정보 완전성 회복</span></div></a>'
+            '<a href="#faq-addition" class="case-index-item"><span class="case-index-num">05</span><div><b>FAQ 추가</b><span>사용자 질문이 답변되지 않은 페이지의 FAQ 섹션 신설</span></div></a>'
+            '<a href="#eeat-signals" class="case-index-item"><span class="case-index-num">06</span><div><b>E-E-A-T 요소 보강</b><span>익명·일반론 글의 저자·경험·출처 신호 추가</span></div></a>'
+            '<a href="#content-internal-link" class="case-index-item"><span class="case-index-num">07</span><div><b>내부링크 삽입</b><span>본문에 컨텍스트 링크 없는 글의 권위 흐름 형성</span></div></a>'
+            '</div></div></section>'
+
+            # Case 1 — 검색 의도 불일치
+            '<section class="section" id="search-intent"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">01</span><span class="eyebrow">SEARCH INTENT MISMATCH</span><h2>검색 의도 불일치</h2><p class="lead">콘텐츠는 잘 썼는데 노출이 안 되는 경우, 대부분 \"무엇을 썼는가\" 가 아니라 \"이 키워드의 SERP에 맞는 형식인가\" 가 문제입니다.</p></div>'
+            '<div class="grid services case-grid">' +
             case_card(
                 badge="MEDIA",
-                icon="📰",
-                h3="라이프스타일 미디어 — 오래된 글 리프레시",
-                problem="과거 글이 많지만 대부분 색인은 되어 있어도 트래픽이 거의 없었습니다.",
-                diagnosis="검색 의도가 변한 키워드를 따라가지 못했고, 본문 길이·이미지·내부 링크가 빈약했습니다. 일부 글은 중복 토픽으로 카니발리제이션 상태였습니다.",
-                improvements=["트래픽 잠재력이 높은 글 50개 선별 후 리프레시", "중복 토픽 통합과 301 리다이렉트 정리", "본문 구조(H2·H3) 재정렬과 내부 링크 재배치"],
-                results=["리프레시 대상 글의 평균 순위 상승", "오가닉 유입 회복 추세 확인", "작업 기간 약 4개월"],
-                caveats="콘텐츠 리프레시 효과는 곧바로 나타나지 않습니다. 색인 재크롤·재평가에 수 주 이상 걸릴 수 있습니다."
-            ) +
-            case_card(
-                badge="ECOMMERCE",
-                icon="🛍️",
-                h3="D2C 커머스 — 제품 페이지 SEO 재작성",
-                problem="제품 페이지가 이미지 중심으로만 만들어져 검색엔진이 제품을 이해하지 못했습니다.",
-                diagnosis="제품명·H1·메타·본문이 동일 문구의 반복이었고, 리뷰·FAQ·사양 정보가 구조화되어 있지 않았습니다.",
-                improvements=["제품별 본문(특징·재질·사용법·FAQ) 추가", "Product·FAQ·Review 스키마 적용", "이미지 alt·파일명·이미지맵 sitemap 정비"],
-                results=["롱테일 제품 키워드 노출 증가", "검색 결과의 리치 스니펫(별점·가격) 노출 시작", "작업 기간 약 3개월"],
-                caveats="제품 정보가 자주 바뀌면 sitemap·구조화 데이터를 함께 갱신해야 합니다."
-            ) +
-            case_card(
-                badge="B2B",
-                icon="📚",
-                h3="전문 컨설팅 — 저자 신뢰도(E-E-A-T) 신호 강화",
-                problem="전문성 있는 콘텐츠를 만들고 있지만 검색 노출이 약했습니다.",
-                diagnosis="저자 정보가 없고, 사례·인용·출처가 본문에 잘 드러나지 않아 \"누가 쓴 글인지\"에 대한 신호가 부족했습니다.",
-                improvements=["저자 페이지·약력 신설과 Author 스키마 적용", "본문 내 실제 사례·출처·인용 보강", "외부 매체 기고로 저자 권위 신호 누적"],
-                results=["전문 키워드에서 노출·체류시간 개선", "기고 매체에서 자연 유입 증가", "작업 기간 약 6개월"],
-                caveats="E-E-A-T 신호는 빠르게 만들 수 없습니다. 6개월 이상의 누적 작업과 진정성 있는 활동이 필요합니다."
+                icon="🎯",
+                h3="잘 쓴 페이지인데 노출 안 되는 사이트 — SERP 분석 기반 재정렬",
+                problem="키워드 리서치를 통해 \"트래픽 잠재력이 있다\" 고 판단해 작성한 글들이, 막상 검색 결과에서 거의 노출되지 않았습니다. 본문 품질·길이는 충분했지만 검색에 잡히지 않는 패턴이 누적되었습니다.",
+                diagnosis="타겟 키워드의 실제 SERP는 \"비교 표·추천 리스트·후기\" 같은 상업형/탐색형 콘텐츠가 상위였는데, 작성된 페이지는 \"○○란 무엇인가\" 같은 정보형 일반 정의 글이었습니다. 검색 의도와 페이지 유형이 어긋난 상태였습니다.",
+                improvements=["타겟 키워드별로 실제 SERP 상위 10개 결과 유형 분석 (블로그/상품/비교/동영상 분포)", "페이지 유형을 검색 의도에 맞게 재정렬 (정의 글 → 비교/추천 가이드 / 일반 정보 → 사례·후기 글)", "메타·H1·인트로의 표현을 검색자 표현으로 재작성 (\"○○ 추천\", \"○○ 비교\" 등)", "한 키워드가 의도가 혼재된 경우 의도별로 페이지 분리"],
+                results=["검색 의도 일치 페이지의 노출·CTR 회복", "기존에 못 잡던 일부 키워드 1페이지 진입", "작업 기간 약 3개월"],
+                caveats="의도를 바꾸면 기존에 노출되던 일부 키워드는 손실될 수 있습니다. 의도 변경 전 영향 키워드 시뮬레이션이 필요합니다."
             ) +
             '</div></div></section>'
+
+            # Case 2 — H태그 구조 개선
+            '<section class="section section-soft" id="heading-structure"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">02</span><span class="eyebrow">HEADING STRUCTURE</span><h2>H태그 구조 개선</h2><p class="lead">H1이 여러 개거나 없거나, H2 없이 H3부터 시작되는 페이지는 검색엔진이 정보 계층을 파악하기 어렵습니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="B2B",
+                icon="📐",
+                h3="H1·H2·H3 계층이 무너진 사이트 — 헤딩 재구성",
+                problem="검수해보니 한 페이지에 H1이 2~3개 있거나, H1 없이 H2부터 시작하거나, H2 건너뛰고 H3·H4가 등장하는 페이지가 다수. 일부 페이지는 디자인 목적의 큰 글자(<code>&lt;div class=\"big\"&gt;</code>)를 사용하고 실제 의미적 헤딩(<code>&lt;h1&gt;</code>)은 페이지에 없는 케이스도 있었습니다.",
+                diagnosis="페이지의 정보 계층을 검색엔진이 명확히 파악할 단서가 부족. 일부 페이지는 H1이 페이지 주제가 아닌 사이트 로고 텍스트인 경우도 있었습니다.",
+                improvements=["페이지당 H1 1개 원칙 적용 (페이지 주제를 정확히 명시)", "H2는 본문 섹션 단위로 4~7개, H3는 H2 하위만 사용", "헤딩 텍스트를 검색 의도가 드러나는 자연 문장으로 재작성 (키워드만 박지 않음)", "디자인 헤딩과 의미적 헤딩 분리 — 큰 글자는 CSS로, 의미적 계층은 HTML로"],
+                results=["페이지 구조 명확화로 색인 효율 회복", "검색 결과 스니펫에 페이지 구조가 더 잘 반영됨", "작업 기간 약 6주"],
+                caveats="기존 헤딩 변경은 디자인 시스템과 함께 검토해야 합니다. H 태그 의미를 무시하고 디자인용으로 쓰던 케이스라면 CSS 전면 점검 필요."
+            ) +
+            '</div></div></section>'
+
+            # Case 3 — 키워드 과잉 반복
+            '<section class="section" id="keyword-stuffing"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">03</span><span class="eyebrow">KEYWORD STUFFING</span><h2>키워드 과잉 반복 수정</h2><p class="lead">옛 SEO 관행(\"키워드 밀도 2~3% 유지\")의 잔재로 본문에 타겟 키워드를 30번씩 박은 페이지가 적지 않습니다. 현재 알고리즘은 자연스러움을 평가합니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="LEGACY SITE",
+                icon="🔁",
+                h3="본문에 타겟 키워드가 30번 박힌 페이지 — 자연 분포 회복",
+                problem="과거 외주 SEO 작업의 결과로 일부 페이지의 본문에 타겟 키워드가 30~50번 등장. 첫 100자에 같은 키워드가 5번씩 박혀있고 사람이 읽기 어색한 패턴이었습니다. 일부 페이지는 노출 자체가 떨어지는 상태였습니다.",
+                diagnosis="현재 구글 알고리즘은 키워드 밀도를 직접 평가하지 않고 자연스러움·검색 의도 매칭을 봅니다. 키워드 스터핑은 신호가 강해지지 않을 뿐 아니라 일정 임계 이상이면 품질 점수 하락으로 이어질 수 있습니다.",
+                improvements=["강제 반복된 키워드를 동의어·대명사·관련 표현으로 자연 분포 회복", "첫 100자의 키워드 스터핑 제거 후 검색자 표현·문맥으로 재작성", "타이틀·H1·H2에는 키워드를 1번씩만 자연스럽게 배치", "토픽 신호는 동의어·관련어·문맥으로 보강 (키워드 횟수가 아니라 토픽 깊이)"],
+                results=["본문 가독성·체류시간 회복", "일부 페이지의 순위 회복 추세", "작업 기간 약 8주"],
+                caveats="키워드를 \"한 번도 안 쓰는\" 수준까지 줄이면 토픽 신호가 약해질 수 있습니다. 자연스러운 분포 회복이 목표이지 제거가 아닙니다."
+            ) +
+            '</div></div></section>'
+
+            # Case 4 — 얇은 콘텐츠 보강
+            '<section class="section section-soft" id="thin-content"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">04</span><span class="eyebrow">THIN CONTENT</span><h2>얇은 콘텐츠 보강</h2><p class="lead">본문이 300자도 안 되는 페이지는 단순히 글자를 늘리는 게 답이 아닙니다. \"사용자가 진짜 알고 싶은 정보가 빠졌는가\"를 봐야 합니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="ECOMMERCE",
+                icon="📄",
+                h3="본문 300자 미만 페이지 — 정보 깊이 보강",
+                problem="제품 카테고리·태그·기본 정보 페이지의 본문이 매우 짧음. 일부 제품 페이지는 사진과 가격·옵션만 있고 텍스트 본문이 사실상 비어있는 상태. 검색엔진이 \"이 페이지는 색인 가치가 적다\"고 판단해 일부는 색인조차 되지 않았습니다.",
+                diagnosis="Helpful Content System에서 가장 쉽게 잡히는 패턴. 다만 단순 글자 수 증가로 해결되지 않습니다. 사용자가 페이지에 와서 답을 얻고 싶은 정보 자체가 빠져있는 게 핵심.",
+                improvements=["페이지별로 \"사용자가 와서 답을 얻고 싶은 5~7가지 질문\" 리서치 (서치콘솔 쿼리·People Also Ask·실제 CS 문의 기반)", "누락된 정보 추가 — 사용법·사양·비교 기준·결정 가이드·FAQ", "검색 의도와 매칭 안 되는 페이지는 통합·삭제 검토 (글자 수 늘리기로 해결되지 않는 경우)", "단순 글자 수보다 \"검색자가 원하는 정보의 완전성\" 기준 적용"],
+                results=["색인 가치 평가 회복으로 일부 페이지 노출 시작", "체류 시간·재방문 회복", "작업 기간 약 3개월"],
+                caveats="페이지의 \"존재 이유\" 자체가 모호한 경우는 글자 수 늘려도 효과 없습니다. 페이지 자체를 통합·삭제하는 게 정답일 때도 있습니다."
+            ) +
+            '</div></div></section>'
+
+            # Case 5 — FAQ 추가
+            '<section class="section" id="faq-addition"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">05</span><span class="eyebrow">FAQ ENHANCEMENT</span><h2>FAQ 추가</h2><p class="lead">사용자가 검색 후 페이지에 들어와도 궁금한 점이 답변되지 않으면 즉시 뒤로가기로 이탈합니다. 이탈 신호는 누적됩니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="SAAS · SERVICE",
+                icon="❓",
+                h3="사용자 질문이 본문에 답변되지 않은 페이지 — FAQ 섹션 신설",
+                problem="서비스·제품 페이지가 \"우리 입장의 설명\" 으로만 작성되어 있고, 사용자가 실제로 궁금해할 질문(가격 구조, 환불 정책, 호환성, 사용법 등)에 대한 답변이 본문에 없었습니다. People Also Ask 영역에 노출되지 않아 부가 트래픽 손실도 컸습니다.",
+                diagnosis="페이지가 \"브랜드가 말하고 싶은 내용\" 중심으로 구성됨. 사용자 질문 관점 부재. FAQPage 스키마도 미적용으로 검색 결과의 리치 스니펫 노출 손실까지 있었습니다.",
+                improvements=["실제 CS 문의·서치콘솔 People Also Ask·관련 검색어로 FAQ 5~10개 추출", "페이지 하단에 FAQ 섹션 신설 (질문 형태 그대로, 사용자 표현 사용)", "FAQPage 스키마 마크업 적용", "답변은 짧고 구체적으로 (스니펫에 그대로 표시될 수 있는 길이)"],
+                results=["일부 페이지의 People Also Ask 영역 노출 시작", "체류 시간·재방문 회복", "작업 기간 약 6주"],
+                caveats="가짜 FAQ(만들어낸 질문)는 즉시 들킵니다. 실제 받은 질문만 사용. 답변에 \"보장\"·\"확실\" 같은 표현은 정책 위반 위험이 있습니다."
+            ) +
+            '</div></div></section>'
+
+            # Case 6 — E-E-A-T 요소 보강
+            '<section class="section section-soft" id="eeat-signals"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">06</span><span class="eyebrow">E-E-A-T SIGNALS</span><h2>E-E-A-T 요소 보강</h2><p class="lead">\"관리자\" 명의의 익명 글, 일반 정보의 재정리만 있는 콘텐츠는 권위·신뢰 신호가 약합니다. 특히 YMYL 인접 영역에서는 치명적입니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="B2B · CONSULTING",
+                icon="🛡️",
+                h3="익명·일반론 콘텐츠 — 저자·경험·출처 신호 추가",
+                problem="블로그 글이 모두 \"관리자\" 명의로 발행. 본문은 일반 정보를 재정리한 수준이라 \"누가 어떤 경험과 전문성으로 작성했는지\" 신호가 부재. 전문 키워드에서 경쟁사 대비 노출이 약했습니다.",
+                diagnosis="E-E-A-T(Experience·Expertise·Authoritativeness·Trustworthiness) 4가지 신호 모두 부족. 특히 Experience(직접 경험) 신호 부재가 컸습니다.",
+                improvements=["저자 페이지 신설 + Person 스키마 적용 (경력·자격·발표 이력 명시)", "본문에 저자의 실무 경험·관찰 자연스럽게 녹임 — \"실무에서 자주 본 패턴은…\", \"○○ 도구를 5년 운영하면서…\"", "외부 1차 자료·공식 문서·권위 매체 인용 (출처 명시)", "발행일·수정일 가시적 표시 + 정기 갱신 사이클 운영", "외부 매체 기고로 외부 권위 신호 누적"],
+                results=["전문 키워드에서 노출·체류시간 개선 추세", "코어 업데이트 영향이 점차 안정화", "작업 기간 약 6개월"],
+                caveats="E-E-A-T 신호는 빠르게 만들어지지 않습니다. 6개월 이상의 누적 작업과 진정성 있는 활동이 필요하며, 가짜 저자·가짜 자격은 역효과입니다."
+            ) +
+            '</div></div></section>'
+
+            # Case 7 — 내부 링크 삽입
+            '<section class="section" id="content-internal-link"><div class="container">'
+            '<div class="case-section-head"><span class="case-num">07</span><span class="eyebrow">INTERNAL LINKING</span><h2>내부링크 삽입</h2><p class="lead">콘텐츠가 좋아도 본문에서 다른 글로 가는 컨텍스트 링크가 없으면 검색엔진이 사이트 전체 가치를 인식하지 못합니다.</p></div>'
+            '<div class="grid services case-grid">' +
+            case_card(
+                badge="MEDIA · BLOG",
+                icon="🔗",
+                h3="본문에 컨텍스트 링크가 없는 글 — 권위 흐름 형성",
+                problem="블로그 글이 100편 넘게 누적되었지만, 본문 한가운데에 다른 글로 가는 컨텍스트 링크는 거의 없었습니다. 사이드바·자동 \"관련 글\" 위젯만 있는 상태로, 한 글 읽고 사용자가 이탈하는 패턴이었습니다.",
+                diagnosis="사이드바·자동 추천 위젯의 링크는 검색엔진이 약하게 평가합니다. 본문 안에서 \"○○에 대해 더 알려면 [○○ 가이드 보기]\" 같이 자연스럽게 박힌 텍스트 링크가 권위 신호를 전달하는데, 그게 사실상 없었습니다.",
+                improvements=["트래픽 상위 30개 글에 본문 컨텍스트 링크 평균 3~5개 추가 (관련 글·서비스 페이지)", "앵커텍스트를 정확한 타겟 키워드로 통일 (\"여기 클릭\" 금지)", "필러 글 → 클러스터 글 흐름 설계", "오래된 글에는 \"이 주제의 최신 정리\" 링크 추가로 갱신성 신호"],
+                results=["사이트 전체 권위 흐름 형성, 평균 페이지뷰·체류시간 회복", "신규 글의 색인 속도도 함께 개선", "작업 기간 약 2개월"],
+                caveats="자동 \"관련 글\" 위젯과 본문 컨텍스트 링크는 다릅니다. 본문 컨텍스트가 어색한 위치에 강제 링크를 박으면 역효과이고, 자연스러운 위치에만 배치하는 게 핵심입니다."
+            ) +
+            '</div></div></section>'
+
+            # CTA
+            '<section class="section section-cta"><div class="container cta-grid">'
+            '<div><h2>우리 사이트의 콘텐츠는 어느 시나리오일까요?</h2><p>현재 콘텐츠 상태를 7가지 시나리오에 대조해 어디가 가장 시급한지, 어떤 우선순위로 개선해야 하는지 24시간 내 분석 리포트를 보내드립니다.</p></div>'
+            '<div class="cta-actions"><a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">무료 콘텐츠 SEO 진단 받기 →</a><a href="/services/content-seo/" class="btn btn-outline btn-lg btn-light">콘텐츠 SEO 서비스 보기</a></div>'
+            '</div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"콘텐츠 개선 사례","url":"https://onesearchpro.org/case-studies/content/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"콘텐츠 개선 사례","url":"https://onesearchpro.org/case-studies/content/","description":"검색 의도·H태그·키워드 분포·콘텐츠 깊이·FAQ·E-E-A-T·내부 링크 7대 시나리오 콘텐츠 개선 작업 기록","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
         "active": "cases",
     },
 
