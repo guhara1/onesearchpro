@@ -392,6 +392,122 @@ h1 {
 .case-card p, .case-card ul { margin-bottom: .7rem; }
 .case-grid .svc { grid-column: span 2; }
 
+/* Case E-E-A-T 보강 블록 */
+.case-eeat-block {
+  margin-top: 1.6rem;
+  padding-top: 1.4rem;
+  border-top: 1px dashed var(--line-hi);
+}
+.case-eeat-block h5 {
+  font-size: .82rem; font-weight: 800;
+  color: var(--brand-2);
+  letter-spacing: .02em;
+  margin: 0 0 .55rem;
+  display: flex; align-items: center; gap: .35rem;
+}
+.case-eeat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.3rem;
+  margin-bottom: 1.1rem;
+}
+.case-eeat-item p,
+.case-eeat-item ul {
+  font-size: .9rem; line-height: 1.65;
+  color: var(--text-soft);
+  margin: 0;
+}
+.case-eeat-item ul {
+  padding-left: 0;
+  list-style: none;
+}
+.case-eeat-item ul li {
+  position: relative;
+  padding-left: 1.1rem;
+  margin-bottom: .35rem;
+}
+.case-eeat-item ul li::before {
+  content: "·";
+  position: absolute; left: .3rem; top: -.05em;
+  color: var(--brand-2); font-weight: 800; font-size: 1.2rem; line-height: 1;
+}
+.case-eeat-item blockquote {
+  margin: 0;
+  padding: .65rem .85rem;
+  background: rgba(124, 92, 255, .08);
+  border-left: 3px solid var(--brand);
+  border-radius: 0 8px 8px 0;
+  color: var(--text);
+  font-size: .9rem; line-height: 1.6;
+  font-style: normal;
+}
+.case-eeat-item blockquote::before {
+  content: '"'; opacity: .35; font-size: 1.3em;
+  font-family: Georgia, serif; margin-right: .15em;
+}
+.case-eeat-item blockquote::after {
+  content: '"'; opacity: .35; font-size: 1.3em;
+  font-family: Georgia, serif; margin-left: .1em;
+}
+.case-eeat-insight {
+  grid-column: span 2;
+  padding: .8rem 1rem;
+  background: linear-gradient(135deg, rgba(34, 211, 238, .08), rgba(124, 92, 255, .1));
+  border: 1px solid rgba(124, 92, 255, .25);
+  border-radius: 10px;
+}
+.case-eeat-insight p {
+  color: var(--text); font-weight: 500;
+}
+.case-eeat-checklist {
+  padding: .9rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+.case-eeat-checklist ul {
+  padding-left: 0; list-style: none; margin: 0;
+}
+.case-eeat-checklist li {
+  position: relative;
+  padding-left: 1.6rem;
+  margin-bottom: .45rem;
+  font-size: .9rem; line-height: 1.6;
+  color: var(--text-soft);
+}
+.case-eeat-checklist li::before {
+  content: "☐";
+  position: absolute; left: 0; top: 0;
+  color: var(--brand-2);
+}
+.case-eeat-related {
+  padding-top: .8rem;
+  border-top: 1px solid var(--line);
+}
+.case-eeat-related-item {
+  margin: .35rem 0;
+  font-size: .9rem;
+}
+.case-eeat-related-item a {
+  color: var(--brand-2);
+  font-weight: 600;
+  border-bottom: 1px dashed rgba(34, 211, 238, .3);
+}
+.case-eeat-related-item a:hover {
+  border-bottom-style: solid;
+}
+.case-eeat-related-type {
+  color: var(--muted);
+  font-size: .78rem;
+  margin-left: .4rem;
+}
+
+@media (max-width: 768px) {
+  .case-eeat-grid { grid-template-columns: 1fr; }
+  .case-eeat-insight { grid-column: span 1; }
+}
+
 /* Case Study — index navigation + section headers */
 .case-index { padding-bottom: 30px; }
 .case-index-grid {

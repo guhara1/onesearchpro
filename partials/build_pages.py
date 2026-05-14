@@ -249,9 +249,54 @@ def steps_section(eyebrow, h2, steps):
     return f'<section class="section section-soft"><div class="container"><div class="section-head"><span class="eyebrow">{eyebrow}</span><h2>{h2}</h2></div><ol class="steps">{items}</ol></div></section>'
 
 
-def case_card(*, badge, icon, h3, problem, diagnosis, improvements, results, caveats):
+def case_card(*, badge, icon, h3, problem, diagnosis, improvements, results, caveats,
+              tools=None, verification=None, comment=None, insight=None, checklist=None,
+              related_service=None, related_insight=None):
+    """사례 카드. tools/verification/comment/insight/checklist/related_service/related_insight 는 E-E-A-T 보강용 (선택)."""
     imp_list = "".join(f"<li>{x}</li>" for x in improvements)
     res_list = "".join(f"<li>{x}</li>" for x in results)
+
+    eeat_html = ""
+    if tools or comment or insight or checklist or related_service:
+        tools_html = ""
+        if tools:
+            tools_items = "".join(f"<li>{t}</li>" for t in tools)
+            tools_html = f'<div class="case-eeat-item"><h5>🔧 사용한 도구</h5><ul>{tools_items}</ul></div>'
+
+        verification_html = ""
+        if verification:
+            verification_html = f'<div class="case-eeat-item"><h5>✅ 작업 후 확인 방식</h5><p>{verification}</p></div>'
+
+        comment_html = ""
+        if comment:
+            comment_html = f'<div class="case-eeat-item"><h5>💬 담당자 코멘트</h5><blockquote>{comment}</blockquote></div>'
+
+        insight_html = ""
+        if insight:
+            insight_html = f'<div class="case-eeat-item case-eeat-insight"><h5>💡 이 사례에서 얻은 인사이트</h5><p>{insight}</p></div>'
+
+        checklist_html = ""
+        if checklist:
+            items = "".join(f"<li>{c}</li>" for c in checklist)
+            checklist_html = f'<div class="case-eeat-checklist"><h5>🔍 비슷한 문제가 있다면 확인할 것</h5><ul>{items}</ul></div>'
+
+        related_html = ""
+        if related_service or related_insight:
+            link_items = []
+            if related_service:
+                link_items.append(f'<div class="case-eeat-related-item"><a href="{related_service[1]}">{related_service[0]}</a> <span class="case-eeat-related-type">(서비스)</span></div>')
+            if related_insight:
+                link_items.append(f'<div class="case-eeat-related-item"><a href="{related_insight[1]}">{related_insight[0]}</a> <span class="case-eeat-related-type">(인사이트)</span></div>')
+            related_inner = "".join(link_items)
+            related_html = f'<div class="case-eeat-related"><h5>🔗 관련 페이지</h5>{related_inner}</div>'
+
+        eeat_html = (
+            f'<div class="case-eeat-block">'
+            f'<div class="case-eeat-grid">{tools_html}{verification_html}{comment_html}{insight_html}</div>'
+            f'{checklist_html}{related_html}'
+            f'</div>'
+        )
+
     return (
         f'<article class="svc case-card">'
         f'<span class="badge">{badge}</span>'
@@ -262,6 +307,7 @@ def case_card(*, badge, icon, h3, problem, diagnosis, improvements, results, cav
         f'<h4>개선한 항목</h4><ul>{imp_list}</ul>'
         f'<h4>적용 후 변화</h4><ul>{res_list}</ul>'
         f'<h4>주의할 점</h4><p>{caveats}</p>'
+        f'{eeat_html}'
         f'</article>'
     )
 
@@ -996,7 +1042,14 @@ PAGES = {
                 diagnosis="구글 코어 업데이트 영향과 사이트 자체 이슈가 혼재된 상태로 확인. 일부 페이지는 알고리즘 평가 변화, 일부는 색인 누락이 원인이었습니다. 서치콘솔 \"커버리지\" 리포트와 코어 업데이트 발표 시점을 매칭해 분리했습니다.",
                 improvements=["서치콘솔 시점별 데이터로 코어 영향 페이지 vs 사이트 이슈 페이지 분리", "색인 누락 페이지는 우선 진단·복구 (robots·canonical 점검)", "코어 영향 페이지는 즉시 대응 보류 (4주 관찰)", "원인이 분리된 후 우선순위 적용"],
                 results=["색인 이슈 페이지 4주 내 노출 회복", "코어 영향 페이지는 다음 업데이트 사이클에서 부분 회복 관찰", "전체 작업 기간 약 8주"],
-                caveats="코어 업데이트 영향에 패닉으로 콘텐츠를 대거 수정하면 측정 기준선이 사라집니다. 첫 2주는 데이터 수집·관찰 단계로 두는 게 가장 효과적입니다."
+                caveats="코어 업데이트 영향에 패닉으로 콘텐츠를 대거 수정하면 측정 기준선이 사라집니다. 첫 2주는 데이터 수집·관찰 단계로 두는 게 가장 효과적입니다.",
+                tools=["Google Search Console (커버리지·성능 리포트)", "GA4 (트래픽 시점·페이지별 분석)", "구글 코어 업데이트 발표 캘린더", "Ahrefs Site Explorer (외부 변화 점검)"],
+                verification="서치콘솔에서 4주·8주·12주 시점의 노출수·평균 게재 순위 추이를 페이지군별로 분리해 비교. 색인 누락 페이지는 \"URL 검사\" 도구로 직접 색인 상태 확인.",
+                comment="트래픽 그래프만 보면 패닉이 옵니다. 그래도 첫 2주는 데이터만 모으는 게 정답입니다. 패닉 작업이 진짜 원인을 찾을 기회를 빼앗아요.",
+                insight="코어 업데이트와 사이트 자체 이슈는 원인이 다르므로 대응 시점도 달라야 합니다. 동시에 잡으려 하면 어느 것이 효과 있었는지 측정이 불가능해집니다.",
+                checklist=["트래픽 하락 시점이 구글 코어 업데이트 발표와 일치하는지", "특정 페이지군에만 하락이 집중되는지(부분 영향)", "서치콘솔 커버리지 리포트에서 색인 누락 페이지가 늘었는지", "최근 외부 백링크 변화·페널티 메시지가 있었는지", "사이트 자체 변경(디자인·코드·플러그인) 시점과 일치하는지"],
+                related_service=("기술 SEO 진단 서비스", "/services/technical-seo/"),
+                related_insight=("코어 업데이트 직후 2주 손대지 말 5가지", "/insights/google-seo/post-core-update-mistakes/")
             ) +
             '</div></div></section>'
 
@@ -1012,7 +1065,14 @@ PAGES = {
                 diagnosis="개별 페이지 품질은 충분했지만 토픽 권위가 분산되어 있었습니다. 같은 토픽을 다루는 글이 흩어져 있고 내부 링크로 연결되지 않아 검색엔진이 \"이 사이트는 ○○ 전문\"이라 판단할 신호가 부족했습니다.",
                 improvements=["필러 페이지 1개 + 클러스터 8편으로 토픽 구조 재설계", "기존 인기 글에서 신규 필러로 컨텍스트 내부 링크", "타이틀·H1·메타를 검색 의도에 맞춰 재작성"],
                 results=["타겟 키워드 중 다수가 1~2페이지로 이동", "오가닉 세션 약 2~3배 수준으로 증가", "전체 작업 기간 약 6개월"],
-                caveats="정체 원인은 키워드마다 다릅니다. 어떤 키워드는 토픽 권위 부족, 어떤 키워드는 검색 의도 미스매치가 원인이라 일괄 대응으로는 해결되지 않습니다."
+                caveats="정체 원인은 키워드마다 다릅니다. 어떤 키워드는 토픽 권위 부족, 어떤 키워드는 검색 의도 미스매치가 원인이라 일괄 대응으로는 해결되지 않습니다.",
+                tools=["Ahrefs Keyword Explorer (키워드 난이도·SERP 분석)", "Google Search Console (쿼리별 평균 게재 순위)", "Screaming Frog (내부 링크 매핑)", "SEMrush Position Tracking"],
+                verification="타겟 키워드의 평균 게재 순위를 4주 단위로 비교. 토픽 클러스터 도입 후 8주차에 노출 변화·12주차에 클릭 변화 측정.",
+                comment="정체된 키워드는 글을 더 쓰는 게 답이 아닙니다. 흩어진 글들을 연결해서 신호를 모아주는 게 답이에요.",
+                insight="토픽 권위는 글 1편의 품질로 만들어지지 않고, 같은 토픽을 다루는 글들의 \"묶음과 연결\"로 만들어집니다. 100편 흩어진 글보다 10편 연결된 글이 더 강합니다.",
+                checklist=["같은 토픽 글들이 본문 내부 링크로 연결되어 있는지", "필러 콘텐츠(요약·허브 글)가 명시적으로 있는지", "SERP 상위 결과 유형과 우리 페이지 유형이 일치하는지", "타이틀·H1·메타가 검색 의도를 직접 표현하는지", "신규 글 발행 시 기존 인기 글에서 컨텍스트 링크가 추가되는지"],
+                related_service=("SEO 컨설팅 서비스", "/services/seo/"),
+                related_insight=("Helpful Content System 셀프 점검", "/insights/google-seo/helpful-content-self-check/")
             ) +
             '</div></div></section>'
 
@@ -1028,7 +1088,14 @@ PAGES = {
                 diagnosis="URL 구조에 일관성이 없고(예: /course/abc, /lesson/xyz, /classes/123 혼재), 카테고리 허브 페이지가 부재. 사이드바·태그 외에 본문 내부 링크가 없어 \"고립 페이지(orphan)\"가 다수였습니다.",
                 improvements=["URL을 /courses/[category]/[slug]/ 형식으로 통일 + 1:1 301 리다이렉트", "카테고리 허브 페이지 신설 (소개 본문 + 강의 리스트 + 비교 가이드)", "BreadcrumbList·ItemList 스키마 적용", "본문 내부 컨텍스트 링크로 고립 페이지 연결"],
                 results=["카테고리 단위 키워드에서 노출 시작", "카테고리 페이지 자체 직접 방문 증가", "작업 기간 약 4개월"],
-                caveats="URL 변경 시 301 매핑이 부실하면 트래픽 손실이 큽니다. 변경 전 기존 URL·키워드·트래픽 매핑 시트를 반드시 만들어두세요."
+                caveats="URL 변경 시 301 매핑이 부실하면 트래픽 손실이 큽니다. 변경 전 기존 URL·키워드·트래픽 매핑 시트를 반드시 만들어두세요.",
+                tools=["Screaming Frog (사이트 구조·URL 패턴 스캔)", "Google Search Console (URL 검사·색인 상태)", "Ahrefs Site Audit (구조 이슈 식별)", "자체 URL 매핑 스프레드시트"],
+                verification="URL 변경 후 4주간 서치콘솔에서 404 페이지 변화·신규 URL 색인 속도 추적. 카테고리 키워드의 노출 회복은 8~12주 단위로 측정.",
+                comment="사이트 구조는 디자인이 아니라 검색엔진과 사용자가 사이트를 이해하는 방식입니다. 깊이가 4단 넘으면 크롤러도 사용자도 못 찾아요.",
+                insight="카테고리 허브 페이지가 없으면 카테고리 단위 키워드는 절대 잡히지 않습니다. 본문이 있는 카테고리 페이지 + 1:1 301 매핑이 핵심입니다.",
+                checklist=["사용자가 핵심 페이지에 3클릭 안에 도달하는지", "URL 패턴이 일관성 있는지(혼재 없는지)", "카테고리 허브 페이지가 본문과 함께 존재하는지", "고립 페이지(어디서도 링크 안 되는 페이지) 가 있는지", "URL 변경 시 1:1 301 매핑 시트가 있는지"],
+                related_service=("SEO 웹사이트 제작 서비스", "/services/web-design/"),
+                related_insight=("301 리다이렉트 자주 빠뜨리는 12가지", "/insights/visibility/301-migration-mistakes/")
             ) +
             '</div></div></section>'
 
@@ -1044,7 +1111,14 @@ PAGES = {
                 diagnosis="사이드바·자동 추천 위젯 링크는 검색엔진이 컨텍스트 신호로 약하게 평가합니다. 본문 한가운데에서 자연스럽게 \"○○에 대해 더 알려면 [○○ 글 보기]\" 같은 텍스트 링크가 사실상 없었습니다.",
                 improvements=["트래픽 상위 20개 글에서 관련 글로 가는 본문 텍스트 링크 추가 (글당 평균 3~5개)", "앵커텍스트를 정확한 타겟 키워드로 통일", "허브-스포크 구조로 필러 글과 클러스터 글 연결", "고립 페이지(어디서도 링크되지 않는 글) 식별·연결"],
                 results=["연결된 페이지의 노출·체류 시간이 함께 회복", "사이트 전체 권위 신호 강화로 신규 글 색인 속도도 개선", "작업 기간 약 3개월"],
-                caveats="자동 생성된 \"관련 글\" 위젯에 의존하지 마세요. 컨텍스트가 어색한 위치에 강제 링크를 박는 것도 역효과입니다."
+                caveats="자동 생성된 \"관련 글\" 위젯에 의존하지 마세요. 컨텍스트가 어색한 위치에 강제 링크를 박는 것도 역효과입니다.",
+                tools=["Ahrefs Internal Backlinks", "Screaming Frog (Inlinks 리포트)", "GA4 (페이지 흐름·이동 경로)", "자체 내부 링크 매트릭스 시트"],
+                verification="8주간 인기 글 → 신규 글의 트래픽 흐름 측정. 사이드바와 본문 컨텍스트 링크의 클릭률 비교. 신규 글의 평균 색인 소요 시간 단축 확인.",
+                comment="사이드바·자동 위젯 링크는 검색엔진 신호로 거의 안 잡힙니다. 본문 한가운데에 자연스럽게 들어간 한 줄이 푸터 30개 링크보다 강합니다.",
+                insight="내부 링크는 권위가 흐르는 수도관입니다. 본문 컨텍스트 안에서 자연스러운 위치에 박힌 한 줄이 사이드바·푸터의 자동 링크보다 훨씬 강한 신호입니다.",
+                checklist=["트래픽 상위 20개 글에 본문 내부 링크가 평균 3개+ 있는지", "고립 페이지(어디서도 본문 링크 없는 페이지)가 있는지", "앵커텍스트가 \"여기 클릭\" 대신 정확한 키워드인지", "필러 글 → 클러스터 글 흐름이 설계되어 있는지", "신규 글 발행 시 기존 글에서 컨텍스트 링크 추가 루틴이 있는지"],
+                related_service=("SEO 컨설팅 서비스", "/services/seo/"),
+                related_insight=("쇼핑몰 제품 페이지 6단락 구조", "/insights/content-seo/product-page-content-structure/")
             ) +
             '</div></div></section>'
 
@@ -1060,7 +1134,14 @@ PAGES = {
                 diagnosis="타이틀이 \"키워드 + 회사명\" 형식으로만 작성되어 있고 클릭 후크가 없었습니다. 디스크립션은 200자가 넘어 검색 결과에서 잘리거나, 페이지 본문 첫 부분이 자동으로 추출되어 광고 카피 없는 상태로 노출되고 있었습니다.",
                 improvements=["타이틀을 \"키워드 + 사용자 혜택·구체 숫자\" 형식으로 재작성 (50~60자)", "디스크립션을 120~155자로 단축하면서 CTA 1줄 명시", "특정 페이지에는 FAQ·리뷰 등 리치 결과 유도 스키마 추가", "A/B 테스트 가능한 페이지 그룹은 분기별 메타 카피 교체로 효과 측정"],
                 results=["주요 페이지의 CTR이 상승 추세로 전환", "같은 노출수에서 클릭이 의미 있게 증가", "작업 기간 약 6주"],
-                caveats="클릭 후크가 본문과 어긋나면 이탈률이 오히려 늘어납니다. 메타 개선 후 \"클릭률은 올랐는데 체류 시간이 떨어졌다\" 면 본문이 메타 약속을 지키지 못하는 신호입니다."
+                caveats="클릭 후크가 본문과 어긋나면 이탈률이 오히려 늘어납니다. 메타 개선 후 \"클릭률은 올랐는데 체류 시간이 떨어졌다\" 면 본문이 메타 약속을 지키지 못하는 신호입니다.",
+                tools=["Google Search Console (성능 리포트 CTR)", "PageSpeed Insights (Rich Results 미리보기)", "Schema.org Validator", "자체 메타 작성 시트 + A/B 테스트"],
+                verification="메타 변경 후 4주간 같은 페이지의 노출수·평균 게재 순위 대비 CTR 변화 추적. 변경 안 한 페이지를 대조군으로 비교.",
+                comment="메타는 검색자가 우리 페이지를 클릭할지 결정하는 1초짜리 면접입니다. 키워드만 박으면 면접에서 떨어집니다.",
+                insight="키워드만 박힌 타이틀은 색인 가치는 있지만 클릭 가치가 없습니다. 노출은 되는데 안 클릭되는 페이지가 많다면 메타부터 점검하세요.",
+                checklist=["타이틀 길이가 50~60자 안에 들어오는지", "디스크립션이 120~155자에 CTA 포함되었는지", "검색 결과에서 디스크립션이 자동 추출되지 않는지", "OG title·description이 별도로 작성되었는지", "리치 결과 유도 스키마(FAQ·Review·Product)가 적용되었는지"],
+                related_service=("SEO 컨설팅 서비스", "/services/seo/"),
+                related_insight=("Helpful Content System 셀프 점검", "/insights/google-seo/helpful-content-self-check/")
             ) +
             '</div></div></section>'
 
@@ -1076,7 +1157,14 @@ PAGES = {
                 diagnosis="서비스 페이지에 본문이 거의 없고 이미지 위주로 구성되어 있었습니다. 거래형 검색 의도 키워드(\"가격\", \"비교\", \"신청\")가 본문에 등장하지 않아 매칭 실패. 또한 블로그 글에서 서비스 페이지로 가는 내부 링크가 거의 없어 권위 신호도 약했습니다.",
                 improvements=["서비스 페이지 본문 강화 (대상 고객·문제·해결·차별점·FAQ·가격 안내)", "Service / Product / Offer 스키마 적용", "관련 블로그 글에서 서비스 페이지로 본문 내부 링크 5~10개", "거래형 키워드 매핑 (블로그=정보형 / 서비스=거래형으로 의도 분리)"],
                 results=["거래형 키워드에서 서비스 페이지가 직접 노출", "블로그 트래픽이 서비스 페이지로 흐르는 비율 증가", "작업 기간 약 2~3개월"],
-                caveats="블로그 글에 서비스 페이지 링크를 과도하게 박으면 글 자체의 신뢰도가 떨어집니다. 본문 컨텍스트가 자연스러운 위치에만 1~2개 배치하는 게 안전합니다."
+                caveats="블로그 글에 서비스 페이지 링크를 과도하게 박으면 글 자체의 신뢰도가 떨어집니다. 본문 컨텍스트가 자연스러운 위치에만 1~2개 배치하는 게 안전합니다.",
+                tools=["Google Search Console (거래형 쿼리 분석)", "GA4 (페이지별 전환 추적)", "Microsoft Clarity (사용자 행동 히트맵)", "Schema.org Validator (Service·Offer)"],
+                verification="서치콘솔에서 거래형 쿼리(가격·비교·신청)의 노출·클릭 변화를 8주 단위로 추적 + 폼 제출률(전환) 변화 측정.",
+                comment="블로그는 트래픽을 만들고, 서비스 페이지는 매출을 만듭니다. 둘 다 SEO가 필요하지만 잡는 키워드가 다릅니다.",
+                insight="정보형 키워드는 블로그 페이지로, 거래형 키워드는 서비스 페이지로 분리해야 두 의도 모두 잡을 수 있습니다. 한 페이지로 둘 다 잡으려 하면 둘 다 약해집니다.",
+                checklist=["서비스 페이지에 \"대상·문제·해결·차별점·프로세스·FAQ\" 6단락이 있는지", "Service / Offer 스키마가 적용되었는지", "블로그에서 서비스 페이지로 본문 컨텍스트 링크 1~2개 있는지", "거래형 키워드(가격·비교·신청)가 서비스 페이지에 매핑되었는지", "페이지 하단에 명확한 CTA + 신뢰 신호(실적·후기)가 있는지"],
+                related_service=("SEO 웹사이트 제작 서비스", "/services/web-design/"),
+                related_insight=("쇼핑몰 제품 페이지 6단락 구조", "/insights/content-seo/product-page-content-structure/")
             ) +
             '</div></div></section>'
 
@@ -1122,7 +1210,14 @@ PAGES = {
                 diagnosis="자체 사이트 어디에도 지역명 + 서비스 조합이 본문 텍스트로 등장하지 않았습니다. 메타·H1에도 \"전국\", \"공식 사이트\" 같은 일반 표현만 있고 \"○○동·○○구\" 같은 검색자 표현이 없었습니다.",
                 improvements=["지역 키워드 트리 구축 (시·도 → 구·군 → 동·읍·면 3단 분류)", "지점별 랜딩페이지의 H1·title·메타·본문에 지역명 자연스럽게 배치", "검색자가 실제로 쓰는 표현(\"○○동 ○○ 추천\", \"○○역 근처 ○○\") 본문 도입", "지역 키워드 우선순위(검색량 + 경쟁도) 기준 분기별 작업 순서 수립"],
                 results=["일부 지역 키워드에서 자체 사이트 노출 시작", "지점 검색 트래픽 회복 추세", "작업 기간 약 4개월"],
-                caveats="지역 키워드 검색은 경쟁 매장의 활동성·계절성에 따라 변동이 큽니다. 한 번 상위 노출됐다고 작업을 멈추면 다시 밀려나는 경우가 흔합니다."
+                caveats="지역 키워드 검색은 경쟁 매장의 활동성·계절성에 따라 변동이 큽니다. 한 번 상위 노출됐다고 작업을 멈추면 다시 밀려나는 경우가 흔합니다.",
+                tools=["네이버 키워드 도구", "구글 키워드 플래너", "Ahrefs Keyword Explorer", "GSC 쿼리 리포트"],
+                verification="작업 후 8주 동안 GSC에서 신규 지역 키워드 노출·클릭 수를 주간 단위로 추적했습니다. 일부 키워드는 12주 시점부터 본격적으로 순위가 잡혔습니다.",
+                comment="지역 키워드는 '한 번에 다 잡겠다'고 욕심내면 본문이 키워드 나열처럼 보입니다. 우선순위 3~5개부터 자연스럽게 본문에 녹이는 게 안전합니다.",
+                insight="지역 검색은 '어디에서 ○○하는지'에 대한 답을 본문에 자연스럽게 담아야 합니다. 메뉴·푸터의 지역명 노출만으로는 검색 시그널로 약합니다.",
+                checklist=["사이트 본문에 '시·도 + 구·군 + 동' 단위 지역명이 등장하는지", "검색자가 실제로 쓰는 표현(\"근처\", \"역 앞\", \"○○동\")이 메타·H1에 있는지", "지점별 지역 키워드 우선순위 시트가 있는지"],
+                related_service=("지역 SEO 서비스", "/services/local-seo/"),
+                related_insight=("신규 매장 네이버 플레이스 첫 30일", "/insights/local-seo/new-store-naver-place/")
             ) +
             '</div></div></section>'
 
@@ -1138,7 +1233,14 @@ PAGES = {
                 diagnosis="지역 랜딩페이지의 본문 부재가 핵심. 메타 디스크립션이 자동 추출되어 \"진료시간 09~18 · 점심 12~13\" 같은 의미 없는 내용이 검색 결과에 노출되고 있었습니다.",
                 improvements=["지역 랜딩페이지에 6단락 본문 구조 도입: ① 지점 소개 + 지역 특성, ② 진료 항목·서비스, ③ 가는 길·교통편, ④ 주차·편의시설, ⑤ FAQ, ⑥ 예약 안내", "지역명·랜드마크·인근 정보를 본문에 자연스럽게 포함", "지점별 LocalBusiness 스키마 적용 (영업시간·주소·전화 정확히)", "메타 description을 사람이 직접 작성해 자동 추출 대체"],
                 results=["지점 페이지의 지역 검색 노출 회복", "검색 결과 스니펫이 의미 있는 문장으로 표시 → CTR 회복", "작업 기간 약 3개월"],
-                caveats="지점별 콘텐츠를 복붙으로 만들면 다음 사례(중복 페이지)와 같은 문제가 생깁니다. 지점마다 차별화된 내용을 작성하는 게 핵심입니다."
+                caveats="지점별 콘텐츠를 복붙으로 만들면 다음 사례(중복 페이지)와 같은 문제가 생깁니다. 지점마다 차별화된 내용을 작성하는 게 핵심입니다.",
+                tools=["Screaming Frog", "GSC URL 검사", "Schema Markup Validator", "PageSpeed Insights"],
+                verification="지점 페이지에 본문 6단락을 적용한 후, 4주·8주·12주 시점에 GSC에서 해당 페이지의 노출·평균 게재순위를 비교했습니다. 스키마 적용은 Schema Validator에서 무오류를 확인한 뒤 색인 재요청을 진행했습니다.",
+                comment="\"지점 페이지는 사진만으로 충분하다\"는 가정을 가장 자주 봅니다. 실제로는 검색엔진이 '여기는 ○○동 ○○ 페이지'라고 해석할 텍스트가 한 단락도 없으면 노출 기회를 잡지 못합니다.",
+                insight="지점 페이지에서 가장 효과가 큰 단락은 '가는 길·교통편'이었습니다. 검색자가 이미 위치를 파악하려는 의도로 들어오기 때문에 클릭률·체류시간이 함께 올라갑니다.",
+                checklist=["지점 페이지 본문이 텍스트 300자 이상인지", "메타 description이 자동 추출이 아닌 사람 작성인지", "LocalBusiness 스키마가 적용되고 영업시간·주소가 정확한지"],
+                related_service=("지역 SEO 서비스", "/services/local-seo/"),
+                related_insight=("쇼핑몰 제품 페이지 6단락 구조", "/insights/content-seo/product-page-content-structure/")
             ) +
             '</div></div></section>'
 
@@ -1154,7 +1256,14 @@ PAGES = {
                 diagnosis="구글이 중복 콘텐츠로 판단해 일부 지점 페이지를 색인에서 제외하거나, 색인은 했지만 검색에서 노출하지 않는 상태. 서치콘솔에서 \"중복, 사용자가 선택한 표준 URL 없음\" 메시지가 다수 발생했습니다.",
                 improvements=["지점별 차별화 콘텐츠 작성 (지역 특성, 인근 상권, 매장 인테리어 특징, 지점 매니저 인사말, 지역 한정 메뉴 등)", "잘못 설정된 canonical 정비 (일부 지점이 본사 페이지를 canonical로 가리키고 있던 케이스 수정)", "본문이 너무 비슷한 일부 작은 지점은 통합 페이지로 묶고 301 리다이렉트", "색인 거부 페이지는 본문 보강 후 서치콘솔 색인 재요청"],
                 results=["색인된 지점 페이지 수 회복", "지역 키워드에서 노출 시작", "작업 기간 약 4개월"],
-                caveats="무리한 지점 통합은 지역 시그널 자체를 잃습니다. 지역 검색 가치가 있는 지점은 본문 차별화로, 가치가 적은 지점만 통합하는 게 안전합니다."
+                caveats="무리한 지점 통합은 지역 시그널 자체를 잃습니다. 지역 검색 가치가 있는 지점은 본문 차별화로, 가치가 적은 지점만 통합하는 게 안전합니다.",
+                tools=["Screaming Frog", "GSC 색인 적용 범위 리포트", "Siteliner 중복 콘텐츠 진단", "canonical 매핑 시트"],
+                verification="중복 정리 후 6주 동안 GSC '색인 적용 범위'에서 '중복, 사용자가 선택한 표준 URL 없음' 페이지 수가 단계적으로 줄어드는지 모니터링했습니다. 통합·301 처리 페이지는 리다이렉트 체인 길이도 함께 점검했습니다.",
+                comment="프랜차이즈 사이트에서 가장 흔한 실수는 \"본사 페이지로 canonical 한 줄 박아두면 끝난다\"는 가정입니다. 그렇게 하면 그 지점은 검색에서 영원히 안 보입니다.",
+                insight="지점별 차별화 콘텐츠 중 가장 빠르게 색인 회복을 만든 단락은 '지점 매니저 인사말' + '지역 한정 메뉴/서비스'였습니다. 다른 지점과 본문이 명확히 달라지는 신호가 강력합니다.",
+                checklist=["지점 페이지끼리 본문 유사도가 80% 이상인 곳이 있는지", "canonical이 본사 페이지를 가리키는 지점이 있는지", "통합·301 처리한 페이지가 의도대로 동작하는지"],
+                related_service=("지역 SEO 서비스", "/services/local-seo/"),
+                related_insight=("Helpful Content System 셀프 점검", "/insights/google-seo/helpful-content-self-check/")
             ) +
             '</div></div></section>'
 
@@ -1170,7 +1279,14 @@ PAGES = {
                 diagnosis="자동 \"전체 매장 보기\" 페이지가 있긴 했지만 그 페이지에서 개별 지점으로 가는 링크 외에는 사이트 내 어디서도 \"○○동 매장 보기\" 같은 컨텍스트 링크가 없었습니다. 권위 신호가 흐르지 않아 색인 우선순위도 낮았습니다.",
                 improvements=["지역별 허브 페이지 신설 (시·도 단위 또는 권역 단위) → 그 안에서 인근 지점 그룹화", "본사·서비스 페이지 본문에서 주요 지점으로 자연스러운 컨텍스트 링크 (\"강남 지점에서 자세히 보기\" 같은 표현)", "블로그 글에서 관련 지점으로 링크 (\"○○동 가이드\" 글 → 해당 지점 페이지)", "앵커텍스트는 정확한 지역명 + 서비스로 통일"],
                 results=["주요 지점 페이지의 색인 속도 개선", "지점 페이지로 권위 신호가 흐르기 시작", "작업 기간 약 3개월"],
-                caveats="모든 페이지에서 모든 지점으로 링크하면 노이즈로 평가됩니다. 컨텍스트가 자연스러운 위치에만, 1~3개씩 배치하는 게 효과적입니다."
+                caveats="모든 페이지에서 모든 지점으로 링크하면 노이즈로 평가됩니다. 컨텍스트가 자연스러운 위치에만, 1~3개씩 배치하는 게 효과적입니다.",
+                tools=["Ahrefs Site Audit", "Screaming Frog 내부링크 리포트", "GSC 링크 리포트", "내부링크 매트릭스 시트"],
+                verification="허브 페이지·서비스 페이지에서 지점으로 가는 컨텍스트 링크를 추가한 후, 4주마다 Screaming Frog로 지점 페이지의 InLink 수가 증가하는지 확인했습니다. GSC 링크 리포트의 '많이 연결된 페이지'에 주요 지점이 진입하는지도 함께 봤습니다.",
+                comment="\"매장 찾기 페이지가 있으니 내부링크는 충분하다\"는 인식을 자주 봅니다. 자동 디렉토리식 매장 찾기 페이지는 검색엔진에 권위 흐름을 거의 보내지 못합니다.",
+                insight="블로그 글에서 지점으로 보내는 컨텍스트 링크가 의외로 강력했습니다. \"○○동 ○○ 가이드\" 같은 정보형 글이 자연스럽게 지점 페이지를 인용하는 구조가 가장 안정적입니다.",
+                checklist=["지점 페이지의 InLink 수가 페이지당 5개 이상인지", "본사·서비스 본문에 주요 지점 링크가 컨텍스트로 들어가는지", "앵커텍스트가 '여기 클릭'이 아닌 '지역명 + 서비스'인지"],
+                related_service=("지역 SEO 서비스", "/services/local-seo/"),
+                related_insight=("다지점 사업장 GBP 운영 가이드", "/insights/local-seo/multi-location-gbp/")
             ) +
             '</div></div></section>'
 
@@ -1186,7 +1302,14 @@ PAGES = {
                 diagnosis="구글 비즈니스 프로필(GBP)이 기본 정보만 설정된 상태. 카테고리·서비스·사진·게시물·리뷰 응대가 거의 운영되지 않았습니다. 네이버 플레이스도 마찬가지. NAP(상호·주소·전화)가 사이트·GBP·네이버 플레이스·외부 디렉토리에서 미세하게 달라 일관성 문제가 있었습니다.",
                 improvements=["GBP 풀 셋업 — 카테고리·부카테고리·서비스 항목·30장+ 사진·주간 게시물·리뷰 응답 SLA", "네이버 플레이스 메뉴·서비스·영업시간·휴무일·블로그 연동 정비", "NAP 통일 — 사이트·GBP·플레이스·디렉토리 전수 점검 후 일관 갱신", "지역 디렉토리 등록 (구글맵·다음 지도·카카오맵·업종별 디렉토리)", "자체 사이트에 LocalBusiness 스키마 적용"],
                 results=["일부 지역 키워드에서 구글 로컬 팩 노출 시작", "네이버 플레이스 상위 노출과 예약·전화 문의 증가", "작업 기간 약 5개월"],
-                caveats="리뷰 어뷰징(지인 리뷰 대량 작성·금품 거래)은 즉시 패널티 사유입니다. 영수증 인증 기반의 자연 리뷰만 유도해야 합니다."
+                caveats="리뷰 어뷰징(지인 리뷰 대량 작성·금품 거래)은 즉시 패널티 사유입니다. 영수증 인증 기반의 자연 리뷰만 유도해야 합니다.",
+                tools=["Google Business Profile 관리자", "네이버 플레이스 관리자", "NAP 일관성 점검 시트", "Schema Markup Validator"],
+                verification="GBP·플레이스 정비 후 매주 GBP 인사이트(검색 노출수·통화·길찾기)와 네이버 플레이스 통계를 비교해 추이를 확인했습니다. 자체 사이트에는 LocalBusiness 스키마를 적용해 Schema Validator로 무오류를 점검했습니다.",
+                comment="\"GBP는 한 번 만들어두면 끝\"이라는 인식이 가장 위험합니다. 게시물·사진·리뷰 응답이 멈춘 GBP는 알고리즘이 활동성 낮은 비즈니스로 판정합니다.",
+                insight="자체 사이트 SEO보다 GBP·플레이스 정비가 더 빨리 매출로 이어진 케이스가 많았습니다. 지역·로컬 비즈니스라면 사이트 SEO와 동시 진행이 필수입니다.",
+                checklist=["NAP가 사이트·GBP·플레이스·디렉토리에서 완전히 일치하는지", "GBP·플레이스에 주간 게시물·사진이 정기 갱신되는지", "리뷰 응답 SLA가 24~48시간 내인지"],
+                related_service=("지역 SEO 서비스", "/services/local-seo/"),
+                related_insight=("다지점 사업장 GBP 운영 가이드", "/insights/local-seo/multi-location-gbp/")
             ) +
             '</div></div></section>'
 
@@ -1202,7 +1325,14 @@ PAGES = {
                 diagnosis="title이 지역 정보 없이 브랜드명만 포함. description은 페이지마다 동일해서 검색 결과에서 다른 지점과 구분이 안 됨. 사용자가 \"○○동 ○○\"로 검색해도 우리 결과에 지역명이 안 보여 클릭률 차이가 컸습니다.",
                 improvements=["지점별 title 패턴 도입: \"○○동 ○○ — 영업시간·주차·예약 | 브랜드명\" 형식", "지점별 description 작성: 지역 특성 + 핵심 서비스 + CTA 1줄 (지점 매니저가 직접 작성한 톤)", "변수 기반 자동 생성 + 사람의 미세 조정 병행 (지역명만 바뀌면 안 됨, 본문 내용 일부 반영)", "시즌·이벤트별로 일부 지점 메타 분기 갱신"],
                 results=["지점 페이지 평균 CTR 회복", "지역 검색에서 같은 노출수 대비 클릭 증가", "작업 기간 약 6주"],
-                caveats="자동 생성된 메타가 너무 동일한 패턴이면 구글이 본문에서 자동 추출한 디스크립션으로 대체하는 경우가 있습니다. 패턴이라도 변형이 필요합니다."
+                caveats="자동 생성된 메타가 너무 동일한 패턴이면 구글이 본문에서 자동 추출한 디스크립션으로 대체하는 경우가 있습니다. 패턴이라도 변형이 필요합니다.",
+                tools=["GSC 검색 실적 (쿼리·페이지별 CTR)", "title/description 길이 측정기", "Screaming Frog 메타 추출", "A/B 메타 시트"],
+                verification="메타 재작성 후 4주·8주 시점에 GSC '검색 실적'에서 페이지별 CTR이 회복되는지, 같은 노출 수 대비 클릭 수가 증가하는지를 추적했습니다. 일부 지점은 자동 추출로 대체된 케이스가 있어 본문도 같이 손봤습니다.",
+                comment="\"브랜드명 - 공식 사이트\" 패턴이 가장 안 좋습니다. 검색자는 \"○○동\"으로 검색했는데 결과에 지역명이 안 보이면 1초 안에 다른 결과를 클릭합니다.",
+                insight="title의 첫 8~10자가 가장 중요했습니다. 지역명을 맨 앞에 두고 그 뒤에 서비스·차별점·브랜드를 배치한 패턴이 CTR 회복에 가장 안정적이었습니다.",
+                checklist=["지점 페이지 title이 지점마다 다른지", "description이 사람이 작성한 1~2 문장인지", "title이 50~60자, description이 130~160자 안에 들어가는지"],
+                related_service=("지역 SEO 서비스", "/services/local-seo/"),
+                related_insight=("신규 매장 네이버 플레이스 첫 30일", "/insights/local-seo/new-store-naver-place/")
             ) +
             '</div></div></section>'
 
@@ -1249,7 +1379,14 @@ PAGES = {
                 diagnosis="타겟 키워드의 실제 SERP는 \"비교 표·추천 리스트·후기\" 같은 상업형/탐색형 콘텐츠가 상위였는데, 작성된 페이지는 \"○○란 무엇인가\" 같은 정보형 일반 정의 글이었습니다. 검색 의도와 페이지 유형이 어긋난 상태였습니다.",
                 improvements=["타겟 키워드별로 실제 SERP 상위 10개 결과 유형 분석 (블로그/상품/비교/동영상 분포)", "페이지 유형을 검색 의도에 맞게 재정렬 (정의 글 → 비교/추천 가이드 / 일반 정보 → 사례·후기 글)", "메타·H1·인트로의 표현을 검색자 표현으로 재작성 (\"○○ 추천\", \"○○ 비교\" 등)", "한 키워드가 의도가 혼재된 경우 의도별로 페이지 분리"],
                 results=["검색 의도 일치 페이지의 노출·CTR 회복", "기존에 못 잡던 일부 키워드 1페이지 진입", "작업 기간 약 3개월"],
-                caveats="의도를 바꾸면 기존에 노출되던 일부 키워드는 손실될 수 있습니다. 의도 변경 전 영향 키워드 시뮬레이션이 필요합니다."
+                caveats="의도를 바꾸면 기존에 노출되던 일부 키워드는 손실될 수 있습니다. 의도 변경 전 영향 키워드 시뮬레이션이 필요합니다.",
+                tools=["GSC 검색 실적", "Ahrefs SERP 비교", "SERP 의도 분류 시트", "SurferSEO SERP Analyzer"],
+                verification="의도 재정렬 후 6주·12주 시점에 GSC에서 타겟 키워드의 노출·평균 게재순위·CTR 변화를 비교했습니다. 의도가 바뀐 페이지는 기존 노출 키워드의 손실 여부도 함께 점검했습니다.",
+                comment="\"잘 쓴 글\"이라는 평가는 검색엔진 기준이 아니라 사람 기준입니다. SERP 상위 10개가 비교·리스트형이면 우리 페이지도 그 형식이어야 노출 자체가 시작됩니다.",
+                insight="의도를 \"정의 → 비교\"로 바꾼 케이스에서 가장 큰 변화가 있었습니다. 인트로 한 문단과 첫 H2만 바꿔도 노출 회복이 시작된 사례가 다수입니다.",
+                checklist=["타겟 키워드의 실제 SERP 상위 10개 형식이 우리 페이지와 같은지", "메타·H1·인트로의 표현이 검색자 표현인지", "한 키워드에 의도가 혼재되면 페이지가 분리되어 있는지"],
+                related_service=("콘텐츠 SEO 서비스", "/services/content-seo/"),
+                related_insight=("Helpful Content System 셀프 점검", "/insights/google-seo/helpful-content-self-check/")
             ) +
             '</div></div></section>'
 
@@ -1265,7 +1402,14 @@ PAGES = {
                 diagnosis="페이지의 정보 계층을 검색엔진이 명확히 파악할 단서가 부족. 일부 페이지는 H1이 페이지 주제가 아닌 사이트 로고 텍스트인 경우도 있었습니다.",
                 improvements=["페이지당 H1 1개 원칙 적용 (페이지 주제를 정확히 명시)", "H2는 본문 섹션 단위로 4~7개, H3는 H2 하위만 사용", "헤딩 텍스트를 검색 의도가 드러나는 자연 문장으로 재작성 (키워드만 박지 않음)", "디자인 헤딩과 의미적 헤딩 분리 — 큰 글자는 CSS로, 의미적 계층은 HTML로"],
                 results=["페이지 구조 명확화로 색인 효율 회복", "검색 결과 스니펫에 페이지 구조가 더 잘 반영됨", "작업 기간 약 6주"],
-                caveats="기존 헤딩 변경은 디자인 시스템과 함께 검토해야 합니다. H 태그 의미를 무시하고 디자인용으로 쓰던 케이스라면 CSS 전면 점검 필요."
+                caveats="기존 헤딩 변경은 디자인 시스템과 함께 검토해야 합니다. H 태그 의미를 무시하고 디자인용으로 쓰던 케이스라면 CSS 전면 점검 필요.",
+                tools=["Screaming Frog 헤딩 추출", "Wave WebAIM 접근성 점검", "HTML5 Outliner", "CSS 헤딩 클래스 매핑 시트"],
+                verification="헤딩 재구성 후 Screaming Frog로 페이지별 H1 개수·H 태그 시퀀스 무결성을 점검했습니다. 접근성 점검은 WebAIM Wave로 헤딩 순서 경고가 사라졌는지도 확인했습니다.",
+                comment="\"디자인용 큰 글자\"를 H 태그로 쓴 케이스가 가장 자주 보입니다. 디자인은 CSS, 의미 구조는 HTML — 이 원칙만 지키면 대부분 해결됩니다.",
+                insight="H1을 페이지 주제 문장으로 바꾸자 검색 결과 스니펫의 강조 표시가 더 정확해진 케이스가 많았습니다. 헤딩은 사람·검색엔진 모두에게 페이지 지도 역할을 합니다.",
+                checklist=["페이지당 H1이 정확히 1개인지", "H2 없이 H3·H4가 등장하는 페이지가 있는지", "H 태그가 디자인용으로 쓰이지는 않는지"],
+                related_service=("기술 SEO 진단", "/services/technical-seo/"),
+                related_insight=("쇼핑몰 제품 페이지 6단락 구조", "/insights/content-seo/product-page-content-structure/")
             ) +
             '</div></div></section>'
 
@@ -1281,7 +1425,14 @@ PAGES = {
                 diagnosis="현재 구글 알고리즘은 키워드 밀도를 직접 평가하지 않고 자연스러움·검색 의도 매칭을 봅니다. 키워드 스터핑은 신호가 강해지지 않을 뿐 아니라 일정 임계 이상이면 품질 점수 하락으로 이어질 수 있습니다.",
                 improvements=["강제 반복된 키워드를 동의어·대명사·관련 표현으로 자연 분포 회복", "첫 100자의 키워드 스터핑 제거 후 검색자 표현·문맥으로 재작성", "타이틀·H1·H2에는 키워드를 1번씩만 자연스럽게 배치", "토픽 신호는 동의어·관련어·문맥으로 보강 (키워드 횟수가 아니라 토픽 깊이)"],
                 results=["본문 가독성·체류시간 회복", "일부 페이지의 순위 회복 추세", "작업 기간 약 8주"],
-                caveats="키워드를 \"한 번도 안 쓰는\" 수준까지 줄이면 토픽 신호가 약해질 수 있습니다. 자연스러운 분포 회복이 목표이지 제거가 아닙니다."
+                caveats="키워드를 \"한 번도 안 쓰는\" 수준까지 줄이면 토픽 신호가 약해질 수 있습니다. 자연스러운 분포 회복이 목표이지 제거가 아닙니다.",
+                tools=["키워드 빈도 카운터(자체 스크립트)", "Hemingway Editor 가독성 점검", "Ahrefs Content Gap", "GA4 체류시간 리포트"],
+                verification="키워드 자연 분포 작업 후 8주·16주 시점에 GSC 게재순위 변화와 GA4 페이지별 평균 체류 시간을 비교했습니다. 본문 가독성은 Hemingway 점수로도 측정해 가독성과 순위 회복이 함께 가는지 확인했습니다.",
+                comment="\"키워드는 많이 박을수록 좋다\"는 인식은 2010년대 초중반 SEO 잔재입니다. 현재 알고리즘은 자연스러운 문맥과 토픽 깊이를 봅니다.",
+                insight="키워드 횟수를 줄이고 그 자리에 동의어·관련어·사용자 표현을 배치하자 오히려 더 많은 롱테일 키워드에서 노출이 시작되었습니다.",
+                checklist=["첫 100자에 같은 키워드가 3번 이상 등장하는지", "본문 키워드 밀도가 3%를 넘는 페이지가 있는지", "헤딩에 키워드가 자연스러운 문장으로 들어가는지"],
+                related_service=("콘텐츠 SEO 서비스", "/services/content-seo/"),
+                related_insight=("Helpful Content System 셀프 점검", "/insights/google-seo/helpful-content-self-check/")
             ) +
             '</div></div></section>'
 
@@ -1297,7 +1448,14 @@ PAGES = {
                 diagnosis="Helpful Content System에서 가장 쉽게 잡히는 패턴. 다만 단순 글자 수 증가로 해결되지 않습니다. 사용자가 페이지에 와서 답을 얻고 싶은 정보 자체가 빠져있는 게 핵심.",
                 improvements=["페이지별로 \"사용자가 와서 답을 얻고 싶은 5~7가지 질문\" 리서치 (서치콘솔 쿼리·People Also Ask·실제 CS 문의 기반)", "누락된 정보 추가 — 사용법·사양·비교 기준·결정 가이드·FAQ", "검색 의도와 매칭 안 되는 페이지는 통합·삭제 검토 (글자 수 늘리기로 해결되지 않는 경우)", "단순 글자 수보다 \"검색자가 원하는 정보의 완전성\" 기준 적용"],
                 results=["색인 가치 평가 회복으로 일부 페이지 노출 시작", "체류 시간·재방문 회복", "작업 기간 약 3개월"],
-                caveats="페이지의 \"존재 이유\" 자체가 모호한 경우는 글자 수 늘려도 효과 없습니다. 페이지 자체를 통합·삭제하는 게 정답일 때도 있습니다."
+                caveats="페이지의 \"존재 이유\" 자체가 모호한 경우는 글자 수 늘려도 효과 없습니다. 페이지 자체를 통합·삭제하는 게 정답일 때도 있습니다.",
+                tools=["GSC 검색 실적·쿼리 리포트", "People Also Ask 추출 도구", "AlsoAsked", "CS 문의 로그 분석"],
+                verification="얇은 콘텐츠 보강 후 8주·16주 시점에 GSC '색인 적용 범위'에서 '크롤링됨 - 현재 색인되지 않음' 페이지 수가 줄어드는지, 보강 페이지의 노출·CTR 변화도 함께 확인했습니다.",
+                comment="\"본문 1000자 채워라\"는 가이드는 가장 흔한 오해입니다. 사용자가 원하는 정보 7가지가 빠져있으면 글자 수를 늘려도 신호가 약해지지 않습니다.",
+                insight="가장 효과가 큰 보강 항목은 'FAQ'와 '비교 표'였습니다. 두 가지 모두 검색자가 페이지에서 답을 즉시 얻을 수 있게 해주는 구조입니다.",
+                checklist=["페이지가 답해야 할 사용자 질문 5~7개가 본문에 들어 있는지", "단순 글자 수 채우기가 아니라 정보 깊이가 증가했는지", "통합·삭제가 더 나은 페이지가 아닌지"],
+                related_service=("콘텐츠 SEO 서비스", "/services/content-seo/"),
+                related_insight=("쇼핑몰 제품 페이지 6단락 구조", "/insights/content-seo/product-page-content-structure/")
             ) +
             '</div></div></section>'
 
@@ -1313,7 +1471,14 @@ PAGES = {
                 diagnosis="페이지가 \"브랜드가 말하고 싶은 내용\" 중심으로 구성됨. 사용자 질문 관점 부재. FAQPage 스키마도 미적용으로 검색 결과의 리치 스니펫 노출 손실까지 있었습니다.",
                 improvements=["실제 CS 문의·서치콘솔 People Also Ask·관련 검색어로 FAQ 5~10개 추출", "페이지 하단에 FAQ 섹션 신설 (질문 형태 그대로, 사용자 표현 사용)", "FAQPage 스키마 마크업 적용", "답변은 짧고 구체적으로 (스니펫에 그대로 표시될 수 있는 길이)"],
                 results=["일부 페이지의 People Also Ask 영역 노출 시작", "체류 시간·재방문 회복", "작업 기간 약 6주"],
-                caveats="가짜 FAQ(만들어낸 질문)는 즉시 들킵니다. 실제 받은 질문만 사용. 답변에 \"보장\"·\"확실\" 같은 표현은 정책 위반 위험이 있습니다."
+                caveats="가짜 FAQ(만들어낸 질문)는 즉시 들킵니다. 실제 받은 질문만 사용. 답변에 \"보장\"·\"확실\" 같은 표현은 정책 위반 위험이 있습니다.",
+                tools=["GSC People Also Ask 추출", "AlsoAsked", "Schema Markup Validator", "Rich Results Test"],
+                verification="FAQPage 스키마 적용 후 Schema Validator·Rich Results Test로 무오류를 확인하고, 8주 동안 GSC '검색 외관'에서 FAQ 리치 결과 노출 수가 증가하는지 추적했습니다.",
+                comment="실제 CS에 가장 자주 들어온 질문 5개만 본문에 자연스럽게 답해도 People Also Ask 영역 노출이 시작됩니다. 인위적으로 만든 질문은 효과가 거의 없습니다.",
+                insight="FAQ 답변 길이를 짧고 구체적으로(40~80자) 작성한 페이지가 리치 스니펫 노출률이 가장 높았습니다. 답변이 길면 스니펫이 안 잡힙니다.",
+                checklist=["FAQ가 실제 CS 문의·검색어 기반인지", "FAQPage 스키마가 적용되고 무오류인지", "답변에 '보장·확실·100%' 같은 표현이 없는지"],
+                related_service=("콘텐츠 SEO 서비스", "/services/content-seo/"),
+                related_insight=("의료 블로그 첫 100편 운영", "/insights/content-seo/medical-blog-first-100/")
             ) +
             '</div></div></section>'
 
@@ -1329,7 +1494,14 @@ PAGES = {
                 diagnosis="E-E-A-T(Experience·Expertise·Authoritativeness·Trustworthiness) 4가지 신호 모두 부족. 특히 Experience(직접 경험) 신호 부재가 컸습니다.",
                 improvements=["저자 페이지 신설 + Person 스키마 적용 (경력·자격·발표 이력 명시)", "본문에 저자의 실무 경험·관찰 자연스럽게 녹임 — \"실무에서 자주 본 패턴은…\", \"○○ 도구를 5년 운영하면서…\"", "외부 1차 자료·공식 문서·권위 매체 인용 (출처 명시)", "발행일·수정일 가시적 표시 + 정기 갱신 사이클 운영", "외부 매체 기고로 외부 권위 신호 누적"],
                 results=["전문 키워드에서 노출·체류시간 개선 추세", "코어 업데이트 영향이 점차 안정화", "작업 기간 약 6개월"],
-                caveats="E-E-A-T 신호는 빠르게 만들어지지 않습니다. 6개월 이상의 누적 작업과 진정성 있는 활동이 필요하며, 가짜 저자·가짜 자격은 역효과입니다."
+                caveats="E-E-A-T 신호는 빠르게 만들어지지 않습니다. 6개월 이상의 누적 작업과 진정성 있는 활동이 필요하며, 가짜 저자·가짜 자격은 역효과입니다.",
+                tools=["Schema.org Person 마크업", "Ahrefs 외부 권위 점검", "GSC 검색 실적(전문 키워드 그룹)", "저자 페이지 관리 시트"],
+                verification="저자 페이지 신설·Person 스키마 적용 후 12주 동안 전문 키워드 그룹의 평균 게재순위 변화를 추적했습니다. 코어 업데이트 시점의 변동성도 비교 기준으로 사용했습니다.",
+                comment="\"관리자\" 명의 글이 가장 위험합니다. 특히 의료·금융·법률 인접 영역에서는 저자 정보 부재만으로도 노출 자체가 멈춥니다.",
+                insight="저자가 외부 매체에 기고한 이력이 누적되자 사이트 전체의 권위 신호가 동반 상승하는 패턴이 관찰되었습니다. E-E-A-T는 사이트 안에서만 만들어지지 않습니다.",
+                checklist=["블로그 글에 실명 저자와 저자 페이지 링크가 있는지", "Person 스키마가 적용되었는지", "본문에 직접 경험·관찰 신호가 들어 있는지"],
+                related_service=("콘텐츠 SEO 서비스", "/services/content-seo/"),
+                related_insight=("Helpful Content System 셀프 점검", "/insights/google-seo/helpful-content-self-check/")
             ) +
             '</div></div></section>'
 
@@ -1345,7 +1517,14 @@ PAGES = {
                 diagnosis="사이드바·자동 추천 위젯의 링크는 검색엔진이 약하게 평가합니다. 본문 안에서 \"○○에 대해 더 알려면 [○○ 가이드 보기]\" 같이 자연스럽게 박힌 텍스트 링크가 권위 신호를 전달하는데, 그게 사실상 없었습니다.",
                 improvements=["트래픽 상위 30개 글에 본문 컨텍스트 링크 평균 3~5개 추가 (관련 글·서비스 페이지)", "앵커텍스트를 정확한 타겟 키워드로 통일 (\"여기 클릭\" 금지)", "필러 글 → 클러스터 글 흐름 설계", "오래된 글에는 \"이 주제의 최신 정리\" 링크 추가로 갱신성 신호"],
                 results=["사이트 전체 권위 흐름 형성, 평균 페이지뷰·체류시간 회복", "신규 글의 색인 속도도 함께 개선", "작업 기간 약 2개월"],
-                caveats="자동 \"관련 글\" 위젯과 본문 컨텍스트 링크는 다릅니다. 본문 컨텍스트가 어색한 위치에 강제 링크를 박으면 역효과이고, 자연스러운 위치에만 배치하는 게 핵심입니다."
+                caveats="자동 \"관련 글\" 위젯과 본문 컨텍스트 링크는 다릅니다. 본문 컨텍스트가 어색한 위치에 강제 링크를 박으면 역효과이고, 자연스러운 위치에만 배치하는 게 핵심입니다.",
+                tools=["Ahrefs Internal Backlinks", "Screaming Frog 내부링크 리포트", "GA4 사용자 흐름 리포트", "내부링크 매핑 시트"],
+                verification="컨텍스트 링크 추가 후 8주 동안 GA4의 페이지당 평균 페이지뷰·세션 깊이 변화와 GSC '많이 연결된 페이지' 리스트의 변동을 비교했습니다. 신규 글 색인 속도도 함께 추적했습니다.",
+                comment="\"사이드바·자동 관련글이 있으니 충분하다\"는 가정이 가장 흔합니다. 본문 안에 박힌 텍스트 링크가 검색엔진 평가에서 훨씬 더 강하게 작동합니다.",
+                insight="필러 글 → 클러스터 글 흐름을 만들고 나서 가장 큰 변화는 신규 글의 색인 속도였습니다. 발행 후 24~48시간 안에 색인되는 비율이 눈에 띄게 늘었습니다.",
+                checklist=["본문 한가운데에 컨텍스트 링크가 평균 3~5개 있는지", "앵커텍스트가 정확한 타겟 키워드인지", "필러·클러스터 구조가 설계되어 있는지"],
+                related_service=("콘텐츠 SEO 서비스", "/services/content-seo/"),
+                related_insight=("쇼핑몰 제품 페이지 6단락 구조", "/insights/content-seo/product-page-content-structure/")
             ) +
             '</div></div></section>'
 
@@ -1393,7 +1572,14 @@ PAGES = {
                 diagnosis="크롤러는 사용자와 비슷하게 사이트를 탐색합니다. 메뉴 깊이가 4단 이상이면 깊은 페이지는 색인 우선순위가 떨어집니다. 반대로 평평한 메뉴는 카테고리 그룹 신호가 약합니다.",
                 improvements=["1차 메뉴 5~7개 + 드롭다운 2단으로 제한", "사용자 결정 흐름 기반 메뉴 재배치 (서비스→사례→인사이트→회사→문의)", "메뉴 항목명에 정확한 키워드 포함 (\"서비스\" 단독보다 \"SEO 컨설팅\" 등 구체)", "모바일 햄버거 메뉴에서도 동일 계층 유지"],
                 results=["크롤링 효율 회복으로 깊은 페이지 색인 속도 개선", "사용자 동선 단축으로 페이지뷰 증가", "메뉴 재설계 작업 기간 약 3~4주"],
-                caveats="메뉴 변경은 기존 사용자 동선에 영향을 줍니다. 변경 전 사용자 행동 데이터를 보고, 변경 후 이탈률 모니터링이 필요합니다."
+                caveats="메뉴 변경은 기존 사용자 동선에 영향을 줍니다. 변경 전 사용자 행동 데이터를 보고, 변경 후 이탈률 모니터링이 필요합니다.",
+                tools=["Screaming Frog 사이트 크롤", "GA4 사용자 동선 리포트", "MS Clarity 클릭 히트맵", "메뉴 트리 매핑 시트"],
+                verification="메뉴 재설계 후 4주 동안 GA4 페이지 평균 깊이, GSC 깊은 페이지 색인 적용 상태, Clarity 메뉴 클릭률을 비교했습니다. 이탈률 변화도 별도 추적했습니다.",
+                comment="메뉴 깊이 4단 사이트가 가장 자주 보입니다. 사용자도 3클릭 이상 들어가지 않습니다 — 검색엔진도 마찬가지입니다.",
+                insight="메뉴 항목명을 \"서비스\"에서 \"SEO 컨설팅·기술 SEO·콘텐츠 SEO\" 같이 구체화하자, 메뉴 자체가 키워드 시그널로도 작동하기 시작했습니다.",
+                checklist=["핵심 페이지에 3클릭 안에 도달 가능한지", "1차 메뉴가 5~7개인지", "메뉴 항목명에 정확한 키워드가 있는지"],
+                related_service=("SEO 웹사이트 제작", "/services/web-design/"),
+                related_insight=("쇼핑몰 제품 페이지 6단락 구조", "/insights/content-seo/product-page-content-structure/")
             ) +
             '</div></div></section>'
 
@@ -1409,7 +1595,14 @@ PAGES = {
                 diagnosis="의미 없는 URL은 검색엔진과 사용자 모두에게 신호가 약합니다. 또한 파라미터 URL은 트래킹·캠페인 변수에 따라 무한히 늘어나 크롤링 예산을 낭비합니다.",
                 improvements=["URL 패턴을 /[category]/[subcategory]/[slug]/ 형식으로 통일", "영문 슬러그 사용 (한글 URL은 인코딩 문제 발생 가능)", "카테고리·서비스 계층을 URL에 반영", "파라미터 URL은 canonical 또는 noindex로 정리", "기존 URL과 새 URL 1:1 301 매핑 시트 작성"],
                 results=["URL 자체가 키워드 신호로 작동", "중복 URL 정리로 크롤링 예산 회복", "색인된 핵심 페이지의 검색 노출 회복"],
-                caveats="URL 변경 시 반드시 모든 기존 URL의 1:1 301 매핑 필수. 누락되면 트래픽 손실이 수개월 이어집니다."
+                caveats="URL 변경 시 반드시 모든 기존 URL의 1:1 301 매핑 필수. 누락되면 트래픽 손실이 수개월 이어집니다.",
+                tools=["Screaming Frog", "GSC URL 검사", "301 매핑 시트", "Ahrefs Site Audit"],
+                verification="URL 마이그레이션 후 4주·8주 시점에 GSC '색인 적용 범위'의 오류·제외 페이지 변화, 평균 게재순위, 404 발생 추이를 함께 추적했습니다. 매핑 누락 케이스가 발견되면 즉시 301 추가했습니다.",
+                comment="\"리뉴얼하면서 URL 좀 바꿨다\"는 말이 가장 위험합니다. 1:1 301 매핑 시트 없이 진행한 리뉴얼은 거의 예외 없이 트래픽이 절반으로 떨어집니다.",
+                insight="파라미터 URL을 의미적 URL로 바꾸자 동일 페이지의 평균 게재순위가 자연 상승한 케이스가 있었습니다. URL 자체가 약하지만 분명한 시그널입니다.",
+                checklist=["URL이 카테고리·계층을 반영하는지", "파라미터 URL이 canonical로 정리됐는지", "기존 URL → 새 URL 1:1 301 매핑 시트가 있는지"],
+                related_service=("SEO 웹사이트 제작", "/services/web-design/"),
+                related_insight=("301 리다이렉트 자주 빠뜨리는 12가지", "/insights/visibility/301-migration-mistakes/")
             ) +
             '</div></div></section>'
 
@@ -1425,7 +1618,14 @@ PAGES = {
                 diagnosis="모바일 우선 색인은 \"모바일에서 보이는 게 색인 기준\"이 됩니다. 데스크탑에만 있는 본문·이미지·내부 링크는 사실상 색인되지 않는 셈입니다. 콘텐츠 패리티(데스크탑/모바일 일치) 실패 케이스였습니다.",
                 improvements=["모바일에서 <code>display:none</code> 처리된 본문·링크 점검 후 복원", "<code>viewport</code> 메타 적용, 본문 폰트 16px 이상, 탭 영역 48×48px+", "모바일 친화성 테스트 통과", "구조화 데이터·내부 링크가 모바일에서도 동일하게 출력되는지 점검", "모바일 LCP·INP·CLS 별도 측정·최적화"],
                 results=["모바일 키워드 노출 회복", "모바일 트래픽이 데스크탑 수준으로 회복", "작업 기간 약 4주"],
-                caveats="별도 모바일 도메인(m.example.com)은 관리 부담만 큽니다. 반응형 단일 사이트가 정답입니다."
+                caveats="별도 모바일 도메인(m.example.com)은 관리 부담만 큽니다. 반응형 단일 사이트가 정답입니다.",
+                tools=["Chrome DevTools Device Toolbar", "PageSpeed Insights Mobile", "GSC 모바일 사용 편의성", "Lighthouse"],
+                verification="모바일 콘텐츠 패리티 작업 후 GSC '모바일 사용 편의성' 오류 페이지 수, 모바일 노출·CTR, Field Data의 모바일 LCP·INP·CLS를 4주 단위로 비교했습니다.",
+                comment="\"반응형이니까 모바일도 자동으로 잘 보일 것\"이라는 가정이 가장 흔합니다. 실제로는 display:none으로 숨긴 본문·내부 링크가 색인에서 빠집니다.",
+                insight="모바일에서 본문을 복원하자 모바일 키워드 노출이 데스크탑 수준에 도달하는 데 6주면 충분했습니다. 색인 자체가 빠르게 갱신됩니다.",
+                checklist=["모바일에서 display:none으로 숨긴 본문·링크가 없는지", "viewport 메타가 있고 폰트가 16px 이상인지", "터치 타겟이 48×48px 이상인지"],
+                related_service=("기술 SEO 진단", "/services/technical-seo/"),
+                related_insight=("모바일 우선 색인 점검 가이드", "/insights/technical-seo/mobile-first-indexing/")
             ) +
             '</div></div></section>'
 
@@ -1441,7 +1641,14 @@ PAGES = {
                 diagnosis="Hero 이미지가 압축 안 된 4MB PNG, 폰트가 차단 렌더링, 무거운 플러그인·CSS/JS, 호스팅 TTFB 1초 초과 등이 복합 원인이었습니다.",
                 improvements=["Hero 이미지 WebP 변환 + 모바일용 별도 srcset, fetchpriority high", "한글 폰트 swap·preload·subset 적용", "사용 안 하는 CSS/JS 제거 또는 lazy loading", "캐싱 플러그인 + Cloudflare CDN 도입으로 TTFB 단축", "Core Web Vitals Field Data를 서치콘솔에서 지속 추적"],
                 results=["모바일 PageSpeed 점수 90+ 진입", "LCP 1.5~2초대로 단축", "Field Data 기준 \"Good\" 비율 증가"],
-                caveats="PageSpeed Lab 점수와 Field Data가 다를 수 있습니다. 구글은 Field Data를 랭킹 신호로 사용하므로 실측 기반 모니터링이 필수입니다."
+                caveats="PageSpeed Lab 점수와 Field Data가 다를 수 있습니다. 구글은 Field Data를 랭킹 신호로 사용하므로 실측 기반 모니터링이 필수입니다.",
+                tools=["PageSpeed Insights", "Lighthouse CI", "Cloudflare 대시보드", "GSC Core Web Vitals 리포트"],
+                verification="속도 최적화 후 12주 동안 GSC '주요 사이트 정보(Core Web Vitals)' 리포트의 'Good' 비율이 증가하는지, Field Data 기준 LCP·INP·CLS 변화를 추적했습니다.",
+                comment="\"Lab 점수 90점\"이 목표가 아니라 실제 사용자 환경의 Field Data가 'Good'인 게 목표입니다. Lab은 깨끗한 환경에서 측정되므로 항상 더 좋게 나옵니다.",
+                insight="Hero 이미지 1장만 WebP + fetchpriority high 적용해도 LCP가 1초 이상 단축된 케이스가 있었습니다. 최우선 작업은 LCP 이미지입니다.",
+                checklist=["Field Data 기준 모바일 LCP가 2.5초 이내인지", "INP가 200ms 이내인지", "CLS가 0.1 이내인지"],
+                related_service=("기술 SEO 진단", "/services/technical-seo/"),
+                related_insight=("워드프레스 LCP 개선 작업 순서", "/insights/technical-seo/wordpress-lcp-fix/")
             ) +
             '</div></div></section>'
 
@@ -1457,7 +1664,14 @@ PAGES = {
                 diagnosis="서비스 페이지는 \"정보 + 전환\" 두 역할을 동시에 해야 하는데, 본문 부재로 검색엔진 신호(SEO)와 사용자 결정(전환) 둘 다 잡지 못하는 상태였습니다.",
                 improvements=["서비스별 6단락 구조: ① 대상 고객, ② 해결할 문제, ③ 해결 방식, ④ 차별점·증거, ⑤ 프로세스, ⑥ FAQ", "Service / Offer 스키마 적용", "기간·결과물·범위 명시 (\"보장\" 표현 없이 \"기준\"·\"목표\"·\"평균\" 표현 사용)", "관련 사례·블로그 글로 본문 내 컨텍스트 링크", "페이지 하단 명확한 CTA + 신뢰 신호 (실적·후기·법적 정보)"],
                 results=["거래형 키워드에서 서비스 페이지가 직접 노출", "문의 전환율 회복 추세", "재구성 기간 약 6주"],
-                caveats="가격 비공개 정책이면 가격 대신 \"프로젝트 단위 견적\"으로 안내하되, 범위·기간은 반드시 명시해야 신뢰가 형성됩니다."
+                caveats="가격 비공개 정책이면 가격 대신 \"프로젝트 단위 견적\"으로 안내하되, 범위·기간은 반드시 명시해야 신뢰가 형성됩니다.",
+                tools=["GSC 거래형 키워드 모니터", "Schema Markup Validator", "GA4 전환 이벤트", "MS Clarity 스크롤·클릭 히트맵"],
+                verification="서비스 페이지 재구성 후 GA4 전환 이벤트, GSC '검색 외관' 의 Service/Offer 리치 결과 노출, Clarity 스크롤 깊이를 8주 단위로 비교했습니다.",
+                comment="이미지만 잔뜩 박힌 서비스 페이지는 결국 영업 자료를 PDF로 받아본 사람만 결정합니다. 본문이 있어야 검색에서 발견되고, 발견된 사람이 결정합니다.",
+                insight="6단락 중 가장 전환에 기여한 단락은 '차별점·증거'와 'FAQ'였습니다. 결정 직전 사용자에게 가장 필요한 정보가 그 두 단락에 들어 있기 때문입니다.",
+                checklist=["서비스 페이지에 6단락 구조가 있는지", "Service/Offer 스키마가 적용됐는지", "'보장·확실' 표현 없이 '기준·평균'으로 명시되는지"],
+                related_service=("SEO 웹사이트 제작", "/services/web-design/"),
+                related_insight=("쇼핑몰 제품 페이지 6단락 구조", "/insights/content-seo/product-page-content-structure/")
             ) +
             '</div></div></section>'
 
@@ -1473,7 +1687,14 @@ PAGES = {
                 diagnosis="메타는 SERP에서 사용자가 우리 페이지를 클릭할지 결정하는 핵심 후크입니다. 자동 추출은 통제 불가능하고, 클릭 후크가 없어 같은 노출수에서도 클릭이 빠집니다.",
                 improvements=["페이지별 title 50~60자 (1차 키워드 + 클릭 후크 + 브랜드)", "description 120~155자 (가치·차별점·CTA 한 줄)", "OG title·description 별도 작성 (SNS 공유 카피와 SERP 카피 분리)", "구조화 데이터로 리치 결과 유도 (FAQPage, Review, Product 등 페이지 유형별)"],
                 results=["평균 CTR 회복", "같은 노출수에서 클릭 증가", "메타 작성·검수 작업 기간 약 3~4주 (페이지 수에 비례)"],
-                caveats="자동 생성 도구 활용 시에도 페이지마다 검수 필수. 동일 패턴이면 구글이 자동 추출로 대체하기도 합니다."
+                caveats="자동 생성 도구 활용 시에도 페이지마다 검수 필수. 동일 패턴이면 구글이 자동 추출로 대체하기도 합니다.",
+                tools=["GSC 검색 실적(CTR)", "Screaming Frog 메타 추출", "title/description 길이 측정기", "Rich Results Test"],
+                verification="페이지별 메타 작성 후 4주·8주 시점에 GSC '검색 실적'에서 페이지별 CTR 변화를 비교했습니다. 자동 추출로 대체된 페이지는 별도 시트로 관리해 본문도 함께 손봤습니다.",
+                comment="\"메타는 자동으로 두면 된다\"는 가정이 가장 빈번한 손실 원인입니다. 자동 추출은 통제 불가능하고 클릭 후크가 없습니다.",
+                insight="title의 클릭 후크 한 단어(예: '체크리스트', '가이드', '비교')만 추가해도 CTR이 회복된 사례가 많았습니다. 모든 페이지에 후크 1개씩은 필요합니다.",
+                checklist=["페이지마다 title·description이 수동 작성됐는지", "title 50~60자, description 120~155자 내인지", "OG title·description이 별도 작성됐는지"],
+                related_service=("SEO 컨설팅", "/services/seo/"),
+                related_insight=("Helpful Content System 셀프 점검", "/insights/google-seo/helpful-content-self-check/")
             ) +
             '</div></div></section>'
 
@@ -1489,7 +1710,14 @@ PAGES = {
                 diagnosis="고립 페이지는 검색엔진이 \"중요하지 않은 페이지\"로 판단해 색인 우선순위가 매우 낮습니다. 또한 본문 컨텍스트 링크 부재로 사이트 전체 권위 신호가 흐르지 않았습니다.",
                 improvements=["본문 내 컨텍스트 링크 평균 3~5개씩 추가 (관련 글·서비스·사례)", "카테고리 허브 → 개별 글 → 서비스 페이지 흐름 설계", "고립 페이지 식별 후 본문 내 자연스러운 위치에 연결", "앵커텍스트는 정확한 타겟 키워드로 통일 (\"여기 클릭\" 금지)", "필러 글과 클러스터 글을 명확히 구분해 권위 집중"],
                 results=["사이트 전체 권위 흐름 형성", "신규 페이지의 색인 속도 개선", "평균 페이지뷰 증가"],
-                caveats="자동 \"관련 글\" 위젯에 의존하지 마세요. 본문 컨텍스트가 자연스러운 위치에 수동 배치가 검색엔진 신호로 더 강합니다."
+                caveats="자동 \"관련 글\" 위젯에 의존하지 마세요. 본문 컨텍스트가 자연스러운 위치에 수동 배치가 검색엔진 신호로 더 강합니다.",
+                tools=["Screaming Frog 내부링크 리포트", "Ahrefs Internal Backlinks", "GSC 링크 리포트", "고립 페이지 식별 시트"],
+                verification="고립 페이지에 컨텍스트 링크 추가 후 8주 동안 페이지별 InLink 수 증가, GSC '많이 연결된 페이지' 변동, 신규 페이지 색인 속도를 함께 점검했습니다.",
+                comment="\"메뉴와 푸터에서 링크하면 충분하다\"는 가정이 가장 흔합니다. 본문 안에서 자연스러운 위치에 박힌 컨텍스트 링크가 훨씬 강한 신호를 보냅니다.",
+                insight="필러 글이 클러스터 글로 자연스럽게 연결되는 구조를 만들고 나서, 클러스터 글의 색인 속도가 발행 후 24~48시간으로 단축된 케이스가 있었습니다.",
+                checklist=["InLink 0인 고립 페이지가 있는지", "본문 안 컨텍스트 링크가 페이지당 평균 3~5개인지", "앵커텍스트가 정확한 타겟 키워드인지"],
+                related_service=("SEO 웹사이트 제작", "/services/web-design/"),
+                related_insight=("쇼핑몰 제품 페이지 6단락 구조", "/insights/content-seo/product-page-content-structure/")
             ) +
             '</div></div></section>'
 
@@ -1505,7 +1733,14 @@ PAGES = {
                 diagnosis="페이지마다 \"다음 행동\"이 명확하지 않거나 푸터에만 있는 케이스. 폼 항목이 너무 많아서 입력 부담이 크고, 신뢰 신호(실적·후기·법적 정보)가 부족해 마지막 결정이 막히는 구조였습니다.",
                 improvements=["모든 핵심 페이지에 명확한 CTA 배치 (상단·중간·하단 3구간)", "폼 항목 최소화 (이름·이메일·문의 내용 3개로 시작)", "복수 채널 제공 (폼 외에 텔레그램·이메일 등)", "신뢰 신호 강화 (실적·후기·인증·법적 정보·사업자등록번호)", "마이크로 컨버전 추가 (무료 진단·체크리스트 다운로드 등 진입 장벽 낮은 행동)"],
                 results=["같은 트래픽에서 문의 수 회복 추세", "재구성 작업 기간 약 3~4주"],
-                caveats="CTA가 너무 공격적이거나 팝업이 과하면 이탈률이 증가합니다. 신뢰 신호와 CTA의 균형이 핵심입니다."
+                caveats="CTA가 너무 공격적이거나 팝업이 과하면 이탈률이 증가합니다. 신뢰 신호와 CTA의 균형이 핵심입니다.",
+                tools=["GA4 전환 이벤트", "MS Clarity 클릭·스크롤 히트맵", "Hotjar 폼 분석", "CRO 가설 트래킹 시트"],
+                verification="CTA 동선 재설계 후 4주·8주 시점에 GA4 전환율, Clarity의 CTA 영역 클릭률, 폼 입력 중단 단계 데이터를 비교했습니다. 마이크로 컨버전(자료 다운로드)도 별도 KPI로 추적했습니다.",
+                comment="\"트래픽이 늘면 문의는 자연스럽게 따라온다\"는 가정은 위험합니다. 페이지에 도착한 사용자가 다음 행동을 찾지 못하면 트래픽이 100배여도 문의는 그대로입니다.",
+                insight="가장 빠르게 전환을 회복한 변경은 'CTA를 상단·중간·하단 3구간 배치'였습니다. 한 곳에만 CTA가 있으면 스크롤 깊이별로 결정 타이밍을 놓칩니다.",
+                checklist=["페이지 상단·중간·하단에 CTA가 있는지", "폼 항목이 3~5개로 최소화됐는지", "신뢰 신호(실적·후기·법적 정보)가 페이지에 노출되는지"],
+                related_service=("SEO 웹사이트 제작", "/services/web-design/"),
+                related_insight=("쇼핑몰 제품 페이지 6단락 구조", "/insights/content-seo/product-page-content-structure/")
             ) +
             '</div></div></section>'
 
@@ -1552,7 +1787,14 @@ PAGES = {
                 diagnosis="색인 실패는 보통 다음 중 하나로 좁혀집니다 — robots.txt 차단 규칙, 메타 robots에 잘못 박힌 noindex, canonical이 다른 URL을 가리키는 오설정, 호스팅·CDN의 봇 차단, 서버 응답 코드 오류(5xx, 잘못된 4xx).",
                 improvements=["robots.txt 점검 — 불필요한 Disallow 제거, 핵심 경로 차단 해제", "모든 페이지의 메타 robots 확인 — noindex가 잘못 박힌 페이지 식별", "canonical이 자기 자신을 정확히 가리키는지 점검", "서치콘솔에 sitemap 제출 + URL 검사 도구로 색인 요청", "서버 응답 코드 점검 (정상 페이지는 200, 의도된 차단은 명확히)"],
                 results=["주요 페이지 대부분 색인 정상화", "회사명·서비스명 검색에서 사이트 노출 회복", "작업 기간 약 4주"],
-                caveats="색인됐다고 검색 상위 노출까지 보장되는 건 아닙니다. 색인은 \"검색에 잡힐 자격\"을 얻는 단계이고, 실제 노출은 콘텐츠·외부 신호 작업이 추가로 필요합니다."
+                caveats="색인됐다고 검색 상위 노출까지 보장되는 건 아닙니다. 색인은 \"검색에 잡힐 자격\"을 얻는 단계이고, 실제 노출은 콘텐츠·외부 신호 작업이 추가로 필요합니다.",
+                tools=["GSC URL 검사", "robots.txt 테스터", "Screaming Frog", "서버 로그 분석"],
+                verification="색인 차단 원인 제거 후 핵심 페이지를 GSC URL 검사로 색인 요청하고, 4주 동안 색인 적용 범위 리포트에서 '색인 생성됨' 페이지 수가 증가하는지 추적했습니다.",
+                comment="\"사이트가 구글에 안 뜬다\"는 상담의 8할은 robots.txt 또는 메타 noindex 1줄이 원인입니다. 가장 먼저 점검할 곳이 가장 자주 누락됩니다.",
+                insight="개발 환경에서 noindex로 막아둔 채로 라이브에 배포된 사이트가 의외로 많습니다. 라이브 배포 직후 noindex 점검은 체크리스트에 고정 항목으로 두는 게 안전합니다.",
+                checklist=["robots.txt가 핵심 경로를 차단하지 않는지", "메타 robots에 noindex가 잘못 박힌 페이지가 있는지", "canonical이 자기 자신을 정확히 가리키는지"],
+                related_service=("기술 SEO 진단", "/services/technical-seo/"),
+                related_insight=("'발견됨 - 색인되지 않음' 7가지 원인", "/insights/technical-seo/discovered-not-indexed/")
             ) +
             '</div></div></section>'
 
@@ -1568,7 +1810,14 @@ PAGES = {
                 diagnosis="서치콘솔 오류는 종류별로 영향이 다릅니다. 일부는 의도된 동작(예: 관리자 페이지의 noindex, 검색용 차단)이고 일부는 진짜 문제(404, 5xx, 색인 실패). 모든 오류를 0으로 만들 필요는 없습니다.",
                 improvements=["오류를 3분류 — ① 진짜 문제 (5xx 서버 오류, 의도하지 않은 4xx, 색인 실패), ② 의도된 동작 (관리자 noindex, 카테고리 필터 차단), ③ 무시 가능 (오래된 외부 링크의 404 등)", "우선순위 1: 5xx 서버 오류 (즉시), 핵심 페이지의 4xx (1주 내), 핵심 페이지 색인 누락 (2주 내)", "우선순위 2: 중복 콘텐츠, canonical 미일치, 모바일 사용성", "우선순위 3: 비핵심 페이지의 \"발견됨/색인 안 됨\""],
                 results=["오류 페이지 수 정상 수준으로 회복", "핵심 페이지 색인 비율 회복", "작업 기간 약 6주"],
-                caveats="\"오류 0\"이 목표가 아닙니다. 의도된 동작은 그대로 두고, 진짜 문제만 우선순위로 해결하는 게 효율적입니다."
+                caveats="\"오류 0\"이 목표가 아닙니다. 의도된 동작은 그대로 두고, 진짜 문제만 우선순위로 해결하는 게 효율적입니다.",
+                tools=["GSC 페이지 색인 생성 리포트", "Screaming Frog 응답 코드 점검", "서버 로그 분석", "오류 분류 시트"],
+                verification="오류를 3분류한 뒤 우선순위 1·2 항목을 6주 동안 단계적으로 해결하면서 GSC '페이지 색인 생성'에서 오류 페이지 수가 감소하는 추이를 매주 모니터링했습니다.",
+                comment="\"빨간 오류 0개 만들기\"는 잘못된 목표입니다. 관리자 페이지의 noindex 같은 의도된 차단까지 잡으려 들면 정말 중요한 문제를 놓칩니다.",
+                insight="실제로 문제가 되는 오류는 보통 전체의 10~20%였습니다. 분류 시트 한 장만 만들어도 작업 효율이 크게 개선됩니다.",
+                checklist=["오류가 ① 진짜 문제 ② 의도된 동작 ③ 무시 가능 3분류로 정리됐는지", "5xx 서버 오류가 즉시 해결됐는지", "핵심 페이지의 4xx·색인 실패가 우선순위 상단에 있는지"],
+                related_service=("기술 SEO 진단", "/services/technical-seo/"),
+                related_insight=("'크롤링됨 - 색인되지 않음' 대응법", "/insights/visibility/crawled-not-indexed/")
             ) +
             '</div></div></section>'
 
@@ -1584,7 +1833,14 @@ PAGES = {
                 diagnosis="색인 ≠ 노출. 색인은 \"검색 후보 풀에 들어간 것\"이고, 노출은 \"실제 검색 결과 페이지에 표시되는 것\"입니다. 페이지가 색인됐어도 검색엔진이 \"이 페이지를 어떤 키워드에 노출할까\" 판단할 신호가 부족하거나, 품질·신뢰 임계 이하면 노출에서 제외됩니다.",
                 improvements=["서치콘솔 \"성능\" 리포트에서 페이지가 어떤 쿼리에라도 노출됐는지 확인 (노출 0이면 신호 부재)", "노출 0인 페이지는 본문·메타·내부 링크·H 태그·구조화 데이터 신호 보강", "매우 경쟁 심한 키워드는 자연스럽게 노출 형성에 3~6개월 소요됨을 인지", "E-E-A-T 신호 점검 (저자·갱신성·출처·실적)", "롱테일 키워드부터 진입 시도 (경쟁 낮은 키워드로 신호 누적)"],
                 results=["페이지가 어떤 키워드에서든 노출 시작 → 점진 확장", "롱테일 키워드 우선 진입 후 메인 키워드로 확장", "작업 기간 약 3~5개월"],
-                caveats="신규 도메인은 색인됐어도 노출까지 4~8주 걸리는 게 흔합니다. 노출 0이라고 즉시 \"문제\"는 아닙니다."
+                caveats="신규 도메인은 색인됐어도 노출까지 4~8주 걸리는 게 흔합니다. 노출 0이라고 즉시 \"문제\"는 아닙니다.",
+                tools=["GSC 검색 실적", "Ahrefs Keyword Explorer", "롱테일 키워드 시트", "Schema Validator"],
+                verification="롱테일 키워드 우선 작업 후 12주 동안 GSC '검색 실적' 의 노출 키워드 수, 평균 게재순위 변화, 첫 노출 발생까지의 시간을 추적했습니다.",
+                comment="\"색인은 됐다\"는 말은 시작점이지 끝점이 아닙니다. 노출은 별도의 신호 임계점을 넘어야 발생합니다.",
+                insight="롱테일 키워드(검색량은 작지만 의도가 뚜렷한 키워드)에서 먼저 노출이 잡히고, 그 신호가 메인 키워드로 점진 확장되는 패턴이 가장 안정적이었습니다.",
+                checklist=["페이지가 어떤 키워드에서든 노출 1회 이상 발생했는지", "본문·메타·H 태그·내부 링크가 키워드 신호를 보내는지", "E-E-A-T 신호가 누적되고 있는지"],
+                related_service=("SEO 컨설팅", "/services/seo/"),
+                related_insight=("Helpful Content System 셀프 점검", "/insights/google-seo/helpful-content-self-check/")
             ) +
             '</div></div></section>'
 
@@ -1600,7 +1856,14 @@ PAGES = {
                 diagnosis="sitemap이 제대로 처리되지 않는 원인은 보통 4가지 — ① sitemap XML 형식 오류(인코딩·XML 구문), ② sitemap 내 URL이 robots.txt에 차단됨, ③ 사이트 권위가 낮아 크롤링 예산이 작음, ④ sitemap 내 URL 다수가 중복·자동 생성 노이즈.",
                 improvements=["sitemap XML 형식 검증 (XML Sitemap Validator 같은 도구로)", "sitemap 내 URL이 robots.txt에 차단되지 않는지 모든 URL 점검", "자동 생성 sitemap을 \"수동 큐레이션\"으로 전환 — 노이즈 URL 제거, 정말 색인 시키고 싶은 URL만 포함", "큰 사이트는 sitemap을 카테고리별로 분리 + sitemap 인덱스 사용", "서치콘솔 URL 검사 → 핵심 페이지 색인 요청으로 수동 트리거"],
                 results=["sitemap 처리 속도 개선", "색인된 URL 수 점진 증가", "작업 기간 약 4~6주"],
-                caveats="sitemap이 모든 페이지의 색인을 보장하지 않습니다. sitemap은 \"이 URL들을 우선 봐달라\"는 요청 신호일 뿐, 색인 결정은 구글이 합니다."
+                caveats="sitemap이 모든 페이지의 색인을 보장하지 않습니다. sitemap은 \"이 URL들을 우선 봐달라\"는 요청 신호일 뿐, 색인 결정은 구글이 합니다.",
+                tools=["XML Sitemap Validator", "GSC 사이트맵 리포트", "Screaming Frog Sitemap 생성", "수동 큐레이션 시트"],
+                verification="sitemap 형식·URL 차단·중복 점검 후 재제출하고 6주 동안 GSC 사이트맵 리포트의 '검색됨' vs '색인 생성됨' URL 수 추이를 비교했습니다.",
+                comment="자동 sitemap 플러그인이 만든 sitemap에는 의외로 노이즈 URL이 많이 섞여 들어갑니다. 사이트 규모에 맞춰 수동 큐레이션이 필요합니다.",
+                insight="sitemap 내 URL을 정말 색인하고 싶은 URL로만 줄였더니, sitemap 제출 후 7~10일 안에 색인 적용 속도가 눈에 띄게 빨라졌습니다.",
+                checklist=["sitemap이 XML 형식 검증을 통과하는지", "sitemap 내 URL이 robots.txt에 차단되지 않는지", "sitemap에 노이즈·중복 URL이 섞이지 않았는지"],
+                related_service=("기술 SEO 진단", "/services/technical-seo/"),
+                related_insight=("'발견됨 - 색인되지 않음' 7가지 원인", "/insights/technical-seo/discovered-not-indexed/")
             ) +
             '</div></div></section>'
 
@@ -1616,7 +1879,14 @@ PAGES = {
                 diagnosis="구글이 공식적으로 \"샌드박스\"를 인정하진 않지만, 신규 도메인의 신뢰 형성에 시간이 걸리는 건 명확합니다. 도메인 권위·외부 신호·콘텐츠 누적이 임계점에 도달해야 검색이 활성화됩니다. 단기간 백링크 대량 발주 같은 무리한 신호는 오히려 의심 신호로 작용합니다.",
                 improvements=["첫 6개월은 콘텐츠 발행·내부 구조에 집중 (외부 신호 무리하게 추구 X)", "주 1~2편 정기 콘텐츠로 \"활성 사이트\" 신호 누적", "안전한 외부 신호 확보 (보도자료·디지털 PR 기반의 자연 언급)", "코어 키워드보다 롱테일 키워드 우선 진입 (경쟁 낮은 키워드부터)", "인내 — 도메인 권위 누적은 절대 시간 필요"],
                 results=["6~9개월차부터 키워드 노출 점진 회복", "롱테일 키워드부터 진입 시작", "안정 노출까지 9~12개월"],
-                caveats="신규 도메인에 단기간 백링크 대량 발주는 의심 신호로 작용합니다. 자연 누적이 정답이며, 무리한 가속은 오히려 회복 시간을 늘립니다."
+                caveats="신규 도메인에 단기간 백링크 대량 발주는 의심 신호로 작용합니다. 자연 누적이 정답이며, 무리한 가속은 오히려 회복 시간을 늘립니다.",
+                tools=["GSC 검색 실적(주간 추적)", "Ahrefs Domain Rating", "콘텐츠 발행 캘린더", "Whois 도메인 이력 점검"],
+                verification="첫 6개월은 콘텐츠 발행 캘린더에 맞춰 진행하고, 7개월차부터 GSC 노출·평균 게재순위·DR 변화를 월간 단위로 비교했습니다. 외부 신호도 자연 누적 페이스를 점검했습니다.",
+                comment="\"3개월 안에 검색 1등\" 같은 약속은 위험 신호입니다. 신규 도메인은 시간을 단축할 수 없고, 무리한 가속은 패널티 위험만 키웁니다.",
+                insight="첫 6개월간 주 1~2편의 정기 콘텐츠 발행이 '활성 사이트' 신호로 누적되어, 7개월차부터 노출 회복 속도가 가팔라지는 패턴이 일관되게 관찰되었습니다.",
+                checklist=["주 1~2편 정기 콘텐츠 발행 캘린더가 있는지", "단기간 백링크 대량 발주를 피하고 있는지", "롱테일 키워드 우선 전략이 적용됐는지"],
+                related_service=("SEO 컨설팅", "/services/seo/"),
+                related_insight=("구글 SEO 첫 달 우선 작업 5가지", "/insights/google-seo/first-month-priorities/")
             ) +
             '</div></div></section>'
 
@@ -1632,7 +1902,14 @@ PAGES = {
                 diagnosis="중복 콘텐츠는 구글이 \"어느 페이지가 메인인지\" 판단하지 못해 노출 우선순위가 하락합니다. 또한 크롤링 예산을 낭비해서 정말 색인되어야 할 핵심 페이지의 색인까지 지연됩니다.",
                 improvements=["중복 페이지 식별 (서치콘솔 + site: 검색 + 본문 첫 50자 따옴표 검색)", "옵션·필터·정렬 URL은 메인 페이지를 canonical로 지정", "페이지네이션은 rel=next/prev 대신 canonical 메인 + noindex 조합", "본문 90% 이상 같은 페이지는 통합 후 301", "sitemap에서 중복 URL 모두 제거, 핵심 URL만 포함"],
                 results=["크롤링 통계상 핵심 페이지 방문 증가", "중복 색인 페이지 점진 감소", "핵심 페이지 노출 회복", "작업 기간 약 3개월"],
-                caveats="대규모 중복 정리는 단기 트래픽 변동이 발생할 수 있습니다. 작업 전 영향 분석과 분기 단위 추적이 필요합니다."
+                caveats="대규모 중복 정리는 단기 트래픽 변동이 발생할 수 있습니다. 작업 전 영향 분석과 분기 단위 추적이 필요합니다.",
+                tools=["GSC 색인 적용 범위", "Screaming Frog 중복 콘텐츠 점검", "Siteliner", "canonical 매핑 시트"],
+                verification="중복 정리 후 GSC '색인 적용 범위'의 '중복, 사용자가 선택한 표준 URL 없음' 페이지 수 감소, '크롤링 통계'의 핵심 페이지 방문 빈도, 핵심 URL의 평균 게재순위를 12주 동안 추적했습니다.",
+                comment="옵션·필터·페이지네이션 URL은 가장 흔한 중복 발생원입니다. canonical 한 줄로 막을 수 있는 케이스가 의외로 많이 방치됩니다.",
+                insight="중복 URL을 정리하자 크롤링 통계상 핵심 페이지 방문 빈도가 자연스럽게 늘었습니다. 크롤링 예산 회복이 색인·노출 회복으로 연결되는 패턴이 명확했습니다.",
+                checklist=["옵션·필터·정렬 URL이 canonical로 정리됐는지", "본문 90% 이상 같은 페이지가 통합·301되었는지", "sitemap에 중복 URL이 섞여 들어가지 않는지"],
+                related_service=("기술 SEO 진단", "/services/technical-seo/"),
+                related_insight=("'크롤링됨 - 색인되지 않음' 대응법", "/insights/visibility/crawled-not-indexed/")
             ) +
             '</div></div></section>'
 
@@ -1648,7 +1925,14 @@ PAGES = {
                 diagnosis="마이그레이션 후 트래픽 손실의 90%는 301 리다이렉트 매핑 누락에서 발생합니다. 옛 URL이 새 URL로 정확히 연결되지 않으면 외부 백링크·기존 색인 신호가 모두 끊깁니다. 또한 도메인 변경 시 서치콘솔의 \"주소 변경 도구\"를 사용하지 않은 경우도 흔합니다.",
                 improvements=["기존 URL ↔ 새 URL 1:1 매핑 시트 작성, 누락 점검", "모든 옛 URL에 301 리다이렉트 적용 (http/https/www/non-www/대소문자/슬래시 변형 포함)", "서치콘솔 \"주소 변경 도구\"로 도메인 이전 명시 (도메인 자체가 바뀐 경우)", "새 도메인의 sitemap 제출 + 핵심 URL 색인 재요청", "외부 백링크가 가리키는 옛 URL이 살아있는지(301 작동) 점검", "외부 백링크 일부는 새 URL로 업데이트 요청"],
                 results=["트래픽 점진 회복 (보통 4~12주)", "핵심 키워드 순위 대부분 유지", "작업 기간 약 6~10주"],
-                caveats="마이그레이션 트래픽 손실은 즉시 회복되지 않습니다. 사전 계획이 핵심이고 사후 복구는 시간이 오래 걸립니다. 도메인 이전을 계획 중이라면 출시 전 SEO 컨설팅이 비용 대비 가장 효율적입니다."
+                caveats="마이그레이션 트래픽 손실은 즉시 회복되지 않습니다. 사전 계획이 핵심이고 사후 복구는 시간이 오래 걸립니다. 도메인 이전을 계획 중이라면 출시 전 SEO 컨설팅이 비용 대비 가장 효율적입니다.",
+                tools=["GSC 주소 변경 도구", "Screaming Frog 301 점검", "1:1 URL 매핑 시트", "Ahrefs Backlinks(외부 백링크)"],
+                verification="301 매핑 적용 후 4주·8주·12주 시점에 GSC '검색 실적' 의 클릭·노출, '페이지 색인 생성'의 404 추이, 외부 백링크가 가리키는 옛 URL이 정상 301되는지 점검했습니다.",
+                comment="\"옛 URL은 자연스럽게 사라진다\"는 가정이 가장 위험합니다. 1:1 301 없이 진행한 마이그레이션은 백링크·기존 색인 신호를 모두 잃습니다.",
+                insight="외부 백링크 상위 30개에 대해 새 URL로 업데이트를 직접 요청한 것이 회복 속도를 가장 크게 단축시킨 작업이었습니다. 301만으로는 권위 신호의 일부가 새고 있습니다.",
+                checklist=["옛 URL ↔ 새 URL 1:1 매핑 시트가 완성됐는지", "서치콘솔 '주소 변경 도구'가 적용됐는지", "주요 외부 백링크가 새 URL로 업데이트 요청됐는지"],
+                related_service=("기술 SEO 진단", "/services/technical-seo/"),
+                related_insight=("301 리다이렉트 자주 빠뜨리는 12가지", "/insights/visibility/301-migration-mistakes/")
             ) +
             '</div></div></section>'
 
