@@ -211,8 +211,8 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://onesearchpro.org/assets/images/logo.png" />
   <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg" />
-  <link rel="alternate icon" type="image/png" href="/assets/images/logo.png" />
-  <link rel="apple-touch-icon" href="/assets/images/logo.png" />
+  <link rel="alternate icon" type="image/png" href="/assets/images/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png" />
   <link rel="alternate" type="application/rss+xml" title="OneSearchPro · SEO 인사이트" href="/rss.xml" />
   <meta name="theme-color" content="#7c5cff" />
   <!-- 검색엔진 소유권 인증 (등록 시 코드 입력) -->
@@ -221,9 +221,9 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="image" href="/assets/images/logo-140.webp" type="image/webp" fetchpriority="high" />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap" media="print" onload="this.media='all'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap" /></noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" /></noscript>
   <link rel="stylesheet" href="/styles.css" />
   {site_wide_jsonld}
   {breadcrumb_jsonld}
@@ -239,7 +239,7 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
     {global_cta_html}
   </main>
   {FOOTER}
-  <script src="/script.js"></script>
+  <script src="/script.js" defer></script>
 </body>
 </html>
 '''
