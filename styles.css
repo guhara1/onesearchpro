@@ -224,6 +224,13 @@ h1 {
 .svc ul li { color: var(--text-soft); font-size: .88rem; padding-left: 1rem; position: relative; }
 .svc ul li::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
 .svc-link { display: inline-block; margin-top: .9rem; color: var(--brand); font-weight: 600; font-size: .9rem; }
+.case-card h4 { margin: 1rem 0 .35rem; font-size: .82rem; color: var(--brand); text-transform: uppercase; letter-spacing: .02em; font-weight: 700; }
+.case-card h4:first-of-type { margin-top: .6rem; }
+.case-card p, .case-card ul { margin-bottom: .6rem; }
+.case-grid .svc { grid-column: span 2; }
+.insight-card { border-style: dashed; }
+.insight-card .badge { background: #e5e7eb; color: #6b7280; }
+@media (max-width: 900px) { .case-grid .svc { grid-column: span 1; } }
 .svc.featured {
   grid-column: span 2;
   background: linear-gradient(135deg, #eff6ff, #f5f3ff);
