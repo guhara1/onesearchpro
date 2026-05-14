@@ -49,4 +49,7 @@
 
   <url><loc>https://onesearchpro.org/contact/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://onesearchpro.org/insights/content-seo/search-intent-4-types-keyword-classification-page-strategy/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <url><loc>https://onesearchpro.org/privacy/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://onesearchpro.org/terms/</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>

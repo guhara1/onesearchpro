@@ -67,7 +67,8 @@ FOOTER = '''<footer class="site-footer">
       <div><a href="/" class="brand"><span class="brand-mark">1</span><span class="brand-name">OneSearch<strong>Pro</strong></span></a><p class="muted">검색에서 시작되는 비즈니스 성장.<br/>SEO · 디지털 마케팅 전문 에이전시.</p></div>
       <div><h5>SEO 서비스</h5><ul><li><a href="/services/seo/">SEO 컨설팅</a></li><li><a href="/services/technical-seo/">기술 SEO 진단</a></li><li><a href="/services/content-seo/">콘텐츠 SEO</a></li><li><a href="/services/local-seo/">지역 SEO</a></li><li><a href="/services/digital-pr/">디지털 PR · 백링크 진단</a></li><li><a href="/services/social-media/">SNS 마케팅</a></li><li><a href="/services/web-design/">SEO 웹사이트 제작</a></li></ul></div>
       <div><h5>회사</h5><ul><li><a href="/case-studies/">성공사례</a></li><li><a href="/insights/">SEO 인사이트</a></li><li><a href="/about/">회사 소개</a></li><li><a href="/contact/">내 사이트 진단받기</a></li></ul></div>
-      <div><h5>연락처</h5><ul><li>contact@onesearchpro.com</li><li>Seoul, Korea</li><li>KakaoTalk: @onesearchpro</li></ul></div>
+      <div><h5>연락처</h5><ul><li>contact@onesearchpro.com</li><li>인천 부평구</li><li>KakaoTalk: @onesearchpro</li></ul></div>
+      <div><h5>약관·정책</h5><ul><li><a href="/privacy/">개인정보처리방침</a></li><li><a href="/terms/">이용약관</a></li></ul></div>
     </div>
     <div class="container biz-info">
       <span>상호 <b>YH기획</b></span>
@@ -119,23 +120,49 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
     </section>'''
 
     breadcrumb_html = ""
-    if path.startswith("/services/"):
-        slug_title = h1
-        breadcrumb_html = f'''<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <a href="/services/seo/">서비스</a> <span>›</span> <span>{slug_title}</span></div></nav>'''
+    breadcrumb_trail = []  # list of (name, url) for JSON-LD
+    if path.startswith("/services/") and path != "/services/":
+        breadcrumb_trail = [("홈", "/"), ("서비스", "/services/seo/"), (h1, path)]
+        breadcrumb_html = f'<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <a href="/services/seo/">서비스</a> <span>›</span> <span>{h1}</span></div></nav>'
     elif path == "/about/":
+        breadcrumb_trail = [("홈", "/"), ("회사소개", path)]
         breadcrumb_html = '<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <span>회사소개</span></div></nav>'
     elif path.startswith("/about/") and path != "/about/":
+        breadcrumb_trail = [("홈", "/"), ("회사소개", "/about/"), (h1, path)]
         breadcrumb_html = f'<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <a href="/about/">회사소개</a> <span>›</span> <span>{h1}</span></div></nav>'
     elif path == "/contact/":
+        breadcrumb_trail = [("홈", "/"), ("내 사이트 진단받기", path)]
         breadcrumb_html = '<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <span>내 사이트 진단받기</span></div></nav>'
     elif path == "/case-studies/":
+        breadcrumb_trail = [("홈", "/"), ("성공사례", path)]
         breadcrumb_html = '<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <span>성공사례</span></div></nav>'
     elif path.startswith("/case-studies/") and path != "/case-studies/":
+        breadcrumb_trail = [("홈", "/"), ("성공사례", "/case-studies/"), (h1, path)]
         breadcrumb_html = f'<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <a href="/case-studies/">성공사례</a> <span>›</span> <span>{h1}</span></div></nav>'
     elif path == "/insights/":
+        breadcrumb_trail = [("홈", "/"), ("SEO 인사이트", path)]
         breadcrumb_html = '<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <span>SEO 인사이트</span></div></nav>'
     elif path.startswith("/insights/") and path != "/insights/":
+        breadcrumb_trail = [("홈", "/"), ("SEO 인사이트", "/insights/"), (h1, path)]
         breadcrumb_html = f'<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <a href="/insights/">SEO 인사이트</a> <span>›</span> <span>{h1}</span></div></nav>'
+    elif path == "/privacy/":
+        breadcrumb_trail = [("홈", "/"), ("개인정보처리방침", path)]
+        breadcrumb_html = '<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <span>개인정보처리방침</span></div></nav>'
+    elif path == "/terms/":
+        breadcrumb_trail = [("홈", "/"), ("이용약관", path)]
+        breadcrumb_html = '<nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <span>이용약관</span></div></nav>'
+
+    # BreadcrumbList JSON-LD 자동 생성
+    breadcrumb_jsonld = ""
+    if breadcrumb_trail:
+        items = []
+        for i, (name, url) in enumerate(breadcrumb_trail, 1):
+            full_url = f"{SITE}{url}"
+            items.append(f'{{"@type":"ListItem","position":{i},"name":"{name}","item":"{full_url}"}}')
+        breadcrumb_jsonld = f'<script type="application/ld+json">{{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{",".join(items)}]}}</script>'
+
+    # 모든 페이지에 공통 적용되는 사이트 차원 JSON-LD
+    site_wide_jsonld = '''<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"OneSearchPro","alternateName":"원서치프로","url":"https://onesearchpro.org/","inLanguage":"ko-KR","publisher":{"@type":"Organization","name":"OneSearchPro","legalName":"YH기획"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"YH기획 (OneSearchPro)","alternateName":"OneSearchPro","url":"https://onesearchpro.org/","logo":"https://onesearchpro.org/assets/images/logo.png","image":"https://onesearchpro.org/assets/images/logo.png","telephone":"","email":"contact@onesearchpro.com","priceRange":"₩₩","address":{"@type":"PostalAddress","streetAddress":"부평대로 283 부평우림라이온스밸리","addressLocality":"부평구","addressRegion":"인천광역시","postalCode":"21389","addressCountry":"KR"},"areaServed":"KR","taxID":"503-30-66944"}</script>'''
 
     return f'''<!DOCTYPE html>
 <html lang="ko">
@@ -159,10 +186,16 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
   <link rel="alternate icon" type="image/png" href="/assets/images/logo.png" />
   <link rel="apple-touch-icon" href="/assets/images/logo.png" />
   <meta name="theme-color" content="#7c5cff" />
+  <!-- 검색엔진 소유권 인증 (등록 시 코드 입력) -->
+  <meta name="google-site-verification" content="" />
+  <meta name="naver-site-verification" content="" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="image" href="/assets/images/logo.png" fetchpriority="high" />
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
+  {site_wide_jsonld}
+  {breadcrumb_jsonld}
   {json_ld}
 </head>
 <body class="{body_class}">
@@ -364,8 +397,8 @@ def blog_jsonld(*, url, title, desc, date_published, date_modified=None):
 
 PAGES = {
     "/services/seo/": {
-        "title": "SEO 컨설팅 | 검색 노출 원인 진단·통합 개선 - OneSearchPro",
-        "desc": "OneSearchPro의 SEO 컨설팅은 검색 노출이 안 되는 원인을 사이트 구조·콘텐츠·기술 요소까지 통합 진단하고 단계적으로 개선하는 대표 서비스입니다.",
+        "title": "SEO 컨설팅 | 통합 SEO 진단·개선 - OneSearchPro",
+        "desc": "검색 노출이 안 되는 원인을 사이트 구조·콘텐츠·기술 요소까지 통합 진단·개선하는 SEO 컨설팅 대표 서비스. 화이트햇 방식·투명한 리포트.",
         "keywords": "SEO 컨설팅, SEO 진단, 검색엔진최적화, 구글 SEO, 네이버 SEO, 사이트 진단",
         "h1": "SEO 컨설팅",
         "eyebrow": "SEO CONSULTING",
@@ -390,8 +423,8 @@ PAGES = {
     },
 
     "/services/local-seo/": {
-        "title": "지역 SEO Local SEO | 구글맵·네이버 플레이스 상위 노출 - OneSearchPro",
-        "desc": "OneSearchPro의 지역 SEO는 구글 비즈니스 프로필(GBP), 네이버 플레이스, 지역 디렉토리, 리뷰 관리까지 통합 운영하여 우리 동네 검색 1위를 만듭니다.",
+        "title": "지역 SEO 서비스 | 구글맵·플레이스 | OneSearchPro",
+        "desc": "GBP·네이버 플레이스·지역 디렉토리·리뷰 관리를 통합 운영하는 지역 SEO 서비스. 오프라인 매장의 지역 검색 노출 강화.",
         "keywords": "지역SEO, Local SEO, 구글 비즈니스 프로필, 네이버 플레이스, 지도 SEO, 동네 마케팅",
         "h1": "지역 SEO (Local SEO)",
         "eyebrow": "LOCAL SEO",
@@ -410,10 +443,10 @@ PAGES = {
     },
 
     "/services/social-media/": {
-        "title": "SNS 마케팅 | 인스타·유튜브·틱톡·네이버 외부 유입 - OneSearchPro",
-        "desc": "OneSearchPro의 SNS 마케팅은 인스타그램, 유튜브, 틱톡, 네이버 채널 등 외부 유입과 브랜드 신뢰를 보조하는 채널 운영 서비스입니다.",
+        "title": "SNS 마케팅 | 인스타·유튜브·틱톡 - OneSearchPro",
+        "desc": "인스타그램·유튜브·틱톡·네이버 채널 운영. SEO 외부 유입과 브랜드 신뢰를 보조하는 SNS 마케팅 서비스.",
         "keywords": "SNS 마케팅, 소셜미디어마케팅, 인스타그램마케팅, 유튜브마케팅, 틱톡마케팅, 네이버 채널",
-        "h1": "SNS 마케팅",
+        "h1": "SNS 마케팅 서비스",
         "eyebrow": "SOCIAL MEDIA MARKETING",
         "lead": "브랜드 스토리에 맞는 채널을 찾고, 콘텐츠와 광고를 함께 운영합니다. 팔로워가 아닌 매출로 직결되는 SNS 마케팅을 추구합니다.",
         "body": (
@@ -438,7 +471,7 @@ PAGES = {
     },
 
     "/services/corporate-marketing/": {
-        "title": "기업 마케팅 | B2B·B2C 통합 퍼포먼스 마케팅 - OneSearchPro",
+        "title": "기업 마케팅 | B2B·B2C 통합 - OneSearchPro",
         "desc": "OneSearchPro의 기업 마케팅은 브랜드 전략, 퍼포먼스 광고, CRM, 콘텐츠 마케팅을 통합한 풀스택 B2B/B2C 마케팅 컨설팅 서비스입니다.",
         "keywords": "기업마케팅, B2B마케팅, B2C마케팅, 퍼포먼스마케팅, 브랜드컨설팅, CRM마케팅",
         "h1": "기업 마케팅",
@@ -458,8 +491,8 @@ PAGES = {
     },
 
     "/services/web-design/": {
-        "title": "SEO 웹사이트 제작 | 검색엔진 친화 구조로 만드는 사이트 - OneSearchPro",
-        "desc": "OneSearchPro의 SEO 웹사이트 제작은 처음부터 검색엔진이 이해하기 쉬운 구조·메타·스키마·속도로 설계하는 사이트 제작 서비스입니다. SEO 기초 공사가 끝난 상태로 납품됩니다.",
+        "title": "SEO 웹사이트 제작 | 반응형 SEO 사이트 - OneSearchPro",
+        "desc": "처음부터 검색엔진 친화 구조·메타·스키마·속도로 설계하는 SEO 웹사이트 제작. 기초 SEO 공사 완료 상태로 납품.",
         "keywords": "SEO 웹사이트 제작, 홈페이지제작, 랜딩페이지제작, 워드프레스, SEO 최적화 웹사이트, 반응형 웹사이트",
         "h1": "SEO 웹사이트 제작",
         "eyebrow": "SEO-READY WEB DESIGN",
@@ -475,7 +508,7 @@ PAGES = {
                     ]) +
             section("INCLUDED", "제작 시 기본 포함 사항", "모든 사이트에 SEO 기초 공사가 포함됩니다.",
                     [
-                        {"icon":"⚡","h":"속도 최적화","p":"Core Web Vitals 90점+ 보장."},
+                        {"icon":"⚡","h":"속도 최적화","p":"Core Web Vitals 90점+ 기준 점검."},
                         {"icon":"📱","h":"반응형 디자인","p":"모든 디바이스 완벽 대응."},
                         {"icon":"🔍","h":"SEO 셋업","p":"메타·OG·sitemap·robots·스키마 마크업."},
                         {"icon":"📊","h":"분석 연동","p":"GA4, GTM, 서치콘솔, 픽셀 연동."},
@@ -485,7 +518,7 @@ PAGES = {
     },
 
     "/about/": {
-        "title": "회사 소개 | 원서치프로 - SEO·디지털 마케팅 에이전시",
+        "title": "회사 소개 | OneSearchPro - SEO 마케팅 에이전시",
         "desc": "OneSearchPro는 서울에 거점을 둔 SEO·디지털 마케팅 전문 에이전시입니다. 화이트햇 방식과 투명한 데이터로 180+ 프로젝트를 성공시킨 작업 원칙과 프로세스를 소개합니다.",
         "keywords": "OneSearchPro, 원서치프로, SEO 에이전시, 마케팅 에이전시, 작업 원칙, 진행 프로세스, 서울",
         "h1": "원서치프로 소개",
@@ -532,8 +565,8 @@ PAGES = {
     },
 
     "/services/technical-seo/": {
-        "title": "기술 SEO 진단 | 색인·속도·구조화 데이터 점검 - OneSearchPro",
-        "desc": "OneSearchPro의 기술 SEO 진단은 색인 문제, robots.txt, sitemap, canonical, Core Web Vitals, 모바일 사용성, 중복 URL, 구조화 데이터까지 100+ 항목을 점검하는 테크니컬 SEO 서비스입니다.",
+        "title": "기술 SEO 진단 | 기술 SEO 점검 - OneSearchPro",
+        "desc": "색인·robots·sitemap·canonical·CWV·모바일·중복 URL·구조화 데이터까지 100+ 항목 점검. 코드 레벨 개선 실행 가능한 기술 SEO 진단.",
         "keywords": "기술 SEO, 테크니컬 SEO, 색인 문제, robots.txt, sitemap, canonical, Core Web Vitals, 구조화 데이터, 중복 URL",
         "h1": "기술 SEO 진단",
         "eyebrow": "TECHNICAL SEO AUDIT",
@@ -562,10 +595,10 @@ PAGES = {
     },
 
     "/services/content-seo/": {
-        "title": "콘텐츠 SEO | 키워드·H태그·E-E-A-T 콘텐츠 전략 - OneSearchPro",
-        "desc": "OneSearchPro의 콘텐츠 SEO는 키워드 설계, H태그 구조, 검색 의도 분석, E-E-A-T 기반 콘텐츠 개선, 블로그 콘텐츠 전략을 통합 제공하는 SEO 서비스입니다.",
+        "title": "콘텐츠 SEO | 키워드·H태그·E-E-A-T - OneSearchPro",
+        "desc": "키워드 설계·H태그 구조·검색 의도·E-E-A-T 기반 콘텐츠 개선·블로그 전략을 통합한 콘텐츠 SEO 서비스.",
         "keywords": "콘텐츠 SEO, 키워드 설계, H태그 구조, 검색 의도, E-E-A-T, 블로그 SEO, 콘텐츠 전략",
-        "h1": "콘텐츠 SEO",
+        "h1": "콘텐츠 SEO 서비스",
         "eyebrow": "CONTENT SEO",
         "lead": "검색엔진이 신뢰하는 콘텐츠에는 구조가 있습니다. 키워드 설계부터 H태그 계층, 검색 의도 매칭, E-E-A-T 신호까지 — 토픽 권위를 만드는 콘텐츠 전략을 설계합니다.",
         "body": (
@@ -589,8 +622,8 @@ PAGES = {
     },
 
     "/services/digital-pr/": {
-        "title": "디지털 PR · 백링크 진단 | 링크 리스크 점검과 평판 관리 - OneSearchPro",
-        "desc": "OneSearchPro의 디지털 PR·백링크 진단은 위험한 링크 식별, 브랜드 언급 추적, 외부 평판 분석, 디지털 PR을 통한 자연스러운 신뢰 신호 확보 서비스입니다.",
+        "title": "디지털 PR · 백링크 진단 | OneSearchPro",
+        "desc": "위험한 백링크 식별·브랜드 언급 추적·외부 평판·디지털 PR로 자연스러운 신뢰 신호를 확보하는 진단 서비스.",
         "keywords": "디지털 PR, 백링크 진단, 링크 리스크, 백링크 분석, 브랜드 언급, 외부 평판, 백링크 감사",
         "h1": "디지털 PR · 백링크 진단",
         "eyebrow": "DIGITAL PR & LINK AUDIT",
@@ -615,7 +648,7 @@ PAGES = {
     },
 
     "/case-studies/": {
-        "title": "성공사례 | SEO·검색 노출 개선 작업 기록 - OneSearchPro",
+        "title": "성공사례 | SEO 작업 기록 | OneSearchPro",
         "desc": "OneSearchPro의 실제 작업 사례 모음. SEO 개선, 지역 SEO, 콘텐츠 개선, 웹사이트 제작, 검색 노출 문제 해결 사례를 작업 전 문제·진단·개선·변화·주의점 5단계로 정리했습니다.",
         "keywords": "SEO 성공사례, 마케팅 사례, 검색 노출 사례, 지역 SEO 사례, 콘텐츠 SEO 사례, 백링크 사례",
         "h1": "성공사례",
@@ -757,7 +790,7 @@ PAGES = {
     },
 
     "/insights/": {
-        "title": "SEO 인사이트 | 구글·네이버 SEO 전문 콘텐츠 - OneSearchPro",
+        "title": "SEO 인사이트 | 구글·네이버 SEO 가이드 | OneSearchPro",
         "desc": "OneSearchPro의 SEO 인사이트는 구글 SEO, 기술 SEO, 콘텐츠 SEO, 지역 SEO, 백링크·디지털 PR, SNS 마케팅, 검색 노출 문제 해결을 다루는 전문 콘텐츠 허브입니다.",
         "keywords": "SEO 인사이트, 구글 SEO 가이드, 기술 SEO, 콘텐츠 SEO, 지역 SEO, 백링크 가이드, 검색 노출",
         "h1": "SEO 인사이트",
@@ -768,13 +801,13 @@ PAGES = {
                 "구글 검색 결과 페이지의 작동 원리, 알고리즘 업데이트, E-E-A-T 가이드라인을 다룹니다.",
                 [
                     insight_article_card(
-                        "구글 코어 업데이트 직후 2주, 절대 손대지 말아야 할 5가지",
+                        "코어 업데이트 직후 SEO 주의사항 5가지",
                         "트래픽이 흔들릴 때 가장 위험한 건 패닉 작업입니다. 첫 2주에 손대지 말아야 할 5가지와 대신 무엇을 해야 하는지.",
                         "/insights/google-seo/post-core-update-mistakes/",
                         7
                     ),
                     insight_article_card(
-                        "Helpful Content System 셀프 점검 — 한국 사이트가 자주 떨어지는 7가지 질문",
+                        "Helpful Content System 셀프 점검 7가지",
                         "HCS는 사이트 전체 평가입니다. 한국 사이트가 셀프 평가에서 자주 떨어지는 패턴과 통과 기준.",
                         "/insights/google-seo/helpful-content-self-check/",
                         8
@@ -800,13 +833,13 @@ PAGES = {
                         9
                     ),
                     insight_article_card(
-                        "워드프레스 사이트 LCP 4초 → 1.5초로 줄인 실제 작업 순서",
+                        "워드프레스 LCP 개선 작업 순서",
                         "워드프레스 LCP 90%는 4가지 패턴에서 결정됩니다. 효과 큰 순서로 정리한 작업 매뉴얼.",
                         "/insights/technical-seo/wordpress-lcp-fix/",
                         8
                     ),
                     insight_article_card(
-                        "모바일 우선 색인 — 무엇이 다르고 무엇을 점검해야 하나",
+                        "모바일 우선 색인 점검 가이드",
                         "반응형 사이트도 안심할 수 없는 6가지 점검 항목과 콘텐츠 패리티의 의미.",
                         "/insights/technical-seo/mobile-first-indexing/",
                         8
@@ -820,13 +853,13 @@ PAGES = {
                 "키워드 설계·H태그·검색 의도·콘텐츠 클러스터링·리프레시 전략을 다룹니다.",
                 [
                     insight_article_card(
-                        "병원·치과 블로그 첫 100자 — 환자 검색어로 시작해야 하는 이유와 예시",
+                        "병원·치과 블로그 첫 100자 작성법",
                         "첫 100자에서 검색 의도 매칭과 메타 디스크립션이 결정됩니다. 의료광고심의 충돌도 피하는 작성법.",
                         "/insights/content-seo/medical-blog-first-100/",
                         7
                     ),
                     insight_article_card(
-                        "쇼핑몰 제품 페이지 본문이 비어있을 때 추가하는 6단락 구조",
+                        "쇼핑몰 제품 페이지 본문 6단락 구조",
                         "이미지 위주 제품 페이지가 색인 안 되는 이유와, 본문 6단락으로 롱테일 노출을 늘리는 패턴.",
                         "/insights/content-seo/product-page-content-structure/",
                         8
@@ -840,13 +873,13 @@ PAGES = {
                 "구글 비즈니스 프로필·네이버 플레이스·지역 랜딩페이지·NAP 일관성 가이드입니다.",
                 [
                     insight_article_card(
-                        "신규 매장 네이버 플레이스 — 영수증 리뷰 적을 때 첫 3개월 운영 패턴",
+                        "신규 매장 네이버 플레이스 3개월 운영",
                         "리뷰 없는 신규 매장이 빠지는 함정과, 정보·블로그·리뷰 우선순위로 짠 월별 운영 매뉴얼.",
                         "/insights/local-seo/new-store-naver-place/",
                         7
                     ),
                     insight_article_card(
-                        "다지점 매장 구글 비즈니스 프로필 — 본사·지점 정보 분리 원칙과 흔한 실수",
+                        "다지점 매장 GBP 본사·지점 분리 원칙",
                         "본사 정보를 모든 지점에 복붙하면 안 되는 이유. 위치·카테고리·사진·리뷰 응대 4가지 분리 원칙.",
                         "/insights/local-seo/multi-location-gbp/",
                         7
@@ -860,13 +893,13 @@ PAGES = {
                 "안전한 외부 신호 확보, 백링크 리스크 진단, 디지털 PR 전략을 다룹니다.",
                 [
                     insight_article_card(
-                        "이전 대행사가 남긴 위험한 백링크 — 어디서부터 Disavow 결정해야 하나",
+                        "위험한 백링크 Disavow 결정 기준",
                         "도구 점수의 한계와 즉시·보류·유지 3단계 분류, 단계적 Disavow 제출 전략.",
                         "/insights/backlink-pr/disavow-decision/",
                         9
                     ),
                     insight_article_card(
-                        "한국 언론사 보도자료 배포 — 백링크 따라오는 매체와 안 오는 매체 구분법",
+                        "한국 언론사 보도자료 백링크 구분법",
                         "본문 링크가 살아남는 매체와 텍스트만 남는 매체의 차이, 브랜드 언급의 가치.",
                         "/insights/backlink-pr/korean-press-release/",
                         7
@@ -880,13 +913,13 @@ PAGES = {
                 "인스타그램·유튜브·틱톡·네이버 채널 운영과 SEO 보조 역할에 대한 가이드입니다.",
                 [
                     insight_article_card(
-                        "유튜브 쇼츠 설명란 — 본 영상 페이지로 트래픽 유도하는 텍스트 구조",
+                        "유튜브 쇼츠 설명란 트래픽 유도법",
                         "쇼츠 설명란의 첫 줄·본문·해시태그 구조와 외부 사이트 클릭률을 높이는 패턴.",
                         "/insights/sns/youtube-shorts-description/",
                         6
                     ),
                     insight_article_card(
-                        "인스타그램 프로필 링크 — 링크인바이오 vs 자체 랜딩, 어느 게 SEO에 도움될까",
+                        "인스타그램 프로필 링크 SEO 비교",
                         "두 선택지의 SEO·UX·측정 관점 비교. 비즈니스 단계별 권장 방향.",
                         "/insights/sns/instagram-link-in-bio/",
                         6
@@ -900,7 +933,7 @@ PAGES = {
                 "색인·페널티·중복·트래픽 급락 등 \"검색 노출이 안 될 때\" 진단 가이드입니다.",
                 [
                     insight_article_card(
-                        "사이트 리뉴얼 후 트래픽 절반 — 301 리다이렉트 시 자주 빠뜨리는 12가지",
+                        "사이트 리뉴얼 301 매핑 실수 12가지",
                         "리뉴얼 후 트래픽 손실의 90%는 301 매핑 누락에서. 자주 빠뜨리는 12가지와 모니터링 매뉴얼.",
                         "/insights/visibility/301-migration-mistakes/",
                         8
@@ -922,7 +955,7 @@ PAGES = {
 
     # ========== Case Studies subpages ==========
     "/case-studies/seo/": {
-        "title": "SEO 개선 성공사례 | 사이트 구조·콘텐츠·기술 통합 개선 - OneSearchPro",
+        "title": "SEO 개선 사례 | 통합 개선 작업 기록 | OneSearchPro",
         "desc": "OneSearchPro의 SEO 개선 사례 모음. 키워드 매핑, 토픽 클러스터, 내부 링크, 스키마 적용까지 통합 작업으로 검색 노출이 회복된 B2B·교육·미디어 프로젝트를 작업 전·진단·개선·변화·주의점 5단계로 기록했습니다.",
         "keywords": "SEO 개선 사례, SEO 성공사례, 검색 노출 회복, 키워드 매핑, 토픽 클러스터, B2B SEO 사례",
         "h1": "SEO 개선 사례",
@@ -967,7 +1000,7 @@ PAGES = {
     },
 
     "/case-studies/local-seo/": {
-        "title": "지역 SEO 성공사례 | 네이버 플레이스·구글 비즈니스 프로필 - OneSearchPro",
+        "title": "지역 SEO 사례 | GBP·네이버 플레이스 | OneSearchPro",
         "desc": "OneSearchPro의 지역 SEO 사례. \"지역명 + 서비스\" 키워드 노출 개선, 구글 비즈니스 프로필·네이버 플레이스 정비, 다지점 매장 지역 랜딩 분리 등 지역 기반 검색 유입을 회복시킨 작업 기록입니다.",
         "keywords": "지역 SEO 사례, 네이버 플레이스 사례, 구글 비즈니스 프로필, 지역 키워드 노출, 마사지 사이트 SEO, 다지점 SEO",
         "h1": "지역 SEO 사례",
@@ -1012,7 +1045,7 @@ PAGES = {
     },
 
     "/case-studies/content/": {
-        "title": "콘텐츠 SEO 개선 사례 | 키워드·구조·E-E-A-T 적용 기록 - OneSearchPro",
+        "title": "콘텐츠 SEO 사례 | E-E-A-T 적용 기록 | OneSearchPro",
         "desc": "OneSearchPro의 콘텐츠 SEO 개선 사례. 오래된 글 리프레시, 제품 페이지 재작성, 검색 의도 매칭, E-E-A-T 신호 강화로 콘텐츠 자산이 다시 작동하기 시작한 실제 작업 기록입니다.",
         "keywords": "콘텐츠 SEO 사례, 콘텐츠 리프레시, 제품 페이지 SEO, E-E-A-T 사례, 검색 의도 매칭",
         "h1": "콘텐츠 개선 사례",
@@ -1057,7 +1090,7 @@ PAGES = {
     },
 
     "/case-studies/web-design/": {
-        "title": "SEO 웹사이트 제작 사례 | 검색엔진 친화 구조 제작 기록 - OneSearchPro",
+        "title": "SEO 웹사이트 제작 사례 | OneSearchPro",
         "desc": "OneSearchPro의 SEO 웹사이트 제작 사례. 신규 사이트 SEO 기초 공사, 리뉴얼 시 URL 마이그레이션, Core Web Vitals 최적화 등 처음부터 검색 친화로 만든 제작 기록입니다.",
         "keywords": "SEO 웹사이트 제작 사례, 사이트 리뉴얼, URL 마이그레이션, Core Web Vitals 사례, 신규 사이트 SEO",
         "h1": "웹사이트 제작 사례",
@@ -1092,7 +1125,7 @@ PAGES = {
     },
 
     "/case-studies/visibility/": {
-        "title": "검색 노출 문제 해결 사례 | 색인·페널티·중복 URL - OneSearchPro",
+        "title": "검색 노출 해결 사례 | 색인·페널티 | OneSearchPro",
         "desc": "OneSearchPro의 검색 노출 문제 해결 사례. 색인 누락, 페널티, 중복 URL, robots 설정 오류 등 \"검색 노출 자체가 막혀 있던\" 사이트를 정상화한 작업 기록입니다.",
         "keywords": "검색 노출 사례, 색인 문제, 중복 URL, robots 설정, 페널티 회복, 색인 누락",
         "h1": "검색 노출 문제 해결 사례",
@@ -1138,7 +1171,7 @@ PAGES = {
 
     # ========== Insights subpages ==========
     "/insights/google-seo/": {
-        "title": "구글 SEO 가이드 | E-E-A-T·알고리즘·검색 의도 - OneSearchPro 인사이트",
+        "title": "구글 SEO 가이드 | E-E-A-T·알고리즘 | OneSearchPro",
         "desc": "구글 SEO 실무 가이드 모음. 신규 사이트 시작 체크리스트, E-E-A-T 적용 방법, 코어 업데이트 대응, 검색 의도 분류 등 구글 검색 결과 페이지의 작동 원리를 다룹니다.",
         "keywords": "구글 SEO 가이드, E-E-A-T, 코어 업데이트, 검색 의도, 구글 알고리즘, 구글 SEO 입문",
         "h1": "구글 SEO",
@@ -1159,7 +1192,7 @@ PAGES = {
     },
 
     "/insights/technical-seo/": {
-        "title": "기술 SEO 가이드 | 색인·sitemap·Core Web Vitals - OneSearchPro 인사이트",
+        "title": "기술 SEO 가이드 | 색인·CWV | OneSearchPro",
         "desc": "기술 SEO 실무 가이드. 색인 누락 진단, robots·sitemap·canonical 설정, Core Web Vitals 90+ 만들기, JavaScript SEO 등 테크니컬 영역의 가이드 모음.",
         "keywords": "기술 SEO 가이드, 테크니컬 SEO, Core Web Vitals, 색인 누락, sitemap, canonical, JavaScript SEO",
         "h1": "기술 SEO",
@@ -1180,7 +1213,7 @@ PAGES = {
     },
 
     "/insights/content-seo/": {
-        "title": "콘텐츠 SEO 가이드 | 키워드·H태그·토픽 권위 - OneSearchPro 인사이트",
+        "title": "콘텐츠 SEO 가이드 | 키워드·토픽 권위 | OneSearchPro",
         "desc": "콘텐츠 SEO 실무 가이드. 키워드 의도 분류, H태그 구조, 토픽 클러스터 설계, 콘텐츠 리프레시 전략 등 검색 자산이 되는 콘텐츠를 만드는 방법.",
         "keywords": "콘텐츠 SEO 가이드, 키워드 리서치, 토픽 클러스터, H태그 구조, 콘텐츠 리프레시, 검색 의도",
         "h1": "콘텐츠 SEO",
@@ -1201,7 +1234,7 @@ PAGES = {
     },
 
     "/insights/local-seo/": {
-        "title": "지역 SEO 가이드 | GBP·네이버 플레이스·NAP - OneSearchPro 인사이트",
+        "title": "지역 SEO 가이드 | GBP·네이버 플레이스 | OneSearchPro",
         "desc": "지역 SEO 실무 가이드. 구글 비즈니스 프로필 최적화, 네이버 플레이스 운영, 지역 랜딩페이지 설계, NAP 일관성 등 지역 기반 검색 유입 가이드 모음.",
         "keywords": "지역 SEO 가이드, 구글 비즈니스 프로필, 네이버 플레이스, 지역 랜딩페이지, NAP 일관성, 로컬 SEO",
         "h1": "지역 SEO",
@@ -1222,7 +1255,7 @@ PAGES = {
     },
 
     "/insights/backlink-pr/": {
-        "title": "백링크·디지털 PR 가이드 | 링크 리스크·평판 관리 - OneSearchPro 인사이트",
+        "title": "백링크·디지털 PR 가이드 | OneSearchPro",
         "desc": "안전한 외부 신호 확보 가이드. 백링크 리스크 진단, Disavow 활용, 디지털 PR과 게스트 포스트의 차이, 브랜드 언급 링크 전환 등 외부 신뢰 신호 가이드.",
         "keywords": "백링크 가이드, 디지털 PR, Disavow, 백링크 리스크, 브랜드 언급, 외부 신뢰 신호",
         "h1": "백링크 · 디지털 PR",
@@ -1243,7 +1276,7 @@ PAGES = {
     },
 
     "/insights/sns/": {
-        "title": "SNS 마케팅 가이드 | 인스타·유튜브·틱톡 SEO 보조 - OneSearchPro 인사이트",
+        "title": "SNS 마케팅 가이드 | 인스타·유튜브 | OneSearchPro",
         "desc": "SNS 마케팅과 SEO의 관계를 다루는 가이드. 소셜 신호가 SEO에 미치는 영향, 유튜브 SEO, 인스타그램 검색 활용 등 외부 유입과 브랜드 신뢰 보조 전략.",
         "keywords": "SNS 마케팅 가이드, 유튜브 SEO, 인스타그램 SEO, 소셜 신호, 외부 유입, SNS와 SEO",
         "h1": "SNS 마케팅",
@@ -1263,7 +1296,7 @@ PAGES = {
     },
 
     "/insights/visibility/": {
-        "title": "검색 노출 문제 해결 가이드 | 색인 누락·트래픽 급락 진단 - OneSearchPro 인사이트",
+        "title": "검색 노출 문제 해결 가이드 | OneSearchPro",
         "desc": "검색 노출 문제 진단 가이드. 색인 누락 진단, 트래픽 급락 4주 매뉴얼, 수동 조치 회복, 중복 콘텐츠 정리 등 \"검색 노출이 안 될 때\" 점검할 항목 모음.",
         "keywords": "검색 노출 진단, 색인 누락, 트래픽 급락, 수동 조치, 중복 콘텐츠, 페널티 회복",
         "h1": "검색 노출 문제 해결",
@@ -1354,10 +1387,10 @@ PAGES = {
     # ===================== BLOG ARTICLES =====================
     # Google SEO category
     "/insights/google-seo/post-core-update-mistakes/": {
-        "title": "구글 코어 업데이트 직후 2주, 절대 손대지 말아야 할 5가지 | OneSearchPro 인사이트",
+        "title": "코어 업데이트 직후 SEO 주의사항 5가지 | OneSearchPro",
         "desc": "코어 업데이트 발표 후 트래픽이 흔들릴 때 가장 위험한 건 패닉 작업입니다. 첫 2주간 손대지 말아야 할 5가지와 그 이유, 그리고 대신 무엇을 해야 하는지 정리합니다.",
         "keywords": "구글 코어 업데이트, core update, 트래픽 급락, SEO 패닉, 코어 업데이트 대응",
-        "h1": "구글 코어 업데이트 직후 2주, 절대 손대지 말아야 할 5가지",
+        "h1": "코어 업데이트 직후 SEO 주의사항 5가지",
         "eyebrow": "GOOGLE SEO · ARTICLE",
         "lead": "코어 업데이트 후 트래픽이 흔들릴 때 가장 위험한 건 \"뭐라도 해야 할 것 같다\"는 충동입니다. 첫 2주에 손대지 말아야 할 5가지와 그 대신 해야 할 일을 실무 관점에서 정리합니다.",
         "body": blog_post(
@@ -1393,14 +1426,14 @@ PAGES = {
                 "대신 \"4주 관찰\"이 진짜 원인을 찾는 가장 빠른 길입니다.",
             ],
             related=[
-                ("Helpful Content System 셀프 점검 — 한국 사이트가 자주 떨어지는 7가지 질문", "/insights/google-seo/helpful-content-self-check/", "구글 SEO"),
+                ("Helpful Content System 셀프 점검 7가지", "/insights/google-seo/helpful-content-self-check/", "구글 SEO"),
                 ("트래픽이 갑자기 떨어졌을 때 4주 진단 매뉴얼", "/insights/visibility/", "검색 노출"),
                 ("SEO 컨설팅 서비스", "/services/seo/", "서비스"),
             ]
         ),
         "json_ld": blog_jsonld(
             url="https://onesearchpro.org/insights/google-seo/post-core-update-mistakes/",
-            title="구글 코어 업데이트 직후 2주, 절대 손대지 말아야 할 5가지",
+            title="코어 업데이트 직후 SEO 주의사항 5가지",
             desc="코어 업데이트 직후 패닉 작업이 위험한 이유와 4주 관찰 매뉴얼.",
             date_published="2025-05-14"
         ),
@@ -1408,10 +1441,10 @@ PAGES = {
     },
 
     "/insights/google-seo/helpful-content-self-check/": {
-        "title": "Helpful Content System 셀프 점검 — 한국 사이트가 자주 떨어지는 7가지 질문 | OneSearchPro 인사이트",
+        "title": "Helpful Content System 셀프 점검 7가지 | OneSearchPro",
         "desc": "구글의 Helpful Content System은 사이트 전체 평가에 영향을 줍니다. 한국 사이트가 셀프 평가에서 자주 떨어지는 7가지 질문과 통과 기준을 정리합니다.",
         "keywords": "Helpful Content System, HCS, 도움이 되는 콘텐츠, 구글 셀프 평가, 콘텐츠 품질 평가",
-        "h1": "Helpful Content System 셀프 점검 — 한국 사이트가 자주 떨어지는 7가지 질문",
+        "h1": "Helpful Content System 셀프 점검 7가지",
         "eyebrow": "GOOGLE SEO · ARTICLE",
         "lead": "Helpful Content System(HCS)은 \"이 사이트가 사람에게 도움이 되는가\"를 사이트 전체 단위로 평가합니다. 글 한 편이 아닌 사이트 전체 신호이기 때문에 한 번 분류되면 회복이 느립니다. 구글이 공개한 셀프 점검 질문 중 한국 사이트가 가장 자주 떨어지는 7가지를 짚어봅니다.",
         "body": blog_post(
@@ -1455,14 +1488,14 @@ PAGES = {
                 "옛 글 정리·저자 정보·출처 인용·키워드 스터핑 제거가 가장 효과적인 시작점입니다.",
             ],
             related=[
-                ("구글 코어 업데이트 직후 2주, 절대 손대지 말아야 할 5가지", "/insights/google-seo/post-core-update-mistakes/", "구글 SEO"),
-                ("쇼핑몰 제품 페이지 본문이 비어있을 때 추가하는 6단락 구조", "/insights/content-seo/product-page-content-structure/", "콘텐츠 SEO"),
+                ("코어 업데이트 직후 SEO 주의사항 5가지", "/insights/google-seo/post-core-update-mistakes/", "구글 SEO"),
+                ("쇼핑몰 제품 페이지 본문 6단락 구조", "/insights/content-seo/product-page-content-structure/", "콘텐츠 SEO"),
                 ("콘텐츠 SEO 서비스", "/services/content-seo/", "서비스"),
             ]
         ),
         "json_ld": blog_jsonld(
             url="https://onesearchpro.org/insights/google-seo/helpful-content-self-check/",
-            title="Helpful Content System 셀프 점검 — 한국 사이트가 자주 떨어지는 7가지 질문",
+            title="Helpful Content System 셀프 점검 7가지",
             desc="구글 HCS의 셀프 평가 질문 중 한국 사이트가 가장 자주 떨어지는 패턴 분석.",
             date_published="2025-05-14"
         ),
@@ -1470,7 +1503,7 @@ PAGES = {
     },
 
     "/insights/google-seo/first-month-priorities/": {
-        "title": "신규 사이트 첫 1개월 SEO 우선순위 5가지 — 무엇부터 해야 하나 | OneSearchPro 인사이트",
+        "title": "신규 사이트 첫 1개월 SEO 우선순위 5가지 | OneSearchPro",
         "desc": "신규 도메인이 첫 한 달에 해야 할 SEO 작업을 우선순위 순으로 정리. 측정 기반·색인 확보·핵심 페이지 최적화·Core Web Vitals 기준선·첫 콘텐츠 발행까지의 실무 순서.",
         "keywords": "신규 사이트 SEO, 신규 도메인 SEO, 첫달 SEO, SEO 우선순위, 서치콘솔 셋업, SEO 처음 시작",
         "h1": "신규 사이트 첫 1개월 SEO 우선순위 5가지",
@@ -1547,7 +1580,7 @@ PAGES = {
                 "백링크 대량 발주·디자인 리뉴얼·과한 자동화는 첫 한 달에는 피해야 합니다.",
             ],
             related=[
-                ("구글 코어 업데이트 직후 2주, 절대 손대지 말아야 할 5가지", "/insights/google-seo/post-core-update-mistakes/", "구글 SEO"),
+                ("코어 업데이트 직후 SEO 주의사항 5가지", "/insights/google-seo/post-core-update-mistakes/", "구글 SEO"),
                 ("서치콘솔 \"발견됨 - 현재 색인되지 않음\" 7가지 원인과 진단 순서", "/insights/technical-seo/discovered-not-indexed/", "기술 SEO"),
                 ("SEO 컨설팅 서비스", "/services/seo/", "서비스"),
             ]
@@ -1563,7 +1596,7 @@ PAGES = {
 
     # Technical SEO category
     "/insights/technical-seo/discovered-not-indexed/": {
-        "title": "서치콘솔 '발견됨 - 현재 색인되지 않음' 7가지 원인과 진단 순서 | OneSearchPro 인사이트",
+        "title": "'발견됨 - 색인되지 않음' 원인 7가지 | OneSearchPro",
         "desc": "구글 서치콘솔의 '발견됨 - 현재 색인되지 않음' 메시지가 의미하는 것과 7가지 흔한 원인, 빈도 순으로 정렬한 진단 순서를 정리합니다.",
         "keywords": "발견됨 현재 색인되지 않음, Discovered currently not indexed, 색인 누락, 서치콘솔, 크롤링 예산",
         "h1": "서치콘솔 \"발견됨 - 현재 색인되지 않음\" 7가지 원인과 진단 순서",
@@ -1613,7 +1646,7 @@ PAGES = {
                 "sitemap은 자동 생성보다 큐레이션이 효과적입니다.",
             ],
             related=[
-                ("워드프레스 사이트 LCP 4초 → 1.5초로 줄인 실제 작업 순서", "/insights/technical-seo/wordpress-lcp-fix/", "기술 SEO"),
+                ("워드프레스 LCP 개선 작업 순서", "/insights/technical-seo/wordpress-lcp-fix/", "기술 SEO"),
                 ("서치콘솔 \"크롤링됨 - 현재 색인되지 않음\" — 다른 상태와의 차이와 대응법", "/insights/visibility/crawled-not-indexed/", "검색 노출"),
                 ("기술 SEO 진단 서비스", "/services/technical-seo/", "서비스"),
             ]
@@ -1628,10 +1661,10 @@ PAGES = {
     },
 
     "/insights/technical-seo/mobile-first-indexing/": {
-        "title": "모바일 우선 색인 — 무엇이 다르고 무엇을 점검해야 하나 | OneSearchPro 인사이트",
+        "title": "모바일 우선 색인 점검 가이드 | OneSearchPro",
         "desc": "구글 모바일 우선 색인(Mobile-First Indexing)이 데스크탑 색인과 어떻게 다른지, 반응형 사이트도 점검해야 할 6가지 항목과 흔히 빠뜨리는 함정을 정리합니다.",
         "keywords": "모바일 우선 색인, Mobile-First Indexing, 반응형 SEO, 모바일 SEO, viewport, 콘텐츠 패리티",
-        "h1": "모바일 우선 색인 — 무엇이 다르고 무엇을 점검해야 하나",
+        "h1": "모바일 우선 색인 점검 가이드",
         "eyebrow": "TECHNICAL SEO · ARTICLE",
         "lead": "이름은 \"모바일 우선\"이지만 사실상 \"모바일이 전부\"입니다. 데스크탑에만 있고 모바일에 없는 콘텐츠는 색인되지 않습니다. 반응형 사이트도 안심할 수 없는 6가지 점검 항목을 정리합니다.",
         "body": blog_post(
@@ -1715,14 +1748,14 @@ PAGES = {
                 "별도 모바일 도메인은 관리 부담만 큽니다. 반응형이 정답입니다.",
             ],
             related=[
-                ("워드프레스 사이트 LCP 4초 → 1.5초로 줄인 실제 작업 순서", "/insights/technical-seo/wordpress-lcp-fix/", "기술 SEO"),
+                ("워드프레스 LCP 개선 작업 순서", "/insights/technical-seo/wordpress-lcp-fix/", "기술 SEO"),
                 ("서치콘솔 \"발견됨 - 현재 색인되지 않음\" 7가지 원인과 진단 순서", "/insights/technical-seo/discovered-not-indexed/", "기술 SEO"),
                 ("기술 SEO 진단 서비스", "/services/technical-seo/", "서비스"),
             ]
         ),
         "json_ld": blog_jsonld(
             url="https://onesearchpro.org/insights/technical-seo/mobile-first-indexing/",
-            title="모바일 우선 색인 — 무엇이 다르고 무엇을 점검해야 하나",
+            title="모바일 우선 색인 점검 가이드",
             desc="모바일 우선 색인의 데스크탑 색인 차이점과 점검 6가지.",
             date_published="2025-05-14"
         ),
@@ -1730,10 +1763,10 @@ PAGES = {
     },
 
     "/insights/technical-seo/wordpress-lcp-fix/": {
-        "title": "워드프레스 사이트 LCP 4초 → 1.5초로 줄인 실제 작업 순서 | OneSearchPro 인사이트",
+        "title": "워드프레스 LCP 개선 작업 순서 | OneSearchPro",
         "desc": "워드프레스 사이트의 LCP(Largest Contentful Paint)가 느려지는 가장 흔한 4가지 원인과 효과 큰 순서로 정리한 작업 매뉴얼. 실측 기반.",
         "keywords": "워드프레스 LCP, Core Web Vitals, LCP 개선, 페이지 속도, 워드프레스 최적화",
-        "h1": "워드프레스 사이트 LCP 4초 → 1.5초로 줄인 실제 작업 순서",
+        "h1": "워드프레스 LCP 개선 작업 순서",
         "eyebrow": "TECHNICAL SEO · ARTICLE",
         "lead": "워드프레스 LCP가 느린 이유는 거의 정해져 있습니다. 4가지 핵심 원인을 효과 큰 순서로 정리하고, 실제 작업 단계와 측정 방법까지 정리합니다.",
         "body": blog_post(
@@ -1791,13 +1824,13 @@ PAGES = {
             ],
             related=[
                 ("서치콘솔 \"발견됨 - 현재 색인되지 않음\" 7가지 원인과 진단 순서", "/insights/technical-seo/discovered-not-indexed/", "기술 SEO"),
-                ("사이트 리뉴얼 후 트래픽 절반 — 301 리다이렉트 시 자주 빠뜨리는 12가지", "/insights/visibility/301-migration-mistakes/", "검색 노출"),
+                ("사이트 리뉴얼 301 매핑 실수 12가지", "/insights/visibility/301-migration-mistakes/", "검색 노출"),
                 ("기술 SEO 진단 서비스", "/services/technical-seo/", "서비스"),
             ]
         ),
         "json_ld": blog_jsonld(
             url="https://onesearchpro.org/insights/technical-seo/wordpress-lcp-fix/",
-            title="워드프레스 사이트 LCP 4초 → 1.5초로 줄인 실제 작업 순서",
+            title="워드프레스 LCP 개선 작업 순서",
             desc="워드프레스 LCP 개선의 4가지 핵심 작업과 빈도순 매뉴얼.",
             date_published="2025-05-14"
         ),
@@ -1806,10 +1839,10 @@ PAGES = {
 
     # Content SEO category
     "/insights/content-seo/medical-blog-first-100/": {
-        "title": "병원·치과 블로그 첫 100자 — 환자 검색어로 시작해야 하는 이유와 예시 | OneSearchPro 인사이트",
+        "title": "병원·치과 블로그 첫 100자 작성법 | OneSearchPro",
         "desc": "병원·치과 블로그가 검색 노출이 약한 이유는 첫 100자에 있습니다. 환자가 실제로 검색하는 표현으로 시작하는 패턴과 의료광고심의 충돌을 피하는 작성법.",
         "keywords": "병원 블로그 SEO, 치과 블로그, 의료 콘텐츠, 환자 검색어, 의료광고심의",
-        "h1": "병원·치과 블로그 첫 100자 — 환자 검색어로 시작해야 하는 이유와 예시",
+        "h1": "병원·치과 블로그 첫 100자 작성법",
         "eyebrow": "CONTENT SEO · ARTICLE",
         "lead": "병원·치과 블로그의 검색 노출이 약한 이유는 대개 첫 100자에 있습니다. 환자가 실제 검색하는 표현 대신 의료진의 학술적 표현으로 시작하기 때문입니다. 의료광고심의 규제와 충돌을 피하면서 검색 의도를 잡는 첫 문장 패턴을 정리합니다.",
         "body": blog_post(
@@ -1857,14 +1890,14 @@ PAGES = {
                 "\"안녕하세요\"는 글 끝으로 옮기세요. 첫 100자는 검색 의도에 답하는 자리입니다.",
             ],
             related=[
-                ("쇼핑몰 제품 페이지 본문이 비어있을 때 추가하는 6단락 구조", "/insights/content-seo/product-page-content-structure/", "콘텐츠 SEO"),
-                ("Helpful Content System 셀프 점검 — 한국 사이트가 자주 떨어지는 7가지 질문", "/insights/google-seo/helpful-content-self-check/", "구글 SEO"),
+                ("쇼핑몰 제품 페이지 본문 6단락 구조", "/insights/content-seo/product-page-content-structure/", "콘텐츠 SEO"),
+                ("Helpful Content System 셀프 점검 7가지", "/insights/google-seo/helpful-content-self-check/", "구글 SEO"),
                 ("콘텐츠 SEO 서비스", "/services/content-seo/", "서비스"),
             ]
         ),
         "json_ld": blog_jsonld(
             url="https://onesearchpro.org/insights/content-seo/medical-blog-first-100/",
-            title="병원·치과 블로그 첫 100자 — 환자 검색어로 시작해야 하는 이유와 예시",
+            title="병원·치과 블로그 첫 100자 작성법",
             desc="병원 블로그 첫 100자 작성법과 의료광고심의 회피 패턴.",
             date_published="2025-05-14"
         ),
@@ -1872,10 +1905,10 @@ PAGES = {
     },
 
     "/insights/content-seo/product-page-content-structure/": {
-        "title": "쇼핑몰 제품 페이지 본문이 비어있을 때 추가하는 6단락 구조 | OneSearchPro 인사이트",
+        "title": "쇼핑몰 제품 페이지 본문 6단락 구조 | OneSearchPro",
         "desc": "쇼핑몰 제품 페이지가 이미지 중심으로만 만들어져 검색 노출이 안 될 때, 본문을 채우는 6단락 구조와 스키마 마크업 가이드.",
         "keywords": "쇼핑몰 제품 페이지 SEO, 제품 상세 페이지, 제품 본문, Product 스키마, 쇼핑몰 콘텐츠",
-        "h1": "쇼핑몰 제품 페이지 본문이 비어있을 때 추가하는 6단락 구조",
+        "h1": "쇼핑몰 제품 페이지 본문 6단락 구조",
         "eyebrow": "CONTENT SEO · ARTICLE",
         "lead": "쇼핑몰 제품 페이지가 검색에 안 잡히는 가장 흔한 원인은 \"본문 자체가 거의 없는 것\"입니다. 이미지 중심으로 만들어진 페이지에 본문을 채우는 6단락 구조와 스키마 마크업을 정리합니다.",
         "body": blog_post(
@@ -1922,14 +1955,14 @@ PAGES = {
                 "본문 자동 생성·가짜 FAQ는 신뢰 신호가 역으로 작용하므로 피해야 합니다.",
             ],
             related=[
-                ("병원·치과 블로그 첫 100자 — 환자 검색어로 시작해야 하는 이유와 예시", "/insights/content-seo/medical-blog-first-100/", "콘텐츠 SEO"),
-                ("Helpful Content System 셀프 점검 — 한국 사이트가 자주 떨어지는 7가지 질문", "/insights/google-seo/helpful-content-self-check/", "구글 SEO"),
+                ("병원·치과 블로그 첫 100자 작성법", "/insights/content-seo/medical-blog-first-100/", "콘텐츠 SEO"),
+                ("Helpful Content System 셀프 점검 7가지", "/insights/google-seo/helpful-content-self-check/", "구글 SEO"),
                 ("콘텐츠 SEO 서비스", "/services/content-seo/", "서비스"),
             ]
         ),
         "json_ld": blog_jsonld(
             url="https://onesearchpro.org/insights/content-seo/product-page-content-structure/",
-            title="쇼핑몰 제품 페이지 본문이 비어있을 때 추가하는 6단락 구조",
+            title="쇼핑몰 제품 페이지 본문 6단락 구조",
             desc="쇼핑몰 제품 페이지에 본문을 채우는 6단락 구조와 스키마 가이드.",
             date_published="2025-05-14"
         ),
@@ -1938,10 +1971,10 @@ PAGES = {
 
     # Local SEO category
     "/insights/local-seo/new-store-naver-place/": {
-        "title": "신규 매장 네이버 플레이스 — 영수증 리뷰 적을 때 첫 3개월 운영 패턴 | OneSearchPro 인사이트",
+        "title": "신규 매장 네이버 플레이스 3개월 운영 | OneSearchPro",
         "desc": "신규 매장이 네이버 플레이스에서 \"리뷰 0\" 상태로 시작할 때, 첫 3개월을 어떻게 운영해야 노출이 자연스럽게 자라는지 정리합니다.",
         "keywords": "네이버 플레이스, 신규 매장 SEO, 영수증 리뷰, 플레이스 노출, 로컬 SEO",
-        "h1": "신규 매장 네이버 플레이스 — 영수증 리뷰 적을 때 첫 3개월 운영 패턴",
+        "h1": "신규 매장 네이버 플레이스 3개월 운영",
         "eyebrow": "LOCAL SEO · ARTICLE",
         "lead": "신규 매장이 네이버 플레이스에 등록하자마자 부딪히는 함정이 \"리뷰가 없어서 노출이 안 됨 → 노출 안 되니까 리뷰가 안 쌓임\"입니다. 첫 3개월을 어떻게 운영해야 이 함정에서 벗어나는지, 월별 우선순위로 정리합니다.",
         "body": blog_post(
@@ -2001,14 +2034,14 @@ PAGES = {
                 "3개월 후 노출·방문·리뷰·블로그 4가지를 함께 측정해 방향을 점검합니다.",
             ],
             related=[
-                ("다지점 매장 구글 비즈니스 프로필 — 본사·지점 정보 분리 원칙과 흔한 실수", "/insights/local-seo/multi-location-gbp/", "지역 SEO"),
+                ("다지점 매장 GBP 본사·지점 분리 원칙", "/insights/local-seo/multi-location-gbp/", "지역 SEO"),
                 ("지역 SEO 사례", "/case-studies/local-seo/", "성공사례"),
                 ("지역 SEO 서비스", "/services/local-seo/", "서비스"),
             ]
         ),
         "json_ld": blog_jsonld(
             url="https://onesearchpro.org/insights/local-seo/new-store-naver-place/",
-            title="신규 매장 네이버 플레이스 — 영수증 리뷰 적을 때 첫 3개월 운영 패턴",
+            title="신규 매장 네이버 플레이스 3개월 운영",
             desc="신규 매장 네이버 플레이스 운영 첫 3개월의 우선순위 매뉴얼.",
             date_published="2025-05-14"
         ),
@@ -2016,10 +2049,10 @@ PAGES = {
     },
 
     "/insights/local-seo/multi-location-gbp/": {
-        "title": "다지점 매장 구글 비즈니스 프로필 — 본사·지점 정보 분리 원칙과 흔한 실수 | OneSearchPro 인사이트",
+        "title": "다지점 매장 GBP 본사·지점 분리 원칙 | OneSearchPro",
         "desc": "지점 여러 개를 운영하는 매장이 구글 비즈니스 프로필을 통합 관리할 때, 본사·지점 정보를 어떻게 분리해야 지역 키워드 노출이 분산되지 않는지 정리합니다.",
         "keywords": "구글 비즈니스 프로필, GBP, 다지점 매장, 프랜차이즈 SEO, NAP 일관성",
-        "h1": "다지점 매장 구글 비즈니스 프로필 — 본사·지점 정보 분리 원칙과 흔한 실수",
+        "h1": "다지점 매장 GBP 본사·지점 분리 원칙",
         "eyebrow": "LOCAL SEO · ARTICLE",
         "lead": "지점 여러 개를 운영하면서 본사 정보를 모든 지점에 복붙해두면 \"○○동 ○○\" 같은 지역 키워드 노출이 분산됩니다. 본사와 지점이 가져가야 할 정보를 분리하는 원칙과 흔한 실수를 정리합니다.",
         "body": blog_post(
@@ -2070,14 +2103,14 @@ PAGES = {
                 "가짜 지점·키워드 스터핑·리뷰 매수는 본사·지점 모두 페널티 위험입니다.",
             ],
             related=[
-                ("신규 매장 네이버 플레이스 — 영수증 리뷰 적을 때 첫 3개월 운영 패턴", "/insights/local-seo/new-store-naver-place/", "지역 SEO"),
+                ("신규 매장 네이버 플레이스 3개월 운영", "/insights/local-seo/new-store-naver-place/", "지역 SEO"),
                 ("지역 SEO 사례", "/case-studies/local-seo/", "성공사례"),
                 ("지역 SEO 서비스", "/services/local-seo/", "서비스"),
             ]
         ),
         "json_ld": blog_jsonld(
             url="https://onesearchpro.org/insights/local-seo/multi-location-gbp/",
-            title="다지점 매장 구글 비즈니스 프로필 — 본사·지점 정보 분리 원칙과 흔한 실수",
+            title="다지점 매장 GBP 본사·지점 분리 원칙",
             desc="다지점 매장의 GBP 운영 원칙과 본사·지점 정보 분리 가이드.",
             date_published="2025-05-14"
         ),
@@ -2086,10 +2119,10 @@ PAGES = {
 
     # Backlink & Digital PR category
     "/insights/backlink-pr/disavow-decision/": {
-        "title": "이전 대행사가 남긴 위험한 백링크 — 어디서부터 Disavow 결정해야 하나 | OneSearchPro 인사이트",
+        "title": "위험한 백링크 Disavow 결정 기준 | OneSearchPro",
         "desc": "이전 대행사가 만든 백링크 중 위험한 것을 식별하고 Disavow 여부를 결정하는 기준. 즉시 처리·보류·유지 3단계 분류와 단계적 제출 전략.",
         "keywords": "Disavow, 백링크 진단, 위험한 백링크, 백링크 정리, 페널티 회복",
-        "h1": "이전 대행사가 남긴 위험한 백링크 — 어디서부터 Disavow 결정해야 하나",
+        "h1": "위험한 백링크 Disavow 결정 기준",
         "eyebrow": "BACKLINK & DIGITAL PR · ARTICLE",
         "lead": "이전 대행사가 만든 백링크 프로파일을 받아서 정리할 때 가장 어려운 건 \"어디서부터 어디까지가 위험한가\"의 경계가 모호하다는 점입니다. 즉시 Disavow 후보·보류·유지로 분류하는 실무 기준을 정리합니다.",
         "body": blog_post(
@@ -2151,14 +2184,14 @@ PAGES = {
                 "Disavow는 단계적으로(1차→4주 관찰→2차) 제출해야 효과 측정이 가능합니다.",
             ],
             related=[
-                ("한국 언론사 보도자료 배포 — 백링크 따라오는 매체와 안 오는 매체 구분법", "/insights/backlink-pr/korean-press-release/", "백링크 · 디지털 PR"),
+                ("한국 언론사 보도자료 백링크 구분법", "/insights/backlink-pr/korean-press-release/", "백링크 · 디지털 PR"),
                 ("서치콘솔 \"크롤링됨 - 현재 색인되지 않음\" — 다른 상태와의 차이와 대응법", "/insights/visibility/crawled-not-indexed/", "검색 노출"),
                 ("디지털 PR · 백링크 진단 서비스", "/services/digital-pr/", "서비스"),
             ]
         ),
         "json_ld": blog_jsonld(
             url="https://onesearchpro.org/insights/backlink-pr/disavow-decision/",
-            title="이전 대행사가 남긴 위험한 백링크 — 어디서부터 Disavow 결정해야 하나",
+            title="위험한 백링크 Disavow 결정 기준",
             desc="위험한 백링크의 3단계 분류와 단계적 Disavow 제출 전략.",
             date_published="2025-05-14"
         ),
@@ -2166,10 +2199,10 @@ PAGES = {
     },
 
     "/insights/backlink-pr/korean-press-release/": {
-        "title": "한국 언론사 보도자료 배포 — 백링크 따라오는 매체와 안 오는 매체 구분법 | OneSearchPro 인사이트",
+        "title": "한국 언론사 보도자료 백링크 구분법 | OneSearchPro",
         "desc": "한국 언론사에 보도자료를 뿌렸을 때 백링크가 따라오는 매체와 안 오는 매체의 차이. 본문 링크 vs 텍스트 언급, 발행 패턴, 측정 방법.",
         "keywords": "보도자료 SEO, 언론사 백링크, 디지털 PR, 보도자료 배포, 한국 언론 SEO",
-        "h1": "한국 언론사 보도자료 배포 — 백링크 따라오는 매체와 안 오는 매체 구분법",
+        "h1": "한국 언론사 보도자료 백링크 구분법",
         "eyebrow": "BACKLINK & DIGITAL PR · ARTICLE",
         "lead": "같은 보도자료를 같은 시점에 여러 언론사에 뿌렸는데, 결과는 매체마다 다릅니다. 본문에 우리 사이트 링크를 그대로 두는 매체가 있고, 텍스트로만 언급하는 매체가 있고, 아예 우리 회사명만 노출하는 매체가 있습니다. 구분 기준을 정리합니다.",
         "body": blog_post(
@@ -2227,14 +2260,14 @@ PAGES = {
                 "측정은 색인·백링크·브랜드 검색 3가지를 함께 봐야 합니다.",
             ],
             related=[
-                ("이전 대행사가 남긴 위험한 백링크 — 어디서부터 Disavow 결정해야 하나", "/insights/backlink-pr/disavow-decision/", "백링크 · 디지털 PR"),
-                ("Helpful Content System 셀프 점검 — 한국 사이트가 자주 떨어지는 7가지 질문", "/insights/google-seo/helpful-content-self-check/", "구글 SEO"),
+                ("위험한 백링크 Disavow 결정 기준", "/insights/backlink-pr/disavow-decision/", "백링크 · 디지털 PR"),
+                ("Helpful Content System 셀프 점검 7가지", "/insights/google-seo/helpful-content-self-check/", "구글 SEO"),
                 ("디지털 PR · 백링크 진단 서비스", "/services/digital-pr/", "서비스"),
             ]
         ),
         "json_ld": blog_jsonld(
             url="https://onesearchpro.org/insights/backlink-pr/korean-press-release/",
-            title="한국 언론사 보도자료 배포 — 백링크 따라오는 매체와 안 오는 매체 구분법",
+            title="한국 언론사 보도자료 백링크 구분법",
             desc="한국 언론 보도자료의 백링크 보존 패턴과 매체별 SEO 가치.",
             date_published="2025-05-14"
         ),
@@ -2243,10 +2276,10 @@ PAGES = {
 
     # SNS Marketing category
     "/insights/sns/youtube-shorts-description/": {
-        "title": "유튜브 쇼츠 설명란 — 본 영상 페이지로 트래픽 유도하는 텍스트 구조 | OneSearchPro 인사이트",
+        "title": "유튜브 쇼츠 설명란 트래픽 유도법 | OneSearchPro",
         "desc": "유튜브 쇼츠 설명란을 어떻게 써야 본 영상이나 외부 사이트로 트래픽이 흐르는지. 첫 줄·본문·해시태그 구조와 측정 방법.",
         "keywords": "유튜브 쇼츠 SEO, 쇼츠 설명란, 유튜브 마케팅, 쇼츠 클릭률, 외부 링크 유도",
-        "h1": "유튜브 쇼츠 설명란 — 본 영상 페이지로 트래픽 유도하는 텍스트 구조",
+        "h1": "유튜브 쇼츠 설명란 트래픽 유도법",
         "eyebrow": "SNS MARKETING · ARTICLE",
         "lead": "유튜브 쇼츠는 짧고 빠르게 끝나는 콘텐츠라 설명란을 거의 안 보고 넘어갑니다. 그런데 알고리즘 노출과 외부 트래픽 유도 둘 다에 설명란이 영향을 줍니다. 클릭률을 높이는 텍스트 구조를 정리합니다.",
         "body": blog_post(
@@ -2316,14 +2349,14 @@ PAGES = {
                 "외부 링크 클릭률 0.5~1%가 평균, 2% 이상이면 설명란이 잘 작동하는 것입니다.",
             ],
             related=[
-                ("인스타그램 프로필 링크 — 링크인바이오 vs 자체 랜딩, 어느 게 SEO에 도움될까", "/insights/sns/instagram-link-in-bio/", "SNS 마케팅"),
-                ("쇼핑몰 제품 페이지 본문이 비어있을 때 추가하는 6단락 구조", "/insights/content-seo/product-page-content-structure/", "콘텐츠 SEO"),
+                ("인스타그램 프로필 링크 SEO 비교", "/insights/sns/instagram-link-in-bio/", "SNS 마케팅"),
+                ("쇼핑몰 제품 페이지 본문 6단락 구조", "/insights/content-seo/product-page-content-structure/", "콘텐츠 SEO"),
                 ("SNS 마케팅 서비스", "/services/social-media/", "서비스"),
             ]
         ),
         "json_ld": blog_jsonld(
             url="https://onesearchpro.org/insights/sns/youtube-shorts-description/",
-            title="유튜브 쇼츠 설명란 — 본 영상 페이지로 트래픽 유도하는 텍스트 구조",
+            title="유튜브 쇼츠 설명란 트래픽 유도법",
             desc="유튜브 쇼츠 설명란의 첫 줄·본문·해시태그 구조와 클릭률 측정.",
             date_published="2025-05-14"
         ),
@@ -2331,10 +2364,10 @@ PAGES = {
     },
 
     "/insights/sns/instagram-link-in-bio/": {
-        "title": "인스타그램 프로필 링크 — 링크인바이오 vs 자체 랜딩, 어느 게 SEO에 도움될까 | OneSearchPro 인사이트",
+        "title": "인스타그램 프로필 링크 SEO 비교 | OneSearchPro",
         "desc": "인스타그램 프로필에 링크인바이오 서비스(Linktree 등)와 자체 랜딩 페이지 중 어느 것을 써야 하나. SEO·UX·트래킹 관점에서 비교.",
         "keywords": "인스타그램 프로필 링크, 링크인바이오, Linktree, 인스타 SEO, SNS 유입",
-        "h1": "인스타그램 프로필 링크 — 링크인바이오 vs 자체 랜딩, 어느 게 SEO에 도움될까",
+        "h1": "인스타그램 프로필 링크 SEO 비교",
         "eyebrow": "SNS MARKETING · ARTICLE",
         "lead": "인스타그램은 프로필 링크를 단 하나만 허용합니다. Linktree 같은 링크인바이오 서비스를 쓸지, 자체 랜딩페이지를 만들지 결정해야 합니다. SEO·UX·측정 3가지 관점에서 비교합니다.",
         "body": blog_post(
@@ -2412,14 +2445,14 @@ PAGES = {
                 "랜딩페이지는 noindex 처리해서 검색 결과 노이즈를 만들지 마세요.",
             ],
             related=[
-                ("유튜브 쇼츠 설명란 — 본 영상 페이지로 트래픽 유도하는 텍스트 구조", "/insights/sns/youtube-shorts-description/", "SNS 마케팅"),
-                ("쇼핑몰 제품 페이지 본문이 비어있을 때 추가하는 6단락 구조", "/insights/content-seo/product-page-content-structure/", "콘텐츠 SEO"),
+                ("유튜브 쇼츠 설명란 트래픽 유도법", "/insights/sns/youtube-shorts-description/", "SNS 마케팅"),
+                ("쇼핑몰 제품 페이지 본문 6단락 구조", "/insights/content-seo/product-page-content-structure/", "콘텐츠 SEO"),
                 ("SNS 마케팅 서비스", "/services/social-media/", "서비스"),
             ]
         ),
         "json_ld": blog_jsonld(
             url="https://onesearchpro.org/insights/sns/instagram-link-in-bio/",
-            title="인스타그램 프로필 링크 — 링크인바이오 vs 자체 랜딩, 어느 게 SEO에 도움될까",
+            title="인스타그램 프로필 링크 SEO 비교",
             desc="인스타 프로필 링크 두 선택지의 SEO·UX·측정 관점 비교.",
             date_published="2025-05-14"
         ),
@@ -2428,10 +2461,10 @@ PAGES = {
 
     # Visibility category
     "/insights/visibility/301-migration-mistakes/": {
-        "title": "사이트 리뉴얼 후 트래픽 절반 — 301 리다이렉트 시 자주 빠뜨리는 12가지 | OneSearchPro 인사이트",
+        "title": "사이트 리뉴얼 301 매핑 실수 12가지 | OneSearchPro",
         "desc": "사이트 리뉴얼 후 트래픽이 절반으로 떨어지는 가장 흔한 원인은 301 리다이렉트 매핑 누락입니다. 자주 빠뜨리는 12가지 항목과 출시 후 모니터링 방법.",
         "keywords": "사이트 리뉴얼, 301 리다이렉트, URL 마이그레이션, 트래픽 손실, 리뉴얼 SEO",
-        "h1": "사이트 리뉴얼 후 트래픽 절반 — 301 리다이렉트 시 자주 빠뜨리는 12가지",
+        "h1": "사이트 리뉴얼 301 매핑 실수 12가지",
         "eyebrow": "VISIBILITY · ARTICLE",
         "lead": "리뉴얼 후 트래픽이 절반으로 떨어지면 거의 대부분 301 리다이렉트 매핑에서 빠뜨린 항목이 있습니다. 실무에서 가장 자주 누락되는 12가지를 정리합니다.",
         "body": blog_post(
@@ -2486,13 +2519,13 @@ PAGES = {
             ],
             related=[
                 ("서치콘솔 \"크롤링됨 - 현재 색인되지 않음\" — 다른 상태와의 차이와 대응법", "/insights/visibility/crawled-not-indexed/", "검색 노출"),
-                ("워드프레스 사이트 LCP 4초 → 1.5초로 줄인 실제 작업 순서", "/insights/technical-seo/wordpress-lcp-fix/", "기술 SEO"),
+                ("워드프레스 LCP 개선 작업 순서", "/insights/technical-seo/wordpress-lcp-fix/", "기술 SEO"),
                 ("SEO 웹사이트 제작 서비스", "/services/web-design/", "서비스"),
             ]
         ),
         "json_ld": blog_jsonld(
             url="https://onesearchpro.org/insights/visibility/301-migration-mistakes/",
-            title="사이트 리뉴얼 후 트래픽 절반 — 301 리다이렉트 시 자주 빠뜨리는 12가지",
+            title="사이트 리뉴얼 301 매핑 실수 12가지",
             desc="사이트 리뉴얼 시 301 매핑에서 자주 누락되는 12가지 항목과 모니터링.",
             date_published="2025-05-14"
         ),
@@ -2500,7 +2533,7 @@ PAGES = {
     },
 
     "/insights/visibility/crawled-not-indexed/": {
-        "title": "서치콘솔 '크롤링됨 - 현재 색인되지 않음' — 다른 상태와의 차이와 대응법 | OneSearchPro 인사이트",
+        "title": "'크롤링됨 - 색인되지 않음' 대응법 | OneSearchPro",
         "desc": "서치콘솔 색인 커버리지에서 '크롤링됨 - 현재 색인되지 않음' 메시지가 의미하는 것, '발견됨'과의 차이, 색인 거부의 5가지 원인.",
         "keywords": "크롤링됨 현재 색인되지 않음, Crawled currently not indexed, 색인 거부, 서치콘솔",
         "h1": "서치콘솔 \"크롤링됨 - 현재 색인되지 않음\" — 다른 상태와의 차이와 대응법",
@@ -2555,7 +2588,7 @@ PAGES = {
             ],
             related=[
                 ("서치콘솔 \"발견됨 - 현재 색인되지 않음\" 7가지 원인과 진단 순서", "/insights/technical-seo/discovered-not-indexed/", "기술 SEO"),
-                ("Helpful Content System 셀프 점검 — 한국 사이트가 자주 떨어지는 7가지 질문", "/insights/google-seo/helpful-content-self-check/", "구글 SEO"),
+                ("Helpful Content System 셀프 점검 7가지", "/insights/google-seo/helpful-content-self-check/", "구글 SEO"),
                 ("기술 SEO 진단 서비스", "/services/technical-seo/", "서비스"),
             ]
         ),
@@ -2568,7 +2601,7 @@ PAGES = {
         "active": "insights",
     },
     "/insights/content-seo/search-intent-4-types-keyword-classification-page-strategy/": {
-        "title": "검색 의도 4가지 유형과 키워드 분류법 | OneSearchPro 콘텐츠 SEO 가이드",
+        "title": "검색 의도 4가지 유형과 키워드 분류 | OneSearchPro",
         "desc": "정보형·탐색형·거래형·상업형 4가지 검색 의도를 구분하고 키워드별 페이지를 설계하는 실무 가이드. 네이버·구글 SERP 분석 절차와 혼합 의도 처리법까지 정리합니다.",
         "keywords": "검색 의도, 키워드 분류, 콘텐츠 SEO, 정보형 키워드, 거래형 키워드, SERP 분석, 네이버 SEO",
         "h1": "검색 의도 4가지 유형 — 키워드별로 어떻게 분류하고 페이지를 만드나",
@@ -2601,7 +2634,7 @@ PAGES = {
                 "AI 요약 시대에는 자체 테스트·실제 사용 경험으로 차별화된 콘텐츠만 클릭 가치가 유지됩니다."
             ],
             related=[
-                ("쇼핑몰 제품 페이지 본문이 비어있을 때 추가하는 6단락 구조", "/insights/content-seo/product-page-content-structure/", "콘텐츠 SEO"),
+                ("쇼핑몰 제품 페이지 본문 6단락 구조", "/insights/content-seo/product-page-content-structure/", "콘텐츠 SEO"),
                 ("병원·치과 블로그 첫 100자 — 환자 검색어로 시작해야 하는 이유", "/insights/content-seo/medical-blog-first-100/", "콘텐츠 SEO"),
                 ("SEO 컨설팅 서비스", "/services/seo/", "서비스"),
             ]
@@ -2615,6 +2648,157 @@ PAGES = {
         "active": "insights",
     },
     # ===== AUTO-INSERT MARKER (weekly_blog.py inserts new articles above) =====
+
+    "/privacy/": {
+        "title": "개인정보처리방침 | OneSearchPro",
+        "desc": "OneSearchPro(YH기획)의 개인정보 수집·이용·보관·파기 및 정보주체 권리에 관한 처리방침입니다. 개인정보보호법(PIPA) 준수.",
+        "keywords": "개인정보처리방침, 개인정보보호, PIPA, OneSearchPro, YH기획",
+        "h1": "개인정보처리방침",
+        "eyebrow": "PRIVACY POLICY",
+        "lead": "YH기획(이하 \"회사\")은 정보주체의 개인정보를 중요시하며, 개인정보보호법 등 관련 법령을 준수하기 위해 노력합니다. 본 처리방침은 회사가 운영하는 OneSearchPro 사이트의 개인정보 처리 기준을 안내합니다.",
+        "body": (
+            '<section class="section"><div class="container">'
+            '<div class="legal-doc">'
+            '<h2>1. 개인정보의 처리 목적</h2>'
+            '<p>회사는 다음의 목적을 위하여 개인정보를 처리합니다. 처리 목적이 변경되는 경우에는 개인정보보호법 제18조에 따라 별도 동의를 받는 등 필요한 조치를 이행합니다.</p>'
+            '<ul>'
+            '<li>서비스 문의·상담·견적 응대</li>'
+            '<li>무료 SEO 진단 리포트 제공</li>'
+            '<li>마케팅·계약 관련 사항 안내</li>'
+            '<li>법령 및 회사 정책에 따른 의무 이행</li>'
+            '</ul>'
+            '<h2>2. 처리하는 개인정보 항목</h2>'
+            '<p>회사는 다음의 개인정보 항목을 수집할 수 있습니다.</p>'
+            '<ul>'
+            '<li><b>필수 항목</b>: 이름, 이메일, 회사명, 문의 내용</li>'
+            '<li><b>선택 항목</b>: 웹사이트 URL, 전화번호, 텔레그램 ID</li>'
+            '<li><b>자동 수집 항목</b>: 접속 IP, 쿠키, 접속 로그, 서비스 이용 기록 (GA4·서치콘솔 등을 통해)</li>'
+            '</ul>'
+            '<h2>3. 개인정보의 보유 및 이용 기간</h2>'
+            '<p>회사는 정보주체로부터 개인정보를 수집할 때 동의받은 보유·이용기간 또는 법령에 따른 보유·이용 기간 내에서 개인정보를 처리·보유합니다.</p>'
+            '<ul>'
+            '<li>문의·상담 기록: 처리 완료 후 3년 (전자상거래법)</li>'
+            '<li>계약 또는 청약철회 기록: 5년</li>'
+            '<li>대금결제 및 재화 등의 공급에 관한 기록: 5년</li>'
+            '<li>마케팅 활용 동의 기록: 동의 철회 시까지</li>'
+            '</ul>'
+            '<h2>4. 개인정보의 제3자 제공</h2>'
+            '<p>회사는 원칙적으로 정보주체의 개인정보를 외부에 제공하지 않습니다. 다만 다음의 경우에는 예외로 합니다.</p>'
+            '<ul>'
+            '<li>정보주체가 사전에 동의한 경우</li>'
+            '<li>법령의 규정에 의거하거나 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우</li>'
+            '</ul>'
+            '<h2>5. 개인정보 처리의 위탁</h2>'
+            '<p>회사는 원활한 서비스 운영을 위해 다음과 같이 일부 업무를 위탁할 수 있습니다.</p>'
+            '<ul>'
+            '<li>웹 호스팅: Cloudflare (서비스 인프라 운영)</li>'
+            '<li>분석 도구: Google Analytics 4 (서비스 이용 통계 분석)</li>'
+            '<li>커뮤니케이션: Telegram (문의 응대)</li>'
+            '</ul>'
+            '<h2>6. 정보주체의 권리</h2>'
+            '<p>정보주체는 회사에 대해 언제든지 다음의 권리를 행사할 수 있습니다.</p>'
+            '<ul>'
+            '<li>개인정보 열람 요구</li>'
+            '<li>오류 정정 요구</li>'
+            '<li>삭제 요구</li>'
+            '<li>처리정지 요구</li>'
+            '</ul>'
+            '<p>위 권리 행사는 회사에 대해 서면, 이메일을 통하여 하실 수 있으며 회사는 이에 대해 지체 없이 조치합니다.</p>'
+            '<h2>7. 개인정보의 안전성 확보 조치</h2>'
+            '<ul>'
+            '<li><b>관리적 조치</b>: 내부관리계획 수립·시행, 정기적 직원 교육</li>'
+            '<li><b>기술적 조치</b>: 개인정보처리시스템 등의 접근권한 관리, 접근통제시스템 설치, 고유식별정보 등의 암호화, 보안프로그램 설치</li>'
+            '<li><b>물리적 조치</b>: 전산실, 자료보관실 등의 접근통제</li>'
+            '</ul>'
+            '<h2>8. 쿠키 사용에 관한 사항</h2>'
+            '<p>회사는 이용자에게 맞춤형 서비스를 제공하기 위해 쿠키를 사용할 수 있습니다. 이용자는 웹브라우저 옵션에서 쿠키 저장을 거부할 수 있으나, 거부 시 일부 서비스 이용에 제한이 있을 수 있습니다.</p>'
+            '<h2>9. 개인정보 보호책임자</h2>'
+            '<p>회사는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 정보주체의 불만 처리 및 피해 구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.</p>'
+            '<ul>'
+            '<li><b>책임자</b>: YH기획 운영자</li>'
+            '<li><b>연락처</b>: contact@onesearchpro.com</li>'
+            '</ul>'
+            '<h2>10. 권익침해 구제방법</h2>'
+            '<p>정보주체는 개인정보침해로 인한 구제를 받기 위하여 개인정보분쟁조정위원회, 한국인터넷진흥원 개인정보침해신고센터 등에 분쟁해결이나 상담 등을 신청할 수 있습니다.</p>'
+            '<ul>'
+            '<li>개인정보분쟁조정위원회: 1833-6972 (www.kopico.go.kr)</li>'
+            '<li>개인정보침해신고센터: 118 (privacy.kisa.or.kr)</li>'
+            '<li>대검찰청: 1301 (www.spo.go.kr)</li>'
+            '<li>경찰청: 182 (ecrm.cyber.go.kr)</li>'
+            '</ul>'
+            '<h2>11. 개인정보 처리방침 변경</h2>'
+            '<p>이 개인정보처리방침은 시행일로부터 적용되며, 법령 및 방침에 따른 변경내용의 추가, 삭제 및 정정이 있는 경우에는 변경사항의 시행 7일 전부터 공지사항을 통하여 고지할 것입니다.</p>'
+            '<p><b>시행일자: 2025-05-14</b></p>'
+            '</div></div></section>'
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"개인정보처리방침","url":"https://onesearchpro.org/privacy/","inLanguage":"ko-KR"}</script>',
+        "active": "",
+    },
+
+    "/terms/": {
+        "title": "이용약관 | OneSearchPro",
+        "desc": "OneSearchPro(YH기획) 서비스 이용약관입니다. 서비스 이용 조건, 회원 의무, 책임 한계, 면책 조항 등 서비스 이용에 관한 기본 사항을 정합니다.",
+        "keywords": "이용약관, 서비스 약관, OneSearchPro, YH기획",
+        "h1": "이용약관",
+        "eyebrow": "TERMS OF SERVICE",
+        "lead": "본 이용약관은 YH기획(이하 \"회사\")이 운영하는 OneSearchPro 사이트 및 관련 서비스 이용에 관한 기본 사항을 정합니다.",
+        "body": (
+            '<section class="section"><div class="container">'
+            '<div class="legal-doc">'
+            '<h2>제1조 (목적)</h2>'
+            '<p>본 약관은 YH기획(이하 "회사")이 운영하는 OneSearchPro 웹사이트 및 관련 SEO·디지털 마케팅 서비스(이하 "서비스") 이용에 관한 회사와 이용자 간의 권리·의무 및 책임사항을 규정함을 목적으로 합니다.</p>'
+            '<h2>제2조 (용어의 정의)</h2>'
+            '<ul>'
+            '<li><b>"서비스"</b>: 회사가 제공하는 SEO 컨설팅, 기술 SEO 진단, 콘텐츠 SEO, 지역 SEO, 디지털 PR·백링크 진단, SNS 마케팅, SEO 웹사이트 제작 등 일체의 마케팅 관련 서비스를 의미합니다.</li>'
+            '<li><b>"이용자"</b>: 본 약관에 따라 회사가 제공하는 서비스를 이용하는 개인 또는 법인을 의미합니다.</li>'
+            '<li><b>"콘텐츠"</b>: 회사가 사이트 및 서비스 제공 과정에서 제공하는 모든 텍스트·이미지·동영상·자료를 의미합니다.</li>'
+            '</ul>'
+            '<h2>제3조 (약관의 효력 및 변경)</h2>'
+            '<p>1. 본 약관은 회사 사이트에 게시함으로써 효력을 발생합니다.</p>'
+            '<p>2. 회사는 관련 법령에 위배되지 않는 범위에서 본 약관을 변경할 수 있으며, 변경된 약관은 시행일로부터 7일 전에 사이트에 공지합니다.</p>'
+            '<p>3. 이용자가 변경된 약관에 동의하지 않는 경우, 이용자는 서비스 이용을 중단하고 회사에 통보할 수 있습니다.</p>'
+            '<h2>제4조 (서비스의 제공)</h2>'
+            '<p>회사가 제공하는 서비스의 구체적 범위·내용·기간은 별도의 계약서 또는 견적서에 명시합니다.</p>'
+            '<h2>제5조 (서비스 이용 신청)</h2>'
+            '<p>1. 서비스 이용을 희망하는 이용자는 회사가 정한 방법에 따라 문의를 신청하고, 회사와 별도 계약을 체결한 후 서비스를 이용할 수 있습니다.</p>'
+            '<p>2. 회사는 다음 각 호에 해당하는 신청에 대하여는 승낙하지 않거나 사후에 이용계약을 해지할 수 있습니다.</p>'
+            '<ul>'
+            '<li>허위 정보를 기재한 경우</li>'
+            '<li>구글·네이버 등 검색엔진 가이드라인 위반을 요청하는 경우</li>'
+            '<li>법령 또는 공서양속에 위반되는 목적의 서비스를 요청하는 경우</li>'
+            '<li>기타 회사가 정한 이용신청 요건이 미비된 경우</li>'
+            '</ul>'
+            '<h2>제6조 (회사의 의무)</h2>'
+            '<p>1. 회사는 관련 법령과 본 약관이 금지하거나 공서양속에 반하는 행위를 하지 않으며, 안정적인 서비스 제공을 위해 최선을 다합니다.</p>'
+            '<p>2. 회사는 이용자의 개인정보 보호를 위해 보안시스템을 갖추고 개인정보처리방침을 공시하고 준수합니다.</p>'
+            '<p>3. 회사는 화이트햇(White-hat) 방식으로만 서비스를 제공하며, 검색엔진의 가이드라인을 준수합니다.</p>'
+            '<h2>제7조 (이용자의 의무)</h2>'
+            '<ul>'
+            '<li>회사가 제공하는 서비스 이용에 필요한 정보를 진실하게 제공해야 합니다.</li>'
+            '<li>회사 또는 제3자의 권리를 침해하지 않아야 합니다.</li>'
+            '<li>서비스 결과물(콘텐츠·전략 보고서 등)을 제3자에게 무단 양도·재판매하지 않아야 합니다.</li>'
+            '<li>법령 또는 검색엔진 가이드라인을 위반하는 작업을 회사에 요구하지 않아야 합니다.</li>'
+            '</ul>'
+            '<h2>제8조 (서비스 결과에 관한 사항)</h2>'
+            '<p>1. SEO 서비스의 특성상 검색엔진 알고리즘은 회사의 통제를 벗어난 영역이며, 회사는 특정 순위·특정 키워드 노출을 보장하지 않습니다.</p>'
+            '<p>2. 회사는 작업 진행 상황·결과를 월간 리포트를 통해 투명하게 공개합니다.</p>'
+            '<p>3. 검색엔진 알고리즘 변경, 경쟁 환경 변화, 이용자 사이트의 외부 요인 등으로 인한 결과 변동에 대해 회사는 책임을 지지 않습니다.</p>'
+            '<h2>제9조 (지적재산권)</h2>'
+            '<p>1. 회사가 제공하는 사이트의 콘텐츠(글·이미지·코드 등)에 대한 저작권은 회사에 귀속됩니다.</p>'
+            '<p>2. 이용자와의 계약에 따라 제작된 결과물의 저작권 귀속은 별도 계약서에 따릅니다.</p>'
+            '<h2>제10조 (면책조항)</h2>'
+            '<p>1. 회사는 천재지변, 전쟁, 기간통신사업자의 서비스 중지, 검색엔진의 정책 변경 등 회사의 합리적 통제를 벗어난 사유로 인한 서비스 제공 지연·중단에 대해 책임을 지지 않습니다.</p>'
+            '<p>2. 회사는 이용자의 귀책사유로 인한 서비스 이용 장애에 대해 책임을 지지 않습니다.</p>'
+            '<h2>제11조 (분쟁 해결)</h2>'
+            '<p>본 약관에 관하여 분쟁이 발생할 경우, 양 당사자는 우선 상호 협의로 해결하기 위해 노력합니다. 협의가 이루어지지 않을 경우 회사의 본사 소재지 관할 법원을 1심 관할 법원으로 합니다.</p>'
+            '<h2>제12조 (준거법)</h2>'
+            '<p>본 약관에 명시되지 않은 사항은 대한민국 법령 및 상관례에 따릅니다.</p>'
+            '<p><b>시행일자: 2025-05-14</b></p>'
+            '</div></div></section>'
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"이용약관","url":"https://onesearchpro.org/terms/","inLanguage":"ko-KR"}</script>',
+        "active": "",
+    },
 }
 
 for path, p in PAGES.items():

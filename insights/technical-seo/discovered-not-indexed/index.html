@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>서치콘솔 '발견됨 - 현재 색인되지 않음' 7가지 원인과 진단 순서 | OneSearchPro 인사이트</title>
+  <title>'발견됨 - 색인되지 않음' 원인 7가지 | OneSearchPro</title>
   <meta name="description" content="구글 서치콘솔의 '발견됨 - 현재 색인되지 않음' 메시지가 의미하는 것과 7가지 흔한 원인, 빈도 순으로 정렬한 진단 순서를 정리합니다." />
   <meta name="keywords" content="발견됨 현재 색인되지 않음, Discovered currently not indexed, 색인 누락, 서치콘솔, 크롤링 예산" />
   <link rel="canonical" href="https://onesearchpro.org/insights/technical-seo/discovered-not-indexed/" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="서치콘솔 '발견됨 - 현재 색인되지 않음' 7가지 원인과 진단 순서 | OneSearchPro 인사이트" />
+  <meta property="og:title" content="'발견됨 - 색인되지 않음' 원인 7가지 | OneSearchPro" />
   <meta property="og:description" content="구글 서치콘솔의 '발견됨 - 현재 색인되지 않음' 메시지가 의미하는 것과 7가지 흔한 원인, 빈도 순으로 정렬한 진단 순서를 정리합니다." />
   <meta property="og:url" content="https://onesearchpro.org/insights/technical-seo/discovered-not-indexed/" />
   <meta property="og:image" content="https://onesearchpro.org/assets/images/logo.png" />
@@ -20,10 +20,16 @@
   <link rel="alternate icon" type="image/png" href="/assets/images/logo.png" />
   <link rel="apple-touch-icon" href="/assets/images/logo.png" />
   <meta name="theme-color" content="#7c5cff" />
+  <!-- 검색엔진 소유권 인증 (등록 시 코드 입력) -->
+  <meta name="google-site-verification" content="" />
+  <meta name="naver-site-verification" content="" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="image" href="/assets/images/logo.png" fetchpriority="high" />
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"OneSearchPro","alternateName":"원서치프로","url":"https://onesearchpro.org/","inLanguage":"ko-KR","publisher":{"@type":"Organization","name":"OneSearchPro","legalName":"YH기획"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"YH기획 (OneSearchPro)","alternateName":"OneSearchPro","url":"https://onesearchpro.org/","logo":"https://onesearchpro.org/assets/images/logo.png","image":"https://onesearchpro.org/assets/images/logo.png","telephone":"","email":"contact@onesearchpro.com","priceRange":"₩₩","address":{"@type":"PostalAddress","streetAddress":"부평대로 283 부평우림라이온스밸리","addressLocality":"부평구","addressRegion":"인천광역시","postalCode":"21389","addressCountry":"KR"},"areaServed":"KR","taxID":"503-30-66944"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"홈","item":"https://onesearchpro.org/"},{"@type":"ListItem","position":2,"name":"SEO 인사이트","item":"https://onesearchpro.org/insights/"},{"@type":"ListItem","position":3,"name":"서치콘솔 "발견됨 - 현재 색인되지 않음" 7가지 원인과 진단 순서","item":"https://onesearchpro.org/insights/technical-seo/discovered-not-indexed/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"서치콘솔 "발견됨 - 현재 색인되지 않음" 7가지 원인과 진단 순서","description":"서치콘솔 '발견됨 - 색인되지 않음' 메시지의 원인 7가지와 빈도순 진단법.","url":"https://onesearchpro.org/insights/technical-seo/discovered-not-indexed/","datePublished":"2025-05-14","dateModified":"2025-05-14","author":{"@type":"Organization","name":"OneSearchPro","url":"https://onesearchpro.org/"},"publisher":{"@type":"Organization","name":"OneSearchPro","logo":{"@type":"ImageObject","url":"https://onesearchpro.org/assets/images/logo.png"}},"image":"https://onesearchpro.org/assets/images/logo.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://onesearchpro.org/insights/technical-seo/discovered-not-indexed/"},"inLanguage":"ko-KR"}</script>
 </head>
 <body class=" is-article">
@@ -100,7 +106,7 @@
 <p>자동 생성된 sitemap에 노이즈 URL(로그인, 파라미터 페이지, 카테고리 무한 페이지네이션)이 다량 포함되면 진짜 중요한 URL의 우선순위가 희석됩니다.</p><p>해결: sitemap을 "수동 큐레이션"으로 전환. 정말 색인 시키고 싶은 URL만 포함시킵니다. 100개의 진짜 URL이 1만 개의 자동 URL보다 효과적입니다.</p>
 <h2>진단 순서 — 가장 흔한 것부터</h2>
 <ol><li>내부 링크 점검 (가장 빠르고 효과 큼)</li><li>sitemap 정리 (노이즈 URL 제거)</li><li>중복 콘텐츠 검사 (canonical 정비)</li><li>크롤링 통계 점검 (사이트 전체 권위 이슈인지)</li><li>JS 렌더링 의존 확인 (SPA인 경우)</li></ol><p>이 순서대로 점검하면 90% 케이스는 위 3단계에서 원인이 잡힙니다.</p>
-<aside class="article-takeaway"><h3>🎯 핵심 정리</h3><ul><li>"발견됨"과 "크롤링됨"은 다른 단계의 문제라 진단 순서가 다릅니다.</li><li>가장 흔한 원인은 내부 링크 부재와 sitemap 노이즈입니다.</li><li>JS 렌더링 의존 사이트는 "발견됨"에 오래 머무는 경향이 있습니다.</li><li>sitemap은 자동 생성보다 큐레이션이 효과적입니다.</li></ul></aside></article></section><section class="section"><div class="container"><div class="article-cta"><h3>내 사이트의 SEO 상태가 궁금하다면</h3><p>위 가이드의 항목들을 실제 우리 사이트에 적용하면 어떤 결과가 나올지 궁금하시면, 무료 SEO 진단을 받아보세요. 텔레그램으로 사이트 URL을 보내주시면 24시간 내 분석 리포트를 회신드립니다.</p><a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">무료 SEO 진단 받기 →</a></div></div></section><section class="section section-soft"><div class="container"><div class="section-head left"><span class="eyebrow">READ NEXT</span><h2>이어서 읽으면 좋은 글</h2><p>같은 주제 또는 연관 분야를 더 자세히 다루는 글입니다. 한 주제를 깊이 이해하는 데 도움이 됩니다.</p></div><div class="grid services"><a href="/insights/technical-seo/wordpress-lcp-fix/" class="svc related-card"><span class="badge">기술 SEO</span><h3>워드프레스 사이트 LCP 4초 → 1.5초로 줄인 실제 작업 순서</h3><span class="svc-link">자세히 보기 →</span></a><a href="/insights/visibility/crawled-not-indexed/" class="svc related-card"><span class="badge">검색 노출</span><h3>서치콘솔 "크롤링됨 - 현재 색인되지 않음" — 다른 상태와의 차이와 대응법</h3><span class="svc-link">자세히 보기 →</span></a><a href="/services/technical-seo/" class="svc related-card"><span class="badge">서비스</span><h3>기술 SEO 진단 서비스</h3><span class="svc-link">자세히 보기 →</span></a></div></div></section>
+<aside class="article-takeaway"><h3>🎯 핵심 정리</h3><ul><li>"발견됨"과 "크롤링됨"은 다른 단계의 문제라 진단 순서가 다릅니다.</li><li>가장 흔한 원인은 내부 링크 부재와 sitemap 노이즈입니다.</li><li>JS 렌더링 의존 사이트는 "발견됨"에 오래 머무는 경향이 있습니다.</li><li>sitemap은 자동 생성보다 큐레이션이 효과적입니다.</li></ul></aside></article></section><section class="section"><div class="container"><div class="article-cta"><h3>내 사이트의 SEO 상태가 궁금하다면</h3><p>위 가이드의 항목들을 실제 우리 사이트에 적용하면 어떤 결과가 나올지 궁금하시면, 무료 SEO 진단을 받아보세요. 텔레그램으로 사이트 URL을 보내주시면 24시간 내 분석 리포트를 회신드립니다.</p><a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">무료 SEO 진단 받기 →</a></div></div></section><section class="section section-soft"><div class="container"><div class="section-head left"><span class="eyebrow">READ NEXT</span><h2>이어서 읽으면 좋은 글</h2><p>같은 주제 또는 연관 분야를 더 자세히 다루는 글입니다. 한 주제를 깊이 이해하는 데 도움이 됩니다.</p></div><div class="grid services"><a href="/insights/technical-seo/wordpress-lcp-fix/" class="svc related-card"><span class="badge">기술 SEO</span><h3>워드프레스 LCP 개선 작업 순서</h3><span class="svc-link">자세히 보기 →</span></a><a href="/insights/visibility/crawled-not-indexed/" class="svc related-card"><span class="badge">검색 노출</span><h3>서치콘솔 "크롤링됨 - 현재 색인되지 않음" — 다른 상태와의 차이와 대응법</h3><span class="svc-link">자세히 보기 →</span></a><a href="/services/technical-seo/" class="svc related-card"><span class="badge">서비스</span><h3>기술 SEO 진단 서비스</h3><span class="svc-link">자세히 보기 →</span></a></div></div></section>
     <section class="section section-cta">
       <div class="container cta-grid">
         <div><h2>무료 진단 후 정확한 견적을 받아보세요</h2><p>24시간 내 분석 리포트와 맞춤 제안서를 보내드립니다.</p></div>
@@ -113,7 +119,8 @@
       <div><a href="/" class="brand"><span class="brand-mark">1</span><span class="brand-name">OneSearch<strong>Pro</strong></span></a><p class="muted">검색에서 시작되는 비즈니스 성장.<br/>SEO · 디지털 마케팅 전문 에이전시.</p></div>
       <div><h5>SEO 서비스</h5><ul><li><a href="/services/seo/">SEO 컨설팅</a></li><li><a href="/services/technical-seo/">기술 SEO 진단</a></li><li><a href="/services/content-seo/">콘텐츠 SEO</a></li><li><a href="/services/local-seo/">지역 SEO</a></li><li><a href="/services/digital-pr/">디지털 PR · 백링크 진단</a></li><li><a href="/services/social-media/">SNS 마케팅</a></li><li><a href="/services/web-design/">SEO 웹사이트 제작</a></li></ul></div>
       <div><h5>회사</h5><ul><li><a href="/case-studies/">성공사례</a></li><li><a href="/insights/">SEO 인사이트</a></li><li><a href="/about/">회사 소개</a></li><li><a href="/contact/">내 사이트 진단받기</a></li></ul></div>
-      <div><h5>연락처</h5><ul><li>contact@onesearchpro.com</li><li>Seoul, Korea</li><li>KakaoTalk: @onesearchpro</li></ul></div>
+      <div><h5>연락처</h5><ul><li>contact@onesearchpro.com</li><li>인천 부평구</li><li>KakaoTalk: @onesearchpro</li></ul></div>
+      <div><h5>약관·정책</h5><ul><li><a href="/privacy/">개인정보처리방침</a></li><li><a href="/terms/">이용약관</a></li></ul></div>
     </div>
     <div class="container biz-info">
       <span>상호 <b>YH기획</b></span>
