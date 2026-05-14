@@ -395,6 +395,9 @@ h1 {
 /* Insights */
 .insight-card { border-style: dashed; }
 .insight-card .badge { background: var(--surface-hi); color: var(--muted); box-shadow: none; }
+.insight-article-card { display: block; color: inherit; }
+.insight-article-card .badge { background: var(--grad-brand); color: #fff; }
+.insight-article-card:hover { color: inherit; }
 @media (max-width: 900px) { .case-grid .svc { grid-column: span 1; } }
 
 /* ---------- Backlink section helpers ---------- */
