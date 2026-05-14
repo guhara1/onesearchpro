@@ -2567,6 +2567,7 @@ PAGES = {
         ),
         "active": "insights",
     },
+    # ===== AUTO-INSERT MARKER (weekly_blog.py inserts new articles above) =====
 }
 
 for path, p in PAGES.items():

@@ -1,0 +1,54 @@
+name: Weekly Blog Auto-Publish
+
+on:
+  # 매주 월요일 00:00 UTC (한국시간 월요일 09:00)
+  schedule:
+    - cron: "0 0 * * 1"
+  # GitHub UI에서 수동 트리거 가능 (테스트용)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # 자동 push를 위해 토큰 사용
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install anthropic
+
+      - name: Generate and publish blog post
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/weekly_blog.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "OneSearchPro Bot"
+          git config user.email "bot@onesearchpro.org"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit. Skipping push."
+            exit 0
+          fi
+          # 발행 정보 추출 (가장 최근에 마크된 글)
+          ARTICLE_INFO=$(grep -oP '\(20[0-9]{2}-[0-9]{2}-[0-9]{2} 자동 발행\)' CONTENT_CALENDAR.md | tail -1 || echo "")
+          git commit -m "feat: 주간 블로그 자동 발행 ${ARTICLE_INFO}"
+          # 현재 브랜치로 푸시
+          BRANCH=${GITHUB_REF#refs/heads/}
+          git push origin HEAD:${BRANCH}
