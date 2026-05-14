@@ -8,7 +8,7 @@ SITE = "https://onesearchpro.org"
 
 HEADER = '''<header class="site-header">
     <div class="container nav-wrap">
-      <a href="/" class="brand" aria-label="OneSearchPro 홈"><img src="/assets/images/logo.png" alt="OneSearchPro - 검색의 기준을 바꾸다" class="brand-logo" width="180" height="60" /></a>
+      <a href="/" class="brand" aria-label="OneSearchPro 홈"><picture><source type="image/webp" srcset="/assets/images/logo-140.webp 1x, /assets/images/logo-280.webp 2x" /><img src="/assets/images/logo-140.png" alt="OneSearchPro - 검색의 기준을 바꾸다" class="brand-logo" width="180" height="60" decoding="async" /></picture></a>
       <nav class="nav" id="nav">
         <div class="has-dropdown">
           <a href="/services/seo/" class="nav-trigger{ACTIVE_SVC}">서비스 <span class="caret">▾</span></a>
@@ -220,8 +220,10 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
   <meta name="naver-site-verification" content="" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="image" href="/assets/images/logo.png" fetchpriority="high" />
-  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="/assets/images/logo-140.webp" type="image/webp" fetchpriority="high" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap" /></noscript>
   <link rel="stylesheet" href="/styles.css" />
   {site_wide_jsonld}
   {breadcrumb_jsonld}
