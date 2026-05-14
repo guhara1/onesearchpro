@@ -19,7 +19,6 @@ HEADER = '''<header class="site-header">
             <a href="/services/social-media/">소셜 미디어 마케팅</a>
             <a href="/services/corporate-marketing/">기업 마케팅</a>
             <a href="/services/web-design/">웹사이트 제작</a>
-            <a href="/services/malaysia/">말레이시아 마케팅</a>
           </div>
         </div>
         <a href="/about/"{ACTIVE_ABOUT}>회사소개</a>
@@ -32,11 +31,11 @@ HEADER = '''<header class="site-header">
 FOOTER = '''<footer class="site-footer">
     <div class="container foot-grid">
       <div><a href="/" class="brand"><span class="brand-mark">1</span><span class="brand-name">OneSearch<strong>Pro</strong></span></a><p class="muted">검색에서 시작되는 비즈니스 성장.<br/>백링크 · SEO · 글로벌 마케팅 전문 에이전시.</p></div>
-      <div><h5>서비스</h5><ul><li><a href="/services/backlink/">백링크 서비스</a></li><li><a href="/services/seo/">검색엔진최적화</a></li><li><a href="/services/local-seo/">지역 SEO</a></li><li><a href="/services/social-media/">소셜 미디어 마케팅</a></li><li><a href="/services/corporate-marketing/">기업 마케팅</a></li><li><a href="/services/web-design/">웹사이트 제작</a></li><li><a href="/services/malaysia/">말레이시아 마케팅</a></li></ul></div>
+      <div><h5>서비스</h5><ul><li><a href="/services/backlink/">백링크 서비스</a></li><li><a href="/services/seo/">검색엔진최적화</a></li><li><a href="/services/local-seo/">지역 SEO</a></li><li><a href="/services/social-media/">소셜 미디어 마케팅</a></li><li><a href="/services/corporate-marketing/">기업 마케팅</a></li><li><a href="/services/web-design/">웹사이트 제작</a></li></ul></div>
       <div><h5>회사</h5><ul><li><a href="/about/">회사 소개</a></li><li><a href="/contact/">문의하기</a></li></ul></div>
-      <div><h5>연락처</h5><ul><li>contact@onesearchpro.com</li><li>Seoul · Kuala Lumpur</li><li>KakaoTalk: @onesearchpro</li></ul></div>
+      <div><h5>연락처</h5><ul><li>contact@onesearchpro.com</li><li>Seoul, Korea</li><li>KakaoTalk: @onesearchpro</li></ul></div>
     </div>
-    <div class="container foot-bottom"><span>© <span id="year"></span> OneSearchPro. All rights reserved.</span><span>Made with ☕ in Seoul &amp; KL</span></div>
+    <div class="container foot-bottom"><span>© <span id="year"></span> OneSearchPro. All rights reserved.</span><span>Made with ☕ in Seoul</span></div>
   </footer>'''
 
 
@@ -92,7 +91,7 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
           <div><b>1,200+</b><span>구축 백링크</span></div>
           <div><b>180+</b><span>프로젝트</span></div>
           <div><b>97%</b><span>고객 재계약</span></div>
-          <div><b>2</b><span>국가 거점</span></div>
+          <div><b>DR 50+</b><span>평균 도메인</span></div>
         </div>
       </div>
     </section>
@@ -167,11 +166,11 @@ PAGES = {
         "lead": "오프라인 매장과 지역 기반 서비스를 위한 필수 마케팅. 구글맵·네이버 지도에서 '내 주변 [업종]' 검색 시 가장 먼저 노출되도록 만듭니다.",
         "body": (
             section("CHANNELS", "지역 SEO 핵심 채널",
-                    "한국·말레이시아 양국의 주요 지역 검색 채널을 통합 운영합니다.",
+                    "한국 주요 지역 검색 채널을 통합 운영합니다.",
                     [
                         {"icon":"📍","h":"구글 비즈니스 프로필","p":"GBP 최적화, 카테고리·서비스·사진·게시물 운영, 리뷰 응대.","li":["카테고리·속성 최적화","주간 게시물 운영"]},
                         {"icon":"🗺️","h":"네이버 플레이스","p":"플레이스 정보 최적화, 영수증 리뷰 유도, 톡톡 응대, 스마트플레이스 광고 연계.","li":["블로그·플레이스 연동","리뷰 이벤트 설계"]},
-                        {"icon":"📚","h":"지역 디렉토리","p":"한국·말레이시아 주요 비즈니스 디렉토리 등록과 NAP 정보 일관성 관리.","li":["NAP 일관성","로컬 인용(citation)"]},
+                        {"icon":"📚","h":"지역 디렉토리","p":"국내 주요 비즈니스 디렉토리 등록과 NAP 정보 일관성 관리.","li":["NAP 일관성","로컬 인용(citation)"]},
                         {"icon":"⭐","h":"리뷰 관리","p":"긍정 리뷰 유도 시스템, 부정 리뷰 대응 매뉴얼, 평점 관리.","li":["리뷰 응대 SLA","위기 대응 가이드"]},
                     ])
         ),
@@ -237,7 +236,7 @@ PAGES = {
             section("TYPES", "제작 유형",
                     "프로젝트 성격에 맞는 기술 스택을 선택합니다.",
                     [
-                        {"icon":"🏢","h":"기업 홈페이지","p":"브랜드 소개부터 다국어, 채용까지 — 표준 기업 사이트.","li":["다국어 (KR/EN/MY)","CMS 운영 페이지"]},
+                        {"icon":"🏢","h":"기업 홈페이지","p":"브랜드 소개부터 다국어, 채용까지 — 표준 기업 사이트.","li":["다국어 (KR/EN)","CMS 운영 페이지"]},
                         {"icon":"🚀","h":"랜딩페이지","p":"단일 상품·캠페인용 고전환 랜딩페이지를 3~7일 내 제작.","li":["A/B 테스트 가능","폼·픽셀 연동"]},
                         {"icon":"🛒","h":"쇼핑몰","p":"Shopify, WooCommerce, Cafe24 기반 커머스 구축.","li":["결제·배송 연동","리뷰·재고 자동화"]},
                         {"icon":"📰","h":"콘텐츠/블로그","p":"SEO 친화 구조의 워드프레스·헤드리스 CMS 구축.","li":["스키마 마크업","Core Web Vitals 90+"]},
@@ -253,41 +252,13 @@ PAGES = {
         "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Web Design & Development","provider":{"@type":"Organization","name":"OneSearchPro"}}</script>',
     },
 
-    "/services/malaysia/": {
-        "title": "말레이시아 마케팅 | 한국 기업 동남아 진출 - OneSearchPro",
-        "desc": "OneSearchPro의 말레이시아 마케팅은 BM/EN 다국어 콘텐츠, 현지 인플루언서·매체, .my 도메인 백링크, 쿠알라룸푸르 기반 네트워크를 활용한 동남아 진출 전문 서비스입니다.",
-        "keywords": "말레이시아 마케팅, 동남아 진출, 말레이시아 SEO, 쿠알라룸푸르 마케팅, 동남아 인플루언서, BM 콘텐츠",
-        "h1": "말레이시아 마케팅",
-        "eyebrow": "🇲🇾 MALAYSIA MARKET",
-        "lead": "한국 기업의 동남아 진출 첫 관문, 말레이시아. OneSearchPro는 쿠알라룸푸르에 거점을 두고 BM(말레이어)·영어·중국어 3언어 콘텐츠와 현지 미디어 네트워크를 운영합니다.",
-        "body": (
-            section("OFFERINGS", "말레이시아 진출 패키지",
-                    "한 번에 시장 진입할 수 있도록 모든 영역을 통합합니다.",
-                    [
-                        {"icon":"🌐","h":".my 백링크 빌딩","p":"말레이시아 로컬 도메인(.my, .com.my) 백링크로 현지 검색 시그널 강화.","li":["DR 30+ 현지 매체","BM/EN 게스트 포스트"]},
-                        {"icon":"📝","h":"다국어 콘텐츠","p":"말레이어(BM), 영어, 중국어 3개 언어로 콘텐츠 동시 제작.","li":["네이티브 카피라이터","문화 적합성 검수"]},
-                        {"icon":"📱","h":"현지 SNS 운영","p":"Instagram MY, TikTok MY, Xiaohongshu 등 현지 채널 동시 운영.","li":["KL 인플루언서 협업","로컬 트렌드 반영"]},
-                        {"icon":"🏪","h":"로컬 SEO","p":"Google Maps MY, Waze 등 말레이시아 지역 검색 최적화.","li":["GBP 운영","현지 디렉토리 등록"]},
-                        {"icon":"🤝","h":"현지 파트너십","p":"KL·페낭·조호바루 등 주요 도시 미디어·에이전시 네트워크.","li":["언론사 PR","오프라인 이벤트 연계"]},
-                        {"icon":"💼","h":"진출 컨설팅","p":"법인 설립부터 결제·물류 파트너 매칭까지 비즈니스 컨설팅 연계.","li":["MDEC·MITI 가이드","현지 사례 공유"]},
-                    ]) +
-            steps_section("PROCESS", "말레이시아 진출 프로세스", [
-                ("시장 진단", "타겟 산업·세그먼트의 현지 경쟁 환경 분석."),
-                ("로컬라이징", "브랜드 메시지·콘텐츠를 BM/EN/中으로 현지화."),
-                ("진입 캠페인", "백링크 + SNS + 인플루언서 동시 런칭."),
-                ("운영 & 확장", "쿠알라룸푸르·페낭 → 싱가포르·인도네시아 확장."),
-            ])
-        ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Malaysia Marketing","provider":{"@type":"Organization","name":"OneSearchPro"},"areaServed":"MY"}</script>',
-    },
-
     "/about/": {
         "title": "회사 소개 | OneSearchPro - 백링크 · SEO 전문 에이전시",
-        "desc": "OneSearchPro는 서울과 쿠알라룸푸르에 거점을 둔 백링크·SEO·글로벌 마케팅 전문 에이전시입니다. 화이트햇 방식과 투명한 데이터로 180+ 프로젝트를 성공시켰습니다.",
-        "keywords": "OneSearchPro, 원서치프로, 백링크 에이전시, SEO 에이전시, 마케팅 에이전시, 서울 쿠알라룸푸르",
+        "desc": "OneSearchPro는 서울에 거점을 둔 백링크·SEO·디지털 마케팅 전문 에이전시입니다. 화이트햇 방식과 투명한 데이터로 180+ 프로젝트를 성공시켰습니다.",
+        "keywords": "OneSearchPro, 원서치프로, 백링크 에이전시, SEO 에이전시, 마케팅 에이전시, 서울",
         "h1": "About OneSearchPro",
         "eyebrow": "ABOUT US",
-        "lead": "OneSearchPro는 검색에서 시작되는 비즈니스 성장을 만듭니다. 서울과 쿠알라룸푸르 두 도시에 거점을 두고, 한국 기업의 동남아 진출과 말레이시아 기업의 글로벌 확장을 함께합니다.",
+        "lead": "OneSearchPro는 검색에서 시작되는 비즈니스 성장을 만듭니다. 서울에 거점을 두고, 백링크·SEO를 중심으로 한 풀스택 디지털 마케팅을 제공합니다.",
         "body": (
             section("VALUES", "우리가 일하는 방식",
                     "에이전시의 가치는 결국 '신뢰'에서 나온다고 믿습니다.",
@@ -295,7 +266,7 @@ PAGES = {
                         {"icon":"🤝","h":"투명함","p":"모든 백링크 URL, 광고 데이터, 비용 구조를 고객과 공유합니다."},
                         {"icon":"✅","h":"화이트햇","p":"단기 트릭이 아닌 구글 가이드라인을 지키는 정공법으로 일합니다."},
                         {"icon":"📊","h":"데이터 기반","p":"가설 → 실험 → 측정 → 개선의 사이클을 반복합니다."},
-                        {"icon":"🌏","h":"글로벌 시야","p":"한국·말레이시아 양국의 문화와 시장을 이해합니다."},
+                        {"icon":"🎯","h":"업종 특화","p":"산업별 케이스를 기반으로 맞춤 전략을 설계합니다."},
                     ]) +
             section("WHAT WE DO", "주요 서비스",
                     "백링크를 중심으로 한 풀스택 디지털 마케팅.",
@@ -305,7 +276,6 @@ PAGES = {
                         {"icon":"📱","h":"소셜 미디어","p":"인스타·페이스북·틱톡·유튜브 운영."},
                         {"icon":"💻","h":"웹사이트 제작","p":"SEO 최적화 반응형 웹사이트."},
                         {"icon":"🏢","h":"기업 마케팅","p":"브랜드 · 퍼포먼스 · CRM 통합."},
-                        {"icon":"🇲🇾","h":"말레이시아 진출","p":"BM/EN 다국어 + 현지 네트워크."},
                     ])
         ),
         "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"OneSearchPro","url":"https://onesearchpro.pages.dev/about/","description":"백링크·SEO·글로벌 마케팅 전문 에이전시"}</script>',
