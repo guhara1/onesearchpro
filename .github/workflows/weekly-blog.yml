@@ -2,9 +2,11 @@ name: Weekly Blog Auto-Publish
 
 on:
   # 매주 월요일 00:00 UTC (한국시간 월요일 09:00)
-  schedule:
-    - cron: "0 0 * * 1"
-  # GitHub UI에서 수동 트리거 가능 (테스트용)
+  # 자동 발행은 잠시 비활성화. 수동 트리거만 사용.
+  # 자동 발행을 다시 켜려면 아래 두 줄의 주석을 해제하세요.
+  # schedule:
+  #   - cron: "0 0 * * 1"
+  # GitHub UI에서 수동 트리거 가능
   workflow_dispatch:
 
 permissions:
