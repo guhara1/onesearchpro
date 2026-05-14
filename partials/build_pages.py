@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
-SITE = "https://onesearchpro.pages.dev"
+SITE = "https://onesearchpro.org"
 
 HEADER = '''<header class="site-header">
     <div class="container nav-wrap">
@@ -116,11 +116,11 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
   <meta property="og:title" content="{title}" />
   <meta property="og:description" content="{desc}" />
   <meta property="og:url" content="{canonical}" />
-  <meta property="og:image" content="https://onesearchpro.pages.dev/assets/images/logo.png" />
+  <meta property="og:image" content="https://onesearchpro.org/assets/images/logo.png" />
   <meta property="og:site_name" content="OneSearchPro" />
   <meta property="og:locale" content="ko_KR" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://onesearchpro.pages.dev/assets/images/logo.png" />
+  <meta name="twitter:image" content="https://onesearchpro.org/assets/images/logo.png" />
   <link rel="icon" type="image/png" href="/assets/images/logo.png" />
   <link rel="apple-touch-icon" href="/assets/images/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -400,7 +400,7 @@ PAGES = {
             '<details><summary>네이버 SEO도 함께 해주시나요?</summary><p>네. 구글과 네이버는 알고리즘이 다르므로 분리된 전략이 필요합니다. 통합 SEO 컨설팅에는 두 검색엔진 동시 대응이 포함됩니다.</p></details>'
             '</div></div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"­원서치프로 소개","url":"https://onesearchpro.pages.dev/about/","mainEntity":{"@type":"Organization","name":"OneSearchPro","alternateName":"원서치프로","url":"https://onesearchpro.pages.dev/","description":"SEO·디지털 마케팅 전문 에이전시"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"­원서치프로 소개","url":"https://onesearchpro.org/about/","mainEntity":{"@type":"Organization","name":"OneSearchPro","alternateName":"원서치프로","url":"https://onesearchpro.org/","description":"SEO·디지털 마케팅 전문 에이전시"}}</script>',
         "active": "about",
     },
 
@@ -625,7 +625,7 @@ PAGES = {
                 ]
             )
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"성공사례","url":"https://onesearchpro.pages.dev/case-studies/","description":"OneSearchPro의 SEO 작업 사례 모음"}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"성공사례","url":"https://onesearchpro.org/case-studies/","description":"OneSearchPro의 SEO 작업 사례 모음"}</script>',
         "active": "cases",
     },
 
@@ -706,7 +706,7 @@ PAGES = {
                 ]
             )
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"SEO 인사이트","url":"https://onesearchpro.pages.dev/insights/","description":"구글·네이버 SEO·디지털 마케팅 전문 콘텐츠 허브"}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"SEO 인사이트","url":"https://onesearchpro.org/insights/","description":"구글·네이버 SEO·디지털 마케팅 전문 콘텐츠 허브"}</script>',
         "active": "insights",
     },
 
@@ -752,7 +752,7 @@ PAGES = {
             ) +
             '</div></div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"SEO 개선 사례","url":"https://onesearchpro.pages.dev/case-studies/seo/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"SEO 개선 사례","url":"https://onesearchpro.org/case-studies/seo/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
         "active": "cases",
     },
 
@@ -797,7 +797,7 @@ PAGES = {
             ) +
             '</div></div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"지역 SEO 사례","url":"https://onesearchpro.pages.dev/case-studies/local-seo/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"지역 SEO 사례","url":"https://onesearchpro.org/case-studies/local-seo/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
         "active": "cases",
     },
 
@@ -842,7 +842,7 @@ PAGES = {
             ) +
             '</div></div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"콘텐츠 개선 사례","url":"https://onesearchpro.pages.dev/case-studies/content/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"콘텐츠 개선 사례","url":"https://onesearchpro.org/case-studies/content/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
         "active": "cases",
     },
 
@@ -877,7 +877,7 @@ PAGES = {
             ) +
             '</div></div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"웹사이트 제작 사례","url":"https://onesearchpro.pages.dev/case-studies/web-design/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"웹사이트 제작 사례","url":"https://onesearchpro.org/case-studies/web-design/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
         "active": "cases",
     },
 
@@ -922,7 +922,7 @@ PAGES = {
             ) +
             '</div></div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"검색 노출 문제 해결 사례","url":"https://onesearchpro.pages.dev/case-studies/visibility/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"검색 노출 문제 해결 사례","url":"https://onesearchpro.org/case-studies/visibility/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
         "active": "cases",
     },
 
@@ -944,7 +944,7 @@ PAGES = {
             insight_card("SERP 기능별 노출 전략 — 스니펫·People Also Ask·이미지", "다양한 SERP 기능에 노출되기 위한 콘텐츠 구조와 마크업 가이드.") +
             '</div></div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"구글 SEO","url":"https://onesearchpro.pages.dev/insights/google-seo/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"구글 SEO","url":"https://onesearchpro.org/insights/google-seo/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
         "active": "insights",
     },
 
@@ -965,7 +965,7 @@ PAGES = {
             insight_card("구조화 데이터(JSON-LD) — 어떤 스키마를 적용해야 할까", "Organization, FAQ, Article, Product 등 비즈니스 유형별 적합한 스키마 가이드.") +
             '</div></div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"기술 SEO","url":"https://onesearchpro.pages.dev/insights/technical-seo/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"기술 SEO","url":"https://onesearchpro.org/insights/technical-seo/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
         "active": "insights",
     },
 
@@ -986,7 +986,7 @@ PAGES = {
             insight_card("롱폼 vs 숏폼 — 어떤 길이의 글이 SEO에 유리한가", "키워드 유형별 적합 본문 길이와 글 쪼개기·합치기 의사결정 기준.") +
             '</div></div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"콘텐츠 SEO","url":"https://onesearchpro.pages.dev/insights/content-seo/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"콘텐츠 SEO","url":"https://onesearchpro.org/insights/content-seo/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
         "active": "insights",
     },
 
@@ -1007,7 +1007,7 @@ PAGES = {
             insight_card("지역 SEO와 일반 SEO의 우선순위 차이", "오프라인 매장과 온라인 비즈니스의 SEO 작업 순서 차이 가이드.") +
             '</div></div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"지역 SEO","url":"https://onesearchpro.pages.dev/insights/local-seo/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"지역 SEO","url":"https://onesearchpro.org/insights/local-seo/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
         "active": "insights",
     },
 
@@ -1028,7 +1028,7 @@ PAGES = {
             insight_card("백링크 프로파일 점검 주기와 모니터링 도구 비교", "Ahrefs·SEMrush·Majestic 등 도구별 강점과 분기 점검 루틴.") +
             '</div></div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"백링크 · 디지털 PR","url":"https://onesearchpro.pages.dev/insights/backlink-pr/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"백링크 · 디지털 PR","url":"https://onesearchpro.org/insights/backlink-pr/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
         "active": "insights",
     },
 
@@ -1048,7 +1048,7 @@ PAGES = {
             insight_card("네이버 블로그·카페·인플루언서 마케팅 — SEO 보조 전략", "네이버 생태계에서 검색 신호로 연결되는 운영 패턴 정리.") +
             '</div></div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"SNS 마케팅","url":"https://onesearchpro.pages.dev/insights/sns/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"SNS 마케팅","url":"https://onesearchpro.org/insights/sns/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
         "active": "insights",
     },
 
@@ -1069,7 +1069,7 @@ PAGES = {
             insight_card("크롤링 예산이 부족한 사이트 — 우선순위 정리법", "큰 사이트에서 핵심 페이지로 크롤러를 집중시키는 구조 설계 가이드.") +
             '</div></div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"검색 노출 문제 해결","url":"https://onesearchpro.pages.dev/insights/visibility/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"검색 노출 문제 해결","url":"https://onesearchpro.org/insights/visibility/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
         "active": "insights",
     },
 
@@ -1093,7 +1093,7 @@ PAGES = {
                     {"icon":"♻️","h":"검색 자산 누적","p":"광고를 끄면 사라지는 트래픽이 아니라, 작업을 멈춰도 남는 콘텐츠·링크·평판을 누적시킵니다.","li":["콘텐츠 IP 고객 귀속","링크 자산 분기 점검"]},
                 ])
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"OneSearchPro 작업 원칙","url":"https://onesearchpro.pages.dev/about/principles/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"OneSearchPro 작업 원칙","url":"https://onesearchpro.org/about/principles/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
         "active": "about",
     },
 
@@ -1114,7 +1114,7 @@ PAGES = {
                 ("측정·지속 개선", "월간 순위·트래픽·전환 리포트, 분기 전략 리뷰, 6개월 단위 콘텐츠 리프레시."),
             ])
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"OneSearchPro 진행 프로세스","url":"https://onesearchpro.pages.dev/about/process/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"OneSearchPro 진행 프로세스","url":"https://onesearchpro.org/about/process/","isPartOf":{"@type":"WebSite","name":"OneSearchPro"}}</script>',
         "active": "about",
     },
 
