@@ -369,16 +369,22 @@ def insights_section(anchor, eyebrow, h2, intro, cards):
     )
 
 
-def blog_post(*, date, reading_time, author="강백호", author_url="/about/team/", intro, sections, key_takeaways=None, related=None):
+def blog_post(*, date, reading_time, author="강백호", author_url="/about/team/", date_modified=None, intro, sections, key_takeaways=None, related=None):
     """블로그 글 본문 HTML을 생성합니다.
     sections: list of (h2, html_content) tuples
     key_takeaways: 글 끝부분에 들어가는 요약 리스트 (optional)
     related: list of (title, url, badge) tuples - 내부 링크용
+    date_modified: 발행 후 본문이 실제 수정된 경우의 최종 갱신일 (Freshness 신호)
     """
+    # date_modified가 발행일과 다를 때만 표기하여 redundancy 회피
+    modified_html = ""
+    if date_modified and date_modified != date:
+        modified_html = f'<span>🔄 마지막 업데이트 <time datetime="{date_modified}">{date_modified}</time></span>'
     # 저자 바이라인은 Person 프로필 페이지로 링크 (E-E-A-T Authoritativeness)
     meta = (
         f'<div class="article-meta">'
-        f'<span>📅 {date}</span>'
+        f'<span>📅 발행 <time datetime="{date}">{date}</time></span>'
+        f'{modified_html}'
         f'<span>⏱ 읽는 시간 약 {reading_time}분</span>'
         f'<span>✍ <a href="{author_url}" rel="author">{author}</a> · OneSearchPro</span>'
         f'</div>'
@@ -2520,6 +2526,7 @@ PAGES = {
         "lead": "이름은 \"모바일 우선\"이지만 사실상 \"모바일이 전부\"입니다. 데스크탑에만 있고 모바일에 없는 콘텐츠는 색인되지 않습니다. 반응형 사이트도 안심할 수 없는 6가지 점검 항목을 정리합니다.",
         "body": blog_post(
             date="2025-05-14",
+            date_modified="2026-05-17",
             reading_time=8,
             intro="구글은 2023년 10월부터 모든 사이트를 모바일 우선 색인으로 평가하고 있습니다. 핵심 의미는 단순합니다 — 구글봇이 사이트를 가져갈 때 데스크탑 버전이 아닌 모바일 버전을 봅니다. 모바일에서 안 보이는 본문·이미지·내부 링크는 사실상 없는 것으로 처리됩니다.",
             sections=[
@@ -2608,7 +2615,8 @@ PAGES = {
             url="https://onesearchpro.org/insights/technical-seo/mobile-first-indexing/",
             title="모바일 우선 색인 점검 가이드",
             desc="모바일 우선 색인의 데스크탑 색인 차이점과 점검 6가지.",
-            date_published="2025-05-14"
+            date_published="2025-05-14",
+            date_modified="2026-05-17"
         ),
         "active": "insights",
     },
@@ -3460,6 +3468,7 @@ PAGES = {
         "lead": "같은 키워드라도 사용자가 원하는 결과는 다릅니다. 검색 의도를 정확히 파악해야 페이지가 상위에 잡힙니다.",
         "body": blog_post(
             date="2026-05-14",
+            date_modified="2026-05-17",
             reading_time=8,
             intro="검색 의도를 잘못 매핑한 페이지는 기술 SEO가 완벽해도 상위 노출이 어렵습니다. 같은 키워드라도 사용자 의도는 다르고, 검색엔진은 그 차이를 SERP 구성으로 명확히 보여줍니다. 이 글에서는 정보형·탐색형·거래형·상업형 4가지 의도를 구분하는 기준과, 키워드별로 어떤 페이지를 만들어야 하는지 실무 관점에서 정리합니다.",
             sections=[
@@ -3494,7 +3503,8 @@ PAGES = {
             url="https://onesearchpro.org/insights/content-seo/search-intent-4-types-keyword-classification-page-strategy/",
             title="검색 의도 4가지 유형 — 키워드별로 어떻게 분류하고 페이지를 만드나",
             desc="정보형·탐색형·거래형·상업형 4가지 검색 의도 구분 기준과 키워드별 페이지 매핑 실무 가이드.",
-            date_published="2026-05-14"
+            date_published="2026-05-14",
+            date_modified="2026-05-17"
         ),
         "active": "insights",
     },
