@@ -68,7 +68,7 @@ FOOTER = '''<footer class="site-footer">
       <div><a href="/" class="brand"><span class="brand-mark">1</span><span class="brand-name">OneSearch<strong>Pro</strong></span></a><p class="muted">검색에서 시작되는 비즈니스 성장.<br/>SEO · 디지털 마케팅 전문 에이전시.</p></div>
       <div><h5>SEO 서비스</h5><ul><li><a href="/services/seo/">SEO 컨설팅</a></li><li><a href="/services/technical-seo/">기술 SEO 진단</a></li><li><a href="/services/content-seo/">콘텐츠 SEO</a></li><li><a href="/services/local-seo/">지역 SEO</a></li><li><a href="/services/digital-pr/">디지털 PR · 백링크 진단</a></li><li><a href="/services/social-media/">SNS 마케팅</a></li><li><a href="/services/web-design/">SEO 웹사이트 제작</a></li></ul></div>
       <div><h5>회사</h5><ul><li><a href="/case-studies/">성공사례</a></li><li><a href="/insights/">SEO 인사이트</a></li><li><a href="/about/">회사 소개</a></li><li><a href="/contact/">내 사이트 진단받기</a></li></ul></div>
-      <div><h5>연락처</h5><ul><li>contact@onesearchpro.com</li><li>인천 부평구</li></ul></div>
+      <div><h5>연락처</h5><ul><li>help@onesearchpro.org</li><li>인천 부평구</li></ul></div>
       <div><h5>약관·정책</h5><ul><li><a href="/privacy/">개인정보처리방침</a></li><li><a href="/terms/">이용약관</a></li><li><a href="/sitemap-html/">사이트맵</a></li><li><a href="/rss.xml">RSS 피드</a></li></ul></div>
     </div>
     <div class="container biz-info">
@@ -176,7 +176,7 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
 
     # 모든 페이지에 공통 적용되는 사이트 차원 JSON-LD
     # sameAs: 구글 Knowledge Panel·E-E-A-T Authoritativeness 신호
-    site_wide_jsonld = '''<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"OneSearchPro","alternateName":"원서치프로","url":"https://onesearchpro.org/","inLanguage":"ko-KR","publisher":{"@type":"Organization","name":"OneSearchPro","legalName":"YH기획"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"YH기획 (OneSearchPro)","alternateName":"OneSearchPro","url":"https://onesearchpro.org/","logo":"https://onesearchpro.org/assets/images/logo.png","image":"https://onesearchpro.org/assets/images/logo.png","telephone":"","email":"contact@onesearchpro.com","priceRange":"₩₩","address":{"@type":"PostalAddress","streetAddress":"부평대로 283 부평우림라이온스밸리","addressLocality":"부평구","addressRegion":"인천광역시","postalCode":"21389","addressCountry":"KR"},"areaServed":"KR","taxID":"503-30-66944","sameAs":["https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/","https://medium.com/@88smartbro88","https://x.com/gugeulmake84173","https://t.me/googleseolab"]}</script>'''
+    site_wide_jsonld = '''<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"OneSearchPro","alternateName":"원서치프로","url":"https://onesearchpro.org/","inLanguage":"ko-KR","publisher":{"@type":"Organization","name":"OneSearchPro","legalName":"YH기획"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"YH기획 (OneSearchPro)","alternateName":"OneSearchPro","url":"https://onesearchpro.org/","logo":"https://onesearchpro.org/assets/images/logo.png","image":"https://onesearchpro.org/assets/images/logo.png","telephone":"","email":"help@onesearchpro.org","priceRange":"₩₩","address":{"@type":"PostalAddress","streetAddress":"부평대로 283 부평우림라이온스밸리","addressLocality":"부평구","addressRegion":"인천광역시","postalCode":"21389","addressCountry":"KR"},"areaServed":"KR","taxID":"503-30-66944","sameAs":["https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/","https://medium.com/@88smartbro88","https://x.com/gugeulmake84173","https://t.me/googleseolab"]}</script>'''
 
     # 페이지 본문 내에 자체 CTA가 있는 페이지는 글로벌 CTA를 생략 (중복 방지)
     has_own_cta = path in {
@@ -665,7 +665,7 @@ PAGES = {
                 ("측정·지속 개선", "월간 순위·트래픽·전환 리포트, 분기 전략 리뷰, 6개월 단위 콘텐츠 리프레시."),
             ]) +
 
-            '<section class="section"><div class="container"><div class="section-head left"><span class="eyebrow">COMPANY INFO</span><h2>사업자 정보</h2><p>OneSearchPro는 YH기획이 운영하는 SEO·디지털 마케팅 브랜드입니다.</p></div><div class="company-info"><dl><dt>상호</dt><dd>YH기획</dd><dt>브랜드</dt><dd>OneSearchPro (원서치프로)</dd><dt>사업자등록번호</dt><dd>503-30-66944</dd><dt>주소</dt><dd>인천광역시 부평구 부평대로 283 부평우림라이온스밸리</dd><dt>이메일</dt><dd><a href="mailto:contact@onesearchpro.com">contact@onesearchpro.com</a></dd><dt>문의 채널</dt><dd>텔레그램 <a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer">@googleseolab</a></dd></dl></div></div></section>' +
+            '<section class="section"><div class="container"><div class="section-head left"><span class="eyebrow">COMPANY INFO</span><h2>사업자 정보</h2><p>OneSearchPro는 YH기획이 운영하는 SEO·디지털 마케팅 브랜드입니다.</p></div><div class="company-info"><dl><dt>상호</dt><dd>YH기획</dd><dt>브랜드</dt><dd>OneSearchPro (원서치프로)</dd><dt>사업자등록번호</dt><dd>503-30-66944</dd><dt>주소</dt><dd>인천광역시 부평구 부평대로 283 부평우림라이온스밸리</dd><dt>이메일</dt><dd><a href="mailto:help@onesearchpro.org">help@onesearchpro.org</a></dd><dt>문의 채널</dt><dd>텔레그램 <a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer">@googleseolab</a></dd></dl></div></div></section>' +
 
             '<section class="section" id="faq-anchor"><a id="faq"></a><div class="container faq-wrap"><div class="section-head left"><span class="eyebrow">FAQ</span><h2>자주 묻는 질문</h2></div><div class="faq">'
             '<details open><summary>SEO 효과는 언제부터 나타나나요?</summary><p>키워드 난이도와 사이트 상태에 따라 다르지만, 일반적으로 온페이지 개선은 4~8주, 외부 신호 누적 효과는 8~16주, 안정적인 상위 노출은 3~6개월 이후입니다. 무료 진단 단계에서 예상 타임라인을 함께 제시합니다.</p></details>'
@@ -676,7 +676,7 @@ PAGES = {
             '<details><summary>네이버 SEO도 함께 해주시나요?</summary><p>네. 구글과 네이버는 알고리즘이 다르므로 분리된 전략이 필요합니다. 통합 SEO 컨설팅에는 두 검색엔진 동시 대응이 포함됩니다.</p></details>'
             '</div></div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"원서치프로 소개","url":"https://onesearchpro.org/about/","mainEntity":{"@type":"Organization","name":"OneSearchPro","alternateName":["원서치프로","YH기획"],"legalName":"YH기획","url":"https://onesearchpro.org/","logo":"https://onesearchpro.org/assets/images/logo.png","description":"SEO·디지털 마케팅 전문 에이전시","taxID":"503-30-66944","address":{"@type":"PostalAddress","streetAddress":"부평대로 283 부평우림라이온스밸리","addressLocality":"부평구","addressRegion":"인천광역시","addressCountry":"KR"},"email":"contact@onesearchpro.com","sameAs":["https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/","https://medium.com/@88smartbro88","https://x.com/gugeulmake84173","https://t.me/googleseolab"]}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"원서치프로 소개","url":"https://onesearchpro.org/about/","mainEntity":{"@type":"Organization","name":"OneSearchPro","alternateName":["원서치프로","YH기획"],"legalName":"YH기획","url":"https://onesearchpro.org/","logo":"https://onesearchpro.org/assets/images/logo.png","description":"SEO·디지털 마케팅 전문 에이전시","taxID":"503-30-66944","address":{"@type":"PostalAddress","streetAddress":"부평대로 283 부평우림라이온스밸리","addressLocality":"부평구","addressRegion":"인천광역시","addressCountry":"KR"},"email":"help@onesearchpro.org","sameAs":["https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/","https://medium.com/@88smartbro88","https://x.com/gugeulmake84173","https://t.me/googleseolab"]}}</script>',
         "active": "about",
     },
 
@@ -2284,7 +2284,7 @@ PAGES = {
             '<li>Telegram (문의): <a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer me">@googleseolab</a></li>'
             '</ul>'
             '<h3>연락처</h3>'
-            '<p>저자에게 직접 글·사실관계에 대한 의견을 보내시려면 <a href="mailto:contact@onesearchpro.com">contact@onesearchpro.com</a> 으로 메일을 보내주세요. 모든 인사이트 글의 사실 오류 신고는 24시간 내 검토 후 수정·반영합니다.</p>'
+            '<p>저자에게 직접 글·사실관계에 대한 의견을 보내시려면 <a href="mailto:help@onesearchpro.org">help@onesearchpro.org</a> 으로 메일을 보내주세요. 모든 인사이트 글의 사실 오류 신고는 24시간 내 검토 후 수정·반영합니다.</p>'
             '</div></div></section>'
             + section("EDITORIAL", "콘텐츠 검수 프로세스",
                 "모든 인사이트 글은 발행 전 다음 4단계 검수를 거칩니다.",
@@ -3850,7 +3850,7 @@ PAGES = {
             '<p>회사는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 정보주체의 불만 처리 및 피해 구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.</p>'
             '<ul>'
             '<li><b>책임자</b>: YH기획 운영자</li>'
-            '<li><b>연락처</b>: contact@onesearchpro.com</li>'
+            '<li><b>연락처</b>: help@onesearchpro.org</li>'
             '</ul>'
             '<h2>10. 권익침해 구제방법</h2>'
             '<p>정보주체는 개인정보침해로 인한 구제를 받기 위하여 개인정보분쟁조정위원회, 한국인터넷진흥원 개인정보침해신고센터 등에 분쟁해결이나 상담 등을 신청할 수 있습니다.</p>'
