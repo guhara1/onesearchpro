@@ -216,8 +216,8 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
   <link rel="alternate" type="application/rss+xml" title="OneSearchPro · SEO 인사이트" href="/rss.xml" />
   <meta name="theme-color" content="#7c5cff" />
   <!-- 검색엔진 소유권 인증 (등록 시 코드 입력) -->
-  <meta name="google-site-verification" content="" />
-  <meta name="naver-site-verification" content="" />
+  <meta name="google-site-verification" content="kAFnt3jSs27vJ3oCex9SwynDq07pqYXZmVtITkFZBPQ" />
+  <meta name="naver-site-verification" content="eb0c4d732c1b024809d2ab52ff1ea457bb9189dc" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="image" href="/assets/images/logo-140.webp" type="image/webp" fetchpriority="high" />
@@ -340,13 +340,9 @@ def cases_section(anchor, eyebrow, h2, intro, cards):
 
 
 def insight_card(title, summary, label="준비 중"):
-    return (
-        f'<div class="svc insight-card">'
-        f'<span class="badge">{label}</span>'
-        f'<h3>{title}</h3>'
-        f'<p>{summary}</p>'
-        f'</div>'
-    )
+    # Placeholder 카드는 Helpful Content System의 사이트 단위 평가에 부정 신호로 작용하므로,
+    # 실제 글이 발행되어 insight_article_card 로 교체되기 전까지는 렌더링하지 않는다.
+    return ""
 
 
 def insight_article_card(title, summary, url, reading_time, label="NEW"):
@@ -2518,7 +2514,7 @@ PAGES = {
                  "<ul>"
                  "<li>양쪽 canonical이 정확히 서로를 가리켜야 함</li>"
                  "<li><code>alternate</code> 태그로 데스크탑-모바일 연결</li>"
-                 "<li>두 사이트 간 콘텐츠 100% 일치 (시간이 지나면 어긋남)</li>"
+                 "<li>두 사이트 간 콘텐츠가 동일하게 유지되는지 (시간이 지나면 어긋나는 경우가 많음)</li>"
                  "<li>모바일 사이트 robots.txt가 차단되지 않는지</li>"
                  "<li>두 사이트의 구조화 데이터, sitemap 모두 점검</li>"
                  "</ul>"),
@@ -3418,7 +3414,7 @@ PAGES = {
                 ("6. 키워드를 4가지 의도로 분류하는 실전 프로세스",
                  """<p>검색 의도를 판단할 때는 <strong>키워드 자체보다 실제 검색 결과</strong>를 우선 분석해야 합니다. 같은 키워드라도 시장·시즌·사용자층에 따라 의도가 달라지기 때문입니다.</p><ol><li><strong>SERP 분석:</strong> 네이버·구글에서 키워드 직접 검색 → 상위 10개 결과 유형(블로그/쇼핑/동영상/공식 페이지) 확인</li><li><strong>탭·영역 확인:</strong> 네이버 VIEW/쇼핑/플레이스 어느 탭이 상단인지, 구글 Featured Snippet/Shopping/Local Pack 노출 여부 점검</li><li><strong>키워드 수식어로 1차 분류:</strong> \"방법\", \"추천\", \"구매\" 같은 접미사로 가설을 세우고 SERP로 검증</li><li><strong>도구로 정량 점검:</strong> 네이버 검색광고 키워드 도구·구글 키워드 플래너에서 경쟁도·CPC 확인. CPC가 높을수록 상업형·거래형 가능성 증가</li><li><strong>스프레드시트로 분류:</strong> 키워드 목록에 \"의도\" 열 추가, 정보/탐색/거래/상업 태그 부여 → 페이지 유형 매핑</li></ol><p><code>예시: \"에어프라이어\" → 네이버 쇼핑 탭 최상단 → 거래형 / \"에어프라이어 요리법\" → VIEW 탭 우세 → 정보형</code></p><p><strong>혼합 의도 주의:</strong> 한 키워드가 여러 의도를 동시에 가질 수 있습니다. \"다이어트\"는 정보형(방법 안내)과 상업형(보조제 비교)이 혼재합니다. 포괄적 콘텐츠로 다루거나 의도별로 별도 페이지를 준비해야 합니다.</p>"""),
                 ("7. 검색 의도별 페이지 제작 체크리스트와 흔한 실수",
-                 """<p>의도를 분류한 뒤에는 각 유형에 맞는 페이지 구조·콘텐츠 요소·전환 경로를 설계합니다.</p><table><thead><tr><th>의도 유형</th><th>페이지 형식</th><th>핵심 요소</th><th>흔한 실수</th></tr></thead><tbody><tr><td>정보형</td><td>가이드·블로그</td><td>목차·단계별 설명·예시</td><td>과도한 제품 링크로 신뢰 하락</td></tr><tr><td>탐색형</td><td>홈·서비스 페이지</td><td>브랜드명·사이트 링크·Organization 스키마</td><td>공식 페이지 메타 미최적화</td></tr><tr><td>거래형</td><td>상품·랜딩</td><td>가격·CTA·신뢰 신호</td><td>긴 설명으로 결정 지연</td></tr><tr><td>상업형</td><td>비교·추천</td><td>표·차트·자체 데이터</td><td>제휴 링크만 나열해 편향 의심</td></tr></tbody></table><p><strong>자주 보이는 실수 패턴:</strong></p><ul><li>혼합 의도 키워드에 한 가지 유형의 페이지만 매핑</li><li>거래형 페이지에 신뢰 요소(리뷰·환불 정책·배송 정보) 누락</li><li>정보형 글에 제품 링크를 과도하게 삽입해 광고성 글로 인식</li><li>SERP를 보지 않고 키워드 수식어만으로 의도 판단</li></ul><p>네이버 C-랭크는 체류 시간·재방문율로 콘텐츠 만족도를 평가합니다. 거래형 페이지라도 최소한의 신뢰 요소는 반드시 포함해야 순위 유지가 가능합니다. SERP 결과만 보고 의도를 추정하는 것보다, 실제 페이지를 띄운 뒤 행동 신호(체류·이탈·재검색)를 추적하는 게 가장 정확한 검증입니다.</p>""")
+                 """<p>의도를 분류한 뒤에는 각 유형에 맞는 페이지 구조·콘텐츠 요소·전환 경로를 설계합니다.</p><table><thead><tr><th>의도 유형</th><th>페이지 형식</th><th>핵심 요소</th><th>흔한 실수</th></tr></thead><tbody><tr><td>정보형</td><td>가이드·블로그</td><td>목차·단계별 설명·예시</td><td>과도한 제품 링크로 신뢰 하락</td></tr><tr><td>탐색형</td><td>홈·서비스 페이지</td><td>브랜드명·사이트 링크·Organization 스키마</td><td>공식 페이지 메타 미최적화</td></tr><tr><td>거래형</td><td>상품·랜딩</td><td>가격·CTA·신뢰 신호</td><td>긴 설명으로 결정 지연</td></tr><tr><td>상업형</td><td>비교·추천</td><td>표·차트·자체 데이터</td><td>제휴 링크만 나열해 편향 의심</td></tr></tbody></table><p><strong>자주 보이는 실수 패턴:</strong></p><ul><li>혼합 의도 키워드에 한 가지 유형의 페이지만 매핑</li><li>거래형 페이지에 신뢰 요소(리뷰·환불 정책·배송 정보) 누락</li><li>정보형 글에 제품 링크를 과도하게 삽입해 광고성 글로 인식</li><li>SERP를 보지 않고 키워드 수식어만으로 의도 판단</li></ul><p>네이버 C-랭크는 체류 시간·재방문율로 콘텐츠 만족도를 평가합니다. 거래형 페이지라도 최소한의 신뢰 요소를 갖춰야 안정적인 순위가 유지되는 경향이 있습니다. SERP 결과만 보고 의도를 추정하는 것보다, 실제 페이지를 띄운 뒤 행동 신호(체류·이탈·재검색)를 추적하는 게 가장 정확한 검증입니다.</p>""")
             ],
             key_takeaways=[
                 "검색 의도는 정보형·탐색형·거래형·상업형 4가지로 구분합니다. 네이버·구글 모두 의도 일치 페이지를 우선 노출합니다.",
