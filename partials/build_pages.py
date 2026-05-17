@@ -193,6 +193,27 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
       </div>
     </section>'''
 
+    # 책임자 미니 바이라인 — 비블로그 페이지의 E-E-A-T Authoritativeness 신호
+    # 블로그 글은 이미 본문 상단에 바이라인이 있으므로 제외
+    is_byline_target = (
+        path.startswith("/services/")
+        or path.startswith("/case-studies/")
+        or (path.startswith("/about/") and path not in {"/about/", "/about/team/"})
+    )
+    page_byline_html = ""
+    if is_byline_target:
+        page_byline_html = (
+            '<div class="container"><aside class="page-byline">'
+            '<span class="page-byline-label">이 페이지의 책임 컨설턴트</span>'
+            '<a href="/about/team/" rel="author" class="page-byline-author">'
+            '<span class="page-byline-avatar">👤</span>'
+            '<span><b>강백호</b> · OneSearchPro 대표</span>'
+            '</a>'
+            '<span class="page-byline-note">SEO·디지털 마케팅 실무 10년+, 페널티 사례 0건 화이트햇 원칙. '
+            '<a href="/about/team/">저자 프로필 보기 →</a></span>'
+            '</aside></div>'
+        )
+
     return f'''<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -237,6 +258,7 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
   <main>
     {hero_html}
     {body}
+    {page_byline_html}
     {global_cta_html}
   </main>
   {FOOTER}
@@ -603,6 +625,22 @@ PAGES = {
         "eyebrow": "ABOUT ONESEARCHPRO",
         "lead": "OneSearchPro(원서치프로)는 검색에서 시작되는 비즈니스 성장을 만듭니다. 서울에 거점을 두고 SEO·디지털 마케팅을 제공하며, 단기 트릭이 아닌 정공법으로 검색 자산을 누적시키는 것을 원칙으로 합니다.",
         "body": (
+            # 책임 저자 prominent 카드 — E-E-A-T Authoritativeness 신호 (회사 소개 페이지 최상단)
+            '<section class="section"><div class="container">'
+            '<div class="lead-author-card">'
+            '<div class="lead-author-avatar">👤</div>'
+            '<div class="lead-author-body">'
+            '<span class="eyebrow">LEAD AUTHOR & FOUNDER</span>'
+            '<h2 style="margin: 0.5rem 0 0.75rem;">강백호 · OneSearchPro 운영자</h2>'
+            '<p>SEO·디지털 마케팅 실무 10년+. 구글 코어 업데이트와 Helpful Content System 대응, 한국형 네이버·구글 동시 워크플로우 설계를 직접 담당합니다. OneSearchPro의 모든 SEO 인사이트 글과 컨설팅 작업의 1차 책임자입니다.</p>'
+            '<div class="cta-row" style="margin-top: 1rem;">'
+            '<a href="/about/team/" rel="author" class="btn btn-primary">저자 상세 프로필 →</a>'
+            '<a href="https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/" target="_blank" rel="noopener noreferrer me" class="btn btn-outline">LinkedIn</a>'
+            '</div>'
+            '</div>'
+            '</div>'
+            '</div></section>' +
+
             '<section class="section" id="intro"><div class="container"><div class="section-head"><span class="eyebrow">WHO WE ARE</span><h2>원서치프로는 어떤 에이전시인가요</h2><p>대량 백링크 판매가 아닌, 사이트의 검색 자산을 구조적으로 만드는 SEO 전문 에이전시입니다. 모든 작업은 구글 가이드라인을 준수하는 화이트햇 방식으로만 진행하며, 페널티 사례 0건의 안전성을 유지하고 있습니다.</p></div><div class="grid services"><div class="svc"><div class="svc-icon">🇰🇷</div><h3>서울 기반</h3><p>국내 기업의 구글·네이버 동시 대응을 메인 영역으로 합니다.</p></div><div class="svc"><div class="svc-icon">📈</div><h3>180+ 프로젝트</h3><p>리테일·F&amp;B·뷰티·핀테크·교육 등 산업별 케이스를 축적했습니다.</p></div><div class="svc"><div class="svc-icon">🛡️</div><h3>페널티 0건</h3><p>1,200+ 백링크 빌딩 동안 구글 페널티 사례가 발생하지 않았습니다.</p></div><div class="svc"><div class="svc-icon">🤝</div><h3>97% 재계약률</h3><p>한번 시작한 고객의 97%가 6개월 이상 함께 일하고 있습니다.</p></div></div></div></section>' +
 
             '<a id="principles"></a>' +
