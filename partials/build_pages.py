@@ -50,6 +50,7 @@ HEADER = '''<header class="site-header">
           <a href="/about/" class="nav-trigger{ACTIVE_ABOUT}">회사소개 <span class="caret">▾</span></a>
           <div class="dropdown">
             <a href="/about/" class="dd-main"><b>🏢 원서치프로 소개</b><span>About OneSearchPro</span></a>
+            <a href="/about/team/">팀 · 저자 소개</a>
             <a href="/about/principles/">작업 원칙</a>
             <a href="/about/process/">진행 프로세스</a>
             <a href="/about/faq/">자주 묻는 질문</a>
@@ -216,8 +217,8 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
   <link rel="alternate" type="application/rss+xml" title="OneSearchPro · SEO 인사이트" href="/rss.xml" />
   <meta name="theme-color" content="#7c5cff" />
   <!-- 검색엔진 소유권 인증 (등록 시 코드 입력) -->
-  <meta name="google-site-verification" content="" />
-  <meta name="naver-site-verification" content="" />
+  <meta name="google-site-verification" content="kAFnt3jSs27vJ3oCex9SwynDq07pqYXZmVtITkFZBPQ" />
+  <meta name="naver-site-verification" content="eb0c4d732c1b024809d2ab52ff1ea457bb9189dc" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="image" href="/assets/images/logo-140.webp" type="image/webp" fetchpriority="high" />
@@ -340,13 +341,9 @@ def cases_section(anchor, eyebrow, h2, intro, cards):
 
 
 def insight_card(title, summary, label="준비 중"):
-    return (
-        f'<div class="svc insight-card">'
-        f'<span class="badge">{label}</span>'
-        f'<h3>{title}</h3>'
-        f'<p>{summary}</p>'
-        f'</div>'
-    )
+    # Placeholder 카드는 Helpful Content System의 사이트 단위 평가에 부정 신호로 작용하므로,
+    # 실제 글이 발행되어 insight_article_card 로 교체되기 전까지는 렌더링하지 않는다.
+    return ""
 
 
 def insight_article_card(title, summary, url, reading_time, label="NEW"):
@@ -372,17 +369,18 @@ def insights_section(anchor, eyebrow, h2, intro, cards):
     )
 
 
-def blog_post(*, date, reading_time, author="OneSearchPro SEO팀", intro, sections, key_takeaways=None, related=None):
+def blog_post(*, date, reading_time, author="강백호", author_url="/about/team/", intro, sections, key_takeaways=None, related=None):
     """블로그 글 본문 HTML을 생성합니다.
     sections: list of (h2, html_content) tuples
     key_takeaways: 글 끝부분에 들어가는 요약 리스트 (optional)
     related: list of (title, url, badge) tuples - 내부 링크용
     """
+    # 저자 바이라인은 Person 프로필 페이지로 링크 (E-E-A-T Authoritativeness)
     meta = (
         f'<div class="article-meta">'
         f'<span>📅 {date}</span>'
         f'<span>⏱ 읽는 시간 약 {reading_time}분</span>'
-        f'<span>✍ {author}</span>'
+        f'<span>✍ <a href="{author_url}" rel="author">{author}</a> · OneSearchPro</span>'
         f'</div>'
     )
 
@@ -448,8 +446,9 @@ def blog_post(*, date, reading_time, author="OneSearchPro SEO팀", intro, sectio
     )
 
 
-def blog_jsonld(*, url, title, desc, date_published, date_modified=None):
+def blog_jsonld(*, url, title, desc, date_published, date_modified=None, author_name="강백호", author_url="https://onesearchpro.org/about/team/"):
     date_modified = date_modified or date_published
+    # author는 Person + Organization 배열로 표기 (E-E-A-T Authoritativeness 신호 강화)
     return (
         f'<script type="application/ld+json">'
         f'{{"@context":"https://schema.org","@type":"BlogPosting",'
@@ -458,7 +457,8 @@ def blog_jsonld(*, url, title, desc, date_published, date_modified=None):
         f'"url":"{url}",'
         f'"datePublished":"{date_published}",'
         f'"dateModified":"{date_modified}",'
-        f'"author":{{"@type":"Organization","name":"OneSearchPro","url":"https://onesearchpro.org/"}},'
+        f'"author":[{{"@type":"Person","name":"{author_name}","url":"{author_url}"}},'
+        f'{{"@type":"Organization","name":"OneSearchPro","url":"https://onesearchpro.org/"}}],'
         f'"publisher":{{"@type":"Organization","name":"OneSearchPro","logo":{{"@type":"ImageObject","url":"https://onesearchpro.org/assets/images/logo.png"}}}},'
         f'"image":"https://onesearchpro.org/assets/images/logo.png",'
         f'"mainEntityOfPage":{{"@type":"WebPage","@id":"{url}"}},'
@@ -2177,6 +2177,64 @@ PAGES = {
         "active": "about",
     },
 
+    "/about/team/": {
+        "title": "팀 · 저자 소개 | OneSearchPro 운영자와 SEO 전문가",
+        "desc": "OneSearchPro를 운영하고 SEO 인사이트를 직접 집필하는 책임 저자와 팀을 소개합니다. 누가 어떤 경험으로 콘텐츠를 만드는지(E-E-A-T) 투명하게 공개합니다.",
+        "keywords": "OneSearchPro 팀, 강백호, SEO 컨설턴트, SEO 전문가, 저자 소개, About Author, E-E-A-T",
+        "h1": "팀 · 저자 소개",
+        "eyebrow": "OUR TEAM & AUTHORS",
+        "lead": "콘텐츠의 신뢰는 결국 \"누가 썼는가\"에서 시작됩니다. OneSearchPro의 SEO 인사이트와 컨설팅을 책임지는 팀을 공개합니다. 글에 적용된 경험·관점이 어디서 나왔는지 직접 확인하실 수 있도록 했습니다.",
+        "body": (
+            '<section class="section"><div class="container">'
+            '<div class="section-head left"><span class="eyebrow">LEAD AUTHOR</span><h2>책임 저자 — 강백호</h2><p>OneSearchPro(YH기획) 운영자이자 SEO 인사이트 글 대부분을 직접 집필하는 책임 저자입니다.</p></div>'
+            '<div class="legal-doc">'
+            '<h3>경력 요약</h3>'
+            '<ul>'
+            '<li>SEO·디지털 마케팅 실무 10년+ — 리테일·F&amp;B·뷰티·핀테크·교육·의료 등 다양한 산업의 SEO 프로젝트 수행</li>'
+            '<li>OneSearchPro(YH기획) 대표 · SEO 컨설팅 총괄</li>'
+            '<li>구글 검색 가이드라인·네이버 검색 정책을 동시 대응하는 한국형 SEO 워크플로우 구축</li>'
+            '<li>1,200건+ 화이트햇 백링크 빌딩, 페널티 사례 0건 유지</li>'
+            '</ul>'
+            '<h3>주로 다루는 주제</h3>'
+            '<ul>'
+            '<li>구글 코어 업데이트·Helpful Content System 실무 대응</li>'
+            '<li>기술 SEO (색인, Core Web Vitals, 구조화 데이터, sitemap·robots 설계)</li>'
+            '<li>콘텐츠 SEO (검색 의도, 토픽 클러스터, 의료·금융 등 YMYL 콘텐츠 가이드)</li>'
+            '<li>지역 SEO (네이버 플레이스·구글 비즈니스 프로필 운영)</li>'
+            '<li>디지털 PR·백링크 진단·disavow 판단</li>'
+            '</ul>'
+            '<h3>집필 원칙</h3>'
+            '<p>OneSearchPro의 모든 인사이트 글은 다음 기준을 지킵니다.</p>'
+            '<ul>'
+            '<li><b>실무 경험 기반</b> — 검증되지 않은 인터넷 정보의 단순 재정리는 발행하지 않습니다.</li>'
+            '<li><b>한국 시장 맥락 반영</b> — 네이버 C-랭크·DIA, 의료광고심의, 한국 광고 정책 등 현지 특성을 반영합니다.</li>'
+            '<li><b>관찰형 표현</b> — \"보장\", \"100%\", \"반드시 1위\" 같은 단정·과장 표현 대신 \"자주 보이는 패턴\", \"실무 관찰상\" 같은 정직한 표현을 씁니다.</li>'
+            '<li><b>출처 명시</b> — 구글 공식 가이드라인·서치콘솔 도움말·1차 자료를 우선 인용합니다.</li>'
+            '<li><b>AI 보조 시 인간 검수</b> — 초안 작성에 AI를 보조 도구로 사용하더라도 모든 글은 책임 저자가 사실관계·논리·문장을 직접 검수한 뒤 발행합니다.</li>'
+            '</ul>'
+            '<h3>외부 프로필 · 콘텐츠</h3>'
+            '<ul>'
+            '<li>LinkedIn: <a href="https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/" target="_blank" rel="noopener noreferrer me">강백호 · OneSearchPro</a></li>'
+            '<li>Medium: <a href="https://medium.com/@88smartbro88" target="_blank" rel="noopener noreferrer me">@88smartbro88</a></li>'
+            '<li>X (Twitter): <a href="https://x.com/gugeulmake84173" target="_blank" rel="noopener noreferrer me">@gugeulmake84173</a></li>'
+            '<li>Telegram (문의): <a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer me">@googleseolab</a></li>'
+            '</ul>'
+            '<h3>연락처</h3>'
+            '<p>저자에게 직접 글·사실관계에 대한 의견을 보내시려면 <a href="mailto:contact@onesearchpro.com">contact@onesearchpro.com</a> 으로 메일을 보내주세요. 모든 인사이트 글의 사실 오류 신고는 24시간 내 검토 후 수정·반영합니다.</p>'
+            '</div></div></section>'
+            + section("EDITORIAL", "콘텐츠 검수 프로세스",
+                "모든 인사이트 글은 발행 전 다음 4단계 검수를 거칩니다.",
+                [
+                    {"icon":"📝","h":"1. 초안 작성","p":"책임 저자가 주제를 선정하고 실무 경험과 1차 자료를 토대로 초안을 작성합니다.","li":["주제는 발행 캘린더로 사전 계획","경쟁 SERP·검색 의도 사전 분석"]},
+                    {"icon":"🔍","h":"2. 사실관계 검토","p":"구글·네이버 공식 가이드라인, 도구 공식 문서 등 1차 자료와 대조해 사실 오류를 점검합니다.","li":["공식 문서 인용 추적","수치·날짜 재확인"]},
+                    {"icon":"⚖️","h":"3. 표현·정책 검수","p":"단정·과장 표현, 검증 불가능한 수치, 광고법 위반 가능 표현을 정비합니다.","li":["\\\"보장·100%·반드시\\\" 표현 제거","의료·금융 등 YMYL 규제 확인"]},
+                    {"icon":"🚀","h":"4. 발행 후 관찰","p":"발행 후 댓글·문의·실측 트래픽 데이터를 토대로 사실 오류·노후화 항목을 분기 단위로 업데이트합니다.","li":["분기별 글 리프레시","독자 피드백 반영"]},
+                ])
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Person","name":"강백호","alternateName":"Hobaek Kang","url":"https://onesearchpro.org/about/team/","jobTitle":"SEO 컨설턴트 · OneSearchPro 대표","worksFor":{"@type":"Organization","name":"OneSearchPro","legalName":"YH기획","url":"https://onesearchpro.org/"},"knowsAbout":["Search Engine Optimization","Technical SEO","Content SEO","Local SEO","Digital PR","구글 SEO","네이버 SEO","Helpful Content System","Core Web Vitals"],"sameAs":["https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/","https://medium.com/@88smartbro88","https://x.com/gugeulmake84173","https://t.me/googleseolab"]}}</script>',
+        "active": "about",
+    },
+
     # ===================== BLOG ARTICLES =====================
     # Google SEO category
     "/insights/google-seo/post-core-update-mistakes/": {
@@ -2518,7 +2576,7 @@ PAGES = {
                  "<ul>"
                  "<li>양쪽 canonical이 정확히 서로를 가리켜야 함</li>"
                  "<li><code>alternate</code> 태그로 데스크탑-모바일 연결</li>"
-                 "<li>두 사이트 간 콘텐츠 100% 일치 (시간이 지나면 어긋남)</li>"
+                 "<li>두 사이트 간 콘텐츠가 동일하게 유지되는지 (시간이 지나면 어긋나는 경우가 많음)</li>"
                  "<li>모바일 사이트 robots.txt가 차단되지 않는지</li>"
                  "<li>두 사이트의 구조화 데이터, sitemap 모두 점검</li>"
                  "</ul>"),
@@ -3418,7 +3476,7 @@ PAGES = {
                 ("6. 키워드를 4가지 의도로 분류하는 실전 프로세스",
                  """<p>검색 의도를 판단할 때는 <strong>키워드 자체보다 실제 검색 결과</strong>를 우선 분석해야 합니다. 같은 키워드라도 시장·시즌·사용자층에 따라 의도가 달라지기 때문입니다.</p><ol><li><strong>SERP 분석:</strong> 네이버·구글에서 키워드 직접 검색 → 상위 10개 결과 유형(블로그/쇼핑/동영상/공식 페이지) 확인</li><li><strong>탭·영역 확인:</strong> 네이버 VIEW/쇼핑/플레이스 어느 탭이 상단인지, 구글 Featured Snippet/Shopping/Local Pack 노출 여부 점검</li><li><strong>키워드 수식어로 1차 분류:</strong> \"방법\", \"추천\", \"구매\" 같은 접미사로 가설을 세우고 SERP로 검증</li><li><strong>도구로 정량 점검:</strong> 네이버 검색광고 키워드 도구·구글 키워드 플래너에서 경쟁도·CPC 확인. CPC가 높을수록 상업형·거래형 가능성 증가</li><li><strong>스프레드시트로 분류:</strong> 키워드 목록에 \"의도\" 열 추가, 정보/탐색/거래/상업 태그 부여 → 페이지 유형 매핑</li></ol><p><code>예시: \"에어프라이어\" → 네이버 쇼핑 탭 최상단 → 거래형 / \"에어프라이어 요리법\" → VIEW 탭 우세 → 정보형</code></p><p><strong>혼합 의도 주의:</strong> 한 키워드가 여러 의도를 동시에 가질 수 있습니다. \"다이어트\"는 정보형(방법 안내)과 상업형(보조제 비교)이 혼재합니다. 포괄적 콘텐츠로 다루거나 의도별로 별도 페이지를 준비해야 합니다.</p>"""),
                 ("7. 검색 의도별 페이지 제작 체크리스트와 흔한 실수",
-                 """<p>의도를 분류한 뒤에는 각 유형에 맞는 페이지 구조·콘텐츠 요소·전환 경로를 설계합니다.</p><table><thead><tr><th>의도 유형</th><th>페이지 형식</th><th>핵심 요소</th><th>흔한 실수</th></tr></thead><tbody><tr><td>정보형</td><td>가이드·블로그</td><td>목차·단계별 설명·예시</td><td>과도한 제품 링크로 신뢰 하락</td></tr><tr><td>탐색형</td><td>홈·서비스 페이지</td><td>브랜드명·사이트 링크·Organization 스키마</td><td>공식 페이지 메타 미최적화</td></tr><tr><td>거래형</td><td>상품·랜딩</td><td>가격·CTA·신뢰 신호</td><td>긴 설명으로 결정 지연</td></tr><tr><td>상업형</td><td>비교·추천</td><td>표·차트·자체 데이터</td><td>제휴 링크만 나열해 편향 의심</td></tr></tbody></table><p><strong>자주 보이는 실수 패턴:</strong></p><ul><li>혼합 의도 키워드에 한 가지 유형의 페이지만 매핑</li><li>거래형 페이지에 신뢰 요소(리뷰·환불 정책·배송 정보) 누락</li><li>정보형 글에 제품 링크를 과도하게 삽입해 광고성 글로 인식</li><li>SERP를 보지 않고 키워드 수식어만으로 의도 판단</li></ul><p>네이버 C-랭크는 체류 시간·재방문율로 콘텐츠 만족도를 평가합니다. 거래형 페이지라도 최소한의 신뢰 요소는 반드시 포함해야 순위 유지가 가능합니다. SERP 결과만 보고 의도를 추정하는 것보다, 실제 페이지를 띄운 뒤 행동 신호(체류·이탈·재검색)를 추적하는 게 가장 정확한 검증입니다.</p>""")
+                 """<p>의도를 분류한 뒤에는 각 유형에 맞는 페이지 구조·콘텐츠 요소·전환 경로를 설계합니다.</p><table><thead><tr><th>의도 유형</th><th>페이지 형식</th><th>핵심 요소</th><th>흔한 실수</th></tr></thead><tbody><tr><td>정보형</td><td>가이드·블로그</td><td>목차·단계별 설명·예시</td><td>과도한 제품 링크로 신뢰 하락</td></tr><tr><td>탐색형</td><td>홈·서비스 페이지</td><td>브랜드명·사이트 링크·Organization 스키마</td><td>공식 페이지 메타 미최적화</td></tr><tr><td>거래형</td><td>상품·랜딩</td><td>가격·CTA·신뢰 신호</td><td>긴 설명으로 결정 지연</td></tr><tr><td>상업형</td><td>비교·추천</td><td>표·차트·자체 데이터</td><td>제휴 링크만 나열해 편향 의심</td></tr></tbody></table><p><strong>자주 보이는 실수 패턴:</strong></p><ul><li>혼합 의도 키워드에 한 가지 유형의 페이지만 매핑</li><li>거래형 페이지에 신뢰 요소(리뷰·환불 정책·배송 정보) 누락</li><li>정보형 글에 제품 링크를 과도하게 삽입해 광고성 글로 인식</li><li>SERP를 보지 않고 키워드 수식어만으로 의도 판단</li></ul><p>네이버 C-랭크는 체류 시간·재방문율로 콘텐츠 만족도를 평가합니다. 거래형 페이지라도 최소한의 신뢰 요소를 갖춰야 안정적인 순위가 유지되는 경향이 있습니다. SERP 결과만 보고 의도를 추정하는 것보다, 실제 페이지를 띄운 뒤 행동 신호(체류·이탈·재검색)를 추적하는 게 가장 정확한 검증입니다.</p>""")
             ],
             key_takeaways=[
                 "검색 의도는 정보형·탐색형·거래형·상업형 4가지로 구분합니다. 네이버·구글 모두 의도 일치 페이지를 우선 노출합니다.",
