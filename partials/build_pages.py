@@ -913,6 +913,33 @@ PAGES = {
         "eyebrow": "SEO INSIGHTS",
         "lead": "구글·네이버 검색에서 살아남기 위한 실무 가이드 모음. 카테고리별로 다루는 주제와 곧 공개될 글을 미리 확인할 수 있습니다. 콘텐츠는 정기적으로 업데이트되며, 단발성 트렌드보다는 \"오랫동안 유효한 SEO 원칙\"에 가중치를 두고 작성합니다.",
         "body": (
+            insights_section("latest", "LATEST · 최신 글", "이번 주 새 글",
+                "가장 최근에 발행한 글입니다. 같은 주제의 다른 글은 아래 카테고리 섹션에서 이어 볼 수 있습니다.",
+                [
+                    insight_article_card(
+                        "게스트 포스트 — 안전한 매체 골라내는 6가지 기준",
+                        "도메인 점수만 보지 말고 유기 트래픽·토픽 일관성·발신 링크 패턴까지 보는 매체당 10분 검토 워크플로우.",
+                        "/insights/backlink-pr/guest-post-safe-media-criteria/",
+                        8,
+                        label="백링크·디지털 PR"
+                    ),
+                    insight_article_card(
+                        "네이버 플레이스 부정 리뷰 대응 — 자주 하는 실수 5가지",
+                        "감정적 답글·무차별 신고·가짜 긍정 리뷰 등 자주 보이는 5가지 실수와, 신뢰를 잃지 않는 응답 4단계 프로세스.",
+                        "/insights/local-seo/negative-review-response-mistakes/",
+                        8,
+                        label="지역 SEO"
+                    ),
+                    insight_article_card(
+                        "검색 의도 4가지 유형과 키워드 분류",
+                        "정보형·탐색형·거래형·상업형 의도 구분 기준과 키워드별 페이지 매핑 가이드. 네이버·구글 SERP 분석 절차 포함.",
+                        "/insights/content-seo/search-intent-4-types-keyword-classification-page-strategy/",
+                        10,
+                        label="콘텐츠 SEO"
+                    ),
+                ]
+            ) +
+
             insights_section("google-seo", "GOOGLE SEO", "구글 SEO",
                 "구글 검색 결과 페이지의 작동 원리, 알고리즘 업데이트, E-E-A-T 가이드라인을 다룹니다.",
                 [
