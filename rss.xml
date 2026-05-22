@@ -8,8 +8,8 @@
     <copyright>© YH기획 (OneSearchPro)</copyright>
     <managingEditor>contact@onesearchpro.com (OneSearchPro)</managingEditor>
     <webMaster>contact@onesearchpro.com (OneSearchPro)</webMaster>
-    <lastBuildDate>Thu, 14 May 2026 09:00:00 +0900</lastBuildDate>
-    <pubDate>Thu, 14 May 2026 09:00:00 +0900</pubDate>
+    <lastBuildDate>Fri, 22 May 2026 09:00:00 +0900</lastBuildDate>
+    <pubDate>Fri, 22 May 2026 09:00:00 +0900</pubDate>
     <ttl>60</ttl>
     <image>
       <url>https://onesearchpro.org/assets/images/logo.png</url>
@@ -17,6 +17,16 @@
       <link>https://onesearchpro.org/insights/</link>
     </image>
     <atom:link href="https://onesearchpro.org/rss.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>네이버 플레이스 부정 리뷰 대응 — 자주 하는 실수 5가지</title>
+      <link>https://onesearchpro.org/insights/local-seo/negative-review-response-mistakes/</link>
+      <description><![CDATA[네이버 플레이스 부정 리뷰 대응에서 자주 보이는 5가지 실수(감정적 답글, 무차별 신고, 가짜 긍정 리뷰, 방치, 템플릿 복붙)와 노출·신뢰를 함께 지키는 응대 5단계 매뉴얼.]]></description>
+      <category>지역 SEO</category>
+      <dc:creator>OneSearchPro</dc:creator>
+      <pubDate>Fri, 22 May 2026 09:00:00 +0900</pubDate>
+      <guid isPermaLink="true">https://onesearchpro.org/insights/local-seo/negative-review-response-mistakes/</guid>
+    </item>
 
     <item>
       <title>검색 의도 4가지 유형과 키워드 분류</title>
