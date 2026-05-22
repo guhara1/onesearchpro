@@ -174,7 +174,7 @@ git checkout claude/help-coding-task-F0jMt
 - **브랜드**: OneSearchPro (원서치프로)
 - **사업자등록번호**: 503-30-66944
 - **주소**: 인천광역시 부평구 부평대로 283 부평우림라이온스밸리
-- **이메일**: contact@onesearchpro.com
+- **이메일**: help@onesearchpro.org
 - **텔레그램**: https://t.me/googleseolab (전체 CTA 버튼이 여기로 새 창 열기)
 - **카카오톡 채널**: @onesearchpro
 

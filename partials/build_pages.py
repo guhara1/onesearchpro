@@ -50,6 +50,7 @@ HEADER = '''<header class="site-header">
           <a href="/about/" class="nav-trigger{ACTIVE_ABOUT}">회사소개 <span class="caret">▾</span></a>
           <div class="dropdown">
             <a href="/about/" class="dd-main"><b>🏢 원서치프로 소개</b><span>About OneSearchPro</span></a>
+            <a href="/about/team/">팀 · 저자 소개</a>
             <a href="/about/principles/">작업 원칙</a>
             <a href="/about/process/">진행 프로세스</a>
             <a href="/about/faq/">자주 묻는 질문</a>
@@ -67,7 +68,7 @@ FOOTER = '''<footer class="site-footer">
       <div><a href="/" class="brand"><span class="brand-mark">1</span><span class="brand-name">OneSearch<strong>Pro</strong></span></a><p class="muted">검색에서 시작되는 비즈니스 성장.<br/>SEO · 디지털 마케팅 전문 에이전시.</p></div>
       <div><h5>SEO 서비스</h5><ul><li><a href="/services/seo/">SEO 컨설팅</a></li><li><a href="/services/technical-seo/">기술 SEO 진단</a></li><li><a href="/services/content-seo/">콘텐츠 SEO</a></li><li><a href="/services/local-seo/">지역 SEO</a></li><li><a href="/services/digital-pr/">디지털 PR · 백링크 진단</a></li><li><a href="/services/social-media/">SNS 마케팅</a></li><li><a href="/services/web-design/">SEO 웹사이트 제작</a></li></ul></div>
       <div><h5>회사</h5><ul><li><a href="/case-studies/">성공사례</a></li><li><a href="/insights/">SEO 인사이트</a></li><li><a href="/about/">회사 소개</a></li><li><a href="/contact/">내 사이트 진단받기</a></li></ul></div>
-      <div><h5>연락처</h5><ul><li>contact@onesearchpro.com</li><li>인천 부평구</li></ul></div>
+      <div><h5>연락처</h5><ul><li>help@onesearchpro.org</li><li>인천 부평구</li></ul></div>
       <div><h5>약관·정책</h5><ul><li><a href="/privacy/">개인정보처리방침</a></li><li><a href="/terms/">이용약관</a></li><li><a href="/sitemap-html/">사이트맵</a></li><li><a href="/rss.xml">RSS 피드</a></li></ul></div>
     </div>
     <div class="container biz-info">
@@ -175,7 +176,7 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
 
     # 모든 페이지에 공통 적용되는 사이트 차원 JSON-LD
     # sameAs: 구글 Knowledge Panel·E-E-A-T Authoritativeness 신호
-    site_wide_jsonld = '''<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"OneSearchPro","alternateName":"원서치프로","url":"https://onesearchpro.org/","inLanguage":"ko-KR","publisher":{"@type":"Organization","name":"OneSearchPro","legalName":"YH기획"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"YH기획 (OneSearchPro)","alternateName":"OneSearchPro","url":"https://onesearchpro.org/","logo":"https://onesearchpro.org/assets/images/logo.png","image":"https://onesearchpro.org/assets/images/logo.png","telephone":"","email":"contact@onesearchpro.com","priceRange":"₩₩","address":{"@type":"PostalAddress","streetAddress":"부평대로 283 부평우림라이온스밸리","addressLocality":"부평구","addressRegion":"인천광역시","postalCode":"21389","addressCountry":"KR"},"areaServed":"KR","taxID":"503-30-66944","sameAs":["https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/","https://medium.com/@88smartbro88","https://x.com/gugeulmake84173","https://t.me/googleseolab"]}</script>'''
+    site_wide_jsonld = '''<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"OneSearchPro","alternateName":"원서치프로","url":"https://onesearchpro.org/","inLanguage":"ko-KR","publisher":{"@type":"Organization","name":"OneSearchPro","legalName":"YH기획"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"YH기획 (OneSearchPro)","alternateName":"OneSearchPro","url":"https://onesearchpro.org/","logo":"https://onesearchpro.org/assets/images/logo.png","image":"https://onesearchpro.org/assets/images/logo.png","telephone":"","email":"help@onesearchpro.org","priceRange":"₩₩","address":{"@type":"PostalAddress","streetAddress":"부평대로 283 부평우림라이온스밸리","addressLocality":"부평구","addressRegion":"인천광역시","postalCode":"21389","addressCountry":"KR"},"areaServed":"KR","taxID":"503-30-66944","sameAs":["https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/","https://medium.com/@88smartbro88","https://x.com/gugeulmake84173","https://t.me/googleseolab"]}</script>'''
 
     # 페이지 본문 내에 자체 CTA가 있는 페이지는 글로벌 CTA를 생략 (중복 방지)
     has_own_cta = path in {
@@ -191,6 +192,27 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
         <div class="cta-actions"><a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">무료 진단 신청 →</a><a href="/case-studies/" class="btn btn-outline btn-lg btn-light">성공사례 보기</a></div>
       </div>
     </section>'''
+
+    # 책임자 미니 바이라인 — 비블로그 페이지의 E-E-A-T Authoritativeness 신호
+    # 블로그 글은 이미 본문 상단에 바이라인이 있으므로 제외
+    is_byline_target = (
+        path.startswith("/services/")
+        or path.startswith("/case-studies/")
+        or (path.startswith("/about/") and path not in {"/about/", "/about/team/"})
+    )
+    page_byline_html = ""
+    if is_byline_target:
+        page_byline_html = (
+            '<div class="container"><aside class="page-byline">'
+            '<span class="page-byline-label">이 페이지의 책임 컨설턴트</span>'
+            '<a href="/about/team/" rel="author" class="page-byline-author">'
+            '<span class="page-byline-avatar">👤</span>'
+            '<span><b>강백호</b> · OneSearchPro 대표</span>'
+            '</a>'
+            '<span class="page-byline-note">SEO·디지털 마케팅 실무 10년+, 페널티 사례 0건 화이트햇 원칙. '
+            '<a href="/about/team/">저자 프로필 보기 →</a></span>'
+            '</aside></div>'
+        )
 
     return f'''<!DOCTYPE html>
 <html lang="ko">
@@ -216,8 +238,8 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
   <link rel="alternate" type="application/rss+xml" title="OneSearchPro · SEO 인사이트" href="/rss.xml" />
   <meta name="theme-color" content="#7c5cff" />
   <!-- 검색엔진 소유권 인증 (등록 시 코드 입력) -->
-  <meta name="google-site-verification" content="" />
-  <meta name="naver-site-verification" content="" />
+  <meta name="google-site-verification" content="kAFnt3jSs27vJ3oCex9SwynDq07pqYXZmVtITkFZBPQ" />
+  <meta name="naver-site-verification" content="eb0c4d732c1b024809d2ab52ff1ea457bb9189dc" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="image" href="/assets/images/logo-140.webp" type="image/webp" fetchpriority="high" />
@@ -236,6 +258,7 @@ def page(*, path, title, desc, keywords, h1, eyebrow, lead, body, json_ld="", ac
   <main>
     {hero_html}
     {body}
+    {page_byline_html}
     {global_cta_html}
   </main>
   {FOOTER}
@@ -340,13 +363,9 @@ def cases_section(anchor, eyebrow, h2, intro, cards):
 
 
 def insight_card(title, summary, label="준비 중"):
-    return (
-        f'<div class="svc insight-card">'
-        f'<span class="badge">{label}</span>'
-        f'<h3>{title}</h3>'
-        f'<p>{summary}</p>'
-        f'</div>'
-    )
+    # Placeholder 카드는 Helpful Content System의 사이트 단위 평가에 부정 신호로 작용하므로,
+    # 실제 글이 발행되어 insight_article_card 로 교체되기 전까지는 렌더링하지 않는다.
+    return ""
 
 
 def insight_article_card(title, summary, url, reading_time, label="NEW"):
@@ -372,17 +391,24 @@ def insights_section(anchor, eyebrow, h2, intro, cards):
     )
 
 
-def blog_post(*, date, reading_time, author="OneSearchPro SEO팀", intro, sections, key_takeaways=None, related=None):
+def blog_post(*, date, reading_time, author="강백호", author_url="/about/team/", date_modified=None, intro, sections, key_takeaways=None, related=None):
     """블로그 글 본문 HTML을 생성합니다.
     sections: list of (h2, html_content) tuples
     key_takeaways: 글 끝부분에 들어가는 요약 리스트 (optional)
     related: list of (title, url, badge) tuples - 내부 링크용
+    date_modified: 발행 후 본문이 실제 수정된 경우의 최종 갱신일 (Freshness 신호)
     """
+    # date_modified가 발행일과 다를 때만 표기하여 redundancy 회피
+    modified_html = ""
+    if date_modified and date_modified != date:
+        modified_html = f'<span>🔄 마지막 업데이트 <time datetime="{date_modified}">{date_modified}</time></span>'
+    # 저자 바이라인은 Person 프로필 페이지로 링크 (E-E-A-T Authoritativeness)
     meta = (
         f'<div class="article-meta">'
-        f'<span>📅 {date}</span>'
+        f'<span>📅 발행 <time datetime="{date}">{date}</time></span>'
+        f'{modified_html}'
         f'<span>⏱ 읽는 시간 약 {reading_time}분</span>'
-        f'<span>✍ {author}</span>'
+        f'<span>✍ <a href="{author_url}" rel="author">{author}</a> · OneSearchPro</span>'
         f'</div>'
     )
 
@@ -448,8 +474,9 @@ def blog_post(*, date, reading_time, author="OneSearchPro SEO팀", intro, sectio
     )
 
 
-def blog_jsonld(*, url, title, desc, date_published, date_modified=None):
+def blog_jsonld(*, url, title, desc, date_published, date_modified=None, author_name="강백호", author_url="https://onesearchpro.org/about/team/"):
     date_modified = date_modified or date_published
+    # author는 Person + Organization 배열로 표기 (E-E-A-T Authoritativeness 신호 강화)
     return (
         f'<script type="application/ld+json">'
         f'{{"@context":"https://schema.org","@type":"BlogPosting",'
@@ -458,7 +485,8 @@ def blog_jsonld(*, url, title, desc, date_published, date_modified=None):
         f'"url":"{url}",'
         f'"datePublished":"{date_published}",'
         f'"dateModified":"{date_modified}",'
-        f'"author":{{"@type":"Organization","name":"OneSearchPro","url":"https://onesearchpro.org/"}},'
+        f'"author":[{{"@type":"Person","name":"{author_name}","url":"{author_url}"}},'
+        f'{{"@type":"Organization","name":"OneSearchPro","url":"https://onesearchpro.org/"}}],'
         f'"publisher":{{"@type":"Organization","name":"OneSearchPro","logo":{{"@type":"ImageObject","url":"https://onesearchpro.org/assets/images/logo.png"}}}},'
         f'"image":"https://onesearchpro.org/assets/images/logo.png",'
         f'"mainEntityOfPage":{{"@type":"WebPage","@id":"{url}"}},'
@@ -597,6 +625,22 @@ PAGES = {
         "eyebrow": "ABOUT ONESEARCHPRO",
         "lead": "OneSearchPro(원서치프로)는 검색에서 시작되는 비즈니스 성장을 만듭니다. 서울에 거점을 두고 SEO·디지털 마케팅을 제공하며, 단기 트릭이 아닌 정공법으로 검색 자산을 누적시키는 것을 원칙으로 합니다.",
         "body": (
+            # 책임 저자 prominent 카드 — E-E-A-T Authoritativeness 신호 (회사 소개 페이지 최상단)
+            '<section class="section"><div class="container">'
+            '<div class="lead-author-card">'
+            '<div class="lead-author-avatar">👤</div>'
+            '<div class="lead-author-body">'
+            '<span class="eyebrow">LEAD AUTHOR & FOUNDER</span>'
+            '<h2 style="margin: 0.5rem 0 0.75rem;">강백호 · OneSearchPro 운영자</h2>'
+            '<p>SEO·디지털 마케팅 실무 10년+. 구글 코어 업데이트와 Helpful Content System 대응, 한국형 네이버·구글 동시 워크플로우 설계를 직접 담당합니다. OneSearchPro의 모든 SEO 인사이트 글과 컨설팅 작업의 1차 책임자입니다.</p>'
+            '<div class="cta-row" style="margin-top: 1rem;">'
+            '<a href="/about/team/" rel="author" class="btn btn-primary">저자 상세 프로필 →</a>'
+            '<a href="https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/" target="_blank" rel="noopener noreferrer me" class="btn btn-outline">LinkedIn</a>'
+            '</div>'
+            '</div>'
+            '</div>'
+            '</div></section>' +
+
             '<section class="section" id="intro"><div class="container"><div class="section-head"><span class="eyebrow">WHO WE ARE</span><h2>원서치프로는 어떤 에이전시인가요</h2><p>대량 백링크 판매가 아닌, 사이트의 검색 자산을 구조적으로 만드는 SEO 전문 에이전시입니다. 모든 작업은 구글 가이드라인을 준수하는 화이트햇 방식으로만 진행하며, 페널티 사례 0건의 안전성을 유지하고 있습니다.</p></div><div class="grid services"><div class="svc"><div class="svc-icon">🇰🇷</div><h3>서울 기반</h3><p>국내 기업의 구글·네이버 동시 대응을 메인 영역으로 합니다.</p></div><div class="svc"><div class="svc-icon">📈</div><h3>180+ 프로젝트</h3><p>리테일·F&amp;B·뷰티·핀테크·교육 등 산업별 케이스를 축적했습니다.</p></div><div class="svc"><div class="svc-icon">🛡️</div><h3>페널티 0건</h3><p>1,200+ 백링크 빌딩 동안 구글 페널티 사례가 발생하지 않았습니다.</p></div><div class="svc"><div class="svc-icon">🤝</div><h3>97% 재계약률</h3><p>한번 시작한 고객의 97%가 6개월 이상 함께 일하고 있습니다.</p></div></div></div></section>' +
 
             '<a id="principles"></a>' +
@@ -621,7 +665,7 @@ PAGES = {
                 ("측정·지속 개선", "월간 순위·트래픽·전환 리포트, 분기 전략 리뷰, 6개월 단위 콘텐츠 리프레시."),
             ]) +
 
-            '<section class="section"><div class="container"><div class="section-head left"><span class="eyebrow">COMPANY INFO</span><h2>사업자 정보</h2><p>OneSearchPro는 YH기획이 운영하는 SEO·디지털 마케팅 브랜드입니다.</p></div><div class="company-info"><dl><dt>상호</dt><dd>YH기획</dd><dt>브랜드</dt><dd>OneSearchPro (원서치프로)</dd><dt>사업자등록번호</dt><dd>503-30-66944</dd><dt>주소</dt><dd>인천광역시 부평구 부평대로 283 부평우림라이온스밸리</dd><dt>이메일</dt><dd><a href="mailto:contact@onesearchpro.com">contact@onesearchpro.com</a></dd><dt>문의 채널</dt><dd>텔레그램 <a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer">@googleseolab</a></dd></dl></div></div></section>' +
+            '<section class="section"><div class="container"><div class="section-head left"><span class="eyebrow">COMPANY INFO</span><h2>사업자 정보</h2><p>OneSearchPro는 YH기획이 운영하는 SEO·디지털 마케팅 브랜드입니다.</p></div><div class="company-info"><dl><dt>상호</dt><dd>YH기획</dd><dt>브랜드</dt><dd>OneSearchPro (원서치프로)</dd><dt>사업자등록번호</dt><dd>503-30-66944</dd><dt>주소</dt><dd>인천광역시 부평구 부평대로 283 부평우림라이온스밸리</dd><dt>이메일</dt><dd><a href="mailto:help@onesearchpro.org">help@onesearchpro.org</a></dd><dt>문의 채널</dt><dd>텔레그램 <a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer">@googleseolab</a></dd></dl></div></div></section>' +
 
             '<section class="section" id="faq-anchor"><a id="faq"></a><div class="container faq-wrap"><div class="section-head left"><span class="eyebrow">FAQ</span><h2>자주 묻는 질문</h2></div><div class="faq">'
             '<details open><summary>SEO 효과는 언제부터 나타나나요?</summary><p>키워드 난이도와 사이트 상태에 따라 다르지만, 일반적으로 온페이지 개선은 4~8주, 외부 신호 누적 효과는 8~16주, 안정적인 상위 노출은 3~6개월 이후입니다. 무료 진단 단계에서 예상 타임라인을 함께 제시합니다.</p></details>'
@@ -632,7 +676,7 @@ PAGES = {
             '<details><summary>네이버 SEO도 함께 해주시나요?</summary><p>네. 구글과 네이버는 알고리즘이 다르므로 분리된 전략이 필요합니다. 통합 SEO 컨설팅에는 두 검색엔진 동시 대응이 포함됩니다.</p></details>'
             '</div></div></section>'
         ),
-        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"원서치프로 소개","url":"https://onesearchpro.org/about/","mainEntity":{"@type":"Organization","name":"OneSearchPro","alternateName":["원서치프로","YH기획"],"legalName":"YH기획","url":"https://onesearchpro.org/","logo":"https://onesearchpro.org/assets/images/logo.png","description":"SEO·디지털 마케팅 전문 에이전시","taxID":"503-30-66944","address":{"@type":"PostalAddress","streetAddress":"부평대로 283 부평우림라이온스밸리","addressLocality":"부평구","addressRegion":"인천광역시","addressCountry":"KR"},"email":"contact@onesearchpro.com","sameAs":["https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/","https://medium.com/@88smartbro88","https://x.com/gugeulmake84173","https://t.me/googleseolab"]}}</script>',
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"원서치프로 소개","url":"https://onesearchpro.org/about/","mainEntity":{"@type":"Organization","name":"OneSearchPro","alternateName":["원서치프로","YH기획"],"legalName":"YH기획","url":"https://onesearchpro.org/","logo":"https://onesearchpro.org/assets/images/logo.png","description":"SEO·디지털 마케팅 전문 에이전시","taxID":"503-30-66944","address":{"@type":"PostalAddress","streetAddress":"부평대로 283 부평우림라이온스밸리","addressLocality":"부평구","addressRegion":"인천광역시","addressCountry":"KR"},"email":"help@onesearchpro.org","sameAs":["https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/","https://medium.com/@88smartbro88","https://x.com/gugeulmake84173","https://t.me/googleseolab"]}}</script>',
         "active": "about",
     },
 
@@ -955,6 +999,12 @@ PAGES = {
                         "본사 정보를 모든 지점에 복붙하면 안 되는 이유. 위치·카테고리·사진·리뷰 응대 4가지 분리 원칙.",
                         "/insights/local-seo/multi-location-gbp/",
                         7
+                    ),
+                    insight_article_card(
+                        "네이버 플레이스 부정 리뷰 대응 — 자주 하는 실수 5가지",
+                        "부정 리뷰는 제거 대상이 아니라 응답 대상. 사장님들이 자주 빠지는 5가지 실수와 신뢰를 유지하는 4단계 응답 프로세스.",
+                        "/insights/local-seo/negative-review-response-mistakes/",
+                        8
                     ),
                     insight_card("\"지역명 + 서비스\" 키워드용 지역 랜딩페이지 설계법", "다지점 비즈니스에서 지역 키워드를 잡기 위한 페이지 구조와 콘텐츠 작성 가이드."),
                     insight_card("NAP 일관성과 로컬 인용(citation)이 왜 중요한가", "디렉토리·SNS·자체 사이트의 상호·주소·전화 정보 통일 가이드.")
@@ -2035,12 +2085,26 @@ PAGES = {
         "lead": "구글 비즈니스 프로필·네이버 플레이스·지역 랜딩페이지·NAP 일관성을 다루는 지역 SEO 실무 가이드입니다.",
         "body": (
             '<section class="section"><div class="container"><div class="grid services">' +
-            insight_card("구글 비즈니스 프로필(GBP) 최적화 체크리스트", "카테고리·서비스·사진·리뷰·게시물 관리에서 자주 빠뜨리는 항목.") +
-            insight_card("네이버 플레이스 상위 노출에 영향을 주는 신호들", "스마트플레이스 정보·블로그 연동·영수증 리뷰·톡톡 응대의 우선순위 정리.") +
+            insight_article_card(
+                "네이버 플레이스 부정 리뷰 대응 — 자주 하는 실수 5가지",
+                "부정 리뷰는 제거 대상이 아니라 응답 대상. 사장님들이 자주 빠지는 5가지 실수와 신뢰를 유지하는 4단계 응답 프로세스.",
+                "/insights/local-seo/negative-review-response-mistakes/",
+                8
+            ) +
+            insight_article_card(
+                "신규 매장 네이버 플레이스 등록 첫 4주 운영 가이드",
+                "리뷰 없는 신규 매장이 빠지는 함정과, 정보·블로그·리뷰 우선순위로 짠 월별 운영 매뉴얼.",
+                "/insights/local-seo/new-store-naver-place/",
+                7
+            ) +
+            insight_article_card(
+                "다지점 매장 GBP 본사·지점 분리 원칙",
+                "본사 정보를 모든 지점에 복붙하면 안 되는 이유. 위치·카테고리·사진·리뷰 응대 4가지 분리 원칙.",
+                "/insights/local-seo/multi-location-gbp/",
+                7
+            ) +
             insight_card("\"지역명 + 서비스\" 키워드용 지역 랜딩페이지 설계법", "다지점 비즈니스에서 지역 키워드를 잡기 위한 페이지 구조와 콘텐츠 작성 가이드.") +
             insight_card("NAP 일관성과 로컬 인용(citation)이 왜 중요한가", "디렉토리·SNS·자체 사이트의 상호·주소·전화 정보 통일 가이드.") +
-            insight_card("리뷰 관리 — 부정 리뷰 대응 매뉴얼", "감정적 대응 없이 검색 신호로 작용할 수 있는 리뷰 응답 템플릿과 절차.") +
-            insight_card("지역 SEO와 일반 SEO의 우선순위 차이", "오프라인 매장과 온라인 비즈니스의 SEO 작업 순서 차이 가이드.") +
             '</div></div></section>'
         ),
         "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"지역 SEO","url":"https://onesearchpro.org/insights/local-seo/","isPartOf":{"@type":"Blog","name":"SEO 인사이트"}}</script>',
@@ -2177,6 +2241,64 @@ PAGES = {
         "active": "about",
     },
 
+    "/about/team/": {
+        "title": "팀 · 저자 소개 | OneSearchPro 운영자와 SEO 전문가",
+        "desc": "OneSearchPro를 운영하고 SEO 인사이트를 직접 집필하는 책임 저자와 팀을 소개합니다. 누가 어떤 경험으로 콘텐츠를 만드는지(E-E-A-T) 투명하게 공개합니다.",
+        "keywords": "OneSearchPro 팀, 강백호, SEO 컨설턴트, SEO 전문가, 저자 소개, About Author, E-E-A-T",
+        "h1": "팀 · 저자 소개",
+        "eyebrow": "OUR TEAM & AUTHORS",
+        "lead": "콘텐츠의 신뢰는 결국 \"누가 썼는가\"에서 시작됩니다. OneSearchPro의 SEO 인사이트와 컨설팅을 책임지는 팀을 공개합니다. 글에 적용된 경험·관점이 어디서 나왔는지 직접 확인하실 수 있도록 했습니다.",
+        "body": (
+            '<section class="section"><div class="container">'
+            '<div class="section-head left"><span class="eyebrow">LEAD AUTHOR</span><h2>책임 저자 — 강백호</h2><p>OneSearchPro(YH기획) 운영자이자 SEO 인사이트 글 대부분을 직접 집필하는 책임 저자입니다.</p></div>'
+            '<div class="legal-doc">'
+            '<h3>경력 요약</h3>'
+            '<ul>'
+            '<li>SEO·디지털 마케팅 실무 10년+ — 리테일·F&amp;B·뷰티·핀테크·교육·의료 등 다양한 산업의 SEO 프로젝트 수행</li>'
+            '<li>OneSearchPro(YH기획) 대표 · SEO 컨설팅 총괄</li>'
+            '<li>구글 검색 가이드라인·네이버 검색 정책을 동시 대응하는 한국형 SEO 워크플로우 구축</li>'
+            '<li>1,200건+ 화이트햇 백링크 빌딩, 페널티 사례 0건 유지</li>'
+            '</ul>'
+            '<h3>주로 다루는 주제</h3>'
+            '<ul>'
+            '<li>구글 코어 업데이트·Helpful Content System 실무 대응</li>'
+            '<li>기술 SEO (색인, Core Web Vitals, 구조화 데이터, sitemap·robots 설계)</li>'
+            '<li>콘텐츠 SEO (검색 의도, 토픽 클러스터, 의료·금융 등 YMYL 콘텐츠 가이드)</li>'
+            '<li>지역 SEO (네이버 플레이스·구글 비즈니스 프로필 운영)</li>'
+            '<li>디지털 PR·백링크 진단·disavow 판단</li>'
+            '</ul>'
+            '<h3>집필 원칙</h3>'
+            '<p>OneSearchPro의 모든 인사이트 글은 다음 기준을 지킵니다.</p>'
+            '<ul>'
+            '<li><b>실무 경험 기반</b> — 검증되지 않은 인터넷 정보의 단순 재정리는 발행하지 않습니다.</li>'
+            '<li><b>한국 시장 맥락 반영</b> — 네이버 C-랭크·DIA, 의료광고심의, 한국 광고 정책 등 현지 특성을 반영합니다.</li>'
+            '<li><b>관찰형 표현</b> — \"보장\", \"100%\", \"반드시 1위\" 같은 단정·과장 표현 대신 \"자주 보이는 패턴\", \"실무 관찰상\" 같은 정직한 표현을 씁니다.</li>'
+            '<li><b>출처 명시</b> — 구글 공식 가이드라인·서치콘솔 도움말·1차 자료를 우선 인용합니다.</li>'
+            '<li><b>AI 보조 시 인간 검수</b> — 초안 작성에 AI를 보조 도구로 사용하더라도 모든 글은 책임 저자가 사실관계·논리·문장을 직접 검수한 뒤 발행합니다.</li>'
+            '</ul>'
+            '<h3>외부 프로필 · 콘텐츠</h3>'
+            '<ul>'
+            '<li>LinkedIn: <a href="https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/" target="_blank" rel="noopener noreferrer me">강백호 · OneSearchPro</a></li>'
+            '<li>Medium: <a href="https://medium.com/@88smartbro88" target="_blank" rel="noopener noreferrer me">@88smartbro88</a></li>'
+            '<li>X (Twitter): <a href="https://x.com/gugeulmake84173" target="_blank" rel="noopener noreferrer me">@gugeulmake84173</a></li>'
+            '<li>Telegram (문의): <a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer me">@googleseolab</a></li>'
+            '</ul>'
+            '<h3>연락처</h3>'
+            '<p>저자에게 직접 글·사실관계에 대한 의견을 보내시려면 <a href="mailto:help@onesearchpro.org">help@onesearchpro.org</a> 으로 메일을 보내주세요. 모든 인사이트 글의 사실 오류 신고는 24시간 내 검토 후 수정·반영합니다.</p>'
+            '</div></div></section>'
+            + section("EDITORIAL", "콘텐츠 검수 프로세스",
+                "모든 인사이트 글은 발행 전 다음 4단계 검수를 거칩니다.",
+                [
+                    {"icon":"📝","h":"1. 초안 작성","p":"책임 저자가 주제를 선정하고 실무 경험과 1차 자료를 토대로 초안을 작성합니다.","li":["주제는 발행 캘린더로 사전 계획","경쟁 SERP·검색 의도 사전 분석"]},
+                    {"icon":"🔍","h":"2. 사실관계 검토","p":"구글·네이버 공식 가이드라인, 도구 공식 문서 등 1차 자료와 대조해 사실 오류를 점검합니다.","li":["공식 문서 인용 추적","수치·날짜 재확인"]},
+                    {"icon":"⚖️","h":"3. 표현·정책 검수","p":"단정·과장 표현, 검증 불가능한 수치, 광고법 위반 가능 표현을 정비합니다.","li":["\\\"보장·100%·반드시\\\" 표현 제거","의료·금융 등 YMYL 규제 확인"]},
+                    {"icon":"🚀","h":"4. 발행 후 관찰","p":"발행 후 댓글·문의·실측 트래픽 데이터를 토대로 사실 오류·노후화 항목을 분기 단위로 업데이트합니다.","li":["분기별 글 리프레시","독자 피드백 반영"]},
+                ])
+        ),
+        "json_ld": '<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@type":"Person","name":"강백호","alternateName":"Hobaek Kang","url":"https://onesearchpro.org/about/team/","jobTitle":"SEO 컨설턴트 · OneSearchPro 대표","worksFor":{"@type":"Organization","name":"OneSearchPro","legalName":"YH기획","url":"https://onesearchpro.org/"},"knowsAbout":["Search Engine Optimization","Technical SEO","Content SEO","Local SEO","Digital PR","구글 SEO","네이버 SEO","Helpful Content System","Core Web Vitals"],"sameAs":["https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/","https://medium.com/@88smartbro88","https://x.com/gugeulmake84173","https://t.me/googleseolab"]}}</script>',
+        "active": "about",
+    },
+
     # ===================== BLOG ARTICLES =====================
     # Google SEO category
     "/insights/google-seo/post-core-update-mistakes/": {
@@ -2210,7 +2332,9 @@ PAGES = {
                  "<li><b>주 3:</b> 빠진 페이지를 \"검색 의도 변화\", \"콘텐츠 깊이\", \"E-E-A-T 신호\" 3축으로 분류.</li>"
                  "<li><b>주 4:</b> 가장 영향 큰 페이지 1~2개만 우선 개선. 그 외는 대조군으로 남김.</li>"
                  "</ul>"
-                 "<p>이 순서를 지키면 \"무엇이 효과 있었는지\"를 측정할 수 있습니다. 측정이 가능한 것만이 다음 업데이트에도 통용되는 노하우가 됩니다.</p>"),
+                 "<p>이 순서를 지키면 \"무엇이 효과 있었는지\"를 측정할 수 있습니다. 측정이 가능한 것만이 다음 업데이트에도 통용되는 노하우가 됩니다.</p>"
+                 "<p><b>1차 자료 참고:</b> 코어 업데이트의 \"무엇을 평가하고 무엇을 하지 말 것인가\"는 구글 검색 센터의 "
+                 "<a href=\"https://developers.google.com/search/updates/core-updates\" target=\"_blank\" rel=\"noopener noreferrer\">Core updates 공식 가이드</a>에 정리되어 있습니다. 특히 \"recovery는 일반적으로 다음 코어 업데이트까지 기다려야 한다\"는 부분이 패닉 작업 자제의 근거로 활용됩니다.</p>"),
             ],
             key_takeaways=[
                 "코어 업데이트는 7~14일 단계적 롤아웃이라 첫 며칠의 변동이 최종 결과가 아닙니다.",
@@ -2272,7 +2396,9 @@ PAGES = {
                  "<li><b>출처 인용 없음:</b> 모든 주장이 자체 의견처럼 보임.</li>"
                  "<li><b>본문 첫 100자 키워드 스터핑:</b> 검색엔진 우선 의도가 노출됨.</li>"
                  "</ol>"
-                 "<p>위 4가지를 정비하는 것만으로도 HCS 평가에 의미 있는 변화가 나타납니다.</p>"),
+                 "<p>위 4가지를 정비하는 것만으로도 HCS 평가에 의미 있는 변화가 나타납니다.</p>"
+                 "<p><b>1차 자료 참고:</b> 본문 셀프 평가 질문의 원문은 구글 검색 센터의 "
+                 "<a href=\"https://developers.google.com/search/docs/fundamentals/creating-helpful-content\" target=\"_blank\" rel=\"noopener noreferrer\">\"Creating helpful, reliable, people-first content\"</a> 가이드에 정리되어 있습니다. 영문이지만 단락별로 \"누구를 위해\", \"무엇을 보여주는가\"를 자가 점검할 수 있도록 만들어진 표준 질문지입니다.</p>"),
             ],
             key_takeaways=[
                 "HCS는 페이지가 아닌 사이트 전체 평가입니다. 가지치기가 새 글 발행보다 효과적일 때가 많습니다.",
@@ -2430,7 +2556,9 @@ PAGES = {
                  "<li>크롤링 통계 점검 (사이트 전체 권위 이슈인지)</li>"
                  "<li>JS 렌더링 의존 확인 (SPA인 경우)</li>"
                  "</ol>"
-                 "<p>이 순서대로 점검하면 90% 케이스는 위 3단계에서 원인이 잡힙니다.</p>"),
+                 "<p>이 순서대로 점검하면 90% 케이스는 위 3단계에서 원인이 잡힙니다.</p>"
+                 "<p><b>1차 자료 참고:</b> 서치콘솔 페이지 색인 상태 보고서의 각 상태(\"발견됨\", \"크롤링됨\", \"색인됨\" 등) 정의와 권장 조치는 구글 공식 도움말의 "
+                 "<a href=\"https://support.google.com/webmasters/answer/7440203\" target=\"_blank\" rel=\"noopener noreferrer\">\"페이지 색인 생성 보고서\"</a>에 정리되어 있습니다. 본문의 진단 순서는 이 문서의 상태별 권장 작업을 한국 사이트에서 자주 빠지는 단계 위주로 재정렬한 것입니다.</p>"),
             ],
             key_takeaways=[
                 "\"발견됨\"과 \"크롤링됨\"은 다른 단계의 문제라 진단 순서가 다릅니다.",
@@ -2462,6 +2590,7 @@ PAGES = {
         "lead": "이름은 \"모바일 우선\"이지만 사실상 \"모바일이 전부\"입니다. 데스크탑에만 있고 모바일에 없는 콘텐츠는 색인되지 않습니다. 반응형 사이트도 안심할 수 없는 6가지 점검 항목을 정리합니다.",
         "body": blog_post(
             date="2025-05-14",
+            date_modified="2026-05-17",
             reading_time=8,
             intro="구글은 2023년 10월부터 모든 사이트를 모바일 우선 색인으로 평가하고 있습니다. 핵심 의미는 단순합니다 — 구글봇이 사이트를 가져갈 때 데스크탑 버전이 아닌 모바일 버전을 봅니다. 모바일에서 안 보이는 본문·이미지·내부 링크는 사실상 없는 것으로 처리됩니다.",
             sections=[
@@ -2518,7 +2647,7 @@ PAGES = {
                  "<ul>"
                  "<li>양쪽 canonical이 정확히 서로를 가리켜야 함</li>"
                  "<li><code>alternate</code> 태그로 데스크탑-모바일 연결</li>"
-                 "<li>두 사이트 간 콘텐츠 100% 일치 (시간이 지나면 어긋남)</li>"
+                 "<li>두 사이트 간 콘텐츠가 동일하게 유지되는지 (시간이 지나면 어긋나는 경우가 많음)</li>"
                  "<li>모바일 사이트 robots.txt가 차단되지 않는지</li>"
                  "<li>두 사이트의 구조화 데이터, sitemap 모두 점검</li>"
                  "</ul>"),
@@ -2550,7 +2679,8 @@ PAGES = {
             url="https://onesearchpro.org/insights/technical-seo/mobile-first-indexing/",
             title="모바일 우선 색인 점검 가이드",
             desc="모바일 우선 색인의 데스크탑 색인 차이점과 점검 6가지.",
-            date_published="2025-05-14"
+            date_published="2025-05-14",
+            date_modified="2026-05-17"
         ),
         "active": "insights",
     },
@@ -2968,7 +3098,9 @@ PAGES = {
                  "<li><b>수동 조치:</b> Disavow + 재심사 요청이 같이 가야 합니다. 광범위하게 처리하는 게 안전.</li>"
                  "<li><b>알고리즘 의심:</b> Disavow는 단계적으로. 재심사 요청은 의미 없음.</li>"
                  "</ul>"
-                 "<p>두 경우를 구분하지 않고 같은 전략으로 가면 손해가 큽니다.</p>"),
+                 "<p>두 경우를 구분하지 않고 같은 전략으로 가면 손해가 큽니다.</p>"
+                 "<p><b>1차 자료 참고:</b> Disavow 도구의 사용 시점·파일 형식·제출 절차는 구글 공식 도움말 "
+                 "<a href=\"https://support.google.com/webmasters/answer/2648487\" target=\"_blank\" rel=\"noopener noreferrer\">\"Disavow links to your site\"</a>에 정리되어 있습니다. 본 글의 \"보류 vs 즉시 처리\" 기준은 구글이 권장하는 \"수동 조치를 받았거나, 받을 가능성이 매우 높다고 판단될 때만 사용\" 원칙에 기반한 실무 해석입니다.</p>"),
             ],
             key_takeaways=[
                 "도구 점수는 1차 필터일 뿐, 위험 판단은 사이트 직접 확인 후 사람이 해야 합니다.",
@@ -3402,6 +3534,7 @@ PAGES = {
         "lead": "같은 키워드라도 사용자가 원하는 결과는 다릅니다. 검색 의도를 정확히 파악해야 페이지가 상위에 잡힙니다.",
         "body": blog_post(
             date="2026-05-14",
+            date_modified="2026-05-17",
             reading_time=8,
             intro="검색 의도를 잘못 매핑한 페이지는 기술 SEO가 완벽해도 상위 노출이 어렵습니다. 같은 키워드라도 사용자 의도는 다르고, 검색엔진은 그 차이를 SERP 구성으로 명확히 보여줍니다. 이 글에서는 정보형·탐색형·거래형·상업형 4가지 의도를 구분하는 기준과, 키워드별로 어떤 페이지를 만들어야 하는지 실무 관점에서 정리합니다.",
             sections=[
@@ -3418,7 +3551,7 @@ PAGES = {
                 ("6. 키워드를 4가지 의도로 분류하는 실전 프로세스",
                  """<p>검색 의도를 판단할 때는 <strong>키워드 자체보다 실제 검색 결과</strong>를 우선 분석해야 합니다. 같은 키워드라도 시장·시즌·사용자층에 따라 의도가 달라지기 때문입니다.</p><ol><li><strong>SERP 분석:</strong> 네이버·구글에서 키워드 직접 검색 → 상위 10개 결과 유형(블로그/쇼핑/동영상/공식 페이지) 확인</li><li><strong>탭·영역 확인:</strong> 네이버 VIEW/쇼핑/플레이스 어느 탭이 상단인지, 구글 Featured Snippet/Shopping/Local Pack 노출 여부 점검</li><li><strong>키워드 수식어로 1차 분류:</strong> \"방법\", \"추천\", \"구매\" 같은 접미사로 가설을 세우고 SERP로 검증</li><li><strong>도구로 정량 점검:</strong> 네이버 검색광고 키워드 도구·구글 키워드 플래너에서 경쟁도·CPC 확인. CPC가 높을수록 상업형·거래형 가능성 증가</li><li><strong>스프레드시트로 분류:</strong> 키워드 목록에 \"의도\" 열 추가, 정보/탐색/거래/상업 태그 부여 → 페이지 유형 매핑</li></ol><p><code>예시: \"에어프라이어\" → 네이버 쇼핑 탭 최상단 → 거래형 / \"에어프라이어 요리법\" → VIEW 탭 우세 → 정보형</code></p><p><strong>혼합 의도 주의:</strong> 한 키워드가 여러 의도를 동시에 가질 수 있습니다. \"다이어트\"는 정보형(방법 안내)과 상업형(보조제 비교)이 혼재합니다. 포괄적 콘텐츠로 다루거나 의도별로 별도 페이지를 준비해야 합니다.</p>"""),
                 ("7. 검색 의도별 페이지 제작 체크리스트와 흔한 실수",
-                 """<p>의도를 분류한 뒤에는 각 유형에 맞는 페이지 구조·콘텐츠 요소·전환 경로를 설계합니다.</p><table><thead><tr><th>의도 유형</th><th>페이지 형식</th><th>핵심 요소</th><th>흔한 실수</th></tr></thead><tbody><tr><td>정보형</td><td>가이드·블로그</td><td>목차·단계별 설명·예시</td><td>과도한 제품 링크로 신뢰 하락</td></tr><tr><td>탐색형</td><td>홈·서비스 페이지</td><td>브랜드명·사이트 링크·Organization 스키마</td><td>공식 페이지 메타 미최적화</td></tr><tr><td>거래형</td><td>상품·랜딩</td><td>가격·CTA·신뢰 신호</td><td>긴 설명으로 결정 지연</td></tr><tr><td>상업형</td><td>비교·추천</td><td>표·차트·자체 데이터</td><td>제휴 링크만 나열해 편향 의심</td></tr></tbody></table><p><strong>자주 보이는 실수 패턴:</strong></p><ul><li>혼합 의도 키워드에 한 가지 유형의 페이지만 매핑</li><li>거래형 페이지에 신뢰 요소(리뷰·환불 정책·배송 정보) 누락</li><li>정보형 글에 제품 링크를 과도하게 삽입해 광고성 글로 인식</li><li>SERP를 보지 않고 키워드 수식어만으로 의도 판단</li></ul><p>네이버 C-랭크는 체류 시간·재방문율로 콘텐츠 만족도를 평가합니다. 거래형 페이지라도 최소한의 신뢰 요소는 반드시 포함해야 순위 유지가 가능합니다. SERP 결과만 보고 의도를 추정하는 것보다, 실제 페이지를 띄운 뒤 행동 신호(체류·이탈·재검색)를 추적하는 게 가장 정확한 검증입니다.</p>""")
+                 """<p>의도를 분류한 뒤에는 각 유형에 맞는 페이지 구조·콘텐츠 요소·전환 경로를 설계합니다.</p><table><thead><tr><th>의도 유형</th><th>페이지 형식</th><th>핵심 요소</th><th>흔한 실수</th></tr></thead><tbody><tr><td>정보형</td><td>가이드·블로그</td><td>목차·단계별 설명·예시</td><td>과도한 제품 링크로 신뢰 하락</td></tr><tr><td>탐색형</td><td>홈·서비스 페이지</td><td>브랜드명·사이트 링크·Organization 스키마</td><td>공식 페이지 메타 미최적화</td></tr><tr><td>거래형</td><td>상품·랜딩</td><td>가격·CTA·신뢰 신호</td><td>긴 설명으로 결정 지연</td></tr><tr><td>상업형</td><td>비교·추천</td><td>표·차트·자체 데이터</td><td>제휴 링크만 나열해 편향 의심</td></tr></tbody></table><p><strong>자주 보이는 실수 패턴:</strong></p><ul><li>혼합 의도 키워드에 한 가지 유형의 페이지만 매핑</li><li>거래형 페이지에 신뢰 요소(리뷰·환불 정책·배송 정보) 누락</li><li>정보형 글에 제품 링크를 과도하게 삽입해 광고성 글로 인식</li><li>SERP를 보지 않고 키워드 수식어만으로 의도 판단</li></ul><p>네이버 C-랭크는 체류 시간·재방문율로 콘텐츠 만족도를 평가합니다. 거래형 페이지라도 최소한의 신뢰 요소를 갖춰야 안정적인 순위가 유지되는 경향이 있습니다. SERP 결과만 보고 의도를 추정하는 것보다, 실제 페이지를 띄운 뒤 행동 신호(체류·이탈·재검색)를 추적하는 게 가장 정확한 검증입니다.</p>""")
             ],
             key_takeaways=[
                 "검색 의도는 정보형·탐색형·거래형·상업형 4가지로 구분합니다. 네이버·구글 모두 의도 일치 페이지를 우선 노출합니다.",
@@ -3436,10 +3569,70 @@ PAGES = {
             url="https://onesearchpro.org/insights/content-seo/search-intent-4-types-keyword-classification-page-strategy/",
             title="검색 의도 4가지 유형 — 키워드별로 어떻게 분류하고 페이지를 만드나",
             desc="정보형·탐색형·거래형·상업형 4가지 검색 의도 구분 기준과 키워드별 페이지 매핑 실무 가이드.",
-            date_published="2026-05-14"
+            date_published="2026-05-14",
+            date_modified="2026-05-17"
         ),
         "active": "insights",
     },
+    "/insights/local-seo/negative-review-response-mistakes/": {
+        "title": "네이버 플레이스 부정 리뷰 대응 — 자주 하는 실수 5가지 | OneSearchPro",
+        "desc": "네이버 플레이스의 부정 리뷰는 \"제거 대상\"이 아니라 \"응답 대상\"입니다. 사장님들이 자주 하는 5가지 대응 실수와 신뢰를 잃지 않는 응답 4단계 프로세스를 정리합니다.",
+        "keywords": "네이버 플레이스 부정 리뷰, 악성 리뷰 대응, 리뷰 신고, 리뷰 답글, 네이버 리뷰 삭제, 지역 SEO 리뷰 관리",
+        "h1": "네이버 플레이스 부정 리뷰 대응 — 자주 하는 실수 5가지",
+        "eyebrow": "LOCAL SEO · ARTICLE",
+        "lead": "네이버 플레이스에 부정 리뷰가 달리면 가장 먼저 떠오르는 생각은 \"빨리 지우고 싶다\"입니다. 그런데 현장에서 가장 손해를 보는 패턴은 거의 항상 \"성급한 대응\"이었습니다. 매장 사장님들이 자주 빠지는 5가지 실수와, 잠재 고객에게는 오히려 신뢰 신호로 작용하는 응답 4단계 프로세스를 정리합니다.",
+        "body": blog_post(
+            date="2026-05-17",
+            reading_time=8,
+            intro="부정 리뷰가 달린 직후 24시간이 가장 위험합니다. 화가 난 상태에서 즉시 반박하거나 법적 위협을 언급한 답글이 캡처되어 커뮤니티·SNS로 확산된 사례를 자주 봅니다. 부정 리뷰 자체보다 부정 리뷰에 대한 답글이 잠재 고객의 결정에 더 큰 영향을 주는 경우가 많습니다. 네이버 플레이스의 리뷰는 단순한 평점 데이터가 아니라 \"이 매장은 고객을 어떻게 대하는가\"를 보여주는 가장 직접적인 신호입니다.",
+            sections=[
+                ("실수 1 — 즉시 반박·법적 위협으로 응답",
+                 "<p>가장 흔하고 가장 손해가 큰 실수입니다. \"사실관계가 다르다\", \"악의적 리뷰다\", \"법적 조치를 검토하겠다\" 같은 표현은 본인 입장에서는 정당해 보이지만, 같은 리뷰 화면을 보고 있는 100명의 잠재 고객 입장에서는 \"이 매장은 컴플레인에 어떻게 반응하는가\"의 답으로 읽힙니다.</p>"
+                 "<p>특히 \"법적 조치\" 언급은 명예훼손·협박 시비로 역공받는 경우가 자주 보입니다. 네이버 약관상 작성된 리뷰가 사실 기반이면 삭제 요청 사유로 인정되지 않으며, 오히려 답글이 캡처되어 \"갑질\" 프레임으로 확산되는 위험이 더 큽니다.</p>"
+                 "<p>실무 관찰상 가장 효과적인 첫 24시간 응대는 \"답변 작성 자체를 미루는 것\"입니다. 감정이 가라앉은 후 작성하는 답글이 거의 항상 더 좋은 결과를 만듭니다.</p>"),
+                ("실수 2 — 익명·운영자 표시 없이 응답",
+                 "<p>네이버 플레이스 답글은 작성자가 \"○○ 사장님\" 또는 \"○○ 운영팀\" 같이 명시될 때와 빈 닉네임일 때의 신뢰도 차이가 큽니다. 빈 닉네임 답글은 \"알바생이 쓴 형식적 답변\"으로 인식되는 경우가 많습니다.</p>"
+                 "<p>네이버 비즈니스 정보 관리에서 답글 작성자명을 \"매장명 + 직책\" 형식(예: \"○○카페 사장\", \"○○치과 원장\")으로 설정하면 답글마다 일관된 운영자 신원이 노출됩니다. 이게 작아 보이지만 \"이 매장은 누가 책임지고 응답하는가\"의 신뢰 신호로 작용합니다.</p>"),
+                ("실수 3 — 리뷰 신고에 의존하기",
+                 "<p>네이버 플레이스의 리뷰 신고 시스템은 명확한 약관 위반(욕설, 무관한 광고, 명백한 허위 사실)에만 처리됩니다. \"기분 나쁘다\", \"평점이 부당하다\" 같은 사유로는 거의 받아들여지지 않습니다.</p>"
+                 "<p>현장에서 자주 보는 패턴은 한 달 동안 같은 리뷰를 5번 신고하고 5번 모두 반려된 후에야 \"신고로는 안 되는구나\"를 알게 되는 경우입니다. 신고가 가능한 리뷰는 다음 정도로 좁힙니다 — 욕설·인격 모독 표현 포함, 매장과 무관한 광고·외부 링크, 명백히 다른 매장 리뷰가 잘못 등록된 경우, 동일 사용자의 반복 도배. 그 외에는 신고 대신 \"답글로 정중히 응대\"가 더 빠른 길입니다.</p>"),
+                ("실수 4 — 가짜 긍정 리뷰로 부정 리뷰를 묻기",
+                 "<p>부정 리뷰를 가리려고 지인·직원·외주를 통해 단기간에 긍정 리뷰를 대량 등록하는 경우가 자주 보입니다. 네이버 플레이스의 리뷰 평가 알고리즘은 다음 신호를 종합 평가합니다 — 작성 계정의 영수증 인증 여부, 작성 시점의 매장 방문 시간대 분포, 동일 IP·기기에서의 다중 작성, 작성 패턴의 자연스러움(같은 시간대 집중 작성은 비정상 신호).</p>"
+                 "<p>가짜 리뷰가 적발되면 해당 리뷰만 삭제되는 게 아니라 매장 신뢰도 점수가 떨어지고, 심한 경우 검색 노출 자체가 줄어들 수 있습니다. 단기 가림 효과보다 장기 신뢰 손상이 훨씬 큰 경우가 많습니다.</p>"),
+                ("실수 5 — 부정 리뷰만 골라 답글, 긍정 리뷰는 무시",
+                 "<p>대부분의 매장이 부정 리뷰에만 답글을 답니다. 그런데 잠재 고객 관점에서 리뷰 페이지를 스크롤할 때 \"부정 리뷰에만 답글이 있는 매장\"은 방어적·수동적으로 보입니다.</p>"
+                 "<p>긍정 리뷰에도 \"방문해주셔서 감사합니다, 다음에 ○○도 한번 드셔보세요\" 같은 짧은 개인화 답글을 달면 두 가지 효과가 있습니다. 첫째, 매장이 모든 리뷰를 보고 있다는 신호로 작용해 부정 리뷰 답글의 신뢰도가 올라갑니다. 둘째, 답글에 자연스럽게 메뉴명·서비스명이 들어가면 네이버 검색 노출에서 키워드 풍부도가 올라가는 부수 효과가 있습니다.</p>"),
+                ("부정 리뷰 응답 4단계 권장 프로세스",
+                 "<p>실무에서 효과가 검증된 4단계 응답 순서입니다. 첫 24시간은 응답을 미루고 다음 순서로 진행합니다.</p>"
+                 "<ol>"
+                 "<li><b>1단계 — 사실관계 확인:</b> 영수증 기록, CCTV, 직원 면담으로 \"실제 발생한 상황\"을 파악합니다. 사실이 다르다면 \"우리 매장 기록과 다르다\"는 정중한 표현으로 정리합니다. 사실이 맞다면 인정과 사과부터 시작합니다.</li>"
+                 "<li><b>2단계 — 답글 초안 작성:</b> 본인 + 다른 한 명이 읽어보는 절차를 권장합니다. 감정 표현·법적 위협·자기 변호 표현을 제거합니다. 답글은 작성자 1명이 아니라 \"이 답글을 보게 될 잠재 고객 100명\"을 대상으로 쓴다는 관점이 유용합니다.</li>"
+                 "<li><b>3단계 — 구체적 후속 조치 제안:</b> \"매장으로 다시 방문해주시면\", \"전화로 자세한 상황 들려주시면\" 같은 후속 채널을 제시합니다. 이게 있어야 \"형식적 답변\"이 아닌 \"실제 해결 의지\"로 읽힙니다.</li>"
+                 "<li><b>4단계 — 운영자명·연락처 명시:</b> 답글 끝에 \"○○ 사장 ○○○\" 또는 \"운영팀 ○○○\" 같이 책임자 신원을 명시합니다. 가능하면 직접 통화 가능한 채널(매장 전화·카카오톡 채널)도 함께 안내합니다.</li>"
+                 "</ol>"
+                 "<p>이 4단계는 부정 리뷰를 \"손해\"에서 \"잠재 고객에게 우리 매장의 응대 수준을 보여주는 기회\"로 전환하는 가장 안정적인 방법입니다.</p>"),
+            ],
+            key_takeaways=[
+                "부정 리뷰는 제거 대상이 아니라 응답 대상입니다. 답글의 품질이 부정 리뷰 자체보다 잠재 고객 결정에 더 큰 영향을 줍니다.",
+                "첫 24시간은 응답을 미루고 사실관계부터 확인합니다. 감정 상태에서 작성한 답글이 가장 큰 손해를 만듭니다.",
+                "답글 작성자명을 \"매장명 + 직책\"으로 명시하면 운영자 신원 신뢰 신호가 일관되게 작용합니다.",
+                "가짜 긍정 리뷰는 단기 효과보다 장기 신뢰 손상이 크고, 네이버 알고리즘이 패턴을 식별합니다.",
+            ],
+            related=[
+                ("신규 매장 네이버 플레이스 등록 첫 4주 운영 가이드", "/insights/local-seo/new-store-naver-place/", "지역 SEO"),
+                ("디지털 PR과 자연 백링크 — Disavow 결정 기준", "/insights/backlink-pr/disavow-decision/", "디지털 PR"),
+                ("지역 SEO 서비스", "/services/local-seo/", "서비스"),
+            ]
+        ),
+        "json_ld": blog_jsonld(
+            url="https://onesearchpro.org/insights/local-seo/negative-review-response-mistakes/",
+            title="네이버 플레이스 부정 리뷰 대응 — 자주 하는 실수 5가지",
+            desc="네이버 플레이스 부정 리뷰의 5가지 흔한 대응 실수와 잠재 고객 신뢰를 유지하는 4단계 응답 프로세스.",
+            date_published="2026-05-17"
+        ),
+        "active": "insights",
+    },
+
     # ===== AUTO-INSERT MARKER (weekly_blog.py inserts new articles above) =====
 
     "/sitemap-html/": {
@@ -3657,7 +3850,7 @@ PAGES = {
             '<p>회사는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 정보주체의 불만 처리 및 피해 구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.</p>'
             '<ul>'
             '<li><b>책임자</b>: YH기획 운영자</li>'
-            '<li><b>연락처</b>: contact@onesearchpro.com</li>'
+            '<li><b>연락처</b>: help@onesearchpro.org</li>'
             '</ul>'
             '<h2>10. 권익침해 구제방법</h2>'
             '<p>정보주체는 개인정보침해로 인한 구제를 받기 위하여 개인정보분쟁조정위원회, 한국인터넷진흥원 개인정보침해신고센터 등에 분쟁해결이나 상담 등을 신청할 수 있습니다.</p>'
