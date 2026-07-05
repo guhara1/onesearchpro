@@ -25,6 +25,12 @@
 
 ---
 
+## ➕ 추가 발행 (사용자 지정 주제, 순환과 별개)
+
+- [x] **[기술 SEO]** 소규모 사업자 홈페이지 제작 비용, 2026년 현실 견적 → `/insights/technical-seo/small-business-website-cost-2026/` (2026-07-05 발행, 사용자 요청)
+
+---
+
 ## 📅 주간 발행 계획 (다음 13주, 카테고리 순환)
 
 - [x] **W1 [구글 SEO]** 신규 사이트 첫 1개월 SEO 우선순위 5가지 → `/insights/google-seo/first-month-priorities/` (2025-05-14 발행)
