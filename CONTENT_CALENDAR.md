@@ -38,8 +38,8 @@
 - [x] **W3 [콘텐츠 SEO]** 검색 의도 4가지 유형 — 키워드별로 어떻게 분류하고 페이지를 만드나 → `/insights/content-seo/search-intent-4-types-keyword-classification-page-strategy/` (2026-05-14 자동 발행)
 - [x] **W4 [지역 SEO]** 네이버 플레이스 부정 리뷰 대응 — 자주 하는 실수 5가지 → `/insights/local-seo/negative-review-response-mistakes/` (2026-05-17 발행)
 - [x] **W5 [백링크·디지털 PR]** 게스트 포스트 — 안전한 매체 골라내는 6가지 기준 → `/insights/backlink-pr/guest-post-safe-media-criteria/` (2026-05-22 발행)
-- [ ] **W6 [SNS 마케팅]** 유튜브 영상 vs 쇼츠 — SEO 관점의 차이와 활용
-- [ ] **W7 [검색 노출 문제 해결]** 색인 누락 페이지 — 사이트맵 재제출 효과 측정법
+- [x] **W6 [SNS 마케팅]** 유튜브 영상 vs 쇼츠 — SEO 관점의 차이와 활용 → `/insights/sns/youtube-video-vs-shorts-seo/` (2026-07-20 발행)
+- [x] **W7 [검색 노출 문제 해결]** 색인 누락 페이지 — 사이트맵 재제출 효과 측정법 → `/insights/visibility/sitemap-resubmit-effect-measurement/` (2026-07-20 발행)
 - [ ] **W8 [구글 SEO]** 2025년 구글 검색 결과 페이지(SERP) 변화 주요 패턴
 - [ ] **W9 [기술 SEO]** JavaScript SEO — SPA 사이트에서 자주 빠지는 함정
 - [ ] **W10 [콘텐츠 SEO]** 영문 vs 한글 콘텐츠 — 같은 사이트 운영 시 분리 원칙
