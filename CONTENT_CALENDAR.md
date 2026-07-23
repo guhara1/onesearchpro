@@ -28,6 +28,11 @@
 ## ➕ 추가 발행 (사용자 지정 주제, 순환과 별개)
 
 - [x] **[기술 SEO]** 소규모 사업자 홈페이지 제작 비용, 2026년 현실 견적 → `/insights/technical-seo/small-business-website-cost-2026/` (2026-07-05 발행, 사용자 요청)
+- [x] **[구글 SEO]** 구글 상위노출 방법, 소규모 사업자가 6개월 안에 시도하는 순서 → `/insights/google-seo/google-top-ranking-methods-small-business/` (2026-07-23 발행, 트래픽 유입 배치)
+- [x] **[기술 SEO]** 카페24·아임웹·워드프레스·윅스, SEO 관점에서 뭐가 다를까 → `/insights/technical-seo/website-builder-seo-comparison/` (2026-07-23 발행, 트래픽 유입 배치)
+- [x] **[콘텐츠 SEO]** 블로그 키워드 찾는 법, 검색량 적은 롱테일로 유입 만드는 순서 → `/insights/content-seo/long-tail-keyword-research-method/` (2026-07-23 발행, 트래픽 유입 배치)
+- [x] **[지역 SEO]** 네이버 플레이스 상위노출, 2026년에 통하는 것과 통하지 않는 것 → `/insights/local-seo/naver-place-top-exposure-2026/` (2026-07-23 발행, 트래픽 유입 배치)
+- [x] **[백링크·디지털 PR]** 백링크 만드는 법, 초보 사업자가 돈 안 들이고 시작하는 5가지 → `/insights/backlink-pr/free-backlink-methods-beginners/` (2026-07-23 발행, 트래픽 유입 배치)
 
 ---
 
