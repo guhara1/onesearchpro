@@ -48,9 +48,9 @@
 - [x] **W8 [구글 SEO]** 2025년 구글 검색 결과 페이지(SERP) 변화 주요 패턴 → `/insights/google-seo/serp-changes-recent-patterns/` (2026-07-24 발행)
 - [x] **W9 [기술 SEO]** JavaScript SEO — SPA 사이트에서 자주 빠지는 함정 → `/insights/technical-seo/javascript-seo-spa-pitfalls/` (2026-07-24 발행)
 - [x] **W10 [콘텐츠 SEO]** 영문 vs 한글 콘텐츠 — 같은 사이트 운영 시 분리 원칙 → `/insights/content-seo/multilingual-korean-english-separation/` (2026-07-24 발행)
-- [ ] **W11 [지역 SEO]** 다지점 매장 리뷰 운영 — 본사 통합 vs 지점 자율
-- [ ] **W12 [백링크·디지털 PR]** 디지털 PR 캠페인 — 데이터 리서치로 언론 인용 만드는 법
-- [ ] **W13 [SNS 마케팅]** 인스타그램 검색 탭 — 비즈니스 계정이 활용할 5가지
+- [x] **W11 [지역 SEO]** 다지점 매장 리뷰 운영 — 본사 통합 vs 지점 자율 → `/insights/local-seo/multi-location-review-management/` (2026-07-25 발행)
+- [x] **W12 [백링크·디지털 PR]** 디지털 PR 캠페인 — 데이터 리서치로 언론 인용 만드는 법 → `/insights/backlink-pr/digital-pr-data-research-media-coverage/` (2026-07-25 발행)
+- [x] **W13 [SNS 마케팅]** 인스타그램 검색 탭 — 비즈니스 계정이 활용할 5가지 → `/insights/sns/instagram-search-tab-business/` (2026-07-25 발행)
 
 ---
 
