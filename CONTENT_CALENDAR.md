@@ -54,6 +54,14 @@
 
 ---
 
+## 📅 추가 주차 (W14~, 트래픽 유입 중심 순환)
+
+- [x] **W14 [콘텐츠 SEO]** AI로 블로그 글 쓸 때 검색 노출을 망치는 5가지 실수 → `/insights/content-seo/ai-generated-content-seo-mistakes/` (2026-07-27 발행)
+- [x] **W15 [검색 노출 문제 해결]** 검색 트래픽이 갑자기 떨어졌을 때 — 4주 진단 순서 → `/insights/visibility/traffic-drop-diagnosis-4-weeks/` (2026-07-27 발행)
+- [x] **W16 [기술 SEO]** 구글 서치콘솔 연결하고 가장 먼저 볼 5가지 → `/insights/technical-seo/search-console-first-setup-checklist/` (2026-07-27 발행)
+
+---
+
 ## 📝 운영 원칙
 
 - 매주 1편 발행 (월요일 권장)
