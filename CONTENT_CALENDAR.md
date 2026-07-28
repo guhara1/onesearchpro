@@ -59,6 +59,9 @@
 - [x] **W14 [콘텐츠 SEO]** AI로 블로그 글 쓸 때 검색 노출을 망치는 5가지 실수 → `/insights/content-seo/ai-generated-content-seo-mistakes/` (2026-07-27 발행)
 - [x] **W15 [검색 노출 문제 해결]** 검색 트래픽이 갑자기 떨어졌을 때 — 4주 진단 순서 → `/insights/visibility/traffic-drop-diagnosis-4-weeks/` (2026-07-27 발행)
 - [x] **W16 [기술 SEO]** 구글 서치콘솔 연결하고 가장 먼저 볼 5가지 → `/insights/technical-seo/search-console-first-setup-checklist/` (2026-07-27 발행)
+- [x] **W17 [구글 SEO]** 구글 검색에 내 사이트가 안 나올 때 확인할 7가지 → `/insights/google-seo/site-not-showing-in-google-checklist/` (2026-07-28 발행)
+- [x] **W18 [지역 SEO]** 구글 비즈니스 프로필 최적화 — 구글 지도 상위노출 기본기 → `/insights/local-seo/google-business-profile-optimization/` (2026-07-28 발행)
+- [x] **W19 [SNS 마케팅]** 네이버 블로그 상위노출 — C-랭크·D.I.A. 시대에 통하는 것 → `/insights/sns/naver-blog-top-exposure-crank-dia/` (2026-07-28 발행)
 
 ---
 
