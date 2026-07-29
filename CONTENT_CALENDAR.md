@@ -62,6 +62,9 @@
 - [x] **W17 [구글 SEO]** 구글 검색에 내 사이트가 안 나올 때 확인할 7가지 → `/insights/google-seo/site-not-showing-in-google-checklist/` (2026-07-28 발행)
 - [x] **W18 [지역 SEO]** 구글 비즈니스 프로필 최적화 — 구글 지도 상위노출 기본기 → `/insights/local-seo/google-business-profile-optimization/` (2026-07-28 발행)
 - [x] **W19 [SNS 마케팅]** 네이버 블로그 상위노출 — C-랭크·D.I.A. 시대에 통하는 것 → `/insights/sns/naver-blog-top-exposure-crank-dia/` (2026-07-28 발행)
+- [x] **W20 [기술 SEO]** robots.txt와 meta robots — 한 줄 실수로 사이트가 검색에서 사라지는 이유 → `/insights/technical-seo/robots-txt-meta-robots-guide/` (2026-07-29 발행, 실전형)
+- [x] **W21 [콘텐츠 SEO]** 순위가 오르다 만 글 되살리기 — 콘텐츠 리프레시 실전 절차 → `/insights/content-seo/content-refresh-playbook/` (2026-07-29 발행, 실전형)
+- [x] **W22 [구글 SEO]** 서치콘솔에서 다음에 쓸 글 찾기 — 숨은 기회 키워드 발굴 → `/insights/google-seo/search-console-opportunity-keywords/` (2026-07-29 발행, 실전형)
 
 ---
 

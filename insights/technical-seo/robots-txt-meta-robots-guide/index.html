@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>robots.txt와 meta robots — 한 줄 실수로 사이트가 검색에서 사라지는 이유 | OneSearchPro</title>
+  <meta name="description" content="Disallow와 noindex는 이름은 비슷해도 하는 일이 정반대에 가깝습니다. 혼동하면 색인을 지우려다 남기고, 크롤을 막으려다 순위를 날립니다. 두 도구의 실제 역할과 상황별 사용법·점검법을 실무 기준으로 정리합니다." />
+  <meta name="keywords" content="robots.txt, meta robots, noindex, Disallow, 색인 차단, 크롤링 차단, 검색 노출 실수" />
+  <link rel="canonical" href="https://onesearchpro.org/insights/technical-seo/robots-txt-meta-robots-guide/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="robots.txt와 meta robots — 한 줄 실수로 사이트가 검색에서 사라지는 이유 | OneSearchPro" />
+  <meta property="og:description" content="Disallow와 noindex는 이름은 비슷해도 하는 일이 정반대에 가깝습니다. 혼동하면 색인을 지우려다 남기고, 크롤을 막으려다 순위를 날립니다. 두 도구의 실제 역할과 상황별 사용법·점검법을 실무 기준으로 정리합니다." />
+  <meta property="og:url" content="https://onesearchpro.org/insights/technical-seo/robots-txt-meta-robots-guide/" />
+  <meta property="og:image" content="https://onesearchpro.org/assets/images/logo.png" />
+  <meta property="og:site_name" content="OneSearchPro" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://onesearchpro.org/assets/images/logo.png" />
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg" />
+  <link rel="alternate icon" type="image/png" href="/assets/images/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="OneSearchPro · SEO 인사이트" href="/rss.xml" />
+  <meta name="theme-color" content="#7c5cff" />
+  <!-- 검색엔진 소유권 인증 (등록 시 코드 입력) -->
+  <meta name="google-site-verification" content="kAFnt3jSs27vJ3oCex9SwynDq07pqYXZmVtITkFZBPQ" />
+  <meta name="naver-site-verification" content="eb0c4d732c1b024809d2ab52ff1ea457bb9189dc" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="image" href="/assets/images/logo-140.webp" type="image/webp" fetchpriority="high" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="stylesheet" href="/styles.css" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"OneSearchPro","alternateName":"원서치프로","url":"https://onesearchpro.org/","inLanguage":"ko-KR","publisher":{"@type":"Organization","name":"OneSearchPro","legalName":"YH기획"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"YH기획 (OneSearchPro)","alternateName":"OneSearchPro","url":"https://onesearchpro.org/","logo":"https://onesearchpro.org/assets/images/logo.png","image":"https://onesearchpro.org/assets/images/logo.png","telephone":"","email":"help@onesearchpro.org","priceRange":"₩₩","address":{"@type":"PostalAddress","streetAddress":"부평대로 283 부평우림라이온스밸리","addressLocality":"부평구","addressRegion":"인천광역시","postalCode":"21389","addressCountry":"KR"},"areaServed":"KR","taxID":"503-30-66944","sameAs":["https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/","https://medium.com/@88smartbro88","https://x.com/gugeulmake84173","https://t.me/googleseolab"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"홈","item":"https://onesearchpro.org/"},{"@type":"ListItem","position":2,"name":"SEO 인사이트","item":"https://onesearchpro.org/insights/"},{"@type":"ListItem","position":3,"name":"robots.txt와 meta robots — 한 줄 실수로 사이트가 검색에서 사라지는 이유","item":"https://onesearchpro.org/insights/technical-seo/robots-txt-meta-robots-guide/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"robots.txt와 meta robots — 한 줄 실수로 사이트가 검색에서 사라지는 이유","description":"Disallow와 noindex의 실제 역할 차이, 서로 충돌하는 최악의 조합, 상황별 올바른 선택과 배포 시 점검법.","url":"https://onesearchpro.org/insights/technical-seo/robots-txt-meta-robots-guide/","datePublished":"2026-07-29","dateModified":"2026-07-29","author":[{"@type":"Person","name":"강백호","url":"https://onesearchpro.org/about/team/"},{"@type":"Organization","name":"OneSearchPro","url":"https://onesearchpro.org/"}],"publisher":{"@type":"Organization","name":"OneSearchPro","logo":{"@type":"ImageObject","url":"https://onesearchpro.org/assets/images/logo.png"}},"image":"https://onesearchpro.org/assets/images/logo.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://onesearchpro.org/insights/technical-seo/robots-txt-meta-robots-guide/"},"inLanguage":"ko-KR"}</script>
+</head>
+<body class=" is-article">
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="/" class="brand" aria-label="OneSearchPro 홈"><picture><source type="image/webp" srcset="/assets/images/logo-140.webp 1x, /assets/images/logo-280.webp 2x" /><img src="/assets/images/logo-140.png" alt="OneSearchPro - 검색의 기준을 바꾸다" class="brand-logo" width="180" height="60" decoding="async" /></picture></a>
+      <nav class="nav" id="nav">
+        <div class="has-dropdown">
+          <a href="/services/seo/" class="nav-trigger">서비스 <span class="caret">▾</span></a>
+          <div class="dropdown">
+            <a href="/services/seo/" class="dd-main"><b>🔍 SEO 컨설팅</b><span>대표 서비스</span></a>
+            <a href="/services/technical-seo/">기술 SEO 진단</a>
+            <a href="/services/content-seo/">콘텐츠 SEO</a>
+            <a href="/services/local-seo/">지역 SEO</a>
+            <a href="/services/digital-pr/">디지털 PR · 백링크 진단</a>
+            <a href="/services/social-media/">SNS 마케팅</a>
+            <a href="/services/web-design/">SEO 웹사이트 제작</a>
+          </div>
+        </div>
+        <div class="has-dropdown">
+          <a href="/case-studies/" class="nav-trigger">성공사례 <span class="caret">▾</span></a>
+          <div class="dropdown">
+            <a href="/case-studies/" class="dd-main"><b>📁 전체 성공사례</b><span>업종별 작업 기록</span></a>
+            <a href="/case-studies/seo/">SEO 개선 사례</a>
+            <a href="/case-studies/local-seo/">지역 SEO 사례</a>
+            <a href="/case-studies/content/">콘텐츠 개선 사례</a>
+            <a href="/case-studies/web-design/">웹사이트 제작 사례</a>
+            <a href="/case-studies/visibility/">검색 노출 문제 해결 사례</a>
+          </div>
+        </div>
+        <div class="has-dropdown">
+          <a href="/insights/" class="nav-trigger active">SEO 인사이트 <span class="caret">▾</span></a>
+          <div class="dropdown">
+            <a href="/insights/" class="dd-main"><b>📰 전체 글</b><span>SEO 전문 콘텐츠</span></a>
+            <a href="/insights/google-seo/">구글 SEO</a>
+            <a href="/insights/technical-seo/">기술 SEO</a>
+            <a href="/insights/content-seo/">콘텐츠 SEO</a>
+            <a href="/insights/local-seo/">지역 SEO</a>
+            <a href="/insights/backlink-pr/">백링크 · 디지털 PR</a>
+            <a href="/insights/sns/">SNS 마케팅</a>
+            <a href="/insights/visibility/">검색 노출 문제 해결</a>
+          </div>
+        </div>
+        <div class="has-dropdown">
+          <a href="/about/" class="nav-trigger">회사소개 <span class="caret">▾</span></a>
+          <div class="dropdown">
+            <a href="/about/" class="dd-main"><b>🏢 원서치프로 소개</b><span>About OneSearchPro</span></a>
+            <a href="/about/team/">팀 · 저자 소개</a>
+            <a href="/about/principles/">작업 원칙</a>
+            <a href="/about/process/">진행 프로세스</a>
+            <a href="/about/faq/">자주 묻는 질문</a>
+            <a href="/contact/">문의하기</a>
+          </div>
+        </div>
+        <a href="https://t.me/googleseolab" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">내 사이트 진단받기</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <a href="/insights/">SEO 인사이트</a> <span>›</span> <span>robots.txt와 meta robots — 한 줄 실수로 사이트가 검색에서 사라지는 이유</span></div></nav>
+  <main>
+    <section class="article-hero"><div class="container article-hero-inner"><span class="eyebrow">TECHNICAL SEO · ARTICLE</span><h1>robots.txt와 meta robots — 한 줄 실수로 사이트가 검색에서 사라지는 이유</h1><p class="lead">SEO에서 가장 무서운 실수는 순위가 안 오르는 게 아니라, 잘 나오던 사이트가 통째로 검색에서 사라지는 것입니다. 그리고 그 사고의 상당수는 robots.txt 한 줄, 혹은 meta robots 태그 하나에서 시작됩니다.</p></div></section>
+    <section class="section article-section"><article class="article-body container"><div class="article-meta"><span>📅 발행 <time datetime="2026-07-29">2026-07-29</time></span><span>⏱ 읽는 시간 약 9분</span><span>✍ <a href="/about/team/" rel="author">강백호</a> · OneSearchPro</span></div><p class="article-intro">SEO에서 가장 무서운 실수는 순위가 안 오르는 게 아니라, 잘 나오던 사이트가 통째로 검색에서 사라지는 것입니다. 그리고 그 사고의 상당수는 robots.txt 한 줄, 혹은 meta robots 태그 하나에서 시작됩니다. 두 가지는 이름이 비슷해 자주 혼동되지만, 하는 일이 정반대에 가깝습니다. 이 차이를 모르면 "색인을 지우려다 오히려 색인에 남기고", "크롤링을 막으려다 순위를 통째로 날리는" 일이 벌어집니다. 이 글은 두 도구가 실제로 무엇을 하고, 상황별로 무엇을 써야 하며, 어떻게 점검하는지를 실무 기준으로 정리합니다.</p><h2>robots.txt와 meta robots는 하는 일이 다릅니다</h2>
+<p>이름이 비슷해 헷갈리지만 역할이 다릅니다. <b>robots.txt의 Disallow</b>는 "이 경로를 크롤링하지 말라"는 요청입니다. <b>meta robots의 noindex</b>는 "이 페이지를 검색 결과에 넣지 말라"는 지시입니다.</p><p>즉 하나는 "가져가지 마", 다른 하나는 "보여주지 마"입니다. 이 둘은 완전히 다른 층위의 명령이고, 심지어 서로 충돌하기도 합니다. 여기서 대부분의 사고가 납니다.</p>
+<h2>가장 위험한 오해 — "Disallow하면 색인에서 빠진다"</h2>
+<p>많은 사람이 "검색에서 안 보이게 하려면 robots.txt로 막으면 된다"고 생각합니다. 그런데 Disallow는 크롤링만 막을 뿐, 색인을 지우지 않습니다.</p><p>오히려 문제가 생깁니다. 외부에서 그 페이지로 링크가 걸려 있으면, 구글은 내용을 못 읽은 채로 URL만 색인해 버릴 수 있습니다. 검색 결과에 설명 없는 링크로 남는 것입니다. 지우려다 더 이상하게 남기는 셈입니다.</p>
+<h2>더 위험한 조합 — noindex를 robots.txt로 막기</h2>
+<p>정말 색인에서 빼려면 <b>noindex</b>를 써야 합니다. 그런데 여기 함정이 있습니다. 구글이 noindex를 보려면 그 페이지를 크롤링할 수 있어야 합니다.</p><p>만약 robots.txt로 그 경로를 Disallow해 두면, 구글은 페이지에 접근하지 못해 noindex 태그를 읽지도 못합니다. 결과적으로 "색인에서 빼려고 noindex를 걸었는데, robots.txt가 그걸 못 읽게 막아서 계속 색인에 남는" 최악의 조합이 됩니다. noindex를 쓸 페이지는 robots.txt로 막으면 안 됩니다.</p>
+<h2>상황별로 무엇을 써야 하나</h2>
+<p>정리하면 목적에 따라 도구가 달라집니다.</p><ul><li><b>검색 결과에서 완전히 빼고 싶다</b> → 페이지에 noindex, robots.txt는 열어둠(크롤 가능해야 함)</li><li><b>크롤 낭비를 막고 싶다(관리자·내부 검색결과 페이지 등)</b> → robots.txt Disallow(애초에 색인 대상이 아닌 경로)</li><li><b>중복 페이지를 정리하고 싶다</b> → noindex가 아니라 canonical이 대개 맞음</li><li><b>민감 정보를 감추고 싶다</b> → robots·noindex가 아니라 접근 제한(로그인·인증)</li></ul><p>특히 마지막이 중요합니다. robots.txt는 누구나 열어볼 수 있는 공개 파일이라, 거기 적은 경로는 오히려 "여기 뭔가 있다"고 알려주는 꼴입니다. 진짜 숨겨야 할 건 서버 단에서 막아야 합니다.</p>
+<h2>현장에서 반복되는 실전 사고 3가지</h2>
+<p>실무에서 반복적으로 보이는 사고 패턴입니다.</p><ul><li><b>오픈 시 개발용 차단이 안 풀림</b> — 제작 중 걸어둔 전체 차단(robots.txt의 "Disallow: /" 한 줄)이나 사이트 전체 noindex가 오픈 후에도 남음. 사이트가 통째로 검색에서 사라집니다.</li><li><b>리뉴얼·이전 시 스테이징 설정이 그대로 배포</b> — 개발 서버의 차단 설정이 운영 서버에 딸려 옴.</li><li><b>CSS·JS를 Disallow</b> — 렌더링에 필요한 자원을 막아 구글이 페이지를 제대로 못 그림.</li></ul><p>세 가지 모두 "의도치 않게" 벌어지는데, 피해는 사이트 전체 규모입니다. 색인이 안 되는 사이트의 원인 진단은 <a href="/insights/google-seo/site-not-showing-in-google-checklist/">사이트가 검색에 안 나올 때 확인할 7가지</a>와 이어집니다.</p>
+<h2>배포할 때 꼭 확인하는 점검법</h2>
+<p>사고 대부분은 점검 한 번으로 막을 수 있습니다. 오픈·리뉴얼·배포 직후 다음을 확인하세요.</p><ol><li><b>robots.txt 직접 열어보기</b> — 도메인 뒤에 /robots.txt 를 붙여 접속해, "Disallow: /" 같은 전체 차단이 없는지 확인</li><li><b>서치콘솔 URL 검사</b> — 핵심 페이지가 "색인 생성 가능"으로 나오는지, 차단·noindex가 걸려 있지 않은지 확인</li><li><b>페이지 소스 점검</b> — 각 페이지 소스의 meta robots에 noindex가 남아 있지 않은지 확인</li></ol><p>이 점검은 서치콘솔을 연결해 두면 훨씬 쉬워집니다. 도구 활용은 <a href="/insights/technical-seo/search-console-first-setup-checklist/">서치콘솔 첫 세팅</a>에서 다뤘습니다.</p>
+<h2>한 줄이 사이트 전체를 좌우합니다</h2>
+<p>robots.txt와 meta robots는 코드 몇 글자지만 영향 범위는 사이트 전체입니다. 그래서 "잘 모르면 건드리지 않는다"가 안전한 기본값입니다. 특히 "Disallow: /"와 사이트 전역 noindex는 손댈 때 가장 조심해야 하는 설정입니다.</p><p>정리하면 하나만 기억하면 됩니다. 색인에서 빼려면 noindex(크롤 가능한 상태에서), 크롤을 아끼려면 Disallow, 숨기려면 서버 접근 제한. 이 세 가지를 섞지 않는 것만으로 큰 사고 대부분을 피할 수 있습니다.</p>
+<aside class="article-takeaway"><h3>🎯 핵심 정리</h3><ul><li>robots.txt의 Disallow는 "크롤링 차단", meta robots의 noindex는 "색인 제외"로 하는 일이 다릅니다. 혼동이 사고의 시작입니다.</li><li>Disallow는 색인을 지우지 않습니다. 오히려 내용 없이 URL만 색인에 남을 수 있습니다. 색인에서 빼려면 noindex를 써야 합니다.</li><li>noindex는 크롤이 가능해야 읽힙니다. noindex를 걸 페이지를 robots.txt로 막으면 태그를 못 읽어 계속 색인에 남습니다.</li><li>오픈·리뉴얼 후 robots.txt와 URL 검사로 전체 차단("Disallow: /")·전역 noindex가 남지 않았는지 점검하는 게 사고를 막는 핵심입니다.</li></ul></aside></article></section><section class="section"><div class="container"><div class="article-cta"><h3>내 사이트의 SEO 상태가 궁금하다면</h3><p>위 가이드의 항목들을 실제 우리 사이트에 적용하면 어떤 결과가 나올지 궁금하시면, 무료 SEO 진단을 받아보세요. 텔레그램으로 사이트 URL을 보내주시면 24시간 내 분석 리포트를 회신드립니다.</p><a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">무료 SEO 진단 받기 →</a></div></div></section><section class="section section-soft"><div class="container"><div class="section-head left"><span class="eyebrow">READ NEXT</span><h2>이어서 읽으면 좋은 글</h2><p>같은 주제 또는 연관 분야를 더 자세히 다루는 글입니다. 한 주제를 깊이 이해하는 데 도움이 됩니다.</p></div><div class="grid services"><a href="/insights/google-seo/site-not-showing-in-google-checklist/" class="svc related-card"><span class="badge">구글 SEO</span><h3>구글 검색에 내 사이트가 안 나올 때 확인할 7가지</h3><span class="svc-link">자세히 보기 →</span></a><a href="/insights/technical-seo/search-console-first-setup-checklist/" class="svc related-card"><span class="badge">기술 SEO</span><h3>구글 서치콘솔 연결하고 가장 먼저 볼 5가지</h3><span class="svc-link">자세히 보기 →</span></a><a href="/services/technical-seo/" class="svc related-card"><span class="badge">서비스</span><h3>기술 SEO 진단 서비스</h3><span class="svc-link">자세히 보기 →</span></a></div></div></section>
+    
+    <section class="section section-cta">
+      <div class="container cta-grid">
+        <div><h2>무료 진단 후 정확한 견적을 받아보세요</h2><p>24시간 내 분석 리포트와 맞춤 제안서를 보내드립니다.</p></div>
+        <div class="cta-actions"><a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">무료 진단 신청 →</a><a href="/case-studies/" class="btn btn-outline btn-lg btn-light">성공사례 보기</a></div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container foot-grid">
+      <div><a href="/" class="brand"><span class="brand-mark">1</span><span class="brand-name">OneSearch<strong>Pro</strong></span></a><p class="muted">검색에서 시작되는 비즈니스 성장.<br/>SEO · 디지털 마케팅 전문 에이전시.</p></div>
+      <div><h5>SEO 서비스</h5><ul><li><a href="/services/seo/">SEO 컨설팅</a></li><li><a href="/services/technical-seo/">기술 SEO 진단</a></li><li><a href="/services/content-seo/">콘텐츠 SEO</a></li><li><a href="/services/local-seo/">지역 SEO</a></li><li><a href="/services/digital-pr/">디지털 PR · 백링크 진단</a></li><li><a href="/services/social-media/">SNS 마케팅</a></li><li><a href="/services/web-design/">SEO 웹사이트 제작</a></li></ul></div>
+      <div><h5>회사</h5><ul><li><a href="/case-studies/">성공사례</a></li><li><a href="/insights/">SEO 인사이트</a></li><li><a href="/about/">회사 소개</a></li><li><a href="/contact/">내 사이트 진단받기</a></li></ul></div>
+      <div><h5>연락처</h5><ul><li>help@onesearchpro.org</li><li>인천 부평구</li></ul></div>
+      <div><h5>약관·정책</h5><ul><li><a href="/privacy/">개인정보처리방침</a></li><li><a href="/terms/">이용약관</a></li><li><a href="/sitemap-html/">사이트맵</a></li><li><a href="/rss.xml">RSS 피드</a></li></ul></div>
+    </div>
+    <div class="container biz-info">
+      <span>상호 <b>YH기획</b></span>
+      <span class="biz-sep">·</span>
+      <span>사업자등록번호 503-30-66944</span>
+      <span class="biz-sep">·</span>
+      <span>주소 인천광역시 부평구 부평대로 283 부평우림라이온스밸리</span>
+    </div>
+    <div class="container footer-sns">
+      <span class="footer-sns-label">Follow OneSearchPro</span>
+      <div class="footer-sns-icons">
+        <a href="https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/" target="_blank" rel="noopener noreferrer me" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+        <a href="https://medium.com/@88smartbro88" target="_blank" rel="noopener noreferrer me" aria-label="Medium"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg></a>
+        <a href="https://x.com/gugeulmake84173" target="_blank" rel="noopener noreferrer me" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer me" aria-label="Telegram"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295l.213-3.053 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.66-.643.135-.953l11.566-4.458c.538-.196 1.006.128.832.938z"/></svg></a>
+      </div>
+    </div>
+    <div class="container foot-bottom"><span>© <span id="year"></span> YH기획 (OneSearchPro). All rights reserved.</span><span><a href="/privacy/">개인정보처리방침</a> · <a href="/terms/">이용약관</a></span></div>
+  </footer>
+  <script src="/script.js" defer></script>
+</body>
+</html>
