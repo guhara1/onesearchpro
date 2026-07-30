@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>canonical 태그 실전 — 언제 쓰고, 언제 쓰면 안 되는가 | OneSearchPro</title>
+  <meta name="description" content="canonical은 중복을 정리하는 유용한 도구지만, 잘못 쓰면 멀쩡한 페이지를 스스로 색인에서 지웁니다. canonical이 실제로 하는 일, 필요한 상황, 가장 파괴적인 실수와 점검법을 실무 기준으로 정리합니다." />
+  <meta name="keywords" content="canonical 태그, rel canonical, 중복 콘텐츠, 대표 URL, 정규 URL, 색인 정리" />
+  <link rel="canonical" href="https://onesearchpro.org/insights/technical-seo/canonical-tag-practical-guide/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="canonical 태그 실전 — 언제 쓰고, 언제 쓰면 안 되는가 | OneSearchPro" />
+  <meta property="og:description" content="canonical은 중복을 정리하는 유용한 도구지만, 잘못 쓰면 멀쩡한 페이지를 스스로 색인에서 지웁니다. canonical이 실제로 하는 일, 필요한 상황, 가장 파괴적인 실수와 점검법을 실무 기준으로 정리합니다." />
+  <meta property="og:url" content="https://onesearchpro.org/insights/technical-seo/canonical-tag-practical-guide/" />
+  <meta property="og:image" content="https://onesearchpro.org/assets/images/logo.png" />
+  <meta property="og:site_name" content="OneSearchPro" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://onesearchpro.org/assets/images/logo.png" />
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg" />
+  <link rel="alternate icon" type="image/png" href="/assets/images/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="OneSearchPro · SEO 인사이트" href="/rss.xml" />
+  <meta name="theme-color" content="#7c5cff" />
+  <!-- 검색엔진 소유권 인증 (등록 시 코드 입력) -->
+  <meta name="google-site-verification" content="kAFnt3jSs27vJ3oCex9SwynDq07pqYXZmVtITkFZBPQ" />
+  <meta name="naver-site-verification" content="eb0c4d732c1b024809d2ab52ff1ea457bb9189dc" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="image" href="/assets/images/logo-140.webp" type="image/webp" fetchpriority="high" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="stylesheet" href="/styles.css" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"OneSearchPro","alternateName":"원서치프로","url":"https://onesearchpro.org/","inLanguage":"ko-KR","publisher":{"@type":"Organization","name":"OneSearchPro","legalName":"YH기획"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"YH기획 (OneSearchPro)","alternateName":"OneSearchPro","url":"https://onesearchpro.org/","logo":"https://onesearchpro.org/assets/images/logo.png","image":"https://onesearchpro.org/assets/images/logo.png","telephone":"","email":"help@onesearchpro.org","priceRange":"₩₩","address":{"@type":"PostalAddress","streetAddress":"부평대로 283 부평우림라이온스밸리","addressLocality":"부평구","addressRegion":"인천광역시","postalCode":"21389","addressCountry":"KR"},"areaServed":"KR","taxID":"503-30-66944","sameAs":["https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/","https://medium.com/@88smartbro88","https://x.com/gugeulmake84173","https://t.me/googleseolab"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"홈","item":"https://onesearchpro.org/"},{"@type":"ListItem","position":2,"name":"SEO 인사이트","item":"https://onesearchpro.org/insights/"},{"@type":"ListItem","position":3,"name":"canonical 태그 실전 — 언제 쓰고, 언제 쓰면 안 되는가","item":"https://onesearchpro.org/insights/technical-seo/canonical-tag-practical-guide/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"canonical 태그 실전 — 언제 쓰고, 언제 쓰면 안 되는가","description":"canonical이 실제로 하는 일, 필요한 상황, 전 페이지가 한 URL을 가리키는 파괴적 실수, canonical·noindex·301의 구분과 점검법.","url":"https://onesearchpro.org/insights/technical-seo/canonical-tag-practical-guide/","datePublished":"2026-07-30","dateModified":"2026-07-30","author":[{"@type":"Person","name":"강백호","url":"https://onesearchpro.org/about/team/"},{"@type":"Organization","name":"OneSearchPro","url":"https://onesearchpro.org/"}],"publisher":{"@type":"Organization","name":"OneSearchPro","logo":{"@type":"ImageObject","url":"https://onesearchpro.org/assets/images/logo.png"}},"image":"https://onesearchpro.org/assets/images/logo.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://onesearchpro.org/insights/technical-seo/canonical-tag-practical-guide/"},"inLanguage":"ko-KR"}</script>
+</head>
+<body class=" is-article">
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="/" class="brand" aria-label="OneSearchPro 홈"><picture><source type="image/webp" srcset="/assets/images/logo-140.webp 1x, /assets/images/logo-280.webp 2x" /><img src="/assets/images/logo-140.png" alt="OneSearchPro - 검색의 기준을 바꾸다" class="brand-logo" width="180" height="60" decoding="async" /></picture></a>
+      <nav class="nav" id="nav">
+        <div class="has-dropdown">
+          <a href="/services/seo/" class="nav-trigger">서비스 <span class="caret">▾</span></a>
+          <div class="dropdown">
+            <a href="/services/seo/" class="dd-main"><b>🔍 SEO 컨설팅</b><span>대표 서비스</span></a>
+            <a href="/services/technical-seo/">기술 SEO 진단</a>
+            <a href="/services/content-seo/">콘텐츠 SEO</a>
+            <a href="/services/local-seo/">지역 SEO</a>
+            <a href="/services/digital-pr/">디지털 PR · 백링크 진단</a>
+            <a href="/services/social-media/">SNS 마케팅</a>
+            <a href="/services/web-design/">SEO 웹사이트 제작</a>
+          </div>
+        </div>
+        <div class="has-dropdown">
+          <a href="/case-studies/" class="nav-trigger">성공사례 <span class="caret">▾</span></a>
+          <div class="dropdown">
+            <a href="/case-studies/" class="dd-main"><b>📁 전체 성공사례</b><span>업종별 작업 기록</span></a>
+            <a href="/case-studies/seo/">SEO 개선 사례</a>
+            <a href="/case-studies/local-seo/">지역 SEO 사례</a>
+            <a href="/case-studies/content/">콘텐츠 개선 사례</a>
+            <a href="/case-studies/web-design/">웹사이트 제작 사례</a>
+            <a href="/case-studies/visibility/">검색 노출 문제 해결 사례</a>
+          </div>
+        </div>
+        <div class="has-dropdown">
+          <a href="/insights/" class="nav-trigger active">SEO 인사이트 <span class="caret">▾</span></a>
+          <div class="dropdown">
+            <a href="/insights/" class="dd-main"><b>📰 전체 글</b><span>SEO 전문 콘텐츠</span></a>
+            <a href="/insights/google-seo/">구글 SEO</a>
+            <a href="/insights/technical-seo/">기술 SEO</a>
+            <a href="/insights/content-seo/">콘텐츠 SEO</a>
+            <a href="/insights/local-seo/">지역 SEO</a>
+            <a href="/insights/backlink-pr/">백링크 · 디지털 PR</a>
+            <a href="/insights/sns/">SNS 마케팅</a>
+            <a href="/insights/visibility/">검색 노출 문제 해결</a>
+          </div>
+        </div>
+        <div class="has-dropdown">
+          <a href="/about/" class="nav-trigger">회사소개 <span class="caret">▾</span></a>
+          <div class="dropdown">
+            <a href="/about/" class="dd-main"><b>🏢 원서치프로 소개</b><span>About OneSearchPro</span></a>
+            <a href="/about/team/">팀 · 저자 소개</a>
+            <a href="/about/principles/">작업 원칙</a>
+            <a href="/about/process/">진행 프로세스</a>
+            <a href="/about/faq/">자주 묻는 질문</a>
+            <a href="/contact/">문의하기</a>
+          </div>
+        </div>
+        <a href="https://t.me/googleseolab" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">내 사이트 진단받기</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <a href="/insights/">SEO 인사이트</a> <span>›</span> <span>canonical 태그 실전 — 언제 쓰고, 언제 쓰면 안 되는가</span></div></nav>
+  <main>
+    <section class="article-hero"><div class="container article-hero-inner"><span class="eyebrow">TECHNICAL SEO · ARTICLE</span><h1>canonical 태그 실전 — 언제 쓰고, 언제 쓰면 안 되는가</h1><p class="lead">canonical 태그는 "이 페이지의 대표 주소는 여기다"라고 검색엔진에 알려주는 표시입니다. 잘 쓰면 중복 문제를 깔끔하게 정리하지만, 잘못 쓰면 멀쩡한 페이지를 검색에서 스스로 지워버리는 위험한 도구이기도 합니다.</p></div></section>
+    <section class="section article-section"><article class="article-body container"><div class="article-meta"><span>📅 발행 <time datetime="2026-07-30">2026-07-30</time></span><span>⏱ 읽는 시간 약 9분</span><span>✍ <a href="/about/team/" rel="author">강백호</a> · OneSearchPro</span></div><p class="article-intro">canonical 태그(rel="canonical")는 "이 페이지의 대표 주소는 여기다"라고 검색엔진에 알려주는 표시입니다. 중복되거나 비슷한 페이지가 여러 개일 때, 어느 것을 검색 결과에 내보낼지 정리하는 도구입니다. 그런데 이 태그는 잘 쓰면 중복 문제를 깔끔하게 정리하지만, 잘못 쓰면 멀쩡한 페이지를 검색에서 스스로 지워버리는 위험한 도구이기도 합니다. 실제로 canonical 하나를 잘못 걸어 사이트 절반이 색인에서 빠지는 경우가 있습니다. 이 글은 canonical이 실제로 무엇을 하고, 어떤 상황에 써야 하며, 어떤 실수를 피해야 하는지 실무 기준으로 정리합니다.</p><h2>canonical이 실제로 하는 일</h2>
+<p>canonical은 "명령"이 아니라 "강한 힌트"입니다. 여러 URL에 같거나 비슷한 내용이 있을 때, 구글에 "이 중 대표는 이거다"라고 알려줍니다. 그러면 구글은 대표 URL을 검색에 내보내고, 나머지의 신호(링크 등)를 대표로 합쳐줍니다.</p><p>핵심은 "힌트"라는 점입니다. 구글이 판단상 다른 URL이 더 대표에 가깝다고 보면 무시할 수도 있습니다. 그래서 canonical은 "이렇게 처리해 달라"는 요청에 가깝고, 강제력이 있는 noindex·리다이렉트와는 성격이 다릅니다.</p>
+<h2>canonical이 필요한 대표 상황</h2>
+<p>중복이 자연스럽게 생기는 상황에서 canonical이 빛을 봅니다.</p><ul><li><b>URL 파라미터</b> — 정렬·필터·추적 파라미터로 같은 페이지가 여러 주소로 생김</li><li><b>같은 상품이 여러 카테고리 경로에 존재</b> — 쇼핑몰에서 흔함</li><li><b>www/비www, http/https, 슬래시 유무</b> 등 주소 변형</li><li><b>인쇄용·모바일용 등 거의 동일한 사본 페이지</b></li></ul><p>이런 경우 대표 URL을 정해 모든 변형이 그 대표를 가리키게 하면, 색인이 흩어지지 않고 신호가 한곳에 모입니다. URL 변형이 색인을 분산시키는 문제는 <a href="/insights/google-seo/site-not-showing-in-google-checklist/">사이트가 검색에 안 나올 때</a>에서도 다뤘습니다.</p>
+<h2>가장 흔한 사고 — 전 페이지가 한 URL을 가리킴</h2>
+<p>실전에서 가장 파괴적인 실수는 "사이트 전체 페이지의 canonical이 홈(또는 특정 한 페이지)을 가리키는" 경우입니다. 템플릿에 canonical을 잘못 박아두면 이런 일이 벌어집니다.</p><p>이러면 구글은 "이 사이트의 모든 페이지의 대표는 홈이다"로 이해해, 개별 페이지들을 색인에서 뺄 수 있습니다. 수백 개 페이지가 통째로 검색에서 사라지는 것입니다. canonical을 자동 생성하는 CMS·플러그인을 쓸 때는, 각 페이지가 "자기 자신"을 가리키는지 꼭 확인해야 합니다.</p>
+<h2>canonical vs noindex vs 301 — 언제 무엇을</h2>
+<p>셋은 비슷해 보여도 목적이 다릅니다. 상황에 맞게 골라야 합니다.</p><ul><li><b>canonical</b> — 둘 다 살려두되 대표만 검색에 내보내고 싶을 때(비슷한 페이지, 파라미터)</li><li><b>301 리다이렉트</b> — 한 URL을 완전히 다른 URL로 영구 이전할 때(옛 주소는 없앰)</li><li><b>noindex</b> — 페이지는 접근 가능하되 검색에선 빼고 싶을 때(감사 페이지, 로그인 등)</li></ul><p>예를 들어 사이트를 옮겼다면 canonical이 아니라 301이 맞고, 완전히 안 보이게 하려면 canonical이 아니라 noindex가 맞습니다. 이 셋을 섞으면 의도와 다른 결과가 납니다. noindex·robots의 차이는 <a href="/insights/technical-seo/robots-txt-meta-robots-guide/">robots.txt와 meta robots</a>에서 다뤘습니다.</p>
+<h2>자주 나는 실수들</h2>
+<p>canonical에서 반복적으로 보이는 실수를 모으면 다음과 같습니다.</p><ul><li><b>대표 URL이 정작 noindex거나 차단됨</b> — 가리키는 대상이 색인 불가라 신호가 붕 뜸</li><li><b>canonical이 리다이렉트되는 URL을 가리킴</b> — 대표가 또 다른 곳으로 넘어가 혼란</li><li><b>상대 경로·오타로 엉뚱한 URL 지정</b> — 전체 절대 URL로 정확히 쓰는 게 안전</li><li><b>페이지네이션(2·3페이지)을 1페이지로 canonical</b> — 2페이지 이후 내용이 색인에서 사라질 수 있음</li></ul><p>공통점은 "가리키는 대상이 잘못됐다"는 것입니다. canonical은 방향을 정하는 표지판이라, 표지판이 엉뚱한 곳을 가리키면 그대로 길을 잃습니다.</p>
+<h2>눈에 안 보이니 점검이 중요합니다</h2>
+<p>canonical은 화면에 안 보여서 문제가 생겨도 늦게 발견됩니다. 주기적으로 점검하는 게 좋습니다.</p><ol><li><b>서치콘솔 URL 검사</b> — "사용자가 선언한 표준"과 "구글이 선택한 표준"을 함께 봅니다. 둘이 다르면 구글이 내 canonical을 무시한 것</li><li><b>페이지 소스 확인</b> — 주요 페이지가 자기 자신을 canonical로 가리키는지</li><li><b>크롤 도구로 전체 점검</b> — 사이트 전체의 canonical이 한곳으로 쏠리지 않는지</li></ol><p>특히 "구글이 선택한 표준"이 내 의도와 다르면, canonical 신호가 약하거나 다른 신호(내부 링크·리다이렉트)와 충돌한다는 뜻입니다.</p>
+<h2>정리 — canonical은 "표지판"입니다</h2>
+<p>canonical은 색인을 지우는 도구가 아니라 "대표를 가리키는 표지판"입니다. 그래서 중복을 정리할 때는 유용하지만, "안 보이게 하기"나 "이전"에는 맞지 않습니다.</p><p>가장 안전한 기본은 "모든 페이지가 자기 자신을 canonical로 가리키게 두고, 진짜 중복에만 예외적으로 대표를 지정하는 것"입니다. 잘 모를 때 함부로 홈이나 특정 페이지로 몰아 지정하지 않는 것만으로 큰 사고를 피할 수 있습니다.</p>
+<aside class="article-takeaway"><h3>🎯 핵심 정리</h3><ul><li>canonical은 명령이 아니라 "대표 URL을 알려주는 힌트"입니다. 중복·파라미터·주소 변형을 정리하는 데 씁니다.</li><li>가장 파괴적인 실수는 전 페이지 canonical이 홈 등 한 URL을 가리키는 것 — 페이지들이 통째로 색인에서 빠질 수 있습니다. 각 페이지는 자기 자신을 가리켜야 합니다.</li><li>이전은 301, 완전 제외는 noindex, 대표 지정은 canonical — 목적이 다릅니다. 섞으면 의도와 다른 결과가 납니다.</li><li>서치콘솔 URL 검사에서 "구글이 선택한 표준"을 확인하고, 대표 URL이 noindex·리다이렉트가 아닌지 점검합니다.</li></ul></aside></article></section><section class="section"><div class="container"><div class="article-cta"><h3>내 사이트의 SEO 상태가 궁금하다면</h3><p>위 가이드의 항목들을 실제 우리 사이트에 적용하면 어떤 결과가 나올지 궁금하시면, 무료 SEO 진단을 받아보세요. 텔레그램으로 사이트 URL을 보내주시면 24시간 내 분석 리포트를 회신드립니다.</p><a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">무료 SEO 진단 받기 →</a></div></div></section><section class="section section-soft"><div class="container"><div class="section-head left"><span class="eyebrow">READ NEXT</span><h2>이어서 읽으면 좋은 글</h2><p>같은 주제 또는 연관 분야를 더 자세히 다루는 글입니다. 한 주제를 깊이 이해하는 데 도움이 됩니다.</p></div><div class="grid services"><a href="/insights/technical-seo/robots-txt-meta-robots-guide/" class="svc related-card"><span class="badge">기술 SEO</span><h3>robots.txt와 meta robots — 한 줄 실수로 사이트가 사라지는 이유</h3><span class="svc-link">자세히 보기 →</span></a><a href="/insights/content-seo/keyword-cannibalization-fix/" class="svc related-card"><span class="badge">콘텐츠 SEO</span><h3>내 글끼리 순위를 갉아먹을 때 — 키워드 카니발라이제이션</h3><span class="svc-link">자세히 보기 →</span></a><a href="/services/technical-seo/" class="svc related-card"><span class="badge">서비스</span><h3>기술 SEO 진단 서비스</h3><span class="svc-link">자세히 보기 →</span></a></div></div></section>
+    
+    <section class="section section-cta">
+      <div class="container cta-grid">
+        <div><h2>무료 진단 후 정확한 견적을 받아보세요</h2><p>24시간 내 분석 리포트와 맞춤 제안서를 보내드립니다.</p></div>
+        <div class="cta-actions"><a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">무료 진단 신청 →</a><a href="/case-studies/" class="btn btn-outline btn-lg btn-light">성공사례 보기</a></div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container foot-grid">
+      <div><a href="/" class="brand"><span class="brand-mark">1</span><span class="brand-name">OneSearch<strong>Pro</strong></span></a><p class="muted">검색에서 시작되는 비즈니스 성장.<br/>SEO · 디지털 마케팅 전문 에이전시.</p></div>
+      <div><h5>SEO 서비스</h5><ul><li><a href="/services/seo/">SEO 컨설팅</a></li><li><a href="/services/technical-seo/">기술 SEO 진단</a></li><li><a href="/services/content-seo/">콘텐츠 SEO</a></li><li><a href="/services/local-seo/">지역 SEO</a></li><li><a href="/services/digital-pr/">디지털 PR · 백링크 진단</a></li><li><a href="/services/social-media/">SNS 마케팅</a></li><li><a href="/services/web-design/">SEO 웹사이트 제작</a></li></ul></div>
+      <div><h5>회사</h5><ul><li><a href="/case-studies/">성공사례</a></li><li><a href="/insights/">SEO 인사이트</a></li><li><a href="/about/">회사 소개</a></li><li><a href="/contact/">내 사이트 진단받기</a></li></ul></div>
+      <div><h5>연락처</h5><ul><li>help@onesearchpro.org</li><li>인천 부평구</li></ul></div>
+      <div><h5>약관·정책</h5><ul><li><a href="/privacy/">개인정보처리방침</a></li><li><a href="/terms/">이용약관</a></li><li><a href="/sitemap-html/">사이트맵</a></li><li><a href="/rss.xml">RSS 피드</a></li></ul></div>
+    </div>
+    <div class="container biz-info">
+      <span>상호 <b>YH기획</b></span>
+      <span class="biz-sep">·</span>
+      <span>사업자등록번호 503-30-66944</span>
+      <span class="biz-sep">·</span>
+      <span>주소 인천광역시 부평구 부평대로 283 부평우림라이온스밸리</span>
+    </div>
+    <div class="container footer-sns">
+      <span class="footer-sns-label">Follow OneSearchPro</span>
+      <div class="footer-sns-icons">
+        <a href="https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/" target="_blank" rel="noopener noreferrer me" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+        <a href="https://medium.com/@88smartbro88" target="_blank" rel="noopener noreferrer me" aria-label="Medium"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg></a>
+        <a href="https://x.com/gugeulmake84173" target="_blank" rel="noopener noreferrer me" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer me" aria-label="Telegram"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295l.213-3.053 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.66-.643.135-.953l11.566-4.458c.538-.196 1.006.128.832.938z"/></svg></a>
+      </div>
+    </div>
+    <div class="container foot-bottom"><span>© <span id="year"></span> YH기획 (OneSearchPro). All rights reserved.</span><span><a href="/privacy/">개인정보처리방침</a> · <a href="/terms/">이용약관</a></span></div>
+  </footer>
+  <script src="/script.js" defer></script>
+</body>
+</html>

@@ -65,6 +65,9 @@
 - [x] **W20 [기술 SEO]** robots.txt와 meta robots — 한 줄 실수로 사이트가 검색에서 사라지는 이유 → `/insights/technical-seo/robots-txt-meta-robots-guide/` (2026-07-29 발행, 실전형)
 - [x] **W21 [콘텐츠 SEO]** 순위가 오르다 만 글 되살리기 — 콘텐츠 리프레시 실전 절차 → `/insights/content-seo/content-refresh-playbook/` (2026-07-29 발행, 실전형)
 - [x] **W22 [구글 SEO]** 서치콘솔에서 다음에 쓸 글 찾기 — 숨은 기회 키워드 발굴 → `/insights/google-seo/search-console-opportunity-keywords/` (2026-07-29 발행, 실전형)
+- [x] **W23 [기술 SEO]** canonical 태그 실전 — 언제 쓰고, 언제 쓰면 안 되는가 → `/insights/technical-seo/canonical-tag-practical-guide/` (2026-07-30 발행, 실전형)
+- [x] **W24 [콘텐츠 SEO]** 내 글끼리 순위를 갉아먹을 때 — 키워드 카니발라이제이션 → `/insights/content-seo/keyword-cannibalization-fix/` (2026-07-30 발행, 실전형)
+- [x] **W25 [구글 SEO]** 클릭을 부르는 제목과 메타 디스크립션 — 순위보다 빠른 유입 개선 → `/insights/google-seo/title-meta-description-ctr/` (2026-07-30 발행, 실전형)
 
 ---
 
