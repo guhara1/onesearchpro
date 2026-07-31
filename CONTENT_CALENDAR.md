@@ -71,6 +71,9 @@
 - [x] **W26 [검색 노출 문제 해결]** 서치콘솔 '페이지가 색인되지 않음' — 상태 메시지별 원인과 대응 → `/insights/visibility/search-console-page-indexing-reasons/` (2026-07-31 발행, 실전형·썸네일)
 - [x] **W27 [지역 SEO]** 네이버·구글에 같은 매장 등록할 때 — NAP 일관성 관리 → `/insights/local-seo/nap-consistency-naver-google/` (2026-07-31 발행, 실전형·썸네일)
 - [x] **W28 [백링크·디지털 PR]** 백링크 품질 직접 판별하는 법 — 대행사 리포트에서 걸러야 할 신호 → `/insights/backlink-pr/backlink-quality-audit-agency-report/` (2026-07-31 발행, 실전형·썸네일)
+- [x] **W29 [기술 SEO]** 리치 결과(별점·FAQ)가 검색에 안 뜰 때 — 구조화된 데이터 실전 점검 → `/insights/technical-seo/structured-data-rich-results-guide/` (2026-07-31 발행, 실전형·썸네일)
+- [x] **W30 [콘텐츠 SEO]** 내부 링크 실전 — 어떤 글에서 어떤 글로, 어떻게 거나 → `/insights/content-seo/internal-linking-strategy-practical/` (2026-07-31 발행, 실전형·썸네일)
+- [x] **W31 [SNS 마케팅]** 인스타그램 vs 네이버 블로그 — 검색 유입 관점에서 어디에 집중할까 → `/insights/sns/instagram-vs-naver-blog-search-traffic/` (2026-07-31 발행, 실전형·썸네일)
 
 ---
 
