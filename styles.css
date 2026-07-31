@@ -1054,6 +1054,18 @@ h1 {
   color: var(--text-soft); max-width: 64ch;
   margin: 0;
 }
+.article-hero-thumb {
+  margin: 36px 0 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .08);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .38);
+  line-height: 0;
+}
+.article-hero-thumb img {
+  display: block; width: 100%; height: auto;
+  aspect-ratio: 1200 / 630;
+}
 
 /* Article body — premium reading */
 .article-section {

@@ -68,6 +68,9 @@
 - [x] **W23 [기술 SEO]** canonical 태그 실전 — 언제 쓰고, 언제 쓰면 안 되는가 → `/insights/technical-seo/canonical-tag-practical-guide/` (2026-07-30 발행, 실전형)
 - [x] **W24 [콘텐츠 SEO]** 내 글끼리 순위를 갉아먹을 때 — 키워드 카니발라이제이션 → `/insights/content-seo/keyword-cannibalization-fix/` (2026-07-30 발행, 실전형)
 - [x] **W25 [구글 SEO]** 클릭을 부르는 제목과 메타 디스크립션 — 순위보다 빠른 유입 개선 → `/insights/google-seo/title-meta-description-ctr/` (2026-07-30 발행, 실전형)
+- [x] **W26 [검색 노출 문제 해결]** 서치콘솔 '페이지가 색인되지 않음' — 상태 메시지별 원인과 대응 → `/insights/visibility/search-console-page-indexing-reasons/` (2026-07-31 발행, 실전형·썸네일)
+- [x] **W27 [지역 SEO]** 네이버·구글에 같은 매장 등록할 때 — NAP 일관성 관리 → `/insights/local-seo/nap-consistency-naver-google/` (2026-07-31 발행, 실전형·썸네일)
+- [x] **W28 [백링크·디지털 PR]** 백링크 품질 직접 판별하는 법 — 대행사 리포트에서 걸러야 할 신호 → `/insights/backlink-pr/backlink-quality-audit-agency-report/` (2026-07-31 발행, 실전형·썸네일)
 
 ---
 

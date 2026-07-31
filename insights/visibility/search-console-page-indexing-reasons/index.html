@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>서치콘솔 '페이지가 색인되지 않음' — 상태 메시지별 원인과 대응 | OneSearchPro</title>
+  <meta name="description" content="서치콘솔 페이지 리포트의 '색인이 생성되지 않은 이유'는 정상과 문제가 섞여 있습니다. 상태 메시지를 하나씩 풀어 무시해도 되는 것과 손봐야 하는 것을 구분하고, 상태별 대응을 정리합니다." />
+  <meta name="keywords" content="서치콘솔 색인, 페이지 색인 생성 범위, 크롤링됨 색인되지 않음, 발견됨 색인되지 않음, 대체 페이지 표준 태그, 색인 안 됨 원인" />
+  <link rel="canonical" href="https://onesearchpro.org/insights/visibility/search-console-page-indexing-reasons/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="서치콘솔 '페이지가 색인되지 않음' — 상태 메시지별 원인과 대응 | OneSearchPro" />
+  <meta property="og:description" content="서치콘솔 페이지 리포트의 '색인이 생성되지 않은 이유'는 정상과 문제가 섞여 있습니다. 상태 메시지를 하나씩 풀어 무시해도 되는 것과 손봐야 하는 것을 구분하고, 상태별 대응을 정리합니다." />
+  <meta property="og:url" content="https://onesearchpro.org/insights/visibility/search-console-page-indexing-reasons/" />
+  <meta property="og:image" content="https://onesearchpro.org/assets/images/thumbnails/search-console-page-indexing-reasons.png" />
+  <meta property="og:site_name" content="OneSearchPro" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://onesearchpro.org/assets/images/thumbnails/search-console-page-indexing-reasons.png" />
+  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg" />
+  <link rel="alternate icon" type="image/png" href="/assets/images/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png" />
+  <link rel="alternate" type="application/rss+xml" title="OneSearchPro · SEO 인사이트" href="/rss.xml" />
+  <meta name="theme-color" content="#7c5cff" />
+  <!-- 검색엔진 소유권 인증 (등록 시 코드 입력) -->
+  <meta name="google-site-verification" content="kAFnt3jSs27vJ3oCex9SwynDq07pqYXZmVtITkFZBPQ" />
+  <meta name="naver-site-verification" content="eb0c4d732c1b024809d2ab52ff1ea457bb9189dc" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="image" href="/assets/images/logo-140.webp" type="image/webp" fetchpriority="high" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" /></noscript>
+  <link rel="stylesheet" href="/styles.css" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"OneSearchPro","alternateName":"원서치프로","url":"https://onesearchpro.org/","inLanguage":"ko-KR","publisher":{"@type":"Organization","name":"OneSearchPro","legalName":"YH기획"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"YH기획 (OneSearchPro)","alternateName":"OneSearchPro","url":"https://onesearchpro.org/","logo":"https://onesearchpro.org/assets/images/logo.png","image":"https://onesearchpro.org/assets/images/logo.png","telephone":"","email":"help@onesearchpro.org","priceRange":"₩₩","address":{"@type":"PostalAddress","streetAddress":"부평대로 283 부평우림라이온스밸리","addressLocality":"부평구","addressRegion":"인천광역시","postalCode":"21389","addressCountry":"KR"},"areaServed":"KR","taxID":"503-30-66944","sameAs":["https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/","https://medium.com/@88smartbro88","https://x.com/gugeulmake84173","https://t.me/googleseolab"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"홈","item":"https://onesearchpro.org/"},{"@type":"ListItem","position":2,"name":"SEO 인사이트","item":"https://onesearchpro.org/insights/"},{"@type":"ListItem","position":3,"name":"서치콘솔 '페이지가 색인되지 않음' — 상태 메시지별 원인과 대응","item":"https://onesearchpro.org/insights/visibility/search-console-page-indexing-reasons/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"서치콘솔 '페이지가 색인되지 않음' — 상태 메시지별 원인과 대응","description":"서치콘솔 페이지 리포트의 색인 제외 상태를 정상과 문제로 구분하고, 크롤링됨·발견됨·중복 표준·404 등 상태별 원인과 대응, 재검증 방법을 정리.","url":"https://onesearchpro.org/insights/visibility/search-console-page-indexing-reasons/","datePublished":"2026-07-31","dateModified":"2026-07-31","author":[{"@type":"Person","name":"강백호","url":"https://onesearchpro.org/about/team/"},{"@type":"Organization","name":"OneSearchPro","url":"https://onesearchpro.org/"}],"publisher":{"@type":"Organization","name":"OneSearchPro","logo":{"@type":"ImageObject","url":"https://onesearchpro.org/assets/images/logo.png"}},"image":"https://onesearchpro.org/assets/images/logo.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://onesearchpro.org/insights/visibility/search-console-page-indexing-reasons/"},"inLanguage":"ko-KR"}</script>
+</head>
+<body class=" is-article">
+  <div class="reading-progress" id="readingProgress"></div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="/" class="brand" aria-label="OneSearchPro 홈"><picture><source type="image/webp" srcset="/assets/images/logo-140.webp 1x, /assets/images/logo-280.webp 2x" /><img src="/assets/images/logo-140.png" alt="OneSearchPro - 검색의 기준을 바꾸다" class="brand-logo" width="180" height="60" decoding="async" /></picture></a>
+      <nav class="nav" id="nav">
+        <div class="has-dropdown">
+          <a href="/services/seo/" class="nav-trigger">서비스 <span class="caret">▾</span></a>
+          <div class="dropdown">
+            <a href="/services/seo/" class="dd-main"><b>🔍 SEO 컨설팅</b><span>대표 서비스</span></a>
+            <a href="/services/technical-seo/">기술 SEO 진단</a>
+            <a href="/services/content-seo/">콘텐츠 SEO</a>
+            <a href="/services/local-seo/">지역 SEO</a>
+            <a href="/services/digital-pr/">디지털 PR · 백링크 진단</a>
+            <a href="/services/social-media/">SNS 마케팅</a>
+            <a href="/services/web-design/">SEO 웹사이트 제작</a>
+          </div>
+        </div>
+        <div class="has-dropdown">
+          <a href="/case-studies/" class="nav-trigger">성공사례 <span class="caret">▾</span></a>
+          <div class="dropdown">
+            <a href="/case-studies/" class="dd-main"><b>📁 전체 성공사례</b><span>업종별 작업 기록</span></a>
+            <a href="/case-studies/seo/">SEO 개선 사례</a>
+            <a href="/case-studies/local-seo/">지역 SEO 사례</a>
+            <a href="/case-studies/content/">콘텐츠 개선 사례</a>
+            <a href="/case-studies/web-design/">웹사이트 제작 사례</a>
+            <a href="/case-studies/visibility/">검색 노출 문제 해결 사례</a>
+          </div>
+        </div>
+        <div class="has-dropdown">
+          <a href="/insights/" class="nav-trigger active">SEO 인사이트 <span class="caret">▾</span></a>
+          <div class="dropdown">
+            <a href="/insights/" class="dd-main"><b>📰 전체 글</b><span>SEO 전문 콘텐츠</span></a>
+            <a href="/insights/google-seo/">구글 SEO</a>
+            <a href="/insights/technical-seo/">기술 SEO</a>
+            <a href="/insights/content-seo/">콘텐츠 SEO</a>
+            <a href="/insights/local-seo/">지역 SEO</a>
+            <a href="/insights/backlink-pr/">백링크 · 디지털 PR</a>
+            <a href="/insights/sns/">SNS 마케팅</a>
+            <a href="/insights/visibility/">검색 노출 문제 해결</a>
+          </div>
+        </div>
+        <div class="has-dropdown">
+          <a href="/about/" class="nav-trigger">회사소개 <span class="caret">▾</span></a>
+          <div class="dropdown">
+            <a href="/about/" class="dd-main"><b>🏢 원서치프로 소개</b><span>About OneSearchPro</span></a>
+            <a href="/about/team/">팀 · 저자 소개</a>
+            <a href="/about/principles/">작업 원칙</a>
+            <a href="/about/process/">진행 프로세스</a>
+            <a href="/about/faq/">자주 묻는 질문</a>
+            <a href="/contact/">문의하기</a>
+          </div>
+        </div>
+        <a href="https://t.me/googleseolab" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">내 사이트 진단받기</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <nav class="breadcrumb" aria-label="breadcrumb"><div class="container"><a href="/">홈</a> <span>›</span> <a href="/insights/">SEO 인사이트</a> <span>›</span> <span>서치콘솔 '페이지가 색인되지 않음' — 상태 메시지별 원인과 대응</span></div></nav>
+  <main>
+    <section class="article-hero"><div class="container article-hero-inner"><span class="eyebrow">검색 노출 문제 해결 · ARTICLE</span><h1>서치콘솔 '페이지가 색인되지 않음' — 상태 메시지별 원인과 대응</h1><p class="lead">서치콘솔 '페이지' 리포트를 열면 '색인이 생성되지 않은 이유'에 여러 상태 메시지가 줄줄이 뜹니다. 그런데 이 목록은 전부 문제인 게 아니라 정상 상태와 손봐야 할 상태가 섞여 있습니다. 어느 쪽인지 먼저 구분하는 게 대응의 시작입니다.</p><figure class="article-hero-thumb"><img src="/assets/images/thumbnails/search-console-page-indexing-reasons.png" width="1200" height="630" alt="서치콘솔 '페이지가 색인되지 않음' — 상태 메시지별 원인과 대응" loading="eager" fetchpriority="high" /></figure></div></section>
+    <section class="section article-section"><article class="article-body container"><div class="article-meta"><span>📅 발행 <time datetime="2026-07-31">2026-07-31</time></span><span>⏱ 읽는 시간 약 9분</span><span>✍ <a href="/about/team/" rel="author">강백호</a> · OneSearchPro</span></div><p class="article-intro">서치콘솔 '페이지' 리포트를 열면 '색인이 생성되지 않은 이유'에 여러 상태 메시지가 줄줄이 뜹니다. 숫자가 커서 놀라기 쉬운데, 이 목록은 전부 문제인 게 아닙니다. 정상적으로 색인에서 빠진 것과, 색인되고 싶은데 못 된 것이 한데 섞여 있습니다. 상태마다 원인이 다르고 대응도 다릅니다. 이 글은 실무에서 자주 보이는 상태 메시지를 하나씩 풀어, 무시해도 되는 것과 손봐야 하는 것을 구분하고 각각 어떻게 대응하는지 정리합니다.</p><h2>색인 안 됨이 전부 문제는 아니다</h2>
+<p>가장 먼저 바로잡을 오해가 있습니다. "색인 생성 안 됨" 목록에 페이지가 많다고 곧바로 문제가 아니라는 점입니다. 리디렉션되는 주소, 중복이라 대표 페이지로 합쳐진 주소, 일부러 noindex를 건 주소는 색인에서 빠지는 게 정상입니다.</p><p>그래서 이 리포트는 "숫자를 0으로 만드는 게임"이 아닙니다. 목록을 열어 상태 이름을 기준으로 정상 그룹과 문제 그룹을 먼저 나누고, 문제 그룹에만 시간을 쓰는 게 순서입니다. 이 구분 없이 모든 항목에 색인 요청을 누르는 건 시간 낭비이자, 정작 중요한 페이지를 놓치는 길입니다.</p>
+<h2>무시해도 되는 상태들</h2>
+<p>다음 상태들은 대개 정상이라 손댈 필요가 없습니다.</p><ul><li><b>리디렉션이 포함된 페이지</b> — 그 주소가 다른 주소로 301 이동 중이라는 뜻. 리디렉션이 의도한 것이면 정상입니다.</li><li><b>대체 페이지(적절한 표준 태그 있음)</b> — canonical이 제대로 작동해, 중복 주소가 대표 주소로 합쳐진 상태. 오히려 잘 돌아가는 신호입니다.</li><li><b>noindex 태그로 제외됨</b> — 로그인·장바구니·태그 목록처럼 색인에서 빼려던 페이지면 정상입니다.</li></ul><p>다만 예외가 있습니다. 색인되길 바라는 중요한 페이지가 이 목록에 들어와 있다면 얘기가 다릅니다. 예를 들어 주력 상품 페이지가 "noindex로 제외됨"에 있다면, 실수로 noindex가 걸린 것이니 즉시 손봐야 합니다. 정상 상태 목록도 "중요한 페이지가 잘못 섞여 있지 않은가"라는 눈으로 한 번은 훑어보는 게 안전합니다.</p>
+<h2>손봐야 하는 상태 ① '크롤링됨 - 현재 색인이 생성되지 않음'</h2>
+<p>구글이 페이지를 가져가 봤지만, 색인에 넣기를 보류한 상태입니다. 기술 오류가 아니라 대개 콘텐츠 판단에서 밀린 경우입니다. 내용이 얇거나, 사이트 안 다른 페이지와 너무 비슷하거나, 지금은 넣을 가치가 낮다고 본 것입니다.</p><p>대응은 색인 요청 버튼이 아니라 콘텐츠 쪽입니다. 비슷한 페이지가 여럿이면 하나로 합치고, 얇은 페이지는 실제로 도움이 되도록 내용을 채웁니다. 요청을 눌러도 내용이 그대로면 다시 보류되기 쉽습니다. 이 상태가 많다면 콘텐츠 전반을 점검하라는 신호로 읽는 게 맞습니다.</p>
+<h2>손봐야 하는 상태 ② '발견됨 - 현재 색인이 생성되지 않음'</h2>
+<p>구글이 주소의 존재는 알지만 아직 가져가 보지도 않은 상태입니다. 크롤링 순번에서 밀린 것으로, 신규·대형 사이트에서 자주 보입니다. 원인은 대체로 셋입니다. 그 페이지로 이어지는 내부 링크가 약하거나, 사이트가 커서 크롤링 예산이 부족하거나, 서버 응답이 느려 크롤러가 물러난 경우입니다.</p><p>대응은 그 페이지를 사이트 안에서 더 잘 보이게 만드는 것입니다. 관련 글·목록에서 내부 링크로 연결하고, 사이트맵에 포함됐는지 확인합니다. 서버가 느리면 응답 속도도 함께 봐야 합니다. 이 상태는 시간이 지나며 자연히 해소되기도 하므로, 조급하게 같은 주소를 반복 요청하기보다 링크와 서버부터 손보는 게 낫습니다.</p>
+<h2>중복·표준(canonical) 관련 상태</h2>
+<p>표준 페이지 지정과 얽힌 상태도 자주 보입니다.</p><ul><li><b>중복. Google이 선택한 표준이 사용자가 지정한 표준과 다름</b> — 내가 canonical로 A를 가리켰는데 구글은 B를 대표로 골랐다는 뜻. 내 신호와 구글 판단이 어긋난 경우입니다.</li><li><b>중복. 사용자가 표준을 지정하지 않음</b> — 비슷한 페이지가 여럿인데 canonical을 아예 안 걸어, 구글이 알아서 하나를 고른 상태입니다.</li></ul><p>대응은 어느 주소가 대표가 되어야 하는지 스스로 정하고, canonical과 내부 링크를 그 주소로 일관되게 맞추는 것입니다. 이 신호가 흔들리면 구글도 헷갈립니다. 표준 지정의 원리와 흔한 사고는 <a href="/insights/technical-seo/canonical-tag-practical-guide/">canonical 태그 실전</a>에서 자세히 다뤘습니다.</p>
+<h2>오류 상태: 404·5xx·소프트 404</h2>
+<p>명확한 오류로 분류되는 상태들입니다. 이건 정상/문제 판단이 비교적 단순합니다.</p><ul><li><b>찾을 수 없음(404)</b> — 일부러 지운 페이지면 정상. 하지만 살아 있어야 할 주소가 404면, 내부 링크가 잘못됐거나 리디렉션을 빠뜨린 것입니다.</li><li><b>서버 오류(5xx)</b> — 크롤링 시점에 서버가 응답을 못 준 것. 일시적일 수도 있으니 반복되는지 보고, 잦으면 서버·호스팅을 점검합니다.</li><li><b>소프트 404</b> — 페이지는 열리는데 내용이 비어 "없는 페이지처럼" 보이는 경우. 품절 상품, 빈 검색 결과 페이지에서 자주 납니다.</li></ul><p>404가 무조건 나쁜 건 아닙니다. 지운 페이지가 404를 내는 건 정상입니다. 문제는 "살아 있어야 하는데 404인" 주소이니, 그 구분부터 하는 게 먼저입니다.</p>
+<h2>고친 뒤 — 유효성 검사와 재요청</h2>
+<p>원인을 손봤으면 확인 단계로 넘어갑니다. 개별 주소는 상단 URL 검사에 넣어 "색인 생성 요청"을 누르고, 같은 원인의 페이지가 여럿이면 해당 상태 화면의 "수정 사항 확인(유효성 검사 시작)"을 누릅니다. 그러면 구글이 그 그룹을 다시 살펴봅니다.</p><p>다만 반영에는 시간이 걸립니다. 며칠에서 몇 주가 보통이라, 누른 다음 날 그대로라고 실패한 게 아닙니다. 같은 주소를 매일 반복 요청하는 것도 큰 의미가 없습니다. 원인을 제대로 고쳤는지에 집중하고, 리포트 숫자는 주 단위로 관찰하는 게 실무에서 마음도 편하고 효율도 좋습니다.</p>
+<aside class="article-takeaway"><h3>🎯 핵심 정리</h3><ul><li>'색인 안 됨' 목록은 전부 문제가 아닙니다. 리디렉션·대체 페이지·noindex 제외는 대개 정상이니, 먼저 정상 그룹과 문제 그룹을 나눕니다.</li><li>'크롤링됨-색인 안 됨'은 콘텐츠 신호 문제라 내용 보강·통합으로, '발견됨-색인 안 됨'은 크롤 순번 문제라 내부 링크·사이트맵·서버로 대응합니다.</li><li>'구글이 선택한 표준이 다름'은 canonical·내부 링크를 대표 주소로 일관되게 맞춰 해결합니다. 404는 지운 페이지면 정상, 살아야 할 주소면 링크·리디렉션을 점검합니다.</li><li>원인을 고친 뒤 URL 검사 재요청 또는 유효성 검사를 누르되, 반영에는 며칠~몇 주가 걸립니다. 같은 주소를 매일 반복 요청하기보다 원인 해결에 집중합니다.</li></ul></aside></article></section><section class="section"><div class="container"><div class="article-cta"><h3>내 사이트의 SEO 상태가 궁금하다면</h3><p>위 가이드의 항목들을 실제 우리 사이트에 적용하면 어떤 결과가 나올지 궁금하시면, 무료 SEO 진단을 받아보세요. 텔레그램으로 사이트 URL을 보내주시면 24시간 내 분석 리포트를 회신드립니다.</p><a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">무료 SEO 진단 받기 →</a></div></div></section><section class="section section-soft"><div class="container"><div class="section-head left"><span class="eyebrow">READ NEXT</span><h2>이어서 읽으면 좋은 글</h2><p>같은 주제 또는 연관 분야를 더 자세히 다루는 글입니다. 한 주제를 깊이 이해하는 데 도움이 됩니다.</p></div><div class="grid services"><a href="/insights/visibility/crawled-not-indexed/" class="svc related-card"><span class="badge">검색 노출</span><h3>서치콘솔 '크롤링됨 - 색인되지 않음' 원인 점검</h3><span class="svc-link">자세히 보기 →</span></a><a href="/insights/technical-seo/canonical-tag-practical-guide/" class="svc related-card"><span class="badge">기술 SEO</span><h3>canonical 태그 실전 — 언제 쓰고, 언제 쓰면 안 되나</h3><span class="svc-link">자세히 보기 →</span></a><a href="/services/technical-seo/" class="svc related-card"><span class="badge">서비스</span><h3>기술 SEO 진단 서비스</h3><span class="svc-link">자세히 보기 →</span></a></div></div></section>
+    
+    <section class="section section-cta">
+      <div class="container cta-grid">
+        <div><h2>무료 진단 후 정확한 견적을 받아보세요</h2><p>24시간 내 분석 리포트와 맞춤 제안서를 보내드립니다.</p></div>
+        <div class="cta-actions"><a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">무료 진단 신청 →</a><a href="/case-studies/" class="btn btn-outline btn-lg btn-light">성공사례 보기</a></div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container foot-grid">
+      <div><a href="/" class="brand"><span class="brand-mark">1</span><span class="brand-name">OneSearch<strong>Pro</strong></span></a><p class="muted">검색에서 시작되는 비즈니스 성장.<br/>SEO · 디지털 마케팅 전문 에이전시.</p></div>
+      <div><h5>SEO 서비스</h5><ul><li><a href="/services/seo/">SEO 컨설팅</a></li><li><a href="/services/technical-seo/">기술 SEO 진단</a></li><li><a href="/services/content-seo/">콘텐츠 SEO</a></li><li><a href="/services/local-seo/">지역 SEO</a></li><li><a href="/services/digital-pr/">디지털 PR · 백링크 진단</a></li><li><a href="/services/social-media/">SNS 마케팅</a></li><li><a href="/services/web-design/">SEO 웹사이트 제작</a></li></ul></div>
+      <div><h5>회사</h5><ul><li><a href="/case-studies/">성공사례</a></li><li><a href="/insights/">SEO 인사이트</a></li><li><a href="/about/">회사 소개</a></li><li><a href="/contact/">내 사이트 진단받기</a></li></ul></div>
+      <div><h5>연락처</h5><ul><li>help@onesearchpro.org</li><li>인천 부평구</li></ul></div>
+      <div><h5>약관·정책</h5><ul><li><a href="/privacy/">개인정보처리방침</a></li><li><a href="/terms/">이용약관</a></li><li><a href="/sitemap-html/">사이트맵</a></li><li><a href="/rss.xml">RSS 피드</a></li></ul></div>
+    </div>
+    <div class="container biz-info">
+      <span>상호 <b>YH기획</b></span>
+      <span class="biz-sep">·</span>
+      <span>사업자등록번호 503-30-66944</span>
+      <span class="biz-sep">·</span>
+      <span>주소 인천광역시 부평구 부평대로 283 부평우림라이온스밸리</span>
+    </div>
+    <div class="container footer-sns">
+      <span class="footer-sns-label">Follow OneSearchPro</span>
+      <div class="footer-sns-icons">
+        <a href="https://www.linkedin.com/in/%EB%B0%B1%ED%98%B8-%EA%B0%95-a84273261/" target="_blank" rel="noopener noreferrer me" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+        <a href="https://medium.com/@88smartbro88" target="_blank" rel="noopener noreferrer me" aria-label="Medium"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg></a>
+        <a href="https://x.com/gugeulmake84173" target="_blank" rel="noopener noreferrer me" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://t.me/googleseolab" target="_blank" rel="noopener noreferrer me" aria-label="Telegram"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295l.213-3.053 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.66-.643.135-.953l11.566-4.458c.538-.196 1.006.128.832.938z"/></svg></a>
+      </div>
+    </div>
+    <div class="container foot-bottom"><span>© <span id="year"></span> YH기획 (OneSearchPro). All rights reserved.</span><span><a href="/privacy/">개인정보처리방침</a> · <a href="/terms/">이용약관</a></span></div>
+  </footer>
+  <script src="/script.js" defer></script>
+</body>
+</html>
