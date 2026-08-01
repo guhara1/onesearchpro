@@ -74,6 +74,7 @@
 - [x] **W29 [기술 SEO]** 리치 결과(별점·FAQ)가 검색에 안 뜰 때 — 구조화된 데이터 실전 점검 → `/insights/technical-seo/structured-data-rich-results-guide/` (2026-07-31 발행, 실전형·썸네일)
 - [x] **W30 [콘텐츠 SEO]** 내부 링크 실전 — 어떤 글에서 어떤 글로, 어떻게 거나 → `/insights/content-seo/internal-linking-strategy-practical/` (2026-07-31 발행, 실전형·썸네일)
 - [x] **W31 [SNS 마케팅]** 인스타그램 vs 네이버 블로그 — 검색 유입 관점에서 어디에 집중할까 → `/insights/sns/instagram-vs-naver-blog-search-traffic/` (2026-07-31 발행, 실전형·썸네일)
+- [x] **W32 [구글 SEO]** AI 검색 답변에 내 콘텐츠가 인용되게 하려면 — 지금 할 수 있는 것 → `/insights/google-seo/ai-search-answer-citation-optimization/` (2026-07-31 발행, 실전형·썸네일)
 
 ---
 
