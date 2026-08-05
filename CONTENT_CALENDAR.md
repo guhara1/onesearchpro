@@ -77,6 +77,7 @@
 - [x] **W32 [구글 SEO]** AI 검색 답변에 내 콘텐츠가 인용되게 하려면 — 지금 할 수 있는 것 → `/insights/google-seo/ai-search-answer-citation-optimization/` (2026-07-31 발행, 실전형·썸네일)
 - [x] **W33 [기술 SEO]** 사이트 속도, 뭐부터 고쳐야 하나 — Core Web Vitals(LCP·INP·CLS) 우선순위 → `/insights/technical-seo/core-web-vitals-what-to-fix-first/` (2026-08-02 발행, 실전형·썸네일)
 - [x] **W34 [지역 SEO]** 리뷰, 정책 위반 없이 진짜로 늘리는 법 — 요청부터 응대까지 → `/insights/local-seo/get-more-genuine-reviews-without-policy-violation/` (2026-08-02 발행, 실전형·썸네일)
+- [x] **W35 [콘텐츠 SEO]** 고객은 다른 말로 검색한다 — 업계 용어 대신 검색어로 글쓰기 → `/insights/content-seo/write-with-customer-search-terms-not-jargon/` (2026-08-04 발행, 실전형·썸네일)
 
 ---
 
