@@ -79,6 +79,7 @@
 - [x] **W34 [지역 SEO]** 리뷰, 정책 위반 없이 진짜로 늘리는 법 — 요청부터 응대까지 → `/insights/local-seo/get-more-genuine-reviews-without-policy-violation/` (2026-08-02 발행, 실전형·썸네일)
 - [x] **W35 [콘텐츠 SEO]** 고객은 다른 말로 검색한다 — 업계 용어 대신 검색어로 글쓰기 → `/insights/content-seo/write-with-customer-search-terms-not-jargon/` (2026-08-04 발행, 실전형·썸네일)
 - [x] **W36 [검색 노출 문제 해결]** 새 글이 검색에 뜨기까지 얼마나 걸릴까 — 색인부터 순위까지 현실적 타임라인 → `/insights/visibility/how-long-until-new-content-ranks-timeline/` (2026-08-04 발행, 실전형·썸네일)
+- [x] **W37 [백링크·디지털 PR]** 이미 언급됐는데 링크가 없다면 — '링크 없는 언급'을 백링크로 바꾸기 → `/insights/backlink-pr/unlinked-brand-mentions-to-backlinks/` (2026-08-04 발행, 실전형·썸네일)
 
 ---
 
