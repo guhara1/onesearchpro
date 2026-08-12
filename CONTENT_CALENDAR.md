@@ -83,6 +83,7 @@
 - [x] **W38 [구글 SEO]** 내 상호를 검색하면 뭐가 뜰까 — 브랜드 검색결과 관리하기 → `/insights/google-seo/managing-your-brand-search-results/` (2026-08-04 발행, 실전형·썸네일)
 - [x] **W39 [기술 SEO]** 사진 때문에 사이트가 느릴 때 — 이미지 최적화 실전 → `/insights/technical-seo/image-optimization-for-speed-and-seo/` (2026-08-04 발행, 실전형·썸네일)
 - [x] **W40 [SNS 마케팅]** 인스타만 하면 될까 — 내 소유 채널(홈페이지)이 필요한 이유 → `/insights/sns/why-you-need-your-own-website-not-just-sns/` (2026-08-04 발행, 실전형·썸네일)
+- [x] **W41 [구글 SEO]** 구글과 네이버, 뭐가 어떻게 다른가 — 한국에서 두 검색을 함께 잡는 기본 → `/insights/google-seo/google-vs-naver-seo-differences/` (2026-08-04 발행, 실전형·썸네일)
 
 ---
 
